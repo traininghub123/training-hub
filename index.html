@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Training Hub</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f172a;
+  color: white;
+}
+
+.header {
+  padding: 18px;
+  text-align: center;
+  font-size: 26px;
+  font-weight: bold;
+  background: linear-gradient(90deg,#020617,#1e293b);
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+.video-box {
+  background: #020617;
+  padding: 15px;
+  border-radius: 12px;
+}
+
+iframe {
+  width: 100%;
+  height: 500px;
+  border-radius: 10px;
+  border: none;
+}
+
+.instructions {
+  margin-top: 20px;
+  background: #020617;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 14px;
+  width: 100%;
+  background: #22c55e;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  display: none;
+}
+</style>
+</head>
+
+<body oncontextmenu="return false">
+
+<div class="header">
+🚀 Training Hub
+</div>
+
+<div class="container">
+
+<div class="video-box">
+<iframe 
+src="https://www.youtube.com/embed/Qlh9fxv_S_0?controls=0&disablekb=1&modestbranding=1&rel=0&autoplay=1"
+allow="autoplay">
+</iframe>
+</div>
+
+<button id="nextBtn" onclick="checkCode()">Proceed Next</button>
+
+<div class="instructions">
+<h3>📌 Instructions</h3>
+<ul>
+<li>Video skip nahi kar sakte</li>
+<li>Pura video dekhna mandatory hai</li>
+<li>End me code milega</li>
+<li>Code dalne ke baad hi next milega</li>
+</ul>
+</div>
+
+</div>
+
+<script>
+// Disable keyboard
+document.onkeydown = function(e) {
+  return false;
+};
+
+// TIMER (1 Hour 3 Min = 3780000 ms)
+setTimeout(() => {
+  document.getElementById("nextBtn").style.display = "block";
+}, 3780000);
+
+// Code check
+function checkCode() {
+  let userCode = prompt("Enter code shown in video:");
+  if(userCode === "SRP123") {
+    alert("Access Granted ✅");
+    window.location.href = "next.html";
+  } else {
+    alert("Wrong Code ❌ Watch again");
+  }
+}
+</script>
+
+</body>
+</html>
