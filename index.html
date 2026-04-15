@@ -40,30 +40,31 @@ iframe {
   border: none;
 }
 
-/* Start overlay */
-.start-overlay {
-  position:absolute;
+/* Start Overlay */
+.play-overlay {
+  position: absolute;
   top:0;
   left:0;
   width:100%;
   height:100%;
-  background: rgba(0,0,0,0.85);
+  background: rgba(0,0,0,0.7);
   display:flex;
   justify-content:center;
   align-items:center;
+  cursor:pointer;
   z-index:20;
 }
 
-.start-overlay button {
-  padding:16px 28px;
+.play-overlay button {
+  padding:15px 25px;
   font-size:18px;
   background:#22c55e;
   border:none;
-  border-radius:12px;
+  border-radius:10px;
   cursor:pointer;
 }
 
-/* Block overlay */
+/* Block Overlay */
 .block-overlay {
   position:absolute;
   top:0;
@@ -104,31 +105,35 @@ button {
 <div class="video-box">
 
   <!-- YouTube Video -->
-  <iframe id="ytvideo" src="" allow="autoplay"></iframe>
+  <iframe 
+  id="ytvideo"
+  src=""
+  allow="autoplay">
+  </iframe>
 
   <!-- Start Button -->
-  <div class="start-overlay" id="startScreen">
-    <button onclick="startTraining()">▶ Start Training</button>
+  <div class="play-overlay" onclick="startVideo()">
+    <button>▶ Start Training</button>
   </div>
 
-  <!-- Block Overlay -->
+  <!-- Block Click -->
   <div id="blocker" class="block-overlay"></div>
 
 </div>
 
 <button id="nextBtn" onclick="checkCode()">Proceed Next</button>
 
-<!-- PROFESSIONAL INSTRUCTIONS -->
+<!-- ✅ UPDATED PROFESSIONAL INSTRUCTIONS -->
 <div class="instructions">
 <h3>📌 Important Instructions</h3>
 <ul>
-<li>This is a mandatory training session. Please watch carefully.</li>
-<li>Skipping, refreshing, or exiting the video is strictly not allowed.</li>
-<li>The session must be completed in one go without interruption.</li>
-<li>External access or sharing of this video is restricted.</li>
-<li>A unique verification code will appear at the end of the session.</li>
-<li>Access to the next step will only be granted after correct code submission.</li>
-<li>Non-compliance may lead to disqualification from the training process.</li>
+<li>This training video must be watched completely from start to end.</li>
+<li>Do not skip, refresh, or leave the page during the session.</li>
+<li>The video should be completed in one go without interruption.</li>
+<li>You cannot click, forward, or open the video outside this page.</li>
+<li>A verification code will be shown at the end of the video.</li>
+<li>You must enter the correct code to proceed further.</li>
+<li>If instructions are not followed, access may be restricted.</li>
 </ul>
 </div>
 
@@ -145,25 +150,24 @@ document.onkeydown = function(e) {
 document.addEventListener("contextmenu", e => e.preventDefault());
 
 // Start video with sound
-function startTraining() {
-
+function startVideo() {
   document.getElementById("ytvideo").src =
   "https://www.youtube.com/embed/Qlh9fxv_S_0?controls=0&disablekb=1&modestbranding=1&rel=0&fs=0&iv_load_policy=3&playsinline=1&autoplay=1";
 
-  document.getElementById("startScreen").style.display = "none";
+  document.querySelector(".play-overlay").style.display = "none";
 
-  // 3 sec baad full block
+  // 3 sec baad block activate
   setTimeout(() => {
     document.getElementById("blocker").style.display = "block";
   }, 3000);
 }
 
-// Timer (1 hr 3 min = 3780000 ms)
+// Timer (1hr 3min)
 setTimeout(() => {
   document.getElementById("nextBtn").style.display = "block";
 }, 3780000);
 
-// Code verification
+// Code check
 function checkCode() {
   let code = prompt("Enter verification code:");
   if(code === "SRP123") {
