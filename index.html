@@ -18,6 +18,7 @@ body {
   font-size: 26px;
   font-weight: bold;
   background: linear-gradient(90deg,#020617,#1e293b);
+  border-bottom: 1px solid #334155;
 }
 
 .container {
@@ -27,6 +28,7 @@ body {
 }
 
 .video-box {
+  position: relative;
   background: #020617;
   padding: 15px;
   border-radius: 12px;
@@ -37,6 +39,15 @@ iframe {
   height: 500px;
   border-radius: 10px;
   border: none;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
 }
 
 .instructions {
@@ -57,6 +68,10 @@ button {
   cursor: pointer;
   display: none;
 }
+
+button:hover {
+  background: #16a34a;
+}
 </style>
 </head>
 
@@ -69,10 +84,15 @@ button {
 <div class="container">
 
 <div class="video-box">
-<iframe 
-src="https://www.youtube.com/embed/Qlh9fxv_S_0?controls=0&disablekb=1&modestbranding=1&rel=0&autoplay=1"
-allow="autoplay">
-</iframe>
+
+  <iframe 
+  src="https://www.youtube.com/embed/Qlh9fxv_S_0?controls=0&disablekb=1&modestbranding=1&rel=0&fs=0&iv_load_policy=3&playsinline=1&autoplay=1"
+  allow="autoplay">
+  </iframe>
+
+  <!-- CLICK BLOCK OVERLAY -->
+  <div class="overlay"></div>
+
 </div>
 
 <button id="nextBtn" onclick="checkCode()">Proceed Next</button>
@@ -80,8 +100,8 @@ allow="autoplay">
 <div class="instructions">
 <h3>📌 Instructions</h3>
 <ul>
-<li>Video skip nahi kar sakte</li>
-<li>Pura video dekhna mandatory hai</li>
+<li>Video skip ya click allowed nahi hai</li>
+<li>Video pura dekhna mandatory hai</li>
 <li>End me code milega</li>
 <li>Code dalne ke baad hi next milega</li>
 </ul>
@@ -90,17 +110,21 @@ allow="autoplay">
 </div>
 
 <script>
-// Disable keyboard
+
+// Disable keyboard shortcuts
 document.onkeydown = function(e) {
   return false;
 };
+
+// Disable right click
+document.addEventListener("contextmenu", e => e.preventDefault());
 
 // TIMER (1 Hour 3 Min = 3780000 ms)
 setTimeout(() => {
   document.getElementById("nextBtn").style.display = "block";
 }, 3780000);
 
-// Code check
+// Code verification
 function checkCode() {
   let userCode = prompt("Enter code shown in video:");
   if(userCode === "SRP123") {
@@ -110,6 +134,7 @@ function checkCode() {
     alert("Wrong Code ❌ Watch again");
   }
 }
+
 </script>
 
 </body>
