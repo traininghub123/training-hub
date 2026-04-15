@@ -40,7 +40,7 @@ iframe {
   border: none;
 }
 
-/* Start Overlay */
+/* Play overlay */
 .play-overlay {
   position: absolute;
   top:0;
@@ -64,7 +64,7 @@ iframe {
   cursor:pointer;
 }
 
-/* Block Overlay */
+/* Block overlay after start */
 .block-overlay {
   position:absolute;
   top:0;
@@ -111,19 +111,18 @@ button {
   allow="autoplay">
   </iframe>
 
-  <!-- Start Button -->
+  <!-- Play Button Overlay -->
   <div class="play-overlay" onclick="startVideo()">
     <button>▶ Start Training</button>
   </div>
 
-  <!-- Block Click -->
+  <!-- Block Click Overlay -->
   <div id="blocker" class="block-overlay"></div>
 
 </div>
 
 <button id="nextBtn" onclick="checkCode()">Proceed Next</button>
 
-<!-- ✅ UPDATED PROFESSIONAL INSTRUCTIONS -->
 <div class="instructions">
 <h3>📌 Important Instructions</h3>
 <ul>
@@ -136,7 +135,7 @@ button {
 <li>If instructions are not followed, access may be restricted.</li>
 </ul>
 </div>
-
+  
 </div>
 
 <script>
@@ -145,9 +144,6 @@ button {
 document.onkeydown = function(e) {
   return false;
 };
-
-// Disable right click
-document.addEventListener("contextmenu", e => e.preventDefault());
 
 // Start video with sound
 function startVideo() {
@@ -169,11 +165,11 @@ setTimeout(() => {
 
 // Code check
 function checkCode() {
-  let code = prompt("Enter verification code:");
+  let code = prompt("Enter code:");
   if(code === "SRP123") {
     alert("Access Granted ✅");
   } else {
-    alert("Incorrect Code ❌ Please watch again");
+    alert("Wrong Code ❌");
   }
 }
 
