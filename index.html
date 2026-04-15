@@ -40,39 +40,33 @@ iframe {
   border: none;
 }
 
-/* Play overlay */
-.play-overlay {
+/* FULL BLOCK LAYER */
+.overlay {
   position: absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background: rgba(0,0,0,0.7);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  cursor:pointer;
-  z-index:20;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  z-index: 10;
 }
 
-.play-overlay button {
-  padding:15px 25px;
-  font-size:18px;
-  background:#22c55e;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
+/* CENTER PLAY BUTTON */
+.play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  background: rgba(34,197,94,0.9);
+  padding: 20px 30px;
+  border-radius: 50px;
+  font-size: 18px;
+  cursor: pointer;
 }
 
-/* Block overlay after start */
-.block-overlay {
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  display:none;
-  z-index:10;
+/* AFTER START BLOCK */
+.blocked {
+  pointer-events: none;
 }
 
 .instructions {
@@ -104,20 +98,14 @@ button {
 
 <div class="video-box">
 
-  <!-- YouTube Video -->
-  <iframe 
-  id="ytvideo"
-  src=""
-  allow="autoplay">
-  </iframe>
+  <!-- YOUTUBE VIDEO -->
+  <iframe id="videoFrame" src=""></iframe>
 
-  <!-- Play Button Overlay -->
-  <div class="play-overlay" onclick="startVideo()">
-    <button>▶ Start Training</button>
-  </div>
+  <!-- FULL BLOCK -->
+  <div id="overlay" class="overlay"></div>
 
-  <!-- Block Click Overlay -->
-  <div id="blocker" class="block-overlay"></div>
+  <!-- CENTER PLAY -->
+  <div id="playBtn" class="play-btn" onclick="startVideo()">▶ Start</div>
 
 </div>
 
@@ -126,10 +114,10 @@ button {
 <div class="instructions">
 <h3>📌 Instructions</h3>
 <ul>
+<li>Sirf beech ke button se video start hoga</li>
 <li>Video skip nahi kar sakte</li>
 <li>Pura dekhna mandatory hai</li>
 <li>End me code milega</li>
-<li>Code dalne ke baad next milega</li>
 </ul>
 </div>
 
@@ -142,25 +130,26 @@ document.onkeydown = function(e) {
   return false;
 };
 
-// Start video with sound
+// START VIDEO
 function startVideo() {
-  document.getElementById("ytvideo").src =
+
+  document.getElementById("videoFrame").src =
   "https://www.youtube.com/embed/Qlh9fxv_S_0?controls=0&disablekb=1&modestbranding=1&rel=0&fs=0&iv_load_policy=3&playsinline=1&autoplay=1";
 
-  document.querySelector(".play-overlay").style.display = "none";
+  document.getElementById("playBtn").style.display = "none";
 
-  // 3 sec baad block activate
+  // 3 sec baad pura block
   setTimeout(() => {
-    document.getElementById("blocker").style.display = "block";
+    document.getElementById("overlay").classList.add("blocked");
   }, 3000);
 }
 
-// Timer (1hr 3min)
+// TIMER (1hr 3min)
 setTimeout(() => {
   document.getElementById("nextBtn").style.display = "block";
 }, 3780000);
 
-// Code check
+// CODE CHECK
 function checkCode() {
   let code = prompt("Enter code:");
   if(code === "SRP123") {
