@@ -18,7 +18,6 @@ body {
   font-size: 26px;
   font-weight: bold;
   background: linear-gradient(90deg,#020617,#1e293b);
-  border-bottom: 1px solid #334155;
 }
 
 .container {
@@ -41,13 +40,39 @@ iframe {
   border: none;
 }
 
-.overlay {
+/* Play overlay */
+.play-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 10;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.7);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+  z-index:20;
+}
+
+.play-overlay button {
+  padding:15px 25px;
+  font-size:18px;
+  background:#22c55e;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* Block overlay after start */
+.block-overlay {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  display:none;
+  z-index:10;
 }
 
 .instructions {
@@ -68,30 +93,31 @@ button {
   cursor: pointer;
   display: none;
 }
-
-button:hover {
-  background: #16a34a;
-}
 </style>
 </head>
 
 <body oncontextmenu="return false">
 
-<div class="header">
-🚀 Training Hub
-</div>
+<div class="header">🚀 Training Hub</div>
 
 <div class="container">
 
 <div class="video-box">
 
+  <!-- YouTube Video -->
   <iframe 
-  src="https://www.youtube.com/embed/Qlh9fxv_S_0?controls=0&disablekb=1&modestbranding=1&rel=0&fs=0&iv_load_policy=3&playsinline=1&autoplay=1"
+  id="ytvideo"
+  src=""
   allow="autoplay">
   </iframe>
 
-  <!-- CLICK BLOCK OVERLAY -->
-  <div class="overlay"></div>
+  <!-- Play Button Overlay -->
+  <div class="play-overlay" onclick="startVideo()">
+    <button>▶ Start Training</button>
+  </div>
+
+  <!-- Block Click Overlay -->
+  <div id="blocker" class="block-overlay"></div>
 
 </div>
 
@@ -100,10 +126,10 @@ button:hover {
 <div class="instructions">
 <h3>📌 Instructions</h3>
 <ul>
-<li>Video skip ya click allowed nahi hai</li>
-<li>Video pura dekhna mandatory hai</li>
+<li>Video skip nahi kar sakte</li>
+<li>Pura dekhna mandatory hai</li>
 <li>End me code milega</li>
-<li>Code dalne ke baad hi next milega</li>
+<li>Code dalne ke baad next milega</li>
 </ul>
 </div>
 
@@ -111,27 +137,36 @@ button:hover {
 
 <script>
 
-// Disable keyboard shortcuts
+// Disable keyboard
 document.onkeydown = function(e) {
   return false;
 };
 
-// Disable right click
-document.addEventListener("contextmenu", e => e.preventDefault());
+// Start video with sound
+function startVideo() {
+  document.getElementById("ytvideo").src =
+  "https://www.youtube.com/embed/Qlh9fxv_S_0?controls=0&disablekb=1&modestbranding=1&rel=0&fs=0&iv_load_policy=3&playsinline=1&autoplay=1";
 
-// TIMER (1 Hour 3 Min = 3780000 ms)
+  document.querySelector(".play-overlay").style.display = "none";
+
+  // 3 sec baad block activate
+  setTimeout(() => {
+    document.getElementById("blocker").style.display = "block";
+  }, 3000);
+}
+
+// Timer (1hr 3min)
 setTimeout(() => {
   document.getElementById("nextBtn").style.display = "block";
 }, 3780000);
 
-// Code verification
+// Code check
 function checkCode() {
-  let userCode = prompt("Enter code shown in video:");
-  if(userCode === "SRP123") {
+  let code = prompt("Enter code:");
+  if(code === "SRP123") {
     alert("Access Granted ✅");
-    window.location.href = "next.html";
   } else {
-    alert("Wrong Code ❌ Watch again");
+    alert("Wrong Code ❌");
   }
 }
 
