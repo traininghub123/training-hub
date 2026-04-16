@@ -40,7 +40,6 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none;
 }
 
 /* Start overlay */
@@ -50,7 +49,7 @@ body {
   left:0;
   width:100%;
   height:100%;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.85);
   display:flex;
   justify-content:center;
   align-items:center;
@@ -98,7 +97,7 @@ button {
 </style>
 </head>
 
-<body oncontextmenu="return false">
+<body>
 
 <div class="header">🚀 Training Hub</div>
 
@@ -108,9 +107,8 @@ button {
 
   <!-- Vimeo Video -->
   <iframe 
-  id="vimeovideo"
+  id="video"
   src=""
-  frameborder="0"
   allow="autoplay; fullscreen"
   allowfullscreen>
   </iframe>
@@ -144,34 +142,26 @@ button {
 
 <script>
 
-// Disable keyboard
-document.onkeydown = function(e) {
-  return false;
-};
-
-// Disable right click
-document.addEventListener("contextmenu", e => e.preventDefault());
-
-// Start video with sound
+// Start video (sound ON)
 function startTraining() {
 
-  document.getElementById("vimeovideo").src =
+  document.getElementById("video").src =
   "https://player.vimeo.com/video/1183625534?autoplay=1&controls=0&title=0&byline=0&portrait=0&badge=0";
 
   document.getElementById("startScreen").style.display = "none";
 
-  // Block clicks after 2 sec
+  // 2 sec baad block
   setTimeout(() => {
     document.getElementById("blocker").style.display = "block";
   }, 2000);
 }
 
-// Timer (1 hr 3 min)
+// Timer (1hr 3min)
 setTimeout(() => {
   document.getElementById("nextBtn").style.display = "block";
 }, 3780000);
 
-// Code verification
+// Code check
 function checkCode() {
   let code = prompt("Enter verification code:");
   if(code === "SRP123") {
