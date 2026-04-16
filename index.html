@@ -1,17 +1,176 @@
 <!DOCTYPE html>
-<html>
-<body style="background:black;">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Training Hub</title>
 
-<h2 style="color:white;">Test Video</h2>
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f172a;
+  color: white;
+}
 
-<iframe 
-src="https://player.vimeo.com/video/1183625534"
-width="100%" 
-height="400"
-frameborder="0"
-allow="autoplay; fullscreen"
-allowfullscreen>
-</iframe>
+.header {
+  padding: 18px;
+  text-align: center;
+  font-size: 26px;
+  font-weight: bold;
+  background: linear-gradient(90deg,#020617,#1e293b);
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+.video-box {
+  position: relative;
+  padding-top: 56.25%;
+  background: #020617;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.video-box iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Start overlay */
+.start-overlay {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.85);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:20;
+}
+
+.start-overlay button {
+  padding:16px 28px;
+  font-size:18px;
+  background:#22c55e;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+/* Block overlay */
+.block-overlay {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  display:none;
+  z-index:10;
+}
+
+.instructions {
+  margin-top: 20px;
+  background: #020617;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+button {
+  margin-top: 15px;
+  padding: 14px;
+  width: 100%;
+  background: #22c55e;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">🚀 Training Hub</div>
+
+<div class="container">
+
+<div class="video-box">
+
+  <!-- Vimeo Video -->
+  <iframe 
+  id="video"
+  src=""
+  allow="autoplay; fullscreen">
+  </iframe>
+
+  <!-- Start Button -->
+  <div class="start-overlay" id="startScreen">
+    <button onclick="startTraining()">▶ Start Training</button>
+  </div>
+
+  <!-- Block Overlay -->
+  <div id="blocker" class="block-overlay"></div>
+
+</div>
+
+<button id="nextBtn" onclick="checkCode()">Proceed Next</button>
+
+<div class="instructions">
+<h3>📌 Important Instructions</h3>
+<ul>
+<li>This training video must be watched completely from start to end.</li>
+<li>Do not skip, refresh, or leave the page during the session.</li>
+<li>The video should be completed in one go without interruption.</li>
+<li>You cannot click, forward, or open the video outside this page.</li>
+<li>A verification code will be shown at the end of the video.</li>
+<li>You must enter the correct code to proceed further.</li>
+<li>If instructions are not followed, access may be restricted.</li>
+</ul>
+</div>
+
+</div>
+
+<script>
+
+// Start video
+function startTraining() {
+
+  document.getElementById("video").src =
+  "https://player.vimeo.com/video/1183625534?autoplay=1&controls=0&title=0&byline=0&portrait=0";
+
+  document.getElementById("startScreen").style.display = "none";
+
+  // 🔥 IMPORTANT: 3 sec baad block (video start hone ke baad)
+  setTimeout(() => {
+    document.getElementById("blocker").style.display = "block";
+  }, 3000);
+}
+
+// Timer (1hr 3min)
+setTimeout(() => {
+  document.getElementById("nextBtn").style.display = "block";
+}, 3780000);
+
+// Code check
+function checkCode() {
+  let code = prompt("Enter verification code:");
+  if(code === "SRP123") {
+    alert("Access Granted ✅");
+  } else {
+    alert("Incorrect Code ❌");
+  }
+}
+
+</script>
 
 </body>
 </html>
