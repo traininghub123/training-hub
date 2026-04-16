@@ -40,7 +40,7 @@ iframe {
   border: none;
 }
 
-/* Play overlay */
+/* Start Overlay */
 .play-overlay {
   position: absolute;
   top:0;
@@ -83,7 +83,7 @@ iframe {
 }
 
 button {
-  margin-top: 20px;
+  margin-top: 15px;
   padding: 14px;
   width: 100%;
   background: #22c55e;
@@ -92,6 +92,12 @@ button {
   font-size: 16px;
   cursor: pointer;
   display: none;
+}
+
+/* Fullscreen button */
+.full-btn {
+  display:block;
+  background:#3b82f6;
 }
 </style>
 </head>
@@ -102,7 +108,7 @@ button {
 
 <div class="container">
 
-<div class="video-box">
+<div class="video-box" id="videoBox">
 
   <!-- YouTube Video -->
   <iframe 
@@ -112,8 +118,8 @@ button {
   allowfullscreen>
   </iframe>
 
-  <!-- Play Button -->
-  <div class="play-overlay" onclick="startVideo()">
+  <!-- Start Button -->
+  <div class="play-overlay" id="startOverlay" onclick="startVideo()">
     <button>▶ Start Training</button>
   </div>
 
@@ -121,6 +127,9 @@ button {
   <div id="blocker" class="block-overlay"></div>
 
 </div>
+
+<!-- Fullscreen Button -->
+<button class="full-btn" onclick="goFullScreen()">📺 Full Screen</button>
 
 <button id="nextBtn" onclick="checkCode()">Proceed Next</button>
 
@@ -149,18 +158,38 @@ document.onkeydown = function(e) {
 // Disable right click
 document.addEventListener("contextmenu", e => e.preventDefault());
 
-// Start video with sound
+// Start video
 function startVideo() {
   document.getElementById("ytvideo").src =
   "https://www.youtube.com/embed/Qlh9fxv_S_0?controls=0&disablekb=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&autoplay=1";
 
-  document.querySelector(".play-overlay").style.display = "none";
+  document.getElementById("startOverlay").style.display = "none";
 
-  // 3 sec baad click block
   setTimeout(() => {
     document.getElementById("blocker").style.display = "block";
   }, 3000);
 }
+
+// Fullscreen function
+function goFullScreen() {
+  let iframe = document.getElementById("ytvideo");
+  if (iframe.requestFullscreen) {
+    iframe.requestFullscreen();
+  }
+}
+
+// Double tap fullscreen (mobile)
+let lastTap = 0;
+document.getElementById("videoBox").addEventListener("click", function () {
+  let now = new Date().getTime();
+  let timeBetween = now - lastTap;
+
+  if (timeBetween < 300 && timeBetween > 0) {
+    goFullScreen();
+  }
+
+  lastTap = now;
+});
 
 // Timer (1hr 3min)
 setTimeout(() => {
