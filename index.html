@@ -9,34 +9,35 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: #020617;
-  color: white;
+  background: #f5f7fb;
+  color: #111;
 }
 
 /* Header */
 .header {
   position: sticky;
   top: 0;
-  background: #020617;
-  padding: 8px;
+  background: white;
+  padding: 12px;
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
-  border-bottom: 1px solid #111;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 /* Main */
 .main {
   max-width: 1000px;
-  margin: 0 auto;
-  padding: 0; /* ❌ remove extra space */
+  margin: auto;
+  padding: 0;
 }
 
 /* Video */
 .video-container {
   width: 100%;
-  height: 55vh; /* balanced */
-  margin: 0; /* ❌ no gap */
+  height: 55vh;
+  background: black;
 }
 
 .video-container iframe {
@@ -47,20 +48,21 @@ body {
 
 /* Instructions */
 .instructions {
-  margin: 10px;
-  padding: 14px;
-  background: #0f172a;
-  border-radius: 10px;
-  font-size: 13px;
+  margin: 12px;
+  padding: 16px;
+  background: white;
+  border-radius: 12px;
+  font-size: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 .instructions h3 {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .instructions ul {
   padding-left: 18px;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 /* Desktop */
