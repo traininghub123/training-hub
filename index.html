@@ -64,7 +64,7 @@ iframe {
   cursor:pointer;
 }
 
-/* Block overlay after start */
+/* Block overlay */
 .block-overlay {
   position:absolute;
   top:0;
@@ -108,15 +108,16 @@ button {
   <iframe 
   id="ytvideo"
   src=""
-  allow="autoplay">
+  allow="autoplay; fullscreen"
+  allowfullscreen>
   </iframe>
 
-  <!-- Play Button Overlay -->
+  <!-- Play Button -->
   <div class="play-overlay" onclick="startVideo()">
     <button>▶ Start Training</button>
   </div>
 
-  <!-- Block Click Overlay -->
+  <!-- Block Click -->
   <div id="blocker" class="block-overlay"></div>
 
 </div>
@@ -135,7 +136,7 @@ button {
 <li>If instructions are not followed, access may be restricted.</li>
 </ul>
 </div>
-  
+
 </div>
 
 <script>
@@ -145,14 +146,17 @@ document.onkeydown = function(e) {
   return false;
 };
 
+// Disable right click
+document.addEventListener("contextmenu", e => e.preventDefault());
+
 // Start video with sound
 function startVideo() {
   document.getElementById("ytvideo").src =
-  "https://www.youtube.com/embed/Qlh9fxv_S_0?controls=0&disablekb=1&modestbranding=1&rel=0&fs=0&iv_load_policy=3&playsinline=1&autoplay=1";
+  "https://www.youtube.com/embed/Qlh9fxv_S_0?controls=0&disablekb=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&autoplay=1";
 
   document.querySelector(".play-overlay").style.display = "none";
 
-  // 3 sec baad block activate
+  // 3 sec baad click block
   setTimeout(() => {
     document.getElementById("blocker").style.display = "block";
   }, 3000);
@@ -165,11 +169,11 @@ setTimeout(() => {
 
 // Code check
 function checkCode() {
-  let code = prompt("Enter code:");
+  let code = prompt("Enter verification code:");
   if(code === "SRP123") {
     alert("Access Granted ✅");
   } else {
-    alert("Wrong Code ❌");
+    alert("Incorrect Code ❌ Please watch again");
   }
 }
 
