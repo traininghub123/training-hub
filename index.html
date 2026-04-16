@@ -1,62 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Training Hub</title>
+  <title>Training Video</title>
 
-<style>
-body {
-  margin:0;
-  background:black;
-}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-video {
-  width:100vw;
-  height:100vh;
-  object-fit:cover;
-}
-</style>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      height: 100vh; /* full screen height */
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  </style>
 </head>
 
 <body>
 
-<video id="video" autoplay controls controlsList="nodownload noplaybackrate">
-  <source src="https://drive.google.com/uc?export=download&id=1MYmkVFiNGASEHpsvpjbSCMkHq5df4Qms" type="video/mp4">
-</video>
-
-<script>
-
-let video = document.getElementById("video");
-
-// Force fullscreen
-video.addEventListener("play", () => {
-  if (video.requestFullscreen) video.requestFullscreen();
-});
-
-// Block skipping
-video.addEventListener("seeking", function() {
-  if (video.currentTime > video.lastTime) {
-    video.currentTime = video.lastTime;
-  }
-});
-
-video.addEventListener("timeupdate", function() {
-  video.lastTime = video.currentTime;
-});
-
-// Disable keyboard
-document.onkeydown = function(e) {
-  return false;
-};
-
-// Disable right click
-document.addEventListener("contextmenu", e => e.preventDefault());
-
-// Restart if refresh
-window.onload = () => {
-  video.currentTime = 0;
-};
-
-</script>
+<div class="video-container">
+  <iframe 
+    src="https://player.mediadelivery.net/embed/639095/70fbdd7c-eb77-4cb5-8839-131323414e10?token=07fa05309f0be2f4ed46e5ca6702e89a5872396c8e05a61e6c06ada9b23a9b47&expires=1776451973&autoplay=true&loop=false&muted=false&preload=true&responsive=true"
+    loading="lazy"
+    allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+    allowfullscreen>
+  </iframe>
+</div>
 
 </body>
 </html>
