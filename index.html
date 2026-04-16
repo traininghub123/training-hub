@@ -9,7 +9,7 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(180deg,#020617,#020617,#0f172a);
+  background: #020617;
   color: white;
 }
 
@@ -17,26 +17,24 @@ body {
 .header {
   position: sticky;
   top: 0;
-  background: rgba(15,23,42,0.8);
-  backdrop-filter: blur(10px);
-  padding: 14px;
+  background: #020617;
+  padding: 10px;
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid #111;
 }
 
-/* Video Card */
-.video-wrapper {
-  padding: 15px;
+/* Main */
+.main {
+  padding: 10px;
 }
 
+/* Video */
 .video-container {
-  position: relative;
   width: 100%;
-  border-radius: 14px;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 .video-container iframe {
@@ -45,29 +43,30 @@ body {
   border: none;
 }
 
-/* Instructions Card */
+/* Instructions */
 .instructions {
-  margin: 15px;
-  padding: 18px;
-  background: rgba(15,23,42,0.7);
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.08);
+  margin-top: 12px;
+  padding: 14px;
+  background: #0f172a;
+  border-radius: 10px;
+  font-size: 13px;
 }
 
 .instructions h3 {
-  margin-top: 0;
+  margin: 0 0 8px 0;
+  font-size: 14px;
 }
 
 .instructions ul {
   padding-left: 18px;
-  line-height: 1.6;
-  color: #cbd5f5;
+  margin: 0;
+  line-height: 1.5;
 }
 
 /* Desktop */
 @media(min-width:768px){
   .video-container iframe{
-    height: 450px;
+    height: 480px;
   }
 }
 </style>
@@ -80,7 +79,8 @@ body {
 🚀 Training Hub
 </div>
 
-<div class="video-wrapper">
+<div class="main">
+
   <div class="video-container">
     <iframe 
     src="https://player.mediadelivery.net/embed/639095/1272f98f-576e-47e9-9803-957e3ae7e007?token=b0fa828759f43a5aacc099e6c6302b6af3c541334fda1e2d2dcc06c569b845cf&expires=1776458049&autoplay=true&loop=false&muted=false&preload=true&responsive=true"
@@ -88,17 +88,18 @@ body {
     allowfullscreen>
     </iframe>
   </div>
-</div>
 
-<div class="instructions">
-<h3>📌 Important Instructions</h3>
-<ul>
-<li>Watch the full training video carefully.</li>
-<li>Do not skip or leave the session.</li>
-<li>This training must be completed in one go.</li>
-<li>A verification code will be shown at the end.</li>
-<li>Share the code with your mentor to unlock next session.</li>
-</ul>
+  <div class="instructions">
+    <h3>📌 Important Instructions</h3>
+    <ul>
+      <li>Watch the full training video carefully.</li>
+      <li>Do not skip or leave the session.</li>
+      <li>This training must be completed in one go.</li>
+      <li>A verification code will be shown at the end.</li>
+      <li>Share the code with your mentor to unlock next session.</li>
+    </ul>
+  </div>
+
 </div>
 
 </body>
