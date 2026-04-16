@@ -6,57 +6,57 @@
 <style>
 body {
   margin:0;
-  background:#0f172a;
-  color:white;
-  font-family:sans-serif;
+  background:black;
 }
 
-.container {
-  max-width:900px;
-  margin:auto;
-  padding:20px;
-}
-
-iframe {
-  width:100%;
-  height:500px;
-  border-radius:10px;
-  border:none;
-}
-
-.instructions {
-  margin-top:20px;
-  background:#020617;
-  padding:15px;
-  border-radius:10px;
+video {
+  width:100vw;
+  height:100vh;
+  object-fit:cover;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<video id="video" autoplay controls controlsList="nodownload noplaybackrate">
+  <source src="https://drive.google.com/uc?export=download&id=1MYmkVFiNGASEHpsvpjbSCMkHq5df4Qms" type="video/mp4">
+</video>
 
-<h2>🚀 Training Hub</h2>
+<script>
 
-<iframe 
-src="https://drive.google.com/file/d/1MYmkVFiNGASEHpsvpjbSCMkHq5df4Qms/preview"
-allow="autoplay">
-</iframe>
+let video = document.getElementById("video");
 
-<div class="instructions">
-<h3>📌 Important Instructions</h3>
-<ul>
-<li>This training video must be watched completely from start to end.</li>
-<li>Do not skip, refresh, or leave the page during the session.</li>
-<li>The video should be completed in one go without interruption.</li>
-<li>You cannot forward or skip any part of the video.</li>
-<li>A verification code will be shown at the end of the video.</li>
-<li>Share the code with your mentor to unlock the next session.</li>
-</ul>
-</div>
+// Force fullscreen
+video.addEventListener("play", () => {
+  if (video.requestFullscreen) video.requestFullscreen();
+});
 
-</div>
+// Block skipping
+video.addEventListener("seeking", function() {
+  if (video.currentTime > video.lastTime) {
+    video.currentTime = video.lastTime;
+  }
+});
+
+video.addEventListener("timeupdate", function() {
+  video.lastTime = video.currentTime;
+});
+
+// Disable keyboard
+document.onkeydown = function(e) {
+  return false;
+};
+
+// Disable right click
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+// Restart if refresh
+window.onload = () => {
+  video.currentTime = 0;
+};
+
+</script>
 
 </body>
 </html>
