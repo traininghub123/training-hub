@@ -1,41 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Training Video</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Training Hub</title>
 
-  <style>
-    body {
-      margin: 0;
-      background: black;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #020617;
+  color: white;
+}
 
-    .video-container {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-    }
+/* Header */
+.header {
+  text-align: center;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  background: linear-gradient(90deg,#020617,#1e293b);
+  letter-spacing: 1px;
+}
 
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-  </style>
+/* Video Section */
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 65vh;
+  background: black;
+}
+
+.video-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Lock Overlay */
+.lock-overlay {
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.2);
+  pointer-events: none;
+}
+
+/* Instructions */
+.instructions {
+  padding: 20px;
+}
+
+.instructions h3 {
+  margin-bottom: 10px;
+}
+
+.instructions ul {
+  padding-left: 18px;
+  line-height: 1.7;
+  color: #cbd5f5;
+}
+
+/* Mobile fix */
+@media(max-width:600px){
+  .video-container{
+    height: 50vh;
+  }
+}
+</style>
+
 </head>
 
 <body>
 
+<div class="header">
+🚀 Training Hub
+</div>
+
 <div class="video-container">
-  <iframe 
-    src="https://player.mediadelivery.net/embed/639095/1272f98f-576e-47e9-9803-957e3ae7e007?token=b0fa828759f43a5aacc099e6c6302b6af3c541334fda1e2d2dcc06c569b845cf&expires=1776458049&autoplay=true&loop=false&muted=false&preload=true&responsive=true"
-    loading="lazy"
-    allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-    allowfullscreen>
-  </iframe>
+
+<iframe 
+src="https://player.mediadelivery.net/embed/639095/1272f98f-576e-47e9-9803-957e3ae7e007?token=b0fa828759f43a5aacc099e6c6302b6af3c541334fda1e2d2dcc06c569b845cf&expires=1776458049&autoplay=true&loop=false&muted=false&preload=true&responsive=true"
+allow="autoplay; encrypted-media"
+allowfullscreen>
+</iframe>
+
+<div class="lock-overlay"></div>
+
+</div>
+
+<div class="instructions">
+<h3>📌 Important Instructions</h3>
+<ul>
+<li>Watch the full training video carefully.</li>
+<li>Do not skip or leave the session.</li>
+<li>This training must be completed in one go.</li>
+<li>A verification code will be shown at the end.</li>
+<li>Share the code with your mentor to unlock next session.</li>
+</ul>
 </div>
 
 </body>
