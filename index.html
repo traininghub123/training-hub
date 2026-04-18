@@ -31,13 +31,13 @@ body {
 
 /* Video Card */
 .video-card {
+  position: relative;
   background: #000;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
-/* Responsive Video */
+/* Responsive */
 .video-container {
   position: relative;
   width: 100%;
@@ -46,64 +46,44 @@ body {
 
 .video-container iframe {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   border: 0;
 }
 
+/* 🔥 BLOCK OVERLAY (MAIN FIX) */
+.blocker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
 /* Info */
 .info {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 14px;
-  font-size: 17px;
-  font-weight: 500;
-  color: #333;
+  margin-top: 12px;
+  font-size: 16px;
 }
 
-/* Instruction Box */
+/* Instructions */
 .instructions {
-  margin-top: 22px;
-  background: #ffffff;
-  padding: 22px;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-}
-
-.instructions h3 {
-  margin-bottom: 14px;
-  font-size: 22px;
-}
-
-.instructions ul {
-  padding-left: 18px;
-  font-size: 17px;
-  line-height: 1.8;
+  margin-top: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
 }
 
 /* Button */
 .btn {
-  margin-top: 22px;
+  margin-top: 20px;
   width: 100%;
   padding: 16px;
-  border: none;
-  border-radius: 12px;
   background: #3b82f6;
   color: white;
-  font-size: 18px;
-  font-weight: 600;
-}
-
-/* Mobile Fix */
-@media(max-width:600px){
-  .header {
-    font-size: 22px;
-  }
-  .instructions ul {
-    font-size: 15px;
-  }
+  border: none;
+  border-radius: 12px;
 }
 </style>
 </head>
@@ -117,50 +97,34 @@ body {
   <div class="video-card">
     <div class="video-container">
 
-      <!-- ✅ FINAL VIDEO PLAYER (NO TOKEN = NO EXPIRE) -->
+      <!-- VIDEO -->
       <iframe 
-      src="https://player.mediadelivery.net/embed/639095/1272f98f-576e-47e9-9803-957e3ae7e007?autoplay=true&loop=false&muted=false&preload=true"
-      loading="lazy"
-      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+      src="https://player.mediadelivery.net/embed/639095/1272f98f-576e-47e9-9803-957e3ae7e007?autoplay=true&muted=false"
       allowfullscreen>
       </iframe>
+
+      <!-- 🔥 THIS BLOCKS KEYBOARD + CLICK -->
+      <div class="blocker"></div>
 
     </div>
   </div>
 
   <div class="info">
-    <span>📘 Lesson 1</span>
-    <span>⏱ Training Session</span>
+    📘 Lesson 1 | ⏱ Training Session
   </div>
 
   <div class="instructions">
     <h3>📌 Important Instructions</h3>
     <ul>
-      <li>Watch the full training video carefully.</li>
-      <li>Do not skip or leave the session.</li>
-      <li>This training must be completed in one go.</li>
-      <li>A verification code will be shown at the end.</li>
-      <li>Share the code with your mentor to unlock next session.</li>
+      <li>Watch full video carefully</li>
+      <li>Do not skip</li>
+      <li>Complete in one go</li>
     </ul>
   </div>
 
-  <button class="btn">Next Session Locked 🔒</button>
+  <button class="btn">Next Locked 🔒</button>
 
 </div>
-
-<!-- ✅ KEYBOARD SKIP DISABLE -->
-<script>
-document.addEventListener("keydown", function(e) {
-  const blockedKeys = [
-    "ArrowRight", "ArrowLeft",
-    " ", "k", "l", "j"
-  ];
-
-  if (blockedKeys.includes(e.key)) {
-    e.preventDefault();
-  }
-});
-</script>
 
 </body>
 </html>
