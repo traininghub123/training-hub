@@ -2,312 +2,144 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Training Hub</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f1f5f9;
+}
 
-  :root {
-    --bg: #ffffff;
-    --surface: #f8fafc;
-    --border: #e8edf3;
-    --accent: #2563eb;
-    --accent-light: #eff6ff;
-    --text: #0f172a;
-    --text2: #475569;
-    --text3: #94a3b8;
-  }
+/* Header */
+.header {
+  background: #ffffff;
+  padding: 18px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
 
-  html, body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-    min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
-  }
+/* Container */
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 16px;
+}
 
-  /* TOP BAR */
-  .topbar {
-    background: #fff;
-    border-bottom: 1px solid var(--border);
-    padding: 0 20px;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 99;
-  }
-  .topbar-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .topbar-logo {
-    width: 34px; height: 34px;
-    background: var(--accent);
-    border-radius: 9px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 17px;
-  }
-  .topbar-title {
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: -0.3px;
-  }
-  .topbar-badge {
-    background: #dcfce7;
-    color: #16a34a;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 999px;
-    letter-spacing: 0.5px;
-  }
+/* Video Card */
+.video-card {
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
 
-  /* VIDEO — full bleed, zero side gaps */
-  .video-wrap {
-    width: 100%;
-    position: relative;
-    padding-top: 56.25%;
-    background: #000;
-  }
-  .video-wrap iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-    display: block;
-  }
+/* Aspect Ratio Fix */
+.video-container {
+  position: relative;
+  padding-top: 56.25%;
+}
 
-  /* CONTENT */
-  .content {
-    padding: 20px 16px 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    max-width: 640px;
-    margin: 0 auto;
-  }
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
 
-  /* LESSON META */
-  .lesson-meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 2px 0;
-  }
-  .lesson-pill {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--accent);
-  }
-  .live-dot {
-    width: 8px; height: 8px;
-    background: #22c55e;
-    border-radius: 50%;
-    box-shadow: 0 0 0 3px rgba(34,197,94,0.2);
-  }
-  .session-tag {
-    font-size: 12px;
-    color: var(--text3);
-    font-weight: 500;
-  }
+/* Info */
+.info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 15px;
+  color: #444;
+}
 
-  /* PROGRESS CARD */
-  .progress-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 16px 18px;
-  }
-  .progress-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  .progress-label {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text);
-  }
-  .progress-pct {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--accent);
-  }
-  .track {
-    height: 8px;
-    background: var(--border);
-    border-radius: 999px;
-    overflow: hidden;
-  }
-  .fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #2563eb, #60a5fa);
-    border-radius: 999px;
-    transition: width 0.5s ease;
-  }
-  .progress-hint {
-    margin-top: 8px;
-    font-size: 12px;
-    color: var(--text3);
-  }
+/* Instruction Box */
+.instructions {
+  margin-top: 18px;
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
 
-  /* CARD */
-  .card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    overflow: hidden;
-  }
-  .card-head {
-    padding: 15px 18px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text);
-  }
-  .instr-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    padding: 14px 18px;
-    border-bottom: 1px solid var(--border);
-  }
-  .instr-item:last-child { border-bottom: none; }
-  .instr-num {
-    flex-shrink: 0;
-    width: 26px; height: 26px;
-    border-radius: 8px;
-    background: var(--accent-light);
-    color: var(--accent);
-    font-size: 12px;
-    font-weight: 700;
-    display: flex; align-items: center; justify-content: center;
-    margin-top: 1px;
-  }
-  .instr-text {
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--text2);
-    padding-top: 3px;
-  }
+.instructions h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
 
-  /* LOCKED BUTTON */
-  .btn-locked {
-    width: 100%;
-    padding: 17px 20px;
-    border: 1.5px solid var(--border);
-    border-radius: 14px;
-    background: var(--surface);
-    color: var(--text3);
-    font-family: 'Inter', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: not-allowed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-  }
+.instructions ul {
+  padding-left: 18px;
+  font-size: 15px;
+  line-height: 1.7;
+}
 
-  .footer {
-    text-align: center;
-    padding-top: 4px;
-    font-size: 12px;
-    color: var(--text3);
+/* Button */
+.btn {
+  margin-top: 18px;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #3b82f6;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Mobile Fix */
+@media(max-width:600px){
+  .header {
+    font-size: 20px;
   }
+}
 </style>
 </head>
+
 <body>
 
-<!-- Top Bar -->
-<div class="topbar">
-  <div class="topbar-left">
-    <div class="topbar-logo">🚀</div>
-    <span class="topbar-title">Training Hub</span>
-  </div>
-  <span class="topbar-badge">LIVE</span>
-</div>
+<div class="header">🚀 Training Hub</div>
 
-<!-- Video — full bleed -->
-<div class="video-wrap">
-  <iframe
-    src="https://player.mediadelivery.net/embed/639095/1272f98f-576e-47e9-9803-957e3ae7e007?token=2f2a499bb92f91b7f4042a320ff77014d802fad6fffbadcfc3687cda47f15052&expires=1776461080&autoplay=true&loop=false&muted=false&preload=true&responsive=true"
-    loading="lazy"
-    allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
-    allowfullscreen>
-  </iframe>
-</div>
+<div class="container">
 
-<!-- Content -->
-<div class="content">
+  <div class="video-card">
+    <div class="video-container">
 
-  <div class="lesson-meta">
-    <div class="lesson-pill">
-      <span class="live-dot"></span>
-      Lesson 1 — Day 1
-    </div>
-    <span class="session-tag">© Training Session</span>
-  </div>
+      <!-- ✅ YOUR ORIGINAL WORKING PLAYER CODE (UNCHANGED) -->
+      <iframe 
+      src="https://player.mediadelivery.net/embed/639095/1272f98f-576e-47e9-9803-957e3ae7e007?token=2f2a499bb92f91b7f4042a320ff77014d802fad6fffbadcfc3687cda47f15052&expires=1776461080&autoplay=true&loop=false&muted=false&preload=true&responsive=true"
+      loading="lazy"
+      allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
+      allowfullscreen>
+      </iframe>
 
-  <div class="progress-card">
-    <div class="progress-row">
-      <span class="progress-label">Video Progress</span>
-      <span class="progress-pct" id="pct">0%</span>
-    </div>
-    <div class="track">
-      <div class="fill" id="fill"></div>
-    </div>
-    <div class="progress-hint">Watch the full video to unlock the next session</div>
-  </div>
-
-  <div class="card">
-    <div class="card-head">📌 Important Instructions</div>
-    <div class="instr-item">
-      <span class="instr-num">1</span>
-      <span class="instr-text">Watch the full training video carefully.</span>
-    </div>
-    <div class="instr-item">
-      <span class="instr-num">2</span>
-      <span class="instr-text">Do not skip or leave the session.</span>
-    </div>
-    <div class="instr-item">
-      <span class="instr-num">3</span>
-      <span class="instr-text">This training must be completed in one go.</span>
-    </div>
-    <div class="instr-item">
-      <span class="instr-num">4</span>
-      <span class="instr-text">A verification code will be shown at the end.</span>
-    </div>
-    <div class="instr-item">
-      <span class="instr-num">5</span>
-      <span class="instr-text">Share the code with your mentor to unlock the next session.</span>
     </div>
   </div>
 
-  <button class="btn-locked" disabled>
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="3" y="11" width="18" height="11" rx="3"/>
-      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-    </svg>
-    Next Session Locked
-  </button>
+  <div class="info">
+    <span>Lesson 1</span>
+    <span>⏱ Training Session</span>
+  </div>
 
-  <div class="footer">Powered by Training Hub · All rights reserved</div>
+  <div class="instructions">
+    <h3>📌 Important Instructions</h3>
+    <ul>
+      <li>Watch the full training video carefully.</li>
+      <li>Do not skip or leave the session.</li>
+      <li>This training must be completed in one go.</li>
+      <li>A verification code will be shown at the end.</li>
+      <li>Share the code with your mentor to unlock next session.</li>
+    </ul>
+  </div>
+
+  <button class="btn">Next Session Locked 🔒</button>
 
 </div>
 
