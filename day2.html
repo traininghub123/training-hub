@@ -1,48 +1,179 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day 2</title>
+<title>Launchpad Day 2</title>
 
 <style>
-body{margin:0;font-family:sans-serif;background:#f3f4f6}
-.header{background:#fff;padding:18px;text-align:center;font-size:22px;font-weight:700}
-.container{max-width:900px;margin:auto;padding:15px}
-.card{background:#000;border-radius:14px;overflow:hidden}
-.video{position:relative;padding-top:56.25%}
-.video iframe{position:absolute;width:100%;height:100%}
-.box{background:#fff;padding:15px;border-radius:12px;margin-top:15px}
-.notice{background:#d1ecf1;padding:10px;border-radius:8px;margin-bottom:10px}
-.code{background:#d1fae5;padding:10px;border-radius:8px;margin-top:10px;font-weight:600;text-align:center}
-</style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #eef2f7;
+  color: #1f2937;
+}
 
+/* Header */
+.header {
+  background: #ffffff;
+  padding: 22px;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Container */
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 24px;
+}
+
+/* Urgency Box */
+.urgency {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+/* Video Card */
+.video-card {
+  background: #000;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Info */
+.info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+/* Instructions */
+.instructions {
+  margin-top: 22px;
+  background: #ffffff;
+  padding: 22px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+.instructions h3 {
+  margin-bottom: 14px;
+  font-size: 20px;
+}
+
+.instructions ul {
+  padding-left: 18px;
+  line-height: 1.9;
+  font-size: 16px;
+}
+
+/* Highlight */
+.highlight {
+  margin-top: 16px;
+  padding: 16px;
+  background: #e0ecff;
+  border-radius: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* CTA Button */
+.btn {
+  margin-top: 24px;
+  width: 100%;
+  padding: 18px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+/* Mobile */
+@media(max-width:600px){
+  .header {
+    font-size: 22px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-<div class="header">🚀 Launchpad Day 2</div>
+<div class="header">🚀 LAUNCHPAD DAY-2</div>
 
 <div class="container">
 
-<div class="notice">✅ Access after Day 1 + Doubt Session</div>
+<div class="urgency">
+⚠️ Limited Slots Available — Only Selected Candidates Will Proceed
+</div>
 
-<div class="card">
-<div class="video">
-<iframe src="https://iframe.mediadelivery.net/embed/639095/e8bd14e6-e632-452c-8b97-69e0134e888a" allowfullscreen></iframe>
+<div class="video-card">
+<div class="video-container">
+
+<!-- ✅ VIDEO SAME -->
+<iframe 
+src="https://player.mediadelivery.net/embed/639095/e8bd14e6-e632-452c-8b97-69e0134e888a?autoplay=true&loop=false&muted=false&preload=true"
+loading="lazy"
+allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+allowfullscreen>
+</iframe>
+
 </div>
 </div>
 
-<div class="box">
-<h3>📌 Instructions</h3>
+<div class="info">
+<span>🚀 Launchpad Day 2</span>
+<span>⏱ Final Session</span>
+</div>
+
+<div class="instructions">
+<h3>📌 Final Instructions</h3>
+
 <ul>
-<li>Apply learning practically</li>
-<li>Stay till end</li>
-<li>Final system unlock ahead</li>
+<li>This is the final and most important session</li>
+<li>Watch the complete video with full attention</li>
+<li>Do not skip any part of the training</li>
+<li>This session determines your next step</li>
+<li>Only serious candidates will be selected</li>
 </ul>
 
-<div class="code">🎯 Final Stage Unlocked</div>
+<div class="highlight">
+🎯 A final verification code will be shown in this session <br><br>
+📩 Share the code with your mentor to confirm your completion <br><br>
+🚀 After verification, you will receive guidance to start your work
+</div>
 
 </div>
+
+<button class="btn">🚀 Start Your Journey</button>
 
 </div>
 
