@@ -38,7 +38,7 @@ body {
   color: #111827;
 }
 
-/* RED BLINK DOT */
+/* BLINK DOT */
 .dot {
   height: 10px;
   width: 10px;
@@ -121,7 +121,7 @@ body {
   color:#1e3a8a;
 }
 
-/* GUIDELINES */
+/* INSTRUCTIONS */
 .instructions {
   margin-top:18px;
   background: #ffffff;
@@ -139,7 +139,7 @@ body {
   line-height:1.7;
 }
 
-/* ACCESS BOX */
+/* ACCESS */
 .access {
   margin-top:18px;
   background: linear-gradient(135deg,#0f172a,#1e293b);
@@ -183,11 +183,11 @@ body {
 
 <div class="live">
   <span class="dot"></span>
-  <span class="live-text">LIVE • Training in Progress — Stay Connected</span>
+  <span class="live-text">LIVE • Waiting to Start</span>
 </div>
 
 <div class="subtext">
-  Limited access training • Complete sincerely • ⏳ Ends in <span id="timer">05:00</span>
+  ⏳ Session starting in <span id="timer">06:50</span>
 </div>
 
 <div class="container">
@@ -195,7 +195,7 @@ body {
   <div class="video-card">
     <div class="video-container">
 
-      <!-- ✅ YOUR ORIGINAL VIDEO -->
+      <!-- VIDEO -->
       <iframe 
       src="https://player.mediadelivery.net/embed/639095/9f85904b-ca56-490e-95c9-82f258bcb815?autoplay=true&loop=false&muted=false&preload=true"
       allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
@@ -222,6 +222,7 @@ body {
       <li>Do not refresh or exit in between</li>
       <li>Stay fully focused and avoid distractions</li>
       <li>Apply the learnings practically</li>
+      <li>📱 For best experience, watch in full screen and rotate your device</li>
     </ul>
   </div>
 
@@ -240,9 +241,9 @@ body {
 
 </div>
 
-<!-- ⏳ COUNTDOWN SCRIPT -->
+<!-- SCRIPT -->
 <script>
-let time = 300;
+let time = 410;
 
 let timer = setInterval(() => {
   let minutes = Math.floor(time / 60);
@@ -255,8 +256,16 @@ let timer = setInterval(() => {
 
   if (time < 0) {
     clearInterval(timer);
-    document.getElementById("timer").innerHTML = "00:00";
+
+    // CHANGE TO LIVE
+    document.querySelector(".subtext").innerHTML =
+      "🔴 Session is now LIVE — Stay focused";
+
+    document.querySelector(".live-text").innerHTML =
+      "LIVE • Session Started — Do Not Skip";
+
   }
+
 }, 1000);
 </script>
 
