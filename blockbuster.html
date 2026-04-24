@@ -9,40 +9,40 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: #f4f6f9;
+  background: #eef2f7;
+  color: #1f2937;
 }
 
 /* HEADER */
 .header {
   background: linear-gradient(135deg,#0f172a,#1e293b);
-  color: white;
-  padding: 18px;
+  color: #fff;
+  padding: 20px;
   text-align: center;
   font-size: 22px;
   font-weight: 700;
 }
 
-/* LIVE BAR */
-.live {
+/* CONTAINER */
+.container {
   max-width: 900px;
-  margin: 15px auto;
-  background: #ffffff;
-  padding: 12px;
-  text-align: center;
+  margin: auto;
+  padding: 18px;
+}
+
+/* LIVE BAR */
+.live-bar {
+  background: #fff;
   border-radius: 10px;
-  border: 1px solid #e5e7eb;
-  font-weight: 600;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
 }
 
-.live-text {
-  color: #111827;
-}
-
-/* BLINK DOT */
-.dot {
-  height: 10px;
+.live-dot {
   width: 10px;
-  background-color: #dc2626;
+  height: 10px;
+  background: red;
   border-radius: 50%;
   display: inline-block;
   margin-right: 6px;
@@ -55,27 +55,23 @@ body {
   100% {opacity:1;}
 }
 
-/* SUBTEXT */
-.subtext {
-  text-align:center;
-  font-size:14px;
-  color:#6b7280;
-  margin-top:5px;
+.live-text {
+  font-weight: 600;
+  font-size: 15px;
 }
 
-/* CONTAINER */
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 16px;
+.subtext {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #6b7280;
 }
 
 /* VIDEO */
 .video-card {
+  margin-top: 15px;
   background: #000;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 .video-container {
@@ -85,95 +81,86 @@ body {
 
 .video-container iframe {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   border: 0;
 }
 
-/* BADGES */
-.badges {
-  display:flex;
-  justify-content:space-between;
-  margin-top:12px;
-  gap:10px;
+/* TAGS */
+.tags {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
 }
 
-.badge {
+.tag {
   flex:1;
-  text-align:center;
-  background:#ffffff;
-  padding:10px;
-  border-radius:10px;
-  font-size:14px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.06);
+  background: #f1f5f9;
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 14px;
 }
 
-/* NOTICE */
-.notice {
-  margin-top:15px;
-  background:#e0ecff;
-  padding:14px;
-  border-radius:12px;
-  text-align:center;
-  font-weight:500;
-  color:#1e3a8a;
+/* ALERT */
+.alert {
+  margin-top: 15px;
+  background: #e0e7ff;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 500;
+  text-align: center;
 }
 
-/* INSTRUCTIONS */
-.instructions {
-  margin-top:18px;
-  background: #ffffff;
+/* BOX */
+.box {
+  margin-top: 18px;
+  background: #fff;
   padding: 18px;
   border-radius: 14px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
 }
 
-.instructions h3 {
+.box h3 {
   margin-bottom: 10px;
 }
 
-.instructions ul {
-  padding-left:18px;
-  line-height:1.7;
+.box ul {
+  padding-left: 18px;
+  line-height: 1.7;
 }
 
-/* ACCESS */
-.access {
-  margin-top:18px;
+/* DARK BOX */
+.dark-box {
+  margin-top: 18px;
   background: linear-gradient(135deg,#0f172a,#1e293b);
-  color:white;
-  padding:18px;
-  border-radius:14px;
+  color: #fff;
+  padding: 18px;
+  border-radius: 14px;
 }
 
-.access h3 {
-  margin-bottom:10px;
-}
-
-.access ul {
-  padding-left:18px;
-  line-height:1.7;
+.dark-box ul {
+  padding-left: 18px;
+  line-height: 1.7;
 }
 
 /* BUTTON */
 .btn {
-  margin-top:16px;
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:10px;
+  margin-top: 15px;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
   background: linear-gradient(135deg,#2563eb,#1d4ed8);
-  color:white;
-  font-size:16px;
-  font-weight:600;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  opacity: 0.6;
 }
 
-/* MOBILE */
-@media(max-width:600px){
-  .header {font-size:20px;}
+.btn.active {
+  opacity: 1;
 }
+
 </style>
 </head>
 
@@ -181,40 +168,46 @@ body {
 
 <div class="header">🎬 BLOCKBUSTER SESSION</div>
 
-<div class="live">
-  <span class="dot"></span>
-  <span class="live-text">LIVE • Waiting to Start</span>
-</div>
-
-<div class="subtext">
-  ⏳ Session starting in <span id="timer">06:50</span>
-</div>
-
 <div class="container">
 
+  <!-- LIVE BAR -->
+  <div class="live-bar">
+    <span class="live-dot"></span>
+    <span class="live-text">
+      <span style="color:#dc2626;font-weight:700;">LIVE</span> • Waiting to Start
+    </span>
+
+    <div class="subtext">
+      ⏳ Starting in <b id="timer">06:50</b> • Stay Ready
+    </div>
+  </div>
+
+  <!-- VIDEO -->
   <div class="video-card">
     <div class="video-container">
 
-      <!-- VIDEO -->
+      <!-- YOUR VIDEO -->
       <iframe 
       src="https://player.mediadelivery.net/embed/639095/9f85904b-ca56-490e-95c9-82f258bcb815?autoplay=true&loop=false&muted=false&preload=true"
-      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
       allowfullscreen>
       </iframe>
 
     </div>
   </div>
 
-  <div class="badges">
-    <div class="badge">🎯 Special Training</div>
-    <div class="badge">🔒 Restricted Access</div>
+  <!-- TAGS -->
+  <div class="tags">
+    <div class="tag">🎯 Special Training</div>
+    <div class="tag">🔒 Restricted Access</div>
   </div>
 
-  <div class="notice">
+  <!-- ALERT -->
+  <div class="alert">
     ⚠️ This session is treated as LIVE. Complete it in one sitting without interruption.
   </div>
 
-  <div class="instructions">
+  <!-- GUIDELINES -->
+  <div class="box">
     <h3>📌 Session Guidelines</h3>
     <ul>
       <li>Watch the complete session without skipping</li>
@@ -222,11 +215,12 @@ body {
       <li>Do not refresh or exit in between</li>
       <li>Stay fully focused and avoid distractions</li>
       <li>Apply the learnings practically</li>
-      <li>📱 For best experience, watch in full screen and rotate your device</li>
+      <li>📱 Watch in full screen and rotate your device</li>
     </ul>
   </div>
 
-  <div class="access">
+  <!-- ACCESS -->
+  <div class="dark-box">
     <h3>🔐 Access Control</h3>
     <ul>
       <li>This is a restricted training process</li>
@@ -236,34 +230,41 @@ body {
       <li>Further process will be handled personally</li>
     </ul>
 
-    <button class="btn">🚀 Connect With Your Mentor</button>
+    <button class="btn" id="ctaBtn" disabled>
+      🚀 Connect With Your Mentor
+    </button>
   </div>
 
 </div>
 
-<!-- SCRIPT -->
 <script>
-let time = 410;
+// TIMER 6:50 (start delay)
+let time = 6 * 60 + 50;
 
-let timer = setInterval(() => {
-  let minutes = Math.floor(time / 60);
-  let seconds = time % 60;
+const timer = setInterval(() => {
+  let min = Math.floor(time / 60);
+  let sec = time % 60;
 
-  document.getElementById("timer").innerHTML =
-    `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  document.getElementById("timer").innerText =
+    (min < 10 ? "0" + min : min) + ":" +
+    (sec < 10 ? "0" + sec : sec);
 
   time--;
 
   if (time < 0) {
     clearInterval(timer);
 
-    // CHANGE TO LIVE
-    document.querySelector(".subtext").innerHTML =
-      "🔴 Session is now LIVE — Stay focused";
-
+    // CHANGE TO LIVE MODE
     document.querySelector(".live-text").innerHTML =
-      "LIVE • Session Started — Do Not Skip";
+      '<span style="color:#dc2626;font-weight:700;">LIVE</span> • Training in Progress';
 
+    document.querySelector(".subtext").innerHTML =
+      "🚀 Session is LIVE — Do Not Skip";
+
+    // UNLOCK BUTTON
+    const btn = document.getElementById("ctaBtn");
+    btn.disabled = false;
+    btn.classList.add("active");
   }
 
 }, 1000);
