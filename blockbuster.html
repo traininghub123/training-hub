@@ -20,22 +20,25 @@ body {
   text-align: center;
   font-size: 22px;
   font-weight: 700;
-  letter-spacing: 1px;
 }
 
 /* LIVE BAR */
 .live {
   max-width: 900px;
   margin: 15px auto;
-  background: #fff1f2;
-  color: #dc2626;
+  background: #ffffff;
   padding: 12px;
   text-align: center;
-  font-weight: 600;
   border-radius: 10px;
-  border: 1px solid #fecaca;
+  border: 1px solid #e5e7eb;
+  font-weight: 600;
 }
 
+.live-text {
+  color: #111827;
+}
+
+/* RED BLINK DOT */
 .dot {
   height: 10px;
   width: 10px;
@@ -52,7 +55,7 @@ body {
   100% {opacity:1;}
 }
 
-/* SUB TEXT */
+/* SUBTEXT */
 .subtext {
   text-align:center;
   font-size:14px;
@@ -107,7 +110,7 @@ body {
   box-shadow:0 4px 12px rgba(0,0,0,0.06);
 }
 
-/* INFO BOX */
+/* NOTICE */
 .notice {
   margin-top:15px;
   background:#e0ecff;
@@ -136,7 +139,7 @@ body {
   line-height:1.7;
 }
 
-/* DARK CARD */
+/* ACCESS BOX */
 .access {
   margin-top:18px;
   background: linear-gradient(135deg,#0f172a,#1e293b);
@@ -179,17 +182,20 @@ body {
 <div class="header">🎬 BLOCKBUSTER SESSION</div>
 
 <div class="live">
-<span class="dot"></span> LIVE • Training in Progress — Stay Connected
+  <span class="dot"></span>
+  <span class="live-text">LIVE • Training in Progress — Stay Connected</span>
 </div>
 
-<div class="subtext">Limited access training • Complete sincerely</div>
+<div class="subtext">
+  Limited access training • Complete sincerely • ⏳ Ends in <span id="timer">05:00</span>
+</div>
 
 <div class="container">
 
   <div class="video-card">
     <div class="video-container">
 
-      <!-- ✅ YOUR ORIGINAL VIDEO (UNCHANGED) -->
+      <!-- ✅ YOUR ORIGINAL VIDEO -->
       <iframe 
       src="https://player.mediadelivery.net/embed/639095/9f85904b-ca56-490e-95c9-82f258bcb815?autoplay=true&loop=false&muted=false&preload=true"
       allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
@@ -233,6 +239,26 @@ body {
   </div>
 
 </div>
+
+<!-- ⏳ COUNTDOWN SCRIPT -->
+<script>
+let time = 300;
+
+let timer = setInterval(() => {
+  let minutes = Math.floor(time / 60);
+  let seconds = time % 60;
+
+  document.getElementById("timer").innerHTML =
+    `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+  time--;
+
+  if (time < 0) {
+    clearInterval(timer);
+    document.getElementById("timer").innerHTML = "00:00";
+  }
+}, 1000);
+</script>
 
 </body>
 </html>
