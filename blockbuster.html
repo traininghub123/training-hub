@@ -16,23 +16,33 @@ body {
 /* Header */
 .header {
   background: #ffffff;
-  padding: 20px;
+  padding: 22px;
   text-align: center;
   font-size: 26px;
   font-weight: 700;
   box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
 
-/* LIVE Badge */
-.live-badge {
-  margin: 15px auto;
+/* LIVE Banner */
+.live {
   max-width: 900px;
+  margin: 15px auto;
   background: #fee2e2;
   color: #b91c1c;
   padding: 14px;
   text-align: center;
   font-weight: 600;
   border-radius: 10px;
+}
+
+/* Limited Notice */
+.limited {
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+  font-size: 14px;
+  color: #dc2626;
+  margin-top: 5px;
 }
 
 /* Container */
@@ -45,9 +55,9 @@ body {
 /* Video */
 .video-card {
   background: #000;
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
 }
 
 .video-container {
@@ -57,10 +67,10 @@ body {
 
 .video-container iframe {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
+  top: 0;
+  left: 0;
   border: 0;
 }
 
@@ -73,7 +83,7 @@ body {
   font-weight: 500;
 }
 
-/* Highlight Box */
+/* Highlight */
 .highlight {
   margin-top: 15px;
   background: #dbeafe;
@@ -87,7 +97,7 @@ body {
 .instructions {
   margin-top: 20px;
   background: #ffffff;
-  padding: 20px;
+  padding: 22px;
   border-radius: 14px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.06);
 }
@@ -101,24 +111,23 @@ body {
   line-height: 1.8;
 }
 
-/* 🔐 LOCK BOX (Main Upgrade) */
-.lock-box {
+/* 🔐 LOCK */
+.lock {
   margin-top: 25px;
   background: linear-gradient(135deg, #111827, #1f2937);
   color: #fff;
-  padding: 22px;
+  padding: 24px;
   border-radius: 14px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
 }
 
-.lock-box h3 {
-  margin-bottom: 12px;
+.lock h3 {
+  margin-bottom: 14px;
 }
 
-.lock-box ul {
+.lock ul {
   padding-left: 18px;
-  line-height: 1.7;
-  font-size: 15px;
+  line-height: 1.8;
 }
 
 /* CTA Button */
@@ -134,8 +143,8 @@ body {
   font-weight: 600;
 }
 
-/* Footer Note */
-.footer-note {
+/* Footer */
+.footer {
   margin-top: 15px;
   text-align: center;
   font-size: 14px;
@@ -149,13 +158,17 @@ body {
 
 <div class="header">🎬 BLOCKBUSTER SESSION</div>
 
-<div class="live-badge">
+<div class="live">
 🔴 LIVE Session in Progress — Stay Connected
+</div>
+
+<div class="limited">
+⚠️ Limited Access Training — Entry may close anytime
 </div>
 
 <div class="container">
 
-  <!-- Video -->
+  <!-- VIDEO -->
   <div class="video-card">
     <div class="video-container">
       <iframe 
@@ -166,18 +179,18 @@ body {
     </div>
   </div>
 
-  <!-- Info -->
+  <!-- INFO -->
   <div class="info">
-    <span>🎯 Special Training</span>
+    <span>🎯 Special Training Session</span>
     <span>🔒 Restricted Access</span>
   </div>
 
-  <!-- Highlight -->
+  <!-- HIGHLIGHT -->
   <div class="highlight">
 ⚠️ This session is treated as LIVE. Complete it in one sitting without interruption.
   </div>
 
-  <!-- Instructions -->
+  <!-- INSTRUCTIONS -->
   <div class="instructions">
     <h3>📌 Session Guidelines</h3>
     <ul>
@@ -190,21 +203,21 @@ body {
   </div>
 
   <!-- 🔐 LOCK SYSTEM -->
-  <div class="lock-box">
-    <h3>🔐 ACCESS CONTROL SYSTEM</h3>
+  <div class="lock">
+    <h3>🔐 ACCESS CONTROL NOTICE</h3>
     <ul>
-      <li>This is a controlled training session</li>
-      <li>A verification code will appear inside the video</li>
-      <li>Note the code carefully after completion</li>
-      <li>Submit the code to your mentor</li>
-      <li>Next process will NOT be unlocked without verification</li>
+      <li>This is a restricted training process</li>
+      <li>Completion of this session is mandatory</li>
+      <li>Access is limited and monitored</li>
+      <li>Only serious candidates will be guided ahead</li>
+      <li>Further process will be handled personally</li>
     </ul>
 
-    <button class="btn">📩 Submit Code to Mentor</button>
+    <button class="btn">🚀 Connect With Your Mentor</button>
   </div>
 
-  <div class="footer-note">
-Only serious candidates will be guided ahead 🚀
+  <div class="footer">
+After completing this session, connect with your mentor for further process.
   </div>
 
 </div>
