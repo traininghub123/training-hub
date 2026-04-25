@@ -16,7 +16,7 @@ body {
 .header {
   background: linear-gradient(135deg,#111827,#1f2937);
   color: white;
-  padding: 20px;
+  padding: 18px;
   text-align: center;
   font-size: 22px;
   font-weight: 700;
@@ -31,7 +31,6 @@ body {
   text-align: center;
   border-radius: 10px;
   border: 1px solid #e5e7eb;
-  font-weight: 600;
 }
 
 .dot {
@@ -83,71 +82,30 @@ body {
   border: 0;
 }
 
-/* BADGES */
-.badges {
-  display:flex;
-  gap:10px;
-  margin-top:12px;
-}
-
-.badge {
-  flex:1;
-  text-align:center;
-  background:#ffffff;
-  padding:10px;
-  border-radius:10px;
-  font-size:14px;
-}
-
-/* NOTICE */
-.notice {
-  margin-top:15px;
-  background:#ecfeff;
-  padding:14px;
-  border-radius:12px;
-  text-align:center;
-  font-weight:500;
-  color:#0f766e;
-}
-
-/* INSTRUCTIONS */
-.instructions {
-  margin-top:18px;
-  background:#ffffff;
-  padding:18px;
-  border-radius:14px;
-}
-
-.instructions ul {
-  padding-left:18px;
-  line-height:1.7;
-}
-
-/* DARK BOX */
-.access {
-  margin-top:18px;
-  background: linear-gradient(135deg,#111827,#1f2937);
-  color:white;
-  padding:18px;
-  border-radius:14px;
-}
-
+/* BUTTON */
 .btn {
   margin-top:15px;
   width:100%;
   padding:14px;
   border:none;
   border-radius:10px;
-  background: linear-gradient(135deg,#2563eb,#1d4ed8);
+  background:#2563eb;
   color:white;
-  font-weight:600;
-  opacity:0.6;
 }
 
-.btn.active {
-  opacity:1;
+/* POPUP */
+#livePopup {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
 }
-
 </style>
 </head>
 
@@ -157,19 +115,21 @@ body {
 
 <div class="live">
   <span class="dot"></span>
-  <span><span style="color:#dc2626;">LIVE</span> • Waiting to Start</span>
+  <span class="live-text">
+    <span style="color:#dc2626;">LIVE</span> • Waiting to Start
+  </span>
 </div>
 
 <div class="subtext">
-  ⏳ Starting in <b id="timer">09:20</b> • Be Ready
+  ⏳ Starting in <b id="timer">00:30</b>
 </div>
 
 <div class="container">
 
-  <!-- VIDEO -->
   <div class="video-card">
     <div class="video-container">
 
+      <!-- SAME WORKING PLAYER -->
       <iframe 
       src="https://player.mediadelivery.net/embed/639095/5a72fba4-eb6e-431e-8e6c-1006f1aa803b?autoplay=true&loop=false&muted=false&preload=true&responsive=true"
       loading="lazy"
@@ -181,39 +141,24 @@ body {
     </div>
   </div>
 
-  <div class="badges">
-    <div class="badge">🎯 Level Up Training</div>
-    <div class="badge">🔒 Exclusive Access</div>
+</div>
+
+<!-- POPUP -->
+<div id="livePopup">
+  <div style="background:#fff;padding:25px;border-radius:12px;text-align:center;width:80%;max-width:320px;">
+    <h3>🔴 Session is LIVE</h3>
+    <p>Stay focused and avoid interruptions</p>
+    <p style="color:#dc2626;font-weight:600;">Do not take calls during this session</p>
+    <button onclick="closePopup()" style="margin-top:10px;padding:10px 16px;background:#2563eb;color:#fff;border:none;border-radius:8px;">
+      Continue
+    </button>
   </div>
-
-  <div class="notice">
-    This session is only for selected candidates. Complete it seriously to upgrade your level.
-  </div>
-
-  <div class="instructions">
-    <ul>
-      <li>Watch the session fully without skipping</li>
-      <li>Do not exit or refresh in between</li>
-      <li>Stay focused — this is a growth stage</li>
-      <li>📱 Watch in full screen and rotate your device</li>
-    </ul>
-  </div>
-
-  <div class="access">
-    <h3>🔐 Next Step</h3>
-    <ul>
-      <li>This is a level upgrade session</li>
-      <li>Completion is mandatory</li>
-      <li>Further process will be guided personally</li>
-    </ul>
-
-    <button id="btn" class="btn">🚀 Proceed to Next Level</button>
-  </div>
-
 </div>
 
 <script>
-let time = 560; // 9:20
+
+// 30 sec timer (TEST)
+let time = 30;
 
 let timer = setInterval(() => {
   let min = Math.floor(time/60);
@@ -224,20 +169,26 @@ let timer = setInterval(() => {
 
   time--;
 
-  if(time<0){
+  if(time < 0){
     clearInterval(timer);
 
-    document.querySelector(".subtext").innerHTML =
-      "🚀 Session is LIVE — Stay Focused";
-
-    document.querySelector(".live span").innerHTML =
+    // LIVE SWITCH
+    document.querySelector(".live-text").innerHTML =
       '<span style="color:#dc2626;">LIVE</span> • Training in Progress';
 
-    let btn = document.getElementById("btn");
-    btn.classList.add("active");
+    document.querySelector(".subtext").innerHTML =
+      "🚀 Session is LIVE — Do Not Skip";
+
+    // SHOW POPUP
+    document.getElementById("livePopup").style.display = "flex";
   }
 
 },1000);
+
+function closePopup(){
+  document.getElementById("livePopup").style.display = "none";
+}
+
 </script>
 
 </body>
