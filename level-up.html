@@ -123,7 +123,7 @@ body {
   line-height:1.7;
 }
 
-/* ACCESS */
+/* DARK BOX */
 .access {
   margin-top:18px;
   background: linear-gradient(135deg,#111827,#1f2937);
@@ -158,12 +158,12 @@ body {
 <div class="live">
   <span class="dot"></span>
   <span id="liveStatus">
-    <span style="color:#dc2626;font-weight:700;">LIVE</span> • Waiting to Start
+    <span style="color:#dc2626;">LIVE</span> • Waiting to Start
   </span>
 </div>
 
 <div class="subtext">
-  ⏳ Starting in <b id="timer">09:20</b>
+  ⏳ Starting in <b id="timer">00:20</b> • Be Ready
 </div>
 
 <div class="container">
@@ -172,11 +172,12 @@ body {
   <div class="video-card">
     <div class="video-container">
 
-      <!-- SAFE PLAYER (NO BLACK SCREEN) -->
       <iframe 
-      src="https://player.mediadelivery.net/embed/639095/5a72fba4-eb6e-431e-8e6c-1006f1aa803b"
-      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-      allowfullscreen>
+      src="https://player.mediadelivery.net/embed/639095/5a72fba4-eb6e-431e-8e6c-1006f1aa803b?autoplay=true&loop=false&muted=false&preload=true&responsive=true"
+      loading="lazy"
+      style="border:0;position:absolute;top:0;height:100%;width:100%;"
+      allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
+      allowfullscreen="true">
       </iframe>
 
     </div>
@@ -214,7 +215,7 @@ body {
 </div>
 
 <script>
-let time = 560;
+let time = 20; // ✅ 20 sec
 
 let timer = setInterval(() => {
   let min = Math.floor(time/60);
@@ -225,12 +226,12 @@ let timer = setInterval(() => {
 
   time--;
 
-  if(time < 0){
+  if(time<0){
     clearInterval(timer);
 
-    // LIVE FIXED UPDATE
+    // ✅ GLITCH FIX (correct targeting)
     document.getElementById("liveStatus").innerHTML =
-      '<span style="color:#dc2626;font-weight:700;">LIVE</span> • Training in Progress';
+      '<span style="color:#dc2626;">LIVE</span> • Training in Progress';
 
     document.querySelector(".subtext").innerHTML =
       "🚀 Session is LIVE — Stay Focused";
