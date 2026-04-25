@@ -123,7 +123,7 @@ body {
   line-height:1.7;
 }
 
-/* DARK BOX */
+/* ACCESS */
 .access {
   margin-top:18px;
   background: linear-gradient(135deg,#111827,#1f2937);
@@ -146,6 +146,49 @@ body {
 
 .btn.active {
   opacity:1;
+}
+
+/* POPUP */
+.popup {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+.popup-box {
+  background:#ffffff;
+  padding:22px;
+  border-radius:14px;
+  width:85%;
+  max-width:320px;
+  text-align:center;
+}
+
+.popup-box h3 {
+  margin-bottom:10px;
+}
+
+.popup-box p {
+  font-size:14px;
+  margin:6px 0;
+}
+
+.popup-btn {
+  margin-top:12px;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  background:#2563eb;
+  color:white;
+  width:100%;
+  font-weight:600;
 }
 
 </style>
@@ -214,8 +257,18 @@ body {
 
 </div>
 
+<!-- POPUP -->
+<div id="popup" class="popup">
+  <div class="popup-box">
+    <h3>🔴 Session is LIVE</h3>
+    <p>Do not take calls or switch apps</p>
+    <p>📱 Tap video → Full screen → Rotate phone</p>
+    <button class="popup-btn" onclick="closePopup()">Continue</button>
+  </div>
+</div>
+
 <script>
-let time = 20; // ✅ 20 sec
+let time = 20;
 
 let timer = setInterval(() => {
   let min = Math.floor(time/60);
@@ -229,17 +282,22 @@ let timer = setInterval(() => {
   if(time<0){
     clearInterval(timer);
 
-    // ✅ GLITCH FIX (correct targeting)
     document.getElementById("liveStatus").innerHTML =
       '<span style="color:#dc2626;">LIVE</span> • Training in Progress';
 
     document.querySelector(".subtext").innerHTML =
-      "🚀 Session is LIVE — Stay Focused";
+      "🚀 Session is LIVE — Do not exit or take calls";
+
+    document.getElementById("popup").style.display = "flex";
 
     document.getElementById("btn").classList.add("active");
   }
 
 },1000);
+
+function closePopup(){
+  document.getElementById("popup").style.display = "none";
+}
 </script>
 
 </body>
