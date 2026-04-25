@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Level Up Session</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4f6f9;
+}
+
+/* HEADER */
+.header {
+  background: linear-gradient(135deg,#111827,#1f2937);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* LIVE BAR */
+.live {
+  max-width: 900px;
+  margin: 15px auto;
+  background: #ffffff;
+  padding: 12px;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  font-weight: 600;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  background: #dc2626;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% {opacity:1;}
+  50% {opacity:0.3;}
+  100% {opacity:1;}
+}
+
+.subtext {
+  text-align:center;
+  font-size:14px;
+  color:#6b7280;
+  margin-top:5px;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 16px;
+}
+
+/* VIDEO */
+.video-card {
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.video-container {
+  position: relative;
+  padding-top: 56.25%;
+}
+
+.video-container iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* BADGES */
+.badges {
+  display:flex;
+  gap:10px;
+  margin-top:12px;
+}
+
+.badge {
+  flex:1;
+  text-align:center;
+  background:#ffffff;
+  padding:10px;
+  border-radius:10px;
+  font-size:14px;
+}
+
+/* NOTICE */
+.notice {
+  margin-top:15px;
+  background:#ecfeff;
+  padding:14px;
+  border-radius:12px;
+  text-align:center;
+  font-weight:500;
+  color:#0f766e;
+}
+
+/* INSTRUCTIONS */
+.instructions {
+  margin-top:18px;
+  background:#ffffff;
+  padding:18px;
+  border-radius:14px;
+}
+
+.instructions ul {
+  padding-left:18px;
+  line-height:1.7;
+}
+
+/* DARK BOX */
+.access {
+  margin-top:18px;
+  background: linear-gradient(135deg,#111827,#1f2937);
+  color:white;
+  padding:18px;
+  border-radius:14px;
+}
+
+.btn {
+  margin-top:15px;
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:10px;
+  background: linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:white;
+  font-weight:600;
+  opacity:0.6;
+}
+
+.btn.active {
+  opacity:1;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">🚀 EXCLUSIVE LEVEL UP SESSION</div>
+
+<div class="live">
+  <span class="dot"></span>
+  <span><span style="color:#dc2626;">LIVE</span> • Waiting to Start</span>
+</div>
+
+<div class="subtext">
+  ⏳ Starting in <b id="timer">09:20</b> • Be Ready
+</div>
+
+<div class="container">
+
+  <!-- VIDEO -->
+  <div class="video-card">
+    <div class="video-container">
+
+      <iframe 
+      src="https://player.mediadelivery.net/embed/639095/5a72fba4-eb6e-431e-8e6c-1006f1aa803b?autoplay=true&loop=false&muted=false&preload=true&responsive=true"
+      loading="lazy"
+      style="border:0;position:absolute;top:0;height:100%;width:100%;"
+      allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
+      allowfullscreen="true">
+      </iframe>
+
+    </div>
+  </div>
+
+  <div class="badges">
+    <div class="badge">🎯 Level Up Training</div>
+    <div class="badge">🔒 Exclusive Access</div>
+  </div>
+
+  <div class="notice">
+    This session is only for selected candidates. Complete it seriously to upgrade your level.
+  </div>
+
+  <div class="instructions">
+    <ul>
+      <li>Watch the session fully without skipping</li>
+      <li>Do not exit or refresh in between</li>
+      <li>Stay focused — this is a growth stage</li>
+      <li>📱 Watch in full screen and rotate your device</li>
+    </ul>
+  </div>
+
+  <div class="access">
+    <h3>🔐 Next Step</h3>
+    <ul>
+      <li>This is a level upgrade session</li>
+      <li>Completion is mandatory</li>
+      <li>Further process will be guided personally</li>
+    </ul>
+
+    <button id="btn" class="btn">🚀 Proceed to Next Level</button>
+  </div>
+
+</div>
+
+<script>
+let time = 560; // 9:20
+
+let timer = setInterval(() => {
+  let min = Math.floor(time/60);
+  let sec = time%60;
+
+  document.getElementById("timer").innerText =
+    (min<10?"0"+min:min)+":"+(sec<10?"0"+sec:sec);
+
+  time--;
+
+  if(time<0){
+    clearInterval(timer);
+
+    document.querySelector(".subtext").innerHTML =
+      "🚀 Session is LIVE — Stay Focused";
+
+    document.querySelector(".live span").innerHTML =
+      '<span style="color:#dc2626;">LIVE</span> • Training in Progress';
+
+    let btn = document.getElementById("btn");
+    btn.classList.add("active");
+  }
+
+},1000);
+</script>
+
+</body>
+</html>
