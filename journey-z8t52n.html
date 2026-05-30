@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Foundation Session | Module 1</title>
+<title>Execution Session | Module 3</title>
 
 <style>
 
@@ -133,7 +133,7 @@ body.locked{
 }
 
 .progress-fill{
-  width:33%;
+  width:100%;
   height:100%;
   background:linear-gradient(135deg,#3b82f6,#2563eb);
 }
@@ -336,15 +336,14 @@ body.locked{
 
   <div class="lock-box">
 
-    <h1 id="lockTitle">⏳ Foundation Session Starts Soon</h1>
+    <h1 id="lockTitle">⏳ Execution Session Starts Soon</h1>
 
     <p id="lockText">
-      Today's Foundation Session has not started yet.<br><br>
-Please join during the active session window.
+      Today's Execution Session has not started yet.<br><br>Please join during the active session window.
     </p>
 
     <div class="lock-time">
-      ⏰ Access Timing: 01:00 PM – 04:00 PM
+      ⏰ Access Timing: 03:00 PM – 06:00 PM
     </div>
 
     <div id="startCountdown">
@@ -359,11 +358,11 @@ Please join during the active session window.
 <div class="topbar">
 
   <div class="brand">
-    🏛 FOUNDATION SESSION
+    🚀 EXECUTION SESSION
   </div>
 
   <div class="batch">
-    Professional Development Program • Module 1 of 3
+    Professional Development Program • Module 3 of 3
   </div>
 
 </div>
@@ -373,7 +372,7 @@ Please join during the active session window.
 
   <div class="live-wrap">
     <div class="dot"></div>
-    <span id="liveStatus">Foundation Session Active</span>
+    <span id="liveStatus">Execution Session Active</span>
   </div>
 
   <div class="viewer">
@@ -392,8 +391,8 @@ Please join during the active session window.
   <div class="access-box">
 
     <div class="access-top">
-      <span><b>📘 Module 1 • Foundation Session</b></span>
-      <span><b>33% Progress</b></span>
+      <span><b>📘 Module 3 • Execution Session</b></span>
+      <span><b>100% Progress</b></span>
     </div>
 
     <div class="progress-bar">
@@ -408,7 +407,7 @@ Please join during the active session window.
     <div class="video-container">
 
       <iframe 
-      src="https://player.mediadelivery.net/embed/671638/efa10f25-1626-4ee8-99df-44bacdc3e8e8?autoplay=false&loop=false&muted=false&preload=true"
+      src="https://player.mediadelivery.net/embed/671638/1837560e-f3a7-4f36-b3a0-6c475c3a32dc?autoplay=false&loop=false&muted=false&preload=true"
       loading="lazy"
       style="border:0;position:absolute;top:0;height:100%;width:100%;"
       allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;"
@@ -424,7 +423,7 @@ Please join during the active session window.
 
     <div class="stat">
       <div class="stat-label">Current Module</div>
-      <div class="stat-value">Foundation Session</div>
+      <div class="stat-value">Execution Session</div>
     </div>
 
     <div class="stat">
@@ -434,7 +433,7 @@ Please join during the active session window.
 
     <div class="stat">
       <div class="stat-label">Next Module</div>
-      <div class="stat-value">Clarification Session 🔒</div>
+      <div class="stat-value">Career Access 🚀</div>
     </div>
 
   </div>
@@ -445,16 +444,15 @@ Please join during the active session window.
     <h3>📌 Important Instructions</h3>
 
     <ul>
-      <li>Watch the complete training carefully without skipping</li>
+      <li>This is the final and most important module</li>
       <li>Do not refresh or leave during the session</li>
-      <li>Complete this module in one sitting</li>
-      <li>A verification code will appear at the end</li>
-      <li>Next module access is unlocked only after verification</li>
+      <li>Watch the complete session with full attention</li>
+      <li>Do not skip any part of the training</li>
+      <li>Only committed candidates will proceed further</li>
     </ul>
 
     <div class="highlight">
-      🎯 Verification code will appear inside the session <br><br>
-      📩 Submit the code to your mentor to continue further
+      🎯 A final verification code will be shown in this session <br><br>📩 Share the code with your mentor to confirm your completion <br><br>🚀 After verification, you will receive guidance to start your work
     </div>
 
   </div>
@@ -465,22 +463,22 @@ Please join during the active session window.
     <h3>📊 Session Status</h3>
 
     <div class="activity-item">
-      🟢 Foundation Session Active
+      🟢 Foundation Session Completed
     </div>
 
     <div class="activity-item">
-      🟢 Verification Enabled
+      🟢 Clarification Session Completed
     </div>
 
     <div class="activity-item">
-      🟢 Clarification Session Locked Until Verification
+      🟢 Execution Session Active
     </div>
 
   </div>
 
   <!-- BUTTON -->
   <button class="btn">
-    Clarification Session Locked 🔒
+    🚀 Start Your Journey
   </button>
 
 </div>
@@ -504,8 +502,8 @@ const minutes = now.getMinutes();
 const lockScreen = document.getElementById("lockScreen");
 const topCountdown = document.getElementById("topCountdown");
 
-const startHour = 13;
-const endHour = 16;
+const startHour = 15;
+const endHour = 18;
 
 let accessGranted = sessionStorage.getItem("accessGranted");
 
@@ -574,24 +572,24 @@ if(document.getElementById("trainingStatus")){
 
 let base;
 
-if(hour === 13){
-  if(minutes < 15) base = 45 + Math.floor(Math.random()*20);
-  else if(minutes < 45) base = 70 + Math.floor(Math.random()*20);
-  else base = 90 + Math.floor(Math.random()*11);
+if(hour === 15){
+  if(minutes < 15) base = 45 + Math.floor(Math.random()*16);
+  else base = 60 + Math.floor(Math.random()*16);
 }
-else if(hour === 14){
-  base = 80 + Math.floor(Math.random()*16);
+else if(hour === 16){
+  if(minutes < 45) base = 70 + Math.floor(Math.random()*11);
+  else base = 55 + Math.floor(Math.random()*16);
 }
-else if(hour === 15){
-  base = 55 + Math.floor(Math.random()*21);
+else if(hour === 17){
+  base = 40 + Math.floor(Math.random()*16);
 }
 else{
-  base = 35 + Math.floor(Math.random()*10);
+  base = 30 + Math.floor(Math.random()*10);
 }
 
 function updateViewers(){
   let fluctuation = Math.floor(Math.random()*5)-2;
-  let viewers = Math.min(100, Math.max(35, base + fluctuation));
+  let viewers = Math.min(80, Math.max(30, base + fluctuation));
   document.getElementById("viewerCount").innerText = viewers;
 }
 
