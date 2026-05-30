@@ -19,6 +19,11 @@ body{
   color:#111827;
 }
 
+body.locked{
+  overflow:hidden;
+  height:100vh;
+}
+
 /* HEADER */
 .topbar{
   background:linear-gradient(135deg,#0f172a,#1e293b);
@@ -338,7 +343,7 @@ body{
     </p>
 
     <div class="lock-time">
-      ⏰ Access Timing: 03:00 PM – 10:00 PM
+      ⏰ Access Timing: 01:00 PM – 04:00 PM
     </div>
 
     <div id="startCountdown">
@@ -497,8 +502,8 @@ const minutes = now.getMinutes();
 const lockScreen = document.getElementById("lockScreen");
 const topCountdown = document.getElementById("topCountdown");
 
-const startHour = 15;
-const endHour = 22;
+const startHour = 13;
+const endHour = 16;
 
 /* BEFORE 3 PM */
 if(hour < startHour){
