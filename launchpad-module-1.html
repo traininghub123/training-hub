@@ -376,7 +376,7 @@ body.locked{
   </div>
 
   <div class="viewer">
-    👁 <span id="viewerCount">128</span> Candidates Attending
+    👁 <span id="viewerCount">128</span> Participants Active
   </div>
 
 </div>
@@ -491,6 +491,7 @@ body.locked{
 
 <script>
 
+
 /* =========================
    ACCESS TIMING SYSTEM
 ========================= */
@@ -505,105 +506,83 @@ const topCountdown = document.getElementById("topCountdown");
 const startHour = 13;
 const endHour = 16;
 
-/* BEFORE 3 PM */
+let accessGranted = sessionStorage.getItem("accessGranted");
+
+if(hour >= startHour && hour < endHour){
+  sessionStorage.setItem("accessGranted","yes");
+}
+
 if(hour < startHour){
 
+  document.body.classList.add("locked");
   lockScreen.style.display = "flex";
 
   function updateStartCountdown(){
 
     const now = new Date();
-
     const target = new Date();
-
     target.setHours(startHour,0,0,0);
 
     const diff = target - now;
 
-    const h = Math.floor(diff / 1000 / 60 / 60);
-    const m = Math.floor((diff / 1000 / 60) % 60);
-    const s = Math.floor((diff / 1000) % 60);
+    const h = Math.floor(diff/1000/60/60);
+    const m = Math.floor((diff/1000/60)%60);
+    const s = Math.floor((diff/1000)%60);
 
     document.getElementById("startCountdown").innerHTML =
-      `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
-
+    `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
   }
 
   updateStartCountdown();
-
   setInterval(updateStartCountdown,1000);
-
 }
 
-/* AFTER 10 PM */
-if(hour >= endHour){
+if(hour >= endHour && accessGranted !== "yes"){
 
+  document.body.classList.add("locked");
   lockScreen.style.display = "flex";
 
   document.getElementById("lockTitle").innerHTML =
-    "🔒 Training Access Closed";
+  "🔒 Training Access Closed";
 
   document.getElementById("lockText").innerHTML =
-    "Today's batch timing has ended.<br><br>Please revisit during active training hours.";
+  "Today's batch timing has ended.<br><br>Please revisit during active training hours.";
 
   document.getElementById("startCountdown").style.display = "none";
-
 }
 
-/* LIVE STATUS */
 if(hour >= startHour && hour < endHour){
-
-  topCountdown.innerHTML =
-    "🔴 Session Live Now • Batch Access Active";
-
+  topCountdown.innerHTML = "🔴 Session Live Now • Batch Access Active";
 }
 
 /* =========================
    VIEWER SYSTEM
 ========================= */
 
-let base = localStorage.getItem("viewerBase");
+let base;
 
-if(!base){
-
-  /* 3 PM → 6 PM HIGH */
-  if(hour >= 15 && hour < 18){
-
-    base = Math.floor(Math.random()*45)+120;
-
-  }
-
-  /* 6 PM → 10 PM LOW */
-  else if(hour >= 18 && hour < 22){
-
-    base = Math.floor(Math.random()*35)+55;
-
-  }
-
-  else{
-
-    base = Math.floor(Math.random()*20)+25;
-
-  }
-
-  localStorage.setItem("viewerBase", base);
-
+if(hour === 13){
+  if(minutes < 15) base = 45 + Math.floor(Math.random()*20);
+  else if(minutes < 45) base = 70 + Math.floor(Math.random()*20);
+  else base = 90 + Math.floor(Math.random()*11);
+}
+else if(hour === 14){
+  base = 80 + Math.floor(Math.random()*16);
+}
+else if(hour === 15){
+  base = 55 + Math.floor(Math.random()*21);
+}
+else{
+  base = 35 + Math.floor(Math.random()*10);
 }
 
-base = parseInt(base);
-
 function updateViewers(){
-
   let fluctuation = Math.floor(Math.random()*5)-2;
-
-  let viewers = base + fluctuation;
-
+  let viewers = Math.min(100, Math.max(35, base + fluctuation));
   document.getElementById("viewerCount").innerText = viewers;
-
 }
 
 updateViewers();
-
 setInterval(updateViewers,15000);
 
 </script>
