@@ -372,7 +372,7 @@ body.locked{
 
   <div class="live-wrap">
     <div class="dot"></div>
-    <span id="liveStatus">LIVE TRAINING ACCESS ACTIVE</span>
+    <span id="liveStatus">Training Session Active</span>
   </div>
 
   <div class="viewer">
@@ -382,7 +382,7 @@ body.locked{
 </div>
 
 <div class="countdown" id="topCountdown">
-  🔴 Session Live Now
+  🟢 Training Window Open
 </div>
 
 <div class="container">
@@ -552,7 +552,7 @@ if(hour >= endHour && accessGranted !== "yes"){
 }
 
 if(hour >= startHour && hour < endHour){
-  topCountdown.innerHTML = "🔴 Session Live Now • Batch Access Active";
+  topCountdown.innerHTML = "🟢 Training Window Open • Batch Access Active";
 }
 
 
