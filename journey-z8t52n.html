@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Doubt Session</title>
+<title>Foundation Session | Module 1</title>
 
 <style>
 
@@ -133,7 +133,7 @@ body.locked{
 }
 
 .progress-fill{
-  width:100%;
+  width:33%;
   height:100%;
   background:linear-gradient(135deg,#3b82f6,#2563eb);
 }
@@ -336,14 +336,15 @@ body.locked{
 
   <div class="lock-box">
 
-    <h1 id="lockTitle">⏳ Training Starts Soon</h1>
+    <h1 id="lockTitle">⏳ Foundation Session Starts Soon</h1>
 
     <p id="lockText">
-      Today's training batch has not started yet.
+      Today's Foundation Session has not started yet.<br><br>
+Please join during the active session window.
     </p>
 
     <div class="lock-time">
-      ⏰ Access Timing: 03:00 PM – 06:00 PM
+      ⏰ Access Timing: 01:00 PM – 04:00 PM
     </div>
 
     <div id="startCountdown">
@@ -358,11 +359,11 @@ body.locked{
 <div class="topbar">
 
   <div class="brand">
-    🚀 LAUNCHPAD DAY-2
+    🏛 FOUNDATION SESSION
   </div>
 
   <div class="batch">
-    Batch Access • Module 3 of 3
+    Professional Development Program • Module 1 of 3
   </div>
 
 </div>
@@ -372,7 +373,7 @@ body.locked{
 
   <div class="live-wrap">
     <div class="dot"></div>
-    <span id="liveStatus">Final Training Session Active</span>
+    <span id="liveStatus">Foundation Session Active</span>
   </div>
 
   <div class="viewer">
@@ -391,8 +392,8 @@ body.locked{
   <div class="access-box">
 
     <div class="access-top">
-      <span><b>📘 Module 3 • Execution Training</b></span>
-      <span><b>100% Progress</b></span>
+      <span><b>📘 Module 1 • Foundation Session</b></span>
+      <span><b>33% Progress</b></span>
     </div>
 
     <div class="progress-bar">
@@ -407,7 +408,7 @@ body.locked{
     <div class="video-container">
 
       <iframe 
-      src="https://player.mediadelivery.net/embed/671638/1837560e-f3a7-4f36-b3a0-6c475c3a32dc?autoplay=false&loop=false&muted=false&preload=true"
+      src="https://player.mediadelivery.net/embed/671638/efa10f25-1626-4ee8-99df-44bacdc3e8e8?autoplay=false&loop=false&muted=false&preload=true"
       loading="lazy"
       style="border:0;position:absolute;top:0;height:100%;width:100%;"
       allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;"
@@ -423,7 +424,7 @@ body.locked{
 
     <div class="stat">
       <div class="stat-label">Current Module</div>
-      <div class="stat-value">Module 3</div>
+      <div class="stat-value">Foundation Session</div>
     </div>
 
     <div class="stat">
@@ -433,7 +434,7 @@ body.locked{
 
     <div class="stat">
       <div class="stat-label">Next Module</div>
-      <div class="stat-value">Career Access 🚀</div>
+      <div class="stat-value">Clarification Session 🔒</div>
     </div>
 
   </div>
@@ -444,15 +445,16 @@ body.locked{
     <h3>📌 Important Instructions</h3>
 
     <ul>
-      <li>This is the final and most important module</li>
+      <li>Watch the complete training carefully without skipping</li>
       <li>Do not refresh or leave during the session</li>
-      <li>Watch the complete session with full attention</li>
-      <li>Do not skip any part of the training</li>
-      <li>Only committed candidates will proceed further</li>
+      <li>Complete this module in one sitting</li>
+      <li>A verification code will appear at the end</li>
+      <li>Next module access is unlocked only after verification</li>
     </ul>
 
     <div class="highlight">
-      🎯 A final verification code will be shown in this session <br><br>📩 Share the code with your mentor to confirm your completion <br><br>🚀 After verification, you will receive guidance to start your work
+      🎯 Verification code will appear inside the session <br><br>
+      📩 Submit the code to your mentor to continue further
     </div>
 
   </div>
@@ -460,32 +462,32 @@ body.locked{
   <!-- ACTIVITY -->
   <div class="activity">
 
-    <h3>📈 Recent Activity</h3>
+    <h3>📊 Session Status</h3>
 
     <div class="activity-item">
-      🟢 Module 1 Completed
+      🟢 Foundation Session Active
     </div>
 
     <div class="activity-item">
-      🟢 Module 2 Completed
+      🟢 Verification Enabled
     </div>
 
     <div class="activity-item">
-      🟢 Final Verification Active
+      🟢 Clarification Session Locked Until Verification
     </div>
 
   </div>
 
   <!-- BUTTON -->
   <button class="btn">
-    🚀 Start Your Journey
+    Clarification Session Locked 🔒
   </button>
 
 </div>
 
 <!-- FOOTER -->
 <div class="footer">
-  Secure Training Portal • Access Controlled • Batch Monitored
+  Professional Training Hub • Access Controlled • Batch Monitored
 </div>
 
 <script>
@@ -502,8 +504,8 @@ const minutes = now.getMinutes();
 const lockScreen = document.getElementById("lockScreen");
 const topCountdown = document.getElementById("topCountdown");
 
-const startHour = 15;
-const endHour = 18;
+const startHour = 13;
+const endHour = 16;
 
 let accessGranted = sessionStorage.getItem("accessGranted");
 
@@ -559,7 +561,7 @@ if(document.getElementById("trainingStatus")){
   if(hour < startHour){
     document.getElementById("trainingStatus").innerText = "Scheduled";
   }else if(hour >= startHour && hour < endHour){
-    document.getElementById("trainingStatus").innerText = "LIVE";
+    document.getElementById("trainingStatus").innerText = "ACTIVE";
   }else{
     document.getElementById("trainingStatus").innerText = "Closed";
   }
@@ -572,24 +574,24 @@ if(document.getElementById("trainingStatus")){
 
 let base;
 
-if(hour === 15){
-  if(minutes < 15) base = 45 + Math.floor(Math.random()*16);
-  else base = 60 + Math.floor(Math.random()*16);
+if(hour === 13){
+  if(minutes < 15) base = 45 + Math.floor(Math.random()*20);
+  else if(minutes < 45) base = 70 + Math.floor(Math.random()*20);
+  else base = 90 + Math.floor(Math.random()*11);
 }
-else if(hour === 16){
-  if(minutes < 45) base = 70 + Math.floor(Math.random()*11);
-  else base = 55 + Math.floor(Math.random()*16);
+else if(hour === 14){
+  base = 80 + Math.floor(Math.random()*16);
 }
-else if(hour === 17){
-  base = 40 + Math.floor(Math.random()*16);
+else if(hour === 15){
+  base = 55 + Math.floor(Math.random()*21);
 }
 else{
-  base = 30 + Math.floor(Math.random()*10);
+  base = 35 + Math.floor(Math.random()*10);
 }
 
 function updateViewers(){
   let fluctuation = Math.floor(Math.random()*5)-2;
-  let viewers = Math.min(80, Math.max(30, base + fluctuation));
+  let viewers = Math.min(100, Math.max(35, base + fluctuation));
   document.getElementById("viewerCount").innerText = viewers;
 }
 
