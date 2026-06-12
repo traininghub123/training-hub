@@ -590,7 +590,7 @@ setInterval(updateViewers,15000);
 fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
 .then(r => r.json())
 .then(data => {
-  document.getElementById("videoContainer").innerHTML = data.day2;
+  document.getElementById("videoContainer").innerHTML = data.day2_v2;
 })
 .catch(err => {
   console.error(err);
