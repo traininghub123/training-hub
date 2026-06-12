@@ -42,7 +42,7 @@ To help shortlisted participants understand its significance, Nikhil Singh's ori
 
 <div class="video">
 <div style="position:relative;padding-top:56.25%;">
-<div id="videoContainer"></div>
+<iframe id="dynamicVideo" style="border:0;position:absolute;top:0;left:0;width:100%;height:100%;" allowfullscreen></iframe>
 </div>
 </div>
 
@@ -80,15 +80,15 @@ Watch the complete session and prepare detailed notes.
 
 <script>
 fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
-.then(response => response.json())
-.then(data => {
-  document.getElementById("videoContainer").innerHTML = data.surprise;
+.then(r=>r.json())
+.then(data=>{
+ const embed = data.surprise || "";
+ const match = embed.match(/src=["']([^"']+)["']/i);
+ if(match){
+   document.getElementById("dynamicVideo").src = match[1];
+ }
 })
-.catch(error => {
-  document.getElementById("videoContainer").innerHTML =
-  "<div style='padding:40px;text-align:center;color:white;'>Video Loading Error</div>";
-  console.error(error);
-});
+.catch(console.error);
 </script>
 </body>
 </html>
