@@ -41,9 +41,7 @@ To help shortlisted participants understand its significance, Nikhil Singh's ori
 </div>
 
 <div class="video">
-<div style="position:relative;padding-top:56.25%;">
-<iframe id="dynamicVideo" style="border:0;position:absolute;top:0;left:0;width:100%;height:100%;" allowfullscreen></iframe>
-</div>
+<div id="videoContainer"></div>
 </div>
 
 <div class="cards">
@@ -80,15 +78,13 @@ Watch the complete session and prepare detailed notes.
 
 <script>
 fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
-.then(r=>r.json())
-.then(data=>{
- const embed = data.surprise || "";
- const match = embed.match(/src=["']([^"']+)["']/i);
- if(match){
-   document.getElementById("dynamicVideo").src = match[1];
- }
+.then(r => r.json())
+.then(data => {
+  document.getElementById("videoContainer").innerHTML = data.surprise;
 })
-.catch(console.error);
+.catch(err => {
+  console.error(err);
+});
 </script>
 </body>
 </html>
