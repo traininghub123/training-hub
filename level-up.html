@@ -295,11 +295,15 @@ function closePopup(){
 }
 
 fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
-.then(r => r.json())
+.then(response => response.json())
 .then(data => {
   document.getElementById("videoContainer").innerHTML = data.levelup;
 })
-.catch(console.error);
+.catch(error => {
+  document.getElementById("videoContainer").innerHTML =
+  "<div style='padding:40px;text-align:center;color:white;'>Video Loading Error</div>";
+  console.error(error);
+});
 
 
 </script>
