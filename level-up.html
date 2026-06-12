@@ -213,12 +213,7 @@ body {
 
   <!-- VIDEO -->
   <div class="video-card">
-    <div class="video-container">
-
-      <!-- ✅ UPDATED NEW BUNNY VIDEO -->
-      <div id="videoContainer"></div>
-
-    </div>
+    <div id="videoContainer"></div>
   </div>
 
   <div class="badges">
@@ -295,14 +290,12 @@ function closePopup(){
 }
 
 fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
-.then(response => response.json())
+.then(r => r.json())
 .then(data => {
   document.getElementById("videoContainer").innerHTML = data.levelup;
 })
-.catch(error => {
-  document.getElementById("videoContainer").innerHTML =
-  "<div style='padding:40px;text-align:center;color:white;'>Video Loading Error</div>";
-  console.error(error);
+.catch(err => {
+  console.error(err);
 });
 
 
