@@ -1,190 +1,478 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Foundation Session | Module 1</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: linear-gradient(135deg, #2563eb, #1d4ed8);
-            --primary-hover: linear-gradient(135deg, #1d4ed8, #1e40af);
-            --dark-surface: linear-gradient(135deg, #0f172a, #1e293b);
-            --bg-light: #f8fafc;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --border-color: #e2e8f0;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--bg-light); color: var(--text-main); line-height: 1.5; }
-        body.modal-locked { overflow: hidden; height: 100vh; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foundation Session | Module 1</title>
 
-        /* HEADER & TOP PROTOCOLS */
-        .topbar { background: var(--dark-surface); padding: 20px 24px; color: #fff; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); }
-        .brand { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
-        .batch { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 600; }
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-        /* DASHBOARD GRID */
-        .status-bar { max-width: 1000px; margin: 24px auto 0; background: #ffffff; border-radius: 16px; border: 1px solid var(--border-color); padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03); }
-        .live-wrap { display: flex; align-items: center; gap: 10px; font-weight: 700; color: #059669; }
-        .dot { width: 10px; height: 10px; border-radius: 50%; background: #10b981; animation: pulse 1.8s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
-        .viewer { font-size: 14px; color: var(--text-muted); font-weight: 600; }
-        .viewer span { color: var(--text-main); font-weight: 700; }
+body{
+  font-family:'Segoe UI',sans-serif;
+  background:#edf2f7;
+  color:#111827;
+}
 
-        .container { max-width: 1000px; margin: auto; padding: 0 20px 40px; }
-        .access-box { background: #ffffff; border-radius: 16px; padding: 20px; margin: 20px 0; border: 1px solid var(--border-color); }
-        .progress-bar { width: 100%; height: 8px; background: #f1f5f9; border-radius: 999px; overflow: hidden; margin-top: 10px; }
-        .progress-fill { width: 33%; height: 100%; background: var(--primary); }
+body.locked{
+  overflow:hidden;
+  height:100vh;
+}
 
-        /* SCREEN FRAME SYSTEM */
-        .video-card { background: #000; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25); }
-        .video-container { position: relative; padding-top: 56.25%; }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+/* HEADER */
+.topbar{
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  padding:18px 22px;
+  color:#fff;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+}
 
-        .stats { margin-top: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-        .stat { background: #ffffff; border-radius: 16px; padding: 20px; border: 1px solid var(--border-color); }
-        .stat-label { color: var(--text-muted); font-size: 13px; text-transform: uppercase; margin-bottom: 6px; }
-        .stat-value { font-size: 20px; font-weight: 700; }
+.brand{
+  font-size:24px;
+  font-weight:700;
+}
 
-        .info-box { margin-top: 24px; background: #ffffff; border-radius: 16px; padding: 24px; border: 1px solid var(--border-color); }
-        .info-box ul { padding-left: 20px; margin-top: 12px; }
-        .info-box li { margin-bottom: 10px; color: #334155; }
-        .highlight { margin-top: 20px; background: rgba(37, 99, 235, 0.05); border: 1px solid rgba(37, 99, 235, 0.15); color: #1e40af; padding: 16px; border-radius: 12px; text-align: center; font-weight: 600; }
+.batch{
+  background:rgba(255,255,255,0.12);
+  padding:9px 14px;
+  border-radius:999px;
+  font-size:14px;
+  font-weight:600;
+}
 
-        .btn { margin-top: 28px; width: 100%; border: none; border-radius: 14px; padding: 18px; background: var(--primary); color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25); }
-        .btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
+/* STATUS BAR */
+.status-bar{
+  max-width:1100px;
+  margin:18px auto 0;
+  background:#fff;
+  border-radius:16px;
+  border:1px solid #e5e7eb;
+  padding:15px 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.05);
+}
 
-        /* SYSTEM MAINTENANCE LOCK SCREEN UI */
-        .lock-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0b0f19; color: #fff; display: none; justify-content: center; align-items: center; text-align: center; z-index: 99999; padding: 25px; }
-        .lock-box h1 { font-size: 36px; margin-bottom: 14px; color: #ffbc00; }
-        .lock-box p { color: #cbd5e1; font-size: 16px; margin-bottom: 20px; }
-        .lock-time { background: rgba(255,255,255,0.06); padding: 14px; border-radius: 14px; font-weight: 700; display: inline-block; }
-        #startCountdown { margin-top: 20px; font-size: 42px; font-weight: 800; color: #ffffff; letter-spacing: 2px; }
-        .footer { text-align: center; padding: 40px 10px; color: var(--text-muted); font-size: 13px; }
+.live-wrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:700;
+}
 
-        @media (max-width: 768px) {
-            .topbar { padding: 16px; flex-direction: column; text-align: center; }
-            .status-bar { flex-direction: column; margin: 16px 16px 0; }
-            .stats { grid-template-columns: 1fr; }
-        }
-    </style>
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#ef4444;
+  animation:blink 1s infinite;
+}
+
+@keyframes blink{
+  0%{opacity:1;}
+  50%{opacity:0.3;}
+  100%{opacity:1;}
+}
+
+.viewer{
+  font-size:14px;
+  color:#374151;
+  font-weight:700;
+}
+
+.countdown{
+  text-align:center;
+  margin-top:8px;
+  font-size:14px;
+  color:#6b7280;
+  font-weight:600;
+}
+
+/* MAIN */
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:22px;
+}
+
+/* ACCESS */
+.access-box{
+  background:#fff;
+  border-radius:18px;
+  padding:22px;
+  margin-bottom:20px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.05);
+}
+
+.access-top{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:12px;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.progress-bar{
+  width:100%;
+  height:10px;
+  background:#e5e7eb;
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  width:33%;
+  height:100%;
+  background:linear-gradient(135deg,#3b82f6,#2563eb);
+}
+
+/* VIDEO - EXACT OLD DESIGN RESTORED */
+.video-card{
+  background:#000;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 18px 40px rgba(0,0,0,0.18);
+}
+
+.video-container{
+  position:relative;
+  padding-top:56.25%;
+}
+
+.video-container iframe{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  border:0;
+}
+
+/* STATS */
+.stats{
+  margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:14px;
+}
+
+.stat{
+  background:#fff;
+  border-radius:16px;
+  padding:18px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.05);
+}
+
+.stat-label{
+  color:#6b7280;
+  font-size:13px;
+  margin-bottom:8px;
+}
+
+.stat-value{
+  font-size:21px;
+  font-weight:700;
+}
+
+/* INFO */
+.info-box{
+  margin-top:22px;
+  background:#fff;
+  border-radius:18px;
+  padding:24px;
+  box-shadow:0 10px 26px rgba(0,0,0,0.05);
+}
+
+.info-box h3{
+  margin-bottom:16px;
+  font-size:22px;
+}
+
+.info-box ul{
+  padding-left:20px;
+  line-height:2;
+  color:#374151;
+}
+
+.highlight{
+  margin-top:18px;
+  background:#eff6ff;
+  border:1px solid #bfdbfe;
+  color:#1e40af;
+  padding:18px;
+  border-radius:14px;
+  text-align:center;
+  font-weight:700;
+}
+
+/* ACTIVITY */
+.activity{
+  margin-top:22px;
+  background:#fff;
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 10px 26px rgba(0,0,0,0.05);
+}
+
+.activity h3{
+  margin-bottom:14px;
+}
+
+.activity-item{
+  padding:12px 0;
+  border-bottom:1px solid #e5e7eb;
+}
+
+.activity-item:last-child{
+  border-bottom:none;
+}
+
+/* BUTTON */
+.btn{
+  margin-top:24px;
+  width:100%;
+  border:none;
+  border-radius:16px;
+  padding:18px;
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:#fff;
+  font-size:18px;
+  font-weight:700;
+}
+
+/* LOCK SCREEN */
+.lock-screen{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#0f172a;
+  color:#fff;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  z-index:99999;
+  padding:25px;
+}
+
+.lock-box{
+  max-width:420px;
+}
+
+.lock-box h1{
+  font-size:34px;
+  margin-bottom:14px;
+}
+
+.lock-box p{
+  line-height:1.8;
+  color:#cbd5e1;
+  font-size:16px;
+}
+
+.lock-time{
+  margin-top:18px;
+  background:rgba(255,255,255,0.08);
+  padding:14px;
+  border-radius:14px;
+  font-weight:700;
+}
+
+#startCountdown{
+  margin-top:14px;
+  font-size:22px;
+  font-weight:700;
+  color:#fff;
+}
+
+/* FOOTER */
+.footer{
+  text-align:center;
+  padding:30px 10px 40px;
+  color:#6b7280;
+  font-size:13px;
+}
+
+/* MOBILE */
+@media(max-width:700px){
+  .topbar{ justify-content:center; text-align:center; }
+  .status-bar{ flex-direction:column; align-items:flex-start; }
+  .access-top{ flex-direction:column; }
+}
+</style>
 </head>
 <body>
 
-<!-- PERSISTENT GATEWAY LOCK SCREEN -->
+<!-- LOCK SCREEN -->
 <div id="lockScreen" class="lock-screen">
-    <div class="lock-box">
-        <h1 id="lockTitle">⏳ Foundation Session Starts Soon</h1>
-        <p id="lockText">Today's specialized onboarding sequence has not initiated yet.</p>
-        <div class="lock-time">⏰ Session Window: 01:00 PM – 04:00 PM Daily</div>
-        <div id="startCountdown">00:00:00</div>
-    </div>
+  <div class="lock-box">
+    <h1 id="lockTitle">⏳ Foundation Session Starts Soon</h1>
+    <p id="lockText">Today's Foundation Session has not started yet.<br><br>Please join during the active session window.</p>
+    <div class="lock-time">⏰ Access Timing: 01:00 PM – 04:00 PM</div>
+    <div id="startCountdown">00:00:00</div>
+  </div>
 </div>
 
+<!-- HEADER -->
 <div class="topbar">
-    <div class="brand">🏛 FOUNDATION SESSION</div>
-    <div class="batch">Professional Onboarding Journey • Module 1 of 3</div>
+  <div class="brand">🏛 FOUNDATION SESSION</div>
+  <div class="batch">Professional Development Program • Module 1 of 3</div>
 </div>
 
+<!-- STATUS -->
 <div class="status-bar">
-    <div class="live-wrap"><div class="dot"></div><span id="liveStatus">Foundation Session Live</span></div>
-    <div class="viewer">👁 <span id="viewerCount">84</span> Candidates Stream Active</div>
+  <div class="live-wrap">
+    <div class="dot" id="statusDot"></div>
+    <span id="liveStatus">Checking Session Status...</span>
+  </div>
+  <div class="viewer">
+    👁 <span id="viewerCount">--</span> Participants Active
+  </div>
 </div>
+
+<div class="countdown" id="topCountdown">Checking Window...</div>
 
 <div class="container">
-    <div class="access-box">
-        <div style="display:flex; justify-content:space-between; font-size:14px;">
-            <span><b>📘 Core Onboarding Phase • Module 1</b></span>
-            <span><b>33% Evaluation Progress</b></span>
-        </div>
-        <div class="progress-bar"><div class="progress-fill"></div></div>
+  <!-- ACCESS -->
+  <div class="access-box">
+    <div class="access-top">
+      <span><b>📘 Module 1 • Foundation Session</b></span>
+      <span><b>33% Progress</b></span>
     </div>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+  </div>
 
-    <div class="video-card">
-        <div id="videoContainer" class="video-container">
-            <div style="position: absolute; color: white; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 600;">Securing Encryption Channel...</div>
-        </div>
+  <!-- VIDEO VIEWPORT (EXACT ORIGINAL STRUCTURE PRESERVED) -->
+  <div class="video-card">
+    <div id="videoContainer" class="video-container">
+       <div style="position: absolute; color: white; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 600;">Securing Data Tunnel...</div>
     </div>
+  </div>
 
-    <div class="stats">
-        <div class="stat"><div class="stat-label">Current Pipeline</div><div class="stat-value" style="color: #2563eb;">Foundation Session</div></div>
-        <div class="stat"><div class="stat-label">System State</div><div class="stat-value" id="trainingStatus" style="color: #10b981;">ACTIVE</div></div>
-        <div class="stat"><div class="stat-label">Next Unlock</div><div class="stat-value">Clarification System 🔒</div></div>
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat"><div class="stat-label">Current Module</div><div class="stat-value">Foundation Session</div></div>
+    <div class="stat"><div class="stat-label">Training Status</div><div class="stat-value" id="trainingStatus">Checking...</div></div>
+    <div class="stat"><div class="stat-label">Next Module</div><div class="stat-value">Clarification Session 🔒</div></div>
+  </div>
+
+  <!-- INFO -->
+  <div class="info-box">
+    <h3>📌 Important Instructions</h3>
+    <ul>
+      <li>Watch the complete training carefully without skipping</li>
+      <li>Do not refresh or leave during the session</li>
+      <li>Complete this module in one sitting</li>
+      <li>A verification code will appear at the end</li>
+      <li>Next module access is unlocked only after verification</li>
+    </ul>
+    <div class="highlight">
+      🎯 Verification code will appear inside the session <br><br>
+      📩 Submit the code to your mentor to continue further
     </div>
+  </div>
 
-    <div class="info-box">
-        <h3>📌 Mandatory Compliance Directives</h3>
-        <ul>
-            <li>Analyze the entire strategic briefing without utilizing seek operations.</li>
-            <li>Maintain absolute continuity; tracking parameters monitor session breaks.</li>
-            <li>A verification vector parameter will render automatically inside the player wrapper.</li>
-        </ul>
-        <div class="highlight">
-            🎯 Strategic verification credentials will render natively inside the stream viewport.<br><br>
-            📩 Transmit the authorized token to your assigned onboarding supervisor for authentication.
-        </div>
-    </div>
+  <!-- ACTIVITY -->
+  <div class="activity">
+    <h3>📊 Session Status</h3>
+    <div class="activity-item">🟢 Foundation Session Active</div>
+    <div class="activity-item">🟢 Verification Enabled</div>
+    <div class="activity-item">🟢 Clarification Session Locked Until Verification</div>
+  </div>
 
-    <button class="btn" id="actionBtn">Awaiting Onboarding Progress Log... 🔒</button>
+  <!-- BUTTON -->
+  <button class="btn">Clarification Session Locked 🔒</button>
 </div>
 
-<div class="footer">Enterprise Workspace Hub • Dynamic Verification Encrypted • Session ID Tracked</div>
+<!-- FOOTER -->
+<div class="footer">Professional Training Hub • Access Controlled • Batch Monitored</div>
 
 <script>
 const startHour = 13; // 1 PM
 const endHour = 16;   // 4 PM
-let isStreamLoaded = false;
+let isVideoLoaded = false;
 
 const lockScreen = document.getElementById("lockScreen");
+const topCountdown = document.getElementById("topCountdown");
 const trainingStatus = document.getElementById("trainingStatus");
+const liveStatus = document.getElementById("liveStatus");
+const statusDot = document.getElementById("statusDot");
 
 function evaluateTimeLockEngine() {
-    const now = new Date();
-    const currentHour = now.getHours();
+  const now = new Date();
+  const hour = now.getHours();
 
-    // TARGET ACTIVE WINDOW RULE
-    if (currentHour >= startHour && currentHour < endHour) {
-        // BUG FIX SOLUTION: Instant unlock engine without force user reloads
-        if (lockScreen.style.display !== "none") {
-            lockScreen.style.display = "none";
-            document.body.classList.remove("modal-locked");
-        }
-        if (trainingStatus) trainingStatus.innerText = "ACTIVE";
-        
-        // Lazy-loading injection trigger so stream loads immediately when timer hits zero
-        if (!isStreamLoaded) {
-            loadSecureBunnyStream();
-        }
-    } 
-    // PRE-START COUNTDOWN ENGINE
-    else if (currentHour < startHour) {
-        lockScreen.style.display = "flex";
-        document.body.classList.add("modal-locked");
-        if (trainingStatus) trainingStatus.innerText = "Scheduled";
-
-        const target = new Date();
-        target.setHours(startHour, 0, 0, 0);
-        const diff = target - now;
-
-        const h = Math.floor(diff / 3600000);
-        const m = Math.floor((diff / 60000) % 60);
-        const s = Math.floor((diff / 1000) % 60);
-        document.getElementById("startCountdown").innerText = 
-            `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-    } 
-    // BATCH EXPIRED WINDOW
-    else {
-        lockScreen.style.display = "flex";
-        document.body.classList.add("modal-locked");
-        document.getElementById("lockTitle").innerHTML = "🔒 Training Access Closed";
-        document.getElementById("lockText").innerHTML = "Today's batch timing has ended.<br><br>Please revisit during active training hours.";
-        document.getElementById("startCountdown").style.display = "none";
-        if (trainingStatus) trainingStatus.innerText = "Closed";
+  // 🟢 CONDITION 1: SESSION IS LIVE & ACTIVE
+  if (hour >= startHour && hour < endHour) {
+    sessionStorage.setItem("accessGranted", "yes");
+    
+    // Auto unlock element UI changes without page refresh
+    if (lockScreen.style.display !== "none") {
+      lockScreen.style.display = "none";
+      document.body.classList.remove("locked");
     }
+
+    topCountdown.innerHTML = "🟢 Training Window Open • Batch Access Active";
+    if (trainingStatus) trainingStatus.innerText = "ACTIVE";
+    if (liveStatus) liveStatus.innerText = "Foundation Session Active";
+    if (statusDot) statusDot.style.background = "#10b981";
+
+    // Dynamic stream loading injection when open context hits zero
+    if (!isVideoLoaded) {
+      loadSecureBunnyStream();
+    }
+  } 
+  // ⏳ CONDITION 2: BEFORE START TIME (COUNTDOWN MODE)
+  else if (hour < startHour) {
+    document.body.classList.add("locked");
+    lockScreen.style.display = "flex";
+    topCountdown.innerHTML = "⏳ Session Starts Soon";
+    if (trainingStatus) trainingStatus.innerText = "Scheduled";
+
+    const target = new Date();
+    target.setHours(startHour, 0, 0, 0);
+    const diff = target - now;
+
+    const h = Math.floor(diff / 3600000);
+    const m = Math.floor((diff / 60000) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("startCountdown").innerHTML =
+      `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  } 
+  // 🔒 CONDITION 3: EXPIRED BATCH
+  else {
+    const accessGranted = sessionStorage.getItem("accessGranted");
+    if (accessGranted !== "yes") {
+      document.body.classList.add("locked");
+      lockScreen.style.display = "flex";
+
+      document.getElementById("lockTitle").innerHTML = "🔒 Training Access Closed";
+      document.getElementById("lockText").innerHTML = "Today's batch timing has ended.<br><br>Please revisit during active training hours.";
+      document.getElementById("startCountdown").style.display = "none";
+    }
+    
+    topCountdown.innerHTML = "🔴 Session Closed";
+    if (trainingStatus) trainingStatus.innerText = "Closed";
+    if (liveStatus) liveStatus.innerText = "Session Expired";
+    if (statusDot) statusDot.style.background = "#ef4444";
+  }
 }
 
-// Fullscreen Integration Controller
+// Fullscreen Automation Pipeline Hook on Tap Context
 document.addEventListener('click', function () {
     if (!document.fullscreenElement && !document.webkitFullscreenElement) {
         const docEl = document.documentElement;
@@ -193,28 +481,54 @@ document.addEventListener('click', function () {
     }
 });
 
-// Dynamic Fluctuations logic
-setInterval(() => {
-    const computed = Math.max(60, 75 + (Math.floor(Math.random() * 12) - 4));
-    if (document.getElementById("viewerCount")) document.getElementById("viewerCount").innerText = computed;
-}, 8000);
+/* =========================
+   VIEWER SIMULATION LOGIC
+========================= */
+const nowTime = new Date();
+const currentH = nowTime.getHours();
+const minutes = nowTime.getMinutes();
+let base;
 
-// Core Data Stream Fetcher Execution Wrapper
-function loadSecureBunnyStream() {
-    isStreamLoaded = true;
-    const API_GATEWAY = "https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec";
-    fetch(API_GATEWAY)
-        .then(r => r.json())
-        .then(payload => {
-            if (payload && payload.day1_v2) {
-                document.getElementById("videoContainer").innerHTML = payload.day1_v2;
-            }
-        }).catch(err => { isStreamLoaded = false; });
+if(currentH === startHour){
+  if(minutes < 15) base = 45 + Math.floor(Math.random()*20);
+  else if(minutes < 45) base = 70 + Math.floor(Math.random()*20);
+  else base = 90 + Math.floor(Math.random()*11);
+} else if(currentH === 14){
+  base = 80 + Math.floor(Math.random()*16);
+} else if(currentH === 15){
+  base = 55 + Math.floor(Math.random()*21);
+} else {
+  base = 35 + Math.floor(Math.random()*10);
 }
 
-// Engine Loop interval initialization
+function updateViewers(){
+  let fluctuation = Math.floor(Math.random()*5)-2;
+  let viewers = Math.min(100, Math.max(35, base + fluctuation));
+  if (document.getElementById("viewerCount")) document.getElementById("viewerCount").innerText = viewers;
+}
+updateViewers();
+setInterval(updateViewers, 15000);
+
+/* =======================================================
+   BUNNY DYNAMIC STREAM INJECTOR & CORE SCHEDULER MATRIX
+======================================================= */
+function loadSecureBunnyStream() {
+  isVideoLoaded = true;
+  fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
+    .then(r => r.json())
+    .then(data => {
+      document.getElementById("videoContainer").innerHTML = data.day1_v2;
+    })
+    .catch(err => {
+      isVideoLoaded = false;
+      console.error(err);
+    });
+}
+
+// Core Loop Active Monitoring Initialization
 setInterval(evaluateTimeLockEngine, 1000);
 evaluateTimeLockEngine();
 </script>
+
 </body>
 </html>
