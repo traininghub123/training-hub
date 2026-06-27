@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Foundation Session | Module 1</title>
 
-<!-- Premium Fonts Integration -->
+<!-- Premium Fonts Integration For Exclusive Corporate Look -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -17,53 +17,56 @@
 
 body{
   font-family: 'Inter', 'Segoe UI', sans-serif;
-  background:#f1f5f9;
-  color:#0f172a;
+  background:#edf2f7;
+  color:#111827;
 }
 
-/* HEADER - Premium Corporate Slate */
+body.locked{
+  overflow:hidden;
+  height:100vh;
+}
+
+/* HEADER - Premium Slate Layout */
 .topbar{
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  padding: 20px 24px;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-.brand{
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-}
-
-.batch{
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 8px 16px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-}
-
-/* REAL-TIME METRICS STATUS BAR */
-.status-bar{
-  max-width:1100px;
-  margin:24px auto 0;
-  background:#fff;
-  border-radius:16px;
-  border:1px solid #e2e8f0;
-  padding:16px 22px;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  padding:18px 22px;
+  color:#fff;
   display:flex;
   justify-content:space-between;
   align-items:center;
   flex-wrap:wrap;
   gap:12px;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.brand{
+  font-size:24px;
+  font-weight:700;
+  letter-spacing: -0.02em;
+}
+
+.batch{
+  background:rgba(255,255,255,0.12);
+  padding:9px 14px;
+  border-radius:999px;
+  font-size:14px;
+  font-weight:600;
+}
+
+/* REAL-TIME STATUS BAR CHANNELS */
+.status-bar{
+  max-width:1100px;
+  margin:18px auto 0;
+  background:#fff;
+  border-radius:16px;
+  border:1px solid #e5e7eb;
+  padding:15px 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.04);
 }
 
 .live-wrap{
@@ -76,33 +79,32 @@ body{
 }
 
 .dot{
-  width:9px;
-  height:9px;
+  width:10px;
+  height:10px;
   border-radius:50%;
   background:#10b981;
-  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.25);
-  animation: pulseBlink 2s infinite;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+  animation:blink 1.5s infinite;
 }
 
-@keyframes pulseBlink{
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); opacity: 1; }
-  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); opacity: 0.8; }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); opacity: 1; }
+@keyframes blink{
+  0%{opacity:1; transform: scale(1);}
+  50%{opacity:0.4; transform: scale(1.05);}
+  100%{opacity:1; transform: scale(1);}
 }
 
 .viewer{
   font-size:14px;
-  color:#475569;
-  font-weight:600;
+  color:#374151;
+  font-weight:700;
 }
 
-.viewer span{
-  color:#0f172a;
-  font-weight:700;
+.viewer span {
   background: #f1f5f9;
   padding: 4px 8px;
   border-radius: 6px;
-  font-variant-numeric: tabular-nums; /* Prevents numbers from jumping when shifting */
+  color: #0f172a;
+  font-variant-numeric: tabular-nums;
   transition: all 0.3s ease;
 }
 
@@ -110,8 +112,8 @@ body{
   text-align:center;
   margin-top:12px;
   font-size:14px;
-  color:#3b82f6;
-  background: rgba(59, 130, 246, 0.05);
+  color:#2563eb;
+  background: rgba(37, 99, 235, 0.05);
   padding: 8px;
   border-radius: 8px;
   max-width: 1100px;
@@ -120,34 +122,36 @@ body{
   font-weight:600;
 }
 
-/* MAIN BODY */
+/* MAIN CONTAINMENT */
 .container{
   max-width:1100px;
   margin:auto;
-  padding: 0 22px 40px;
+  padding:22px;
 }
 
-/* PROGRESS BAR COMPONENT */
+/* ACCESS PROFILE OVERVIEW */
 .access-box{
   background:#fff;
   border-radius:18px;
   padding:22px;
-  margin: 20px 0;
-  border:1px solid #e2e8f0;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
+  margin-bottom:20px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.03);
+  border: 1px solid #e5e7eb;
 }
 
 .access-top{
   display:flex;
   justify-content:space-between;
   margin-bottom:12px;
+  flex-wrap:wrap;
+  gap:10px;
   font-size: 14px;
 }
 
 .progress-bar{
   width:100%;
-  height:8px;
-  background:#e2e8f0;
+  height:10px;
+  background:#e5e7eb;
   border-radius:999px;
   overflow:hidden;
 }
@@ -155,22 +159,20 @@ body{
 .progress-fill{
   width:33%;
   height:100%;
-  background: linear-gradient(90deg, #3b82f6, #2563eb);
-  border-radius:999px;
+  background:linear-gradient(135deg,#3b82f6,#2563eb);
 }
 
-/* VIDEO VIEWPORT (EXACT ORIGINAL ASPECT SIZE REGISTERED) */
+/* 🎥 EXACT OLD VIDEO STYLE & CONFIGURATION RESTORED */
 .video-card{
   background:#000;
-  border-radius:24px;
+  border-radius:22px;
   overflow:hidden;
-  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.3);
-  border: 1px solid rgba(15, 23, 42, 0.05);
+  box-shadow:0 18px 40px rgba(0,0,0,0.18);
 }
 
 .video-container{
   position:relative;
-  padding-top:56.25%; /* Fixed 16:9 Aspect Ratio */
+  padding-top:56.25%;
 }
 
 .video-container iframe{
@@ -182,82 +184,78 @@ body{
   border:0;
 }
 
-/* MODERN ANALYTICS DASHBOARD HUD */
+/* PERFORMANCE HUD GRID */
 .stats{
-  margin-top:24px;
+  margin-top:20px;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:16px;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:14px;
 }
 
 .stat{
   background:#fff;
   border-radius:16px;
-  padding:20px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
+  padding:18px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.03);
+  border: 1px solid #e5e7eb;
 }
 
 .stat-label{
-  color:#64748b;
+  color:#6b7280;
   font-size:12px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom:6px;
+  letter-spacing: 0.03em;
+  margin-bottom:8px;
 }
 
 .stat-value{
-  font-size:18px;
+  font-size:21px;
   font-weight:700;
-  color: #1e293b;
 }
 
-/* COMPLIANCE SYSTEM DIRECTIONS */
+/* DIRECTIVE INSTRUCTIONS CARD */
 .info-box{
-  margin-top:24px;
+  margin-top:22px;
   background:#fff;
-  border-radius:16px;
+  border-radius:18px;
   padding:24px;
-  border: 1px solid #e2e8f0;
+  box-shadow:0 10px 26px rgba(0,0,0,0.03);
+  border: 1px solid #e5e7eb;
 }
 
 .info-box h3{
-  margin-bottom:14px;
-  font-size:18px;
+  margin-bottom:16px;
+  font-size:20px;
   font-weight: 700;
 }
 
 .info-box ul{
   padding-left:20px;
-}
-
-.info-box li{
-  margin-bottom:10px;
-  color:#334155;
-  font-size: 15px;
+  line-height:2;
+  color:#374151;
 }
 
 .highlight{
-  margin-top:20px;
+  margin-top:18px;
   background:#eff6ff;
   border:1px solid #bfdbfe;
   color:#1e40af;
-  padding:16px;
-  border-radius:12px;
+  padding:18px;
+  border-radius:14px;
   text-align:center;
-  font-weight:600;
+  font-weight:700;
   font-size: 14px;
-  line-height: 1.5;
 }
 
-/* LOGS PROFILE GRID */
+/* LOG RECORDS PLATFORM */
 .activity{
-  margin-top:24px;
+  margin-top:22px;
   background:#fff;
-  border-radius:16px;
-  padding:24px;
-  border: 1px solid #e2e8f0;
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 10px 26px rgba(0,0,0,0.03);
+  border: 1px solid #e5e7eb;
 }
 
 .activity h3{
@@ -267,160 +265,156 @@ body{
 
 .activity-item{
   padding:12px 0;
-  border-bottom:1px solid #f1f5f9;
+  border-bottom:1px solid #e5e7eb;
   font-size: 14px;
-  color: #334155;
+  color: #374151;
 }
 
 .activity-item:last-child{
   border-bottom:none;
 }
 
-/* VIP INTERACTIVE SUBMIT PROTOCOL */
+/* DISPATCH ACTION NAVIGATION BUTTON */
 .btn{
-  margin-top:28px;
+  margin-top:24px;
   width:100%;
   border:none;
-  border-radius:14px;
+  border-radius:16px;
   padding:18px;
   background:linear-gradient(135deg,#2563eb,#1d4ed8);
   color:#fff;
-  font-size:16px;
+  font-size:18px;
   font-weight:700;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
 }
 
-.btn:hover {
-  background: linear-gradient(135deg,#1d4ed8,#1e40af);
+.btn:hover{
+  background:linear-gradient(135deg,#1d4ed8,#1e40af);
   transform: translateY(-1px);
 }
 
-/* CONTROL TERMINATION FOOTER */
+/* COMPLIANCE FOOTER SYSTEMS */
 .footer{
   text-align:center;
-  padding:40px 10px;
-  color:#94a3b8;
+  padding:30px 10px 40px;
+  color:#6b7280;
   font-size:13px;
 }
 
-/* RESPONSIVE PIPELINES */
-@media(max-width:768px){
-  .topbar{ padding: 16px; flex-direction: column; text-align: center; }
+/* MOBILE CONFIGURATIONS */
+@media(max-width:700px){
+  .topbar{ justify-content:center; text-align:center; }
   .status-bar{ flex-direction:column; align-items:center; text-align: center; }
-  .container { padding: 0 16px 30px; }
-  .stats { grid-template-columns: 1fr; }
+  .access-top{ flex-direction:column; }
 }
 </style>
 </head>
 <body>
 
-<!-- TOPBAR BRAND ENGINE -->
+<!-- HEADER BRAND PROTOCOLS -->
 <div class="topbar">
   <div class="brand">🏛 FOUNDATION SESSION</div>
   <div class="batch">Professional Development Program • Module 1 of 3</div>
 </div>
 
-<!-- DYNAMIC REAL-TIME HUD COMPONENTS -->
+<!-- REAL-TIME STREAMHUD INSIGHTS -->
 <div class="status-bar">
   <div class="live-wrap">
     <div class="dot"></div>
-    <span id="liveStatus">Foundation Session Live</span>
+    <span id="liveStatus">Foundation Session Active</span>
   </div>
   <div class="viewer">
-    👁 Live: <span id="viewerCount">84</span> Participants Stream Active
+    👁 Live: <span id="viewerCount">85</span> Participants Active
   </div>
 </div>
 
-<div class="countdown" id="topCountdown">🟢 Onboarding Window Open • Priority Streaming Enabled</div>
+<div class="countdown" id="topCountdown">🟢 Training Window Open • Batch Access Active</div>
 
 <div class="container">
-  
-  <!-- MATRIX ACCESS ENGINE STATUS -->
+
+  <!-- INDUCTION METADATA PROGRESS ENGINE -->
   <div class="access-box">
     <div class="access-top">
       <span><b>📘 Module 1 • Foundation Session</b></span>
-      <span><b>33% Evaluation Progress</b></span>
+      <span><b>33% Progress</b></span>
     </div>
     <div class="progress-bar"><div class="progress-fill"></div></div>
   </div>
 
-  <!-- BUNNY SECURE SECURED EMBED GATEWAY (Ratio Checked) -->
+  <!-- 🎥 EXACT OLD VIDEO VIEWPORT CONTAINER RESTORED -->
   <div class="video-card">
-    <div id="videoContainer" class="video-container">
-       <div style="position: absolute; color: white; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 500; font-size: 14px;">Establishing Secure Content Channel...</div>
-    </div>
+    <div id="videoContainer" class="video-container"></div>
   </div>
 
-  <!-- SUMMARY STATISTICS METRICS -->
+  <!-- METRICS INSIGHTS COUNTERS -->
   <div class="stats">
-    <div class="stat"><div class="stat-label">Current Pipeline</div><div class="stat-value" style="color:#2563eb;">Foundation Session</div></div>
-    <div class="stat"><div class="stat-label">System State</div><div class="stat-value" id="trainingStatus" style="color:#10b981;">ACTIVE</div></div>
-    <div class="stat"><div class="stat-label">Next Unlock</div><div class="stat-value" style="color:#64748b;">Clarification System 🔒</div></div>
+    <div class="stat"><div class="stat-label">Current Module</div><div class="stat-value" style="color:#2563eb;">Foundation Session</div></div>
+    <div class="stat"><div class="stat-label">Training Status</div><div class="stat-value" id="trainingStatus" style="color:#10b981;">ACTIVE</div></div>
+    <div class="stat"><div class="stat-label">Next Module</div><div class="stat-value" style="color:#64748b;">Clarification Session 🔒</div></div>
   </div>
 
-  <!-- COMPLIANCE REGULATION SYSTEM CONTENT -->
+  <!-- DIRECTIVE ENGINE PROCEDURES -->
   <div class="info-box">
-    <h3>📌 Important Onboarding Directives</h3>
+    <h3>📌 Important Instructions</h3>
     <ul>
-      <li>Analyze the entire strategic briefing carefully without utilizing seek or skip operations.</li>
-      <li>Do not execute browser reload instructions or isolate the tab instance during playback.</li>
-      <li>Complete this module in one continuous sitting to ensure verification tracking metrics parse properly.</li>
-      <li>A personalized verification code parameter will render automatically inside the player wrapper at the end.</li>
+      <li>Watch the complete training carefully without skipping</li>
+      <li>Do not refresh or leave during the session</li>
+      <li>Complete this module in one sitting</li>
+      <li>A verification code will appear at the end</li>
+      <li>Next module access is unlocked only after verification</li>
     </ul>
     <div class="highlight">
-      🎯 Strategic verification credentials will render natively inside the stream viewport. <br><br>
-      📩 Submit the authorized code token to your assigned supervisor to clear the gate context.
+      🎯 Verification code will appear inside the session <br><br>
+      📩 Submit the code to your mentor to continue further
     </div>
   </div>
 
-  <!-- ACTIVITY PIPELINE CAPTURE ENGINE -->
+  <!-- ARCHITECTURE STATES CAPTURE SYSTEM -->
   <div class="activity">
-    <h3>📊 Live System Architecture</h3>
-    <div class="activity-item">🟢 Stream Feed Synchronized & Active</div>
-    <div class="activity-item">🟢 Dynamic Passkey Verification Subsystem Armed</div>
-    <div class="activity-item">🟢 Module 2 Integration Gateways Sealed Until Token Validation</div>
+    <h3>📊 Session Status</h3>
+    <div class="activity-item">🟢 Foundation Session Active</div>
+    <div class="activity-item">🟢 Verification Enabled</div>
+    <div class="activity-item">🟢 Clarification Session Locked Until Verification</div>
   </div>
 
-  <!-- SYSTEM ACTION DISPATCH TRIGGER -->
+  <!-- SUBMIT GATE CONTEXT BUTTON -->
   <button class="btn">Clarification Session Locked 🔒</button>
 </div>
 
-<!-- CREDENTIAL MATRIX FOOTER -->
+<!-- SYSTEM COMPLIANCE FOOTER METRICS -->
 <div class="footer">Professional Training Hub • Access Controlled • Batch Monitored</div>
 
 <script>
 /* =========================================================
-   GENUINE STREAM VIEWER FLUCTUATION SYSTEM (HUMAN BEHAVIOR)
+   GENUINE ZOOM/YOUTUBE-STYLE VIEWER FLUCTUATION ENGINE
    ========================================================= */
-let currentViewers = 78; // Target starting point base
+let baseViewers = 82; // Safe target starting metric base
 
 function dynamicViewerEngine() {
-  // Generates realistic natural micro-shifts (+2, -1, +1, -2, etc.)
-  const varianceOptions = [-2, -1, 0, 1, 1, 2]; 
-  const randomShift = varianceOptions[Math.floor(Math.random() * varianceOptions.length)];
+  const fluctuationOptions = [-2, -1, 0, 1, 1, 2]; // Natural shift parameters
+  const variance = fluctuationOptions[Math.floor(Math.random() * fluctuationOptions.length)];
   
-  // Keep values bounded between 72 to 94 to preserve optimal look consistency
-  currentViewers = Math.min(94, Math.max(72, currentViewers + randomShift));
+  // Bound dynamic variables tightly to maintain real-time look stability
+  baseViewers = Math.min(96, Math.max(74, baseViewers + variance));
   
-  const viewerTarget = document.getElementById("viewerCount");
-  if (viewerTarget) {
-    viewerTarget.innerText = currentViewers;
+  const targetBadge = document.getElementById("viewerCount");
+  if (targetBadge) {
+    targetBadge.innerText = baseViewers;
   }
 }
-// Triggers fluctuation shifts randomly every 4 to 9 seconds (highly real-time fluid look)
-(function loopViewerUpdates() {
-  const variableInterval = Math.floor(Math.random() * (9000 - 4000 + 1)) + 4000;
+// Trigger smooth natural updates every 4 to 9 seconds dynamically
+(function initViewerLoop() {
+  const randomizedInterval = Math.floor(Math.random() * (9000 - 4000 + 1)) + 4000;
   setTimeout(() => {
     dynamicViewerEngine();
-    loopViewerUpdates();
-  }, variableInterval);
+    initViewerLoop();
+  }, randomizedInterval);
 })();
-dynamicViewerEngine(); // Immediate init launch
+dynamicViewerEngine(); // Fast init trigger
 
 /* =========================================================
-   LMS ENGINE FULLSCREEN SYSTEM CAPTURE ON USER SELECTION
+   LMS SECURITY TAP FULLSCREEN CAPTURE FUNCTIONALITY
    ========================================================= */
 document.addEventListener('click', function () {
     if (!document.fullscreenElement && !document.webkitFullscreenElement) {
@@ -431,23 +425,17 @@ document.addEventListener('click', function () {
 });
 
 /* =========================================================
-   CORE BACKEND ENDPOINT INTEGRATION FOR BUNNY CONTROL CENTER
+   EXACT PURANA API STREAM FETCH AND INNERHTML INJECTION
    ========================================================= */
-const API_GATEWAY = "https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec";
-
-fetch(API_GATEWAY)
-  .then(response => response.json())
-  .then(payload => {
-    const targetWrapper = document.getElementById("videoContainer");
-    if (payload && payload.day1_v2) {
-      targetWrapper.innerHTML = payload.day1_v2;
-    } else {
-      targetWrapper.innerHTML = `<div style="position: absolute; color: #ef4444; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight:600;">Stream Mapping Drop Error</div>`;
-    }
-  })
-  .catch(error => {
-    console.error("Core streaming array parse exceptions:", error);
-  });
+fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
+.then(r => r.json())
+.then(data => {
+  // Exact same original parsing array logic targeted directly
+  document.getElementById("videoContainer").innerHTML = data.day1_v2;
+})
+.catch(err => {
+  console.error(err);
+});
 </script>
 
 </body>
