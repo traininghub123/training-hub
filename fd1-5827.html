@@ -138,7 +138,7 @@ body.locked{
   background:linear-gradient(135deg,#3b82f6,#2563eb);
 }
 
-/* VIDEO - EXACT OLD DESIGN COMPLETELY UNTOUCHED */
+/* VIDEO */
 .video-card{
   background:#000;
   border-radius:22px;
@@ -309,70 +309,107 @@ body.locked{
 
 /* MOBILE */
 @media(max-width:700px){
-  .topbar{ justify-content:center; text-align:center; }
-  .status-bar{ flex-direction:column; align-items:flex-start; }
-  .access-top{ flex-direction:column; }
+
+.topbar{
+  justify-content:center;
+  text-align:center;
+}
+
+.status-bar{
+  flex-direction:column;
+  align-items:flex-start;
+}
+
+.access-top{
+  flex-direction:column;
+}
+
 }
 
 </style>
 </head>
-<body>
 
-<!-- LOCK SCREEN -->
-<div id="lockScreen" class="lock-screen">
-  <div class="lock-box">
-    <h1 id="lockTitle">⏳ Foundation Session Starts Soon</h1>
-    <p id="lockText">Today's Foundation Session has not started yet.<br><br>Please join during the active session window.</p>
-    <div class="lock-time">⏰ Access Timing: 01:00 PM – 04:00 PM</div>
-    <div id="startCountdown">00:00:00</div>
-  </div>
-</div>
+<body>
 
 <!-- HEADER -->
 <div class="topbar">
-  <div class="brand">🏛 FOUNDATION SESSION</div>
-  <div class="batch">Professional Development Program • Module 1 of 3</div>
+
+  <div class="brand">
+    🏛 FOUNDATION SESSION
+  </div>
+
+  <div class="batch">
+    Professional Development Program • Module 1 of 3
+  </div>
+
 </div>
 
 <!-- STATUS -->
 <div class="status-bar">
+
   <div class="live-wrap">
     <div class="dot"></div>
     <span id="liveStatus">Foundation Session Active</span>
   </div>
+
   <div class="viewer">
     👁 <span id="viewerCount">--</span> Participants Active
   </div>
+
 </div>
 
-<div class="countdown" id="topCountdown">🟢 Training Window Open • Batch Access Active</div>
+<div class="countdown" id="topCountdown">
+  🟢 Training Window Open
+</div>
 
 <div class="container">
 
   <!-- ACCESS -->
   <div class="access-box">
+
     <div class="access-top">
       <span><b>📘 Module 1 • Foundation Session</b></span>
       <span><b>33% Progress</b></span>
     </div>
-    <div class="progress-bar"><div class="progress-fill"></div></div>
+
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
+    </div>
+
   </div>
 
-  <!-- VIDEO - ORIGINAL LAYOUT PRESERVED -->
+  <!-- VIDEO -->
   <div class="video-card">
-    <div id="videoContainer" class="video-container"></div>
+
+    <div id="videoContainer"></div>
+
   </div>
 
   <!-- STATS -->
   <div class="stats">
-    <div class="stat"><div class="stat-label">Current Module</div><div class="stat-value">Foundation Session</div></div>
-    <div class="stat"><div class="stat-label">Training Status</div><div class="stat-value" id="trainingStatus">ACTIVE</div></div>
-    <div class="stat"><div class="stat-label">Next Module</div><div class="stat-value">Clarification Session 🔒</div></div>
+
+    <div class="stat">
+      <div class="stat-label">Current Module</div>
+      <div class="stat-value">Foundation Session</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-label">Training Status</div>
+      <div class="stat-value" id="trainingStatus">ACTIVE</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-label">Next Module</div>
+      <div class="stat-value">Clarification Session 🔒</div>
+    </div>
+
   </div>
 
   <!-- INFO -->
   <div class="info-box">
+
     <h3>📌 Important Instructions</h3>
+
     <ul>
       <li>Watch the complete training carefully without skipping</li>
       <li>Do not refresh or leave during the session</li>
@@ -380,72 +417,96 @@ body.locked{
       <li>A verification code will appear at the end</li>
       <li>Next module access is unlocked only after verification</li>
     </ul>
+
     <div class="highlight">
       🎯 Verification code will appear inside the session <br><br>
       📩 Submit the code to your mentor to continue further
     </div>
+
   </div>
 
   <!-- ACTIVITY -->
   <div class="activity">
+
     <h3>📊 Session Status</h3>
-    <div class="activity-item">🟢 Foundation Session Active</div>
-    <div class="activity-item">🟢 Verification Enabled</div>
-    <div class="activity-item">🟢 Clarification Session Locked Until Verification</div>
+
+    <div class="activity-item">
+      🟢 Foundation Session Active
+    </div>
+
+    <div class="activity-item">
+      🟢 Verification Enabled
+    </div>
+
+    <div class="activity-item">
+      🟢 Clarification Session Locked Until Verification
+    </div>
+
   </div>
 
   <!-- BUTTON -->
-  <button class="btn">Clarification Session Locked 🔒</button>
+  <button class="btn">
+    Clarification Session Locked 🔒
+  </button>
+
 </div>
 
 <!-- FOOTER -->
-<div class="footer">Professional Training Hub • Access Controlled • Batch Monitored</div>
+<div class="footer">
+  Professional Training Hub • Access Controlled • Batch Monitored
+</div>
 
 <script>
-let isVideoLoaded = false;
 
-// 1. LMS SECURE TAP FULLSCREEN TRIGGER
-document.addEventListener('click', function () {
-    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-        const docEl = document.documentElement;
-        if (docEl.requestFullscreen) docEl.requestFullscreen();
-        else if (docEl.webkitRequestFullscreen) docEl.webkitRequestFullscreen();
-    }
+const now = new Date();
+const hour = now.getHours();
+const minutes = now.getMinutes();
+
+const topCountdown = document.getElementById("topCountdown");
+
+/* =========================
+   VIEWER SYSTEM
+========================= */
+
+let base = 75; // Set a default base viewer count
+
+if(hour === 13){
+  if(minutes < 15) base = 45 + Math.floor(Math.random()*20);
+  else if(minutes < 45) base = 70 + Math.floor(Math.random()*20);
+  else base = 90 + Math.floor(Math.random()*11);
+}
+else if(hour === 14){
+  base = 80 + Math.floor(Math.random()*16);
+}
+else if(hour === 15){
+  base = 55 + Math.floor(Math.random()*21);
+}
+else{
+  base = 35 + Math.floor(Math.random()*10);
+}
+
+function updateViewers(){
+  let fluctuation = Math.floor(Math.random()*5)-2;
+  let viewers = Math.min(100, Math.max(35, base + fluctuation));
+  document.getElementById("viewerCount").innerText = viewers;
+}
+
+updateViewers();
+setInterval(updateViewers,15000);
+
+/* =========================
+   VIDEO DATA FETCH
+========================= */
+
+fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
+.then(r => r.json())
+.then(data => {
+  document.getElementById("videoContainer").innerHTML = data.day1_v2;
+})
+.catch(err => {
+  console.error(err);
 });
 
-// 2. REAL-TIME VIEWER SHIFT MOTOR
-let currentViewers = 84; 
-function updateViewers(){
-  const shift = [-2, -1, 0, 1, 1, 2];
-  const variance = shift[Math.floor(Math.random() * shift.length)];
-  currentViewers = Math.min(98, Math.max(70, currentViewers + variance));
-  if (document.getElementById("viewerCount")) {
-    document.getElementById("viewerCount").innerText = currentViewers;
-  }
-}
-setInterval(updateViewers, 5000);
-updateViewers();
-
-// 3. BACKGROUND NO-RELOAD SYSTEM TRACKER
-function evaluateTimeLockEngine() {
-  const now = new Date();
-  const hour = now.getHours();
-  const startHour = 13; // 1 PM
-  const endHour = 16;   // 4 PM
-
-  // TEMPORARY BYPASSED TIMING CODE HERE FOR LIVE LOOK REVIEW
-  if (!isVideoLoaded) {
-      isVideoLoaded = true;
-      fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
-        .then(r => r.json())
-        .then(data => {
-          document.getElementById("videoContainer").innerHTML = data.day1_v2;
-        });
-  }
-}
-
-setInterval(evaluateTimeLockEngine, 1000);
-evaluateTimeLockEngine();
 </script>
 
 </body>
