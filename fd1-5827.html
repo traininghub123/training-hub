@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foundation Session | Module 1</title>
-    
-    <!-- Google Fonts For Premium Corporate Appearance -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
     <style>
         :root {
             --primary: linear-gradient(135deg, #2563eb, #1d4ed8);
@@ -18,472 +15,206 @@
             --text-muted: #64748b;
             --border-color: #e2e8f0;
         }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-light); color: var(--text-main); line-height: 1.5; }
+        body.modal-locked { overflow: hidden; height: 100vh; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
+        /* HEADER & TOP PROTOCOLS */
+        .topbar { background: var(--dark-surface); padding: 20px 24px; color: #fff; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); }
+        .brand { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+        .batch { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 600; }
 
-        body {
-            background-color: var(--bg-light);
-            color: var(--text-main);
-            line-height: 1.5;
-        }
+        /* DASHBOARD GRID */
+        .status-bar { max-width: 1000px; margin: 24px auto 0; background: #ffffff; border-radius: 16px; border: 1px solid var(--border-color); padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03); }
+        .live-wrap { display: flex; align-items: center; gap: 10px; font-weight: 700; color: #059669; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; background: #10b981; animation: pulse 1.8s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
+        .viewer { font-size: 14px; color: var(--text-muted); font-weight: 600; }
+        .viewer span { color: var(--text-main); font-weight: 700; }
 
-        /* HEADER */
-        .topbar {
-            background: var(--dark-surface);
-            padding: 20px 24px;
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
+        .container { max-width: 1000px; margin: auto; padding: 0 20px 40px; }
+        .access-box { background: #ffffff; border-radius: 16px; padding: 20px; margin: 20px 0; border: 1px solid var(--border-color); }
+        .progress-bar { width: 100%; height: 8px; background: #f1f5f9; border-radius: 999px; overflow: hidden; margin-top: 10px; }
+        .progress-fill { width: 33%; height: 100%; background: var(--primary); }
 
-        .brand {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        /* SCREEN FRAME SYSTEM */
+        .video-card { background: #000; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25); }
+        .video-container { position: relative; padding-top: 56.25%; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-        .batch {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 8px 16px;
-            border-radius: 999px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 0.02em;
-        }
+        .stats { margin-top: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+        .stat { background: #ffffff; border-radius: 16px; padding: 20px; border: 1px solid var(--border-color); }
+        .stat-label { color: var(--text-muted); font-size: 13px; text-transform: uppercase; margin-bottom: 6px; }
+        .stat-value { font-size: 20px; font-weight: 700; }
 
-        /* STATUS DISPLAY */
-        .status-bar {
-            max-width: 1000px;
-            margin: 24px auto 0;
-            background: #ffffff;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            padding: 16px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 14px;
-            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
-        }
+        .info-box { margin-top: 24px; background: #ffffff; border-radius: 16px; padding: 24px; border: 1px solid var(--border-color); }
+        .info-box ul { padding-left: 20px; margin-top: 12px; }
+        .info-box li { margin-bottom: 10px; color: #334155; }
+        .highlight { margin-top: 20px; background: rgba(37, 99, 235, 0.05); border: 1px solid rgba(37, 99, 235, 0.15); color: #1e40af; padding: 16px; border-radius: 12px; text-align: center; font-weight: 600; }
 
-        .live-wrap {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 700;
-            font-size: 15px;
-            color: #059669;
-        }
+        .btn { margin-top: 28px; width: 100%; border: none; border-radius: 14px; padding: 18px; background: var(--primary); color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25); }
+        .btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
 
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #10b981;
-            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
-            animation: pulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
+        /* SYSTEM MAINTENANCE LOCK SCREEN UI */
+        .lock-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0b0f19; color: #fff; display: none; justify-content: center; align-items: center; text-align: center; z-index: 99999; padding: 25px; }
+        .lock-box h1 { font-size: 36px; margin-bottom: 14px; color: #ffbc00; }
+        .lock-box p { color: #cbd5e1; font-size: 16px; margin-bottom: 20px; }
+        .lock-time { background: rgba(255,255,255,0.06); padding: 14px; border-radius: 14px; font-weight: 700; display: inline-block; }
+        #startCountdown { margin-top: 20px; font-size: 42px; font-weight: 800; color: #ffffff; letter-spacing: 2px; }
+        .footer { text-align: center; padding: 40px 10px; color: var(--text-muted); font-size: 13px; }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: .5; transform: scale(1.1); }
-        }
-
-        .viewer {
-            font-size: 14px;
-            color: var(--text-muted);
-            font-weight: 600;
-        }
-        
-        .viewer span {
-            color: var(--text-main);
-            font-weight: 700;
-        }
-
-        .top-notification {
-            text-align: center;
-            margin-top: 12px;
-            font-size: 14px;
-            color: #2563eb;
-            font-weight: 600;
-            background: rgba(37, 99, 235, 0.06);
-            padding: 8px;
-            border-radius: 8px;
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* MAIN CONTENT STRUCTURE */
-        .container {
-            max-width: 1000px;
-            margin: auto;
-            padding: 0 20px 40px;
-        }
-
-        /* ACCESS CARD & PROGRESS */
-        .access-box {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 20px;
-            margin: 20px 0;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
-        }
-
-        .access-top {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 14px;
-            font-size: 14px;
-            color: var(--text-main);
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #f1f5f9;
-            border-radius: 999px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            width: 33%;
-            height: 100%;
-            background: var(--primary);
-            border-radius: 999px;
-        }
-
-        /* PREMIUM VIDEO VIEWPORT */
-        .video-card {
-            background: #000000;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
-            border: 1px solid rgba(15, 23, 42, 0.1);
-        }
-
-        .video-container {
-            position: relative;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        /* MATRIX DASHBOARD METRICS */
-        .stats {
-            margin-top: 24px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-        }
-
-        .stat {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 20px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
-            transition: transform 0.2s ease;
-        }
-
-        .stat-label {
-            color: var(--text-muted);
-            font-size: 13px;
-            font-weight: 500;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-        }
-
-        .stat-value {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        /* COMPLIANCE INSTRUCTIONS BOX */
-        .info-box {
-            margin-top: 24px;
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 24px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
-        }
-
-        .info-box h3 {
-            margin-bottom: 16px;
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: -0.01em;
-        }
-
-        .info-box ul {
-            padding-left: 20px;
-        }
-
-        .info-box li {
-            margin-bottom: 10px;
-            color: #334155;
-            font-size: 15px;
-        }
-
-        .highlight {
-            margin-top: 20px;
-            background: rgba(37, 99, 235, 0.05);
-            border: 1px solid rgba(37, 99, 235, 0.15);
-            color: #1e40af;
-            padding: 16px;
-            border-radius: 12px;
-            text-align: center;
-            font-weight: 600;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        /* PROGRESS LOG COMPONENT */
-        .activity {
-            margin-top: 24px;
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 24px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
-        }
-
-        .activity h3 {
-            margin-bottom: 16px;
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .activity-item {
-            padding: 14px 0;
-            border-bottom: 1px solid #f1f5f9;
-            font-size: 14px;
-            font-weight: 500;
-            color: #334155;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .activity-item:last-child {
-            border-bottom: none;
-        }
-
-        /* PRIMARY VERIFICATION BUTTON */
-        .btn {
-            margin-top: 28px;
-            width: 100%;
-            border: none;
-            border-radius: 14px;
-            padding: 18px;
-            background: var(--primary);
-            color: #fff;
-            font-size: 16px;
-            font-weight: 700;
-            letter-spacing: 0.01em;
-            cursor: pointer;
-            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
-            transition: all 0.2s ease;
-        }
-
-        .btn:hover {
-            background: var(--primary-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
-        }
-
-        /* FOOTER BRANDING */
-        .footer {
-            text-align: center;
-            padding: 40px 10px;
-            color: var(--text-muted);
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        /* RESPONSIVE DESIGN ADJUSTMENTS */
         @media (max-width: 768px) {
-            .topbar { padding: 16px; justify-content: center; flex-direction: column; text-align: center; }
-            .status-bar { flex-direction: column; align-items: center; text-align: center; margin: 16px 16px 0; }
-            .container { padding: 0 16px 30px; }
-            .brand { font-size: 19px; }
+            .topbar { padding: 16px; flex-direction: column; text-align: center; }
+            .status-bar { flex-direction: column; margin: 16px 16px 0; }
             .stats { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-<!-- TOP NAVIGATIONBAR -->
+<!-- PERSISTENT GATEWAY LOCK SCREEN -->
+<div id="lockScreen" class="lock-screen">
+    <div class="lock-box">
+        <h1 id="lockTitle">⏳ Foundation Session Starts Soon</h1>
+        <p id="lockText">Today's specialized onboarding sequence has not initiated yet.</p>
+        <div class="lock-time">⏰ Session Window: 01:00 PM – 04:00 PM Daily</div>
+        <div id="startCountdown">00:00:00</div>
+    </div>
+</div>
+
 <div class="topbar">
     <div class="brand">🏛 FOUNDATION SESSION</div>
     <div class="batch">Professional Onboarding Journey • Module 1 of 3</div>
 </div>
 
-<!-- REAL-TIME TRACKING INSIGHTS -->
 <div class="status-bar">
-    <div class="live-wrap">
-        <div class="dot"></div>
-        <span id="liveStatus">Foundation Session Live</span>
-    </div>
-    <div class="viewer">
-        👁 <span id="viewerCount">84</span> Candidates Stream Active
-    </div>
+    <div class="live-wrap"><div class="dot"></div><span id="liveStatus">Foundation Session Live</span></div>
+    <div class="viewer">👁 <span id="viewerCount">84</span> Candidates Stream Active</div>
 </div>
 
-<div class="top-notification" id="topCountdown">
-    🟢 Onboarding Window Operational • Priority Streaming Enabled
-</div>
-
-<!-- CORE WEB CONTENT FRAME -->
 <div class="container">
-
-    <!-- INDUCTION METADATA SYSTEM -->
     <div class="access-box">
-        <div class="access-top">
+        <div style="display:flex; justify-content:space-between; font-size:14px;">
             <span><b>📘 Core Onboarding Phase • Module 1</b></span>
             <span><b>33% Evaluation Progress</b></span>
         </div>
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
-        </div>
+        <div class="progress-bar"><div class="progress-fill"></div></div>
     </div>
 
-    <!-- BUNNY SECURE VIEWPORT PORTAL -->
     <div class="video-card">
         <div id="videoContainer" class="video-container">
-            <!-- Loader component placeholder -->
-            <div style="position: absolute; color: white; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 600; font-size: 15px;">
-                Securing Encryption Channel...
-            </div>
+            <div style="position: absolute; color: white; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 600;">Securing Encryption Channel...</div>
         </div>
     </div>
 
-    <!-- METRICS HUD -->
     <div class="stats">
-        <div class="stat">
-            <div class="stat-label">Current Pipeline</div>
-            <div class="stat-value" style="color: #2563eb;">Foundation Session</div>
-        </div>
-        <div class="stat">
-            <div class="stat-label">System State</div>
-            <div class="stat-value" id="trainingStatus" style="color: #10b981;">ACTIVE</div>
-        </div>
-        <div class="stat">
-            <div class="stat-label">Next Unlock</div>
-            <div class="stat-value">Clarification System 🔒</div>
-        </div>
+        <div class="stat"><div class="stat-label">Current Pipeline</div><div class="stat-value" style="color: #2563eb;">Foundation Session</div></div>
+        <div class="stat"><div class="stat-label">System State</div><div class="stat-value" id="trainingStatus" style="color: #10b981;">ACTIVE</div></div>
+        <div class="stat"><div class="stat-label">Next Unlock</div><div class="stat-value">Clarification System 🔒</div></div>
     </div>
 
-    <!-- COMPLIANCE DIRECTIVE ENGINE -->
     <div class="info-box">
         <h3>📌 Mandatory Compliance Directives</h3>
         <ul>
             <li>Analyze the entire strategic briefing without utilizing seek operations.</li>
-            <li>Do not execute browser reload instructions or isolate the tab instance during playback.</li>
             <li>Maintain absolute continuity; tracking parameters monitor session breaks.</li>
-            <li>An verification vector parameter will render automatically inside the player wrapper.</li>
-            <li>Advanced operational portals remain strictly locked until hash verification logs are parsed.</li>
+            <li>A verification vector parameter will render automatically inside the player wrapper.</li>
         </ul>
         <div class="highlight">
-            🎯 Strategic verification credentials will render natively inside the stream viewport. <br><br>
+            🎯 Strategic verification credentials will render natively inside the stream viewport.<br><br>
             📩 Transmit the authorized token to your assigned onboarding supervisor for authentication.
         </div>
     </div>
 
-    <!-- SYSTEM ACTIVITY CAPTURE SYSTEM -->
-    <div class="activity">
-        <h3>📊 Verification Stream Architecture</h3>
-        <div class="activity-item">🟢 Stream Feed Synchronized & Active</div>
-        <div class="activity-item">🟢 Dynamic Passkey Verification Subsystem Armed</div>
-        <div class="activity-item">🟢 Module 2 Integration Gateways Sealed Until Token Validation</div>
-    </div>
-
-    <!-- COMPLIANCE ACTION BUTTON -->
-    <button class="btn" id="actionBtn">
-        Awaiting Onboarding Progress Lock... 🔒
-    </button>
-
+    <button class="btn" id="actionBtn">Awaiting Onboarding Progress Log... 🔒</button>
 </div>
 
-<!-- COMPLIANCE FOOTER METRICS -->
-<div class="footer">
-    Enterprise Workspace Hub • Dynamic Verification Encrypted • Session ID Tracked
-</div>
+<div class="footer">Enterprise Workspace Hub • Dynamic Verification Encrypted • Session ID Tracked</div>
 
 <script>
-/* =========================================================
-   CORE COMPLIANCE MOTOR & INTERFACES (BYPASSED FOR PREVIEW)
-   ========================================================= */
+const startHour = 13; // 1 PM
+const endHour = 16;   // 4 PM
+let isStreamLoaded = false;
 
-// 1. Fullscreen Engine Pipeline
-document.addEventListener('click', function () {
-    if (!document.fullscreenElement && 
-        !document.webkitFullscreenElement && 
-        !document.mozFullScreenElement && 
-        !document.msFullscreenElement) {
+const lockScreen = document.getElementById("lockScreen");
+const trainingStatus = document.getElementById("trainingStatus");
+
+function evaluateTimeLockEngine() {
+    const now = new Date();
+    const currentHour = now.getHours();
+
+    // TARGET ACTIVE WINDOW RULE
+    if (currentHour >= startHour && currentHour < endHour) {
+        // BUG FIX SOLUTION: Instant unlock engine without force user reloads
+        if (lockScreen.style.display !== "none") {
+            lockScreen.style.display = "none";
+            document.body.classList.remove("modal-locked");
+        }
+        if (trainingStatus) trainingStatus.innerText = "ACTIVE";
         
+        // Lazy-loading injection trigger so stream loads immediately when timer hits zero
+        if (!isStreamLoaded) {
+            loadSecureBunnyStream();
+        }
+    } 
+    // PRE-START COUNTDOWN ENGINE
+    else if (currentHour < startHour) {
+        lockScreen.style.display = "flex";
+        document.body.classList.add("modal-locked");
+        if (trainingStatus) trainingStatus.innerText = "Scheduled";
+
+        const target = new Date();
+        target.setHours(startHour, 0, 0, 0);
+        const diff = target - now;
+
+        const h = Math.floor(diff / 3600000);
+        const m = Math.floor((diff / 60000) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+        document.getElementById("startCountdown").innerText = 
+            `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    } 
+    // BATCH EXPIRED WINDOW
+    else {
+        lockScreen.style.display = "flex";
+        document.body.classList.add("modal-locked");
+        document.getElementById("lockTitle").innerHTML = "🔒 Training Access Closed";
+        document.getElementById("lockText").innerHTML = "Today's batch timing has ended.<br><br>Please revisit during active training hours.";
+        document.getElementById("startCountdown").style.display = "none";
+        if (trainingStatus) trainingStatus.innerText = "Closed";
+    }
+}
+
+// Fullscreen Integration Controller
+document.addEventListener('click', function () {
+    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
         const docEl = document.documentElement;
         if (docEl.requestFullscreen) docEl.requestFullscreen();
         else if (docEl.webkitRequestFullscreen) docEl.webkitRequestFullscreen();
-        else if (docEl.mozRequestFullScreen) docEl.mozRequestFullScreen();
-        else if (docEl.msRequestFullscreen) docEl.msRequestFullscreen();
     }
 });
 
-// 2. Simulated Dynamic Metric Fluctuations
-function updateLiveAnalytics() {
-    const baseViewers = 75;
-    const fluctuation = Math.floor(Math.random() * 12) - 4; // Shift dynamic variance bounds
-    const computedViewers = Math.max(60, baseViewers + fluctuation);
-    const viewerNode = document.getElementById("viewerCount");
-    if (viewerNode) viewerNode.innerText = computedViewers;
+// Dynamic Fluctuations logic
+setInterval(() => {
+    const computed = Math.max(60, 75 + (Math.floor(Math.random() * 12) - 4));
+    if (document.getElementById("viewerCount")) document.getElementById("viewerCount").innerText = computed;
+}, 8000);
+
+// Core Data Stream Fetcher Execution Wrapper
+function loadSecureBunnyStream() {
+    isStreamLoaded = true;
+    const API_GATEWAY = "https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec";
+    fetch(API_GATEWAY)
+        .then(r => r.json())
+        .then(payload => {
+            if (payload && payload.day1_v2) {
+                document.getElementById("videoContainer").innerHTML = payload.day1_v2;
+            }
+        }).catch(err => { isStreamLoaded = false; });
 }
-setInterval(updateLiveAnalytics, 8000);
 
-// 3. Bunny Dynamic Endpoint Mapping Stream Loader
-const API_GATEWAY = "https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec";
-
-fetch(API_GATEWAY)
-    .then(response => response.json())
-    .then(payload => {
-        const targetContainer = document.getElementById("videoContainer");
-        if (payload && payload.day1_v2) {
-            targetContainer.innerHTML = payload.day1_v2;
-        } else {
-            targetContainer.innerHTML = `<div style="position: absolute; color: #ef4444; top: 50%; left: 50%; transform: translate(-50%, -50%);">Stream Vector Failure</div>`;
-        }
-    })
-    .catch(error => {
-        console.error("Data tracking stream breakdown:", error);
-    });
+// Engine Loop interval initialization
+setInterval(evaluateTimeLockEngine, 1000);
+evaluateTimeLockEngine();
 </script>
-
 </body>
 </html>
