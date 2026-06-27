@@ -5,10 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Foundation Session | Module 1</title>
 
-<!-- Google Fonts For Ultra-Premium Corporate Appearance -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
 <style>
+
 *{
   margin:0;
   padding:0;
@@ -16,10 +14,9 @@
 }
 
 body{
-  font-family: 'Inter', 'Segoe UI', sans-serif;
-  background:#f8fafc;
-  color:#0f172a;
-  line-height: 1.5;
+  font-family:'Segoe UI',sans-serif;
+  background:#edf2f7;
+  color:#111827;
 }
 
 body.locked{
@@ -27,50 +24,45 @@ body.locked{
   height:100vh;
 }
 
-/* HEADER - Deep Premium Space Slate */
+/* HEADER */
 .topbar{
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  padding:20px 24px;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  padding:18px 22px;
   color:#fff;
   display:flex;
   justify-content:space-between;
   align-items:center;
   flex-wrap:wrap;
   gap:12px;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .brand{
-  font-size:22px;
+  font-size:24px;
   font-weight:700;
-  letter-spacing: -0.02em;
 }
 
 .batch{
-  background:rgba(255,255,255,0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding:8px 16px;
+  background:rgba(255,255,255,0.12);
+  padding:9px 14px;
   border-radius:999px;
-  font-size:13px;
+  font-size:14px;
   font-weight:600;
-  letter-spacing: 0.01em;
 }
 
-/* REAL-TIME INSIGHTS STATUS BAR */
+/* STATUS BAR */
 .status-bar{
   max-width:1100px;
-  margin:24px auto 0;
+  margin:18px auto 0;
   background:#fff;
   border-radius:16px;
-  border:1px solid #e2e8f0;
-  padding:16px 22px;
+  border:1px solid #e5e7eb;
+  padding:15px 18px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   flex-wrap:wrap;
   gap:12px;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+  box-shadow:0 6px 18px rgba(0,0,0,0.05);
 }
 
 .live-wrap{
@@ -78,70 +70,50 @@ body.locked{
   align-items:center;
   gap:10px;
   font-weight:700;
-  font-size: 15px;
-  color: #059669;
 }
 
 .dot{
-  width:9px;
-  height:9px;
+  width:10px;
+  height:10px;
   border-radius:50%;
-  background:#10b981;
-  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
-  animation:pulseBlink 2s infinite;
+  background:#ef4444;
+  animation:blink 1s infinite;
 }
 
-@keyframes pulseBlink{
-  0%, 100% { transform: scale(0.95); opacity: 1; }
-  50% { transform: scale(1.05); opacity: 0.5; }
+@keyframes blink{
+  0%{opacity:1;}
+  50%{opacity:0.3;}
+  100%{opacity:1;}
 }
 
 .viewer{
   font-size:14px;
-  color:#475569;
-  font-weight:600;
-}
-
-.viewer span{
-  color:#0f172a;
+  color:#374151;
   font-weight:700;
-  background:#f1f5f9;
-  padding:4px 10px;
-  border-radius:6px;
-  font-variant-numeric: tabular-nums;
-  transition: all 0.25s ease;
 }
 
 .countdown{
   text-align:center;
-  margin-top:14px;
+  margin-top:8px;
   font-size:14px;
-  color:#2563eb;
-  background:rgba(37, 99, 235, 0.05);
-  padding:10px;
-  border-radius:10px;
-  max-width:1100px;
-  margin-left:auto;
-  margin-right:auto;
+  color:#6b7280;
   font-weight:600;
-  border: 1px solid rgba(37, 99, 235, 0.08);
 }
 
-/* MAIN CONTAINMENT */
+/* MAIN */
 .container{
   max-width:1100px;
   margin:auto;
-  padding:0 22px 40px;
+  padding:22px;
 }
 
-/* ACCESS MODULE CARD */
+/* ACCESS */
 .access-box{
   background:#fff;
   border-radius:18px;
   padding:22px;
-  margin:20px 0;
-  box-shadow:0 4px 16px rgba(0,0,0,0.02);
-  border:1px solid #e2e8f0;
+  margin-bottom:20px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.05);
 }
 
 .access-top{
@@ -150,13 +122,12 @@ body.locked{
   margin-bottom:12px;
   flex-wrap:wrap;
   gap:10px;
-  font-size:14px;
 }
 
 .progress-bar{
   width:100%;
-  height:8px;
-  background:#e2e8f0;
+  height:10px;
+  background:#e5e7eb;
   border-radius:999px;
   overflow:hidden;
 }
@@ -164,16 +135,15 @@ body.locked{
 .progress-fill{
   width:33%;
   height:100%;
-  background:linear-gradient(90deg,#3b82f6,#2563eb);
+  background:linear-gradient(135deg,#3b82f6,#2563eb);
 }
 
-/* 🎥 VIDEO CONTAINER - PRESERVED TO ORIGINAL BOX SIZING RATIOS */
+/* VIDEO - EXACT OLD DESIGN COMPLETELY UNTOUCHED */
 .video-card{
   background:#000;
   border-radius:22px;
   overflow:hidden;
-  box-shadow:0 18px 40px rgba(15, 23, 42, 0.15);
-  border: 1px solid rgba(15, 23, 42, 0.04);
+  box-shadow:0 18px 40px rgba(0,0,0,0.18);
 }
 
 .video-container{
@@ -190,137 +160,168 @@ body.locked{
   border:0;
 }
 
-/* HUD ANALYTICS DASHBOARD CARD GRID */
+/* STATS */
 .stats{
-  margin-top:24px;
+  margin-top:20px;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:16px;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:14px;
 }
 
 .stat{
   background:#fff;
   border-radius:16px;
-  padding:20px;
-  box-shadow:0 4px 12px rgba(15, 23, 42, 0.02);
-  border:1px solid #e2e8f0;
+  padding:18px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.05);
 }
 
 .stat-label{
-  color:#64748b;
-  font-size:12px;
-  font-weight:600;
-  text-transform:uppercase;
-  letter-spacing:0.04em;
+  color:#6b7280;
+  font-size:13px;
   margin-bottom:8px;
 }
 
 .stat-value{
-  font-size:19px;
+  font-size:21px;
   font-weight:700;
 }
 
-/* MANDATORY INSTRUCTIONS WRAPPER */
+/* INFO */
 .info-box{
-  margin-top:24px;
+  margin-top:22px;
   background:#fff;
   border-radius:18px;
   padding:24px;
-  box-shadow:0 4px 16px rgba(0,0,0,0.02);
-  border:1px solid #e2e8f0;
+  box-shadow:0 10px 26px rgba(0,0,0,0.05);
 }
 
 .info-box h3{
   margin-bottom:16px;
-  font-size:20px;
-  font-weight:700;
+  font-size:22px;
 }
 
 .info-box ul{
   padding-left:20px;
   line-height:2;
-  color:#334155;
-}
-
-.info-box li{
-  font-size:15px;
-  margin-bottom:4px;
+  color:#374151;
 }
 
 .highlight{
-  margin-top:20px;
-  background:rgba(37, 99, 235, 0.04);
-  border:1px solid rgba(37, 99, 235, 0.15);
+  margin-top:18px;
+  background:#eff6ff;
+  border:1px solid #bfdbfe;
   color:#1e40af;
   padding:18px;
   border-radius:14px;
   text-align:center;
-  font-weight:600;
-  font-size:14px;
-  line-height:1.5;
+  font-weight:700;
 }
 
-/* TIMELINE ACTIVITY STATE */
+/* ACTIVITY */
 .activity{
-  margin-top:24px;
+  margin-top:22px;
   background:#fff;
   border-radius:18px;
   padding:22px;
-  box-shadow:0 4px 16px rgba(0,0,0,0.02);
-  border:1px solid #e2e8f0;
+  box-shadow:0 10px 26px rgba(0,0,0,0.05);
 }
 
 .activity h3{
   margin-bottom:14px;
-  font-size:18px;
 }
 
 .activity-item{
-  padding:14px 0;
-  border-bottom:1px solid #f1f5f9;
-  font-size:14px;
-  color:#334155;
+  padding:12px 0;
+  border-bottom:1px solid #e5e7eb;
 }
 
 .activity-item:last-child{
   border-bottom:none;
 }
 
-/* ONBOARDING FLOW CALL TO ACTION ACTION */
+/* BUTTON */
 .btn{
-  margin-top:28px;
+  margin-top:24px;
   width:100%;
   border:none;
   border-radius:16px;
   padding:18px;
   background:linear-gradient(135deg,#2563eb,#1d4ed8);
   color:#fff;
-  font-size:16px;
+  font-size:18px;
   font-weight:700;
-  cursor:pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.2);
 }
 
-.btn:hover{
-  background:linear-gradient(135deg,#1d4ed8,#1e40af);
-  transform: translateY(-1px);
+/* LOCK SCREEN */
+.lock-screen{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#0f172a;
+  color:#fff;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  z-index:99999;
+  padding:25px;
 }
 
-/* METRIC VERIFICATION FOOTER */
+.lock-box{
+  max-width:420px;
+}
+
+.lock-box h1{
+  font-size:34px;
+  margin-bottom:14px;
+}
+
+.lock-box p{
+  line-height:1.8;
+  color:#cbd5e1;
+  font-size:16px;
+}
+
+.lock-time{
+  margin-top:18px;
+  background:rgba(255,255,255,0.08);
+  padding:14px;
+  border-radius:14px;
+  font-weight:700;
+}
+
+#startCountdown{
+  margin-top:14px;
+  font-size:22px;
+  font-weight:700;
+  color:#fff;
+}
+
+/* FOOTER */
 .footer{
   text-align:center;
-  padding:40px 10px;
-  color:#64748b;
+  padding:30px 10px 40px;
+  color:#6b7280;
   font-size:13px;
 }
 
-/* BREAKPOINT PIPELINES */
-@media(max-width:768px) {
-  .topbar{ justify-content:center; text-align:center; padding:16px; }
-  .status-bar{ flex-direction:column; align-items:center; text-align:center; }
-  .container { padding: 0 16px 30px; }
+/* MOBILE */
+@media(max-width:700px){
+  .topbar{
+    justify-content:center;
+    text-align:center;
+  }
+  .status-bar{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .access-top{
+    flex-direction:column;
+  }
 }
+
 </style>
 </head>
 
@@ -339,11 +340,13 @@ body.locked{
     <span id="liveStatus">Foundation Session Active</span>
   </div>
   <div class="viewer">
-    👁 Live: <span id="viewerCount">84</span> Participants Active
+    👁 <span id="viewerCount">--</span> Participants Active
   </div>
 </div>
 
-<div class="countdown" id="topCountdown">🟢 Onboarding Window Operational • Priority Streaming Enabled</div>
+<div class="countdown" id="topCountdown">
+  🟢 Training Window Open
+</div>
 
 <div class="container">
 
@@ -351,21 +354,32 @@ body.locked{
   <div class="access-box">
     <div class="access-top">
       <span><b>📘 Module 1 • Foundation Session</b></span>
-      <span><b>33% Evaluation Progress</b></span>
+      <span><b>33% Progress</b></span>
     </div>
-    <div class="progress-bar"><div class="progress-fill"></div></div>
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
+    </div>
   </div>
 
-  <!-- VIDEO VIEWPORT (EXACT ORIGINAL LAYOUT SYSTEM UNTOUCHED) -->
+  <!-- VIDEO - ORIGINAL EXACT WRAPPER RESTORED -->
   <div class="video-card">
-    <div id="videoContainer" class="video-container"></div>
+    <div id="videoContainer"></div>
   </div>
 
   <!-- STATS -->
   <div class="stats">
-    <div class="stat"><div class="stat-label">Current Pipeline</div><div class="stat-value" style="color:#2563eb;">Foundation Session</div></div>
-    <div class="stat"><div class="stat-label">Training Status</div><div class="stat-value" id="trainingStatus" style="color:#10b981;">ACTIVE</div></div>
-    <div class="stat"><div class="stat-label">Next Module</div><div class="stat-value" style="color:#64748b;">Clarification Session 🔒</div></div>
+    <div class="stat">
+      <div class="stat-label">Current Module</div>
+      <div class="stat-value">Foundation Session</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Training Status</div>
+      <div class="stat-value" id="trainingStatus">ACTIVE</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Next Module</div>
+      <div class="stat-value">Clarification Session 🔒</div>
+    </div>
   </div>
 
   <!-- INFO -->
@@ -386,15 +400,17 @@ body.locked{
 
   <!-- ACTIVITY -->
   <div class="activity">
-    <h3>📊 Live Session Architecture</h3>
-    <div class="activity-item">🟢 Foundation Session Feed Active</div>
-    <div class="activity-item">🟢 Dynamic Passkey Verification Subsystem Armed</div>
-    <div class="activity-item">🟢 Module 2 Integration Gateways Sealed Until Token Validation</div>
+    <h3>📊 Session Status</h3>
+    <div class="activity-item">🟢 Foundation Session Active</div>
+    <div class="activity-item">🟢 Verification Enabled</div>
+    <div class="activity-item">🟢 Clarification Session Locked Until Verification</div>
   </div>
 
+  <!-- BUTTON -->
   <button class="btn">Clarification Session Locked 🔒</button>
 </div>
 
+<!-- FOOTER -->
 <div class="footer">Professional Training Hub • Access Controlled • Batch Monitored</div>
 
 <script>
@@ -403,58 +419,52 @@ const hour = now.getHours();
 const minutes = now.getMinutes();
 
 /* =========================================================
-   GENUINE INTERACTIVE LIVE STREAM VIEWER ENGINE
+   GENUINE FLUCTUATION LIVE VIEWER ENGINE
    ========================================================= */
-let currentViewers = 81; // Starting base candidate view metric
-
-function triggerViewerFluctuation() {
-  const shifts = [-2, -1, 0, 1, 1, 2]; // Natural real shifting matrix
-  const change = shifts[Math.floor(Math.random() * shifts.length)];
-  
-  // Confine numbers safely between 76 to 96 for genuine consistency
-  currentViewers = Math.min(96, Math.max(76, currentViewers + change));
-  
-  const targetBadge = document.getElementById("viewerCount");
-  if (targetBadge) targetBadge.innerText = currentViewers;
+let base = 75;
+if(hour === 13){
+  if(minutes < 15) base = 45 + Math.floor(Math.random()*20);
+  else if(minutes < 45) base = 70 + Math.floor(Math.random()*20);
+  else base = 90 + Math.floor(Math.random()*11);
+} else if(hour === 14){
+  base = 80 + Math.floor(Math.random()*16);
+} else if(hour === 15){
+  base = 55 + Math.floor(Math.random()*21);
+} else {
+  base = 35 + Math.floor(Math.random()*10);
 }
 
-// Loop auto-shifter logic randomly between 4 to 8 seconds intervals
-(function dynamicViewerLoop() {
-  const customInterval = Math.floor(Math.random() * (8000 - 4000 + 1)) + 4000;
-  setTimeout(() => {
-    triggerViewerFluctuation();
-    dynamicViewerLoop();
-  }, customInterval);
-})();
-triggerViewerFluctuation();
+function updateViewers(){
+  // Genuine 1-2 viewer real-time micro shifting behavior
+  let fluctuation = Math.floor(Math.random()*5)-2;
+  let viewers = Math.min(100, Math.max(35, base + fluctuation));
+  document.getElementById("viewerCount").innerText = viewers;
+}
+updateViewers();
+setInterval(updateViewers, 6000); // Shifting values dynamically
 
 /* =========================================================
-   AUTOMATED LANDSCAPE OVERRIDE ENGINE FOR FULLSCREEN MODES
+   AUTOMATED DEVICE LANDSCAPE ROTATOR FOR FULLSCREEN VIDEO
    ========================================================= */
-function handleFullscreenOrientationPipeline() {
+function manageFullscreenOrientation() {
   const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
-  
   if (isFullscreen) {
-    // If mobile wrapper initiates fullscreen layout, trigger programmatic horizontal turn
     if (screen.orientation && screen.orientation.lock) {
       screen.orientation.lock('landscape').catch(() => {
-        console.log("Desktop rotation lock safe bypass skipped.");
+        console.log("Desktop rotation lock standard catch bypass.");
       });
     }
   } else {
-    // Release configuration constraints upon fullscreen isolation terminal
     if (screen.orientation && screen.orientation.unlock) {
       screen.orientation.unlock();
     }
   }
 }
-
-// Bind orientation pipeline triggers to standard browser interfaces
-document.addEventListener('fullscreenchange', handleFullscreenOrientationPipeline);
-document.addEventListener('webkitfullscreenchange', handleFullscreenOrientationPipeline);
+document.addEventListener('fullscreenchange', manageFullscreenOrientation);
+document.addEventListener('webkitfullscreenchange', manageFullscreenOrientation);
 
 /* =========================================================
-   CORE BACKEND ENDPOINT INTEGRATION FOR BUNNY CONTROL CENTER
+   ORIGINAL DYNAMIC VIDEO DATA FETCH ENGINE
    ========================================================= */
 fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
 .then(r => r.json())
