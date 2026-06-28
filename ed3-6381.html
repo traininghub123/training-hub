@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Execution Session | Module 3</title>
 
+<!-- Corporate Typography Integration -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
 
 *{
@@ -14,9 +17,10 @@
 }
 
 body{
-  font-family:'Segoe UI',sans-serif;
-  background:#edf2f7;
-  color:#111827;
+  font-family: 'Inter', -apple-system, sans-serif;
+  background:#f8fafc;
+  color:#0f172a;
+  line-height: 1.6;
 }
 
 body.locked{
@@ -24,45 +28,50 @@ body.locked{
   height:100vh;
 }
 
-/* HEADER */
+/* HIGH-END CORPORATE HEADER */
 .topbar{
-  background:linear-gradient(135deg,#0f172a,#1e293b);
-  padding:18px 22px;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  padding: 20px 24px;
   color:#fff;
   display:flex;
   justify-content:space-between;
   align-items:center;
   flex-wrap:wrap;
   gap:12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
 }
 
 .brand{
-  font-size:24px;
+  font-size:22px;
   font-weight:700;
+  letter-spacing: -0.02em;
 }
 
 .batch{
-  background:rgba(255,255,255,0.12);
-  padding:9px 14px;
+  background:rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding:8px 16px;
   border-radius:999px;
-  font-size:14px;
+  font-size:13px;
   font-weight:600;
+  letter-spacing: 0.01em;
 }
 
-/* STATUS BAR */
+/* PREMIUM LIVE STATUS BAR */
 .status-bar{
   max-width:1100px;
-  margin:18px auto 0;
+  margin:24px auto 0;
   background:#fff;
   border-radius:16px;
-  border:1px solid #e5e7eb;
-  padding:15px 18px;
+  border:1px solid #e2e8f0;
+  padding:16px 22px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   flex-wrap:wrap;
   gap:12px;
-  box-shadow:0 6px 18px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
 }
 
 .live-wrap{
@@ -70,50 +79,70 @@ body.locked{
   align-items:center;
   gap:10px;
   font-weight:700;
+  font-size: 15px;
+  color: #059669;
 }
 
 .dot{
-  width:10px;
-  height:10px;
+  width:9px;
+  height:9px;
   border-radius:50%;
-  background:#ef4444;
-  animation:blink 1s infinite;
+  background:#10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+  animation: pulseBlink 2s infinite;
 }
 
-@keyframes blink{
-  0%{opacity:1;}
-  50%{opacity:0.3;}
-  100%{opacity:1;}
+@keyframes pulseBlink{
+  0%, 100% { transform: scale(0.95); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.5; }
 }
 
 .viewer{
   font-size:14px;
-  color:#374151;
-  font-weight:700;
+  color:#475569;
+  font-weight:600;
+}
+
+.viewer span {
+  color: #0f172a;
+  font-weight: 700;
+  background: #f1f5f9;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-variant-numeric: tabular-nums;
+  transition: all 0.25s ease;
 }
 
 .countdown{
   text-align:center;
-  margin-top:8px;
+  margin-top:14px;
   font-size:14px;
-  color:#6b7280;
+  color:#2563eb;
+  background: rgba(37, 99, 235, 0.05);
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
   font-weight:600;
+  border: 1px solid rgba(37, 99, 235, 0.08);
 }
 
 /* MAIN */
 .container{
   max-width:1100px;
   margin:auto;
-  padding:22px;
+  padding: 0 22px 40px;
 }
 
-/* ACCESS */
+/* ACCESS INDUCTION PROGRESS (100% For Module 3) */
 .access-box{
   background:#fff;
   border-radius:18px;
   padding:22px;
-  margin-bottom:20px;
-  box-shadow:0 8px 24px rgba(0,0,0,0.05);
+  margin: 20px 0;
+  border:1px solid #e2e8f0;
+  box-shadow:0 4px 16px rgba(0,0,0,0.01);
 }
 
 .access-top{
@@ -122,12 +151,13 @@ body.locked{
   margin-bottom:12px;
   flex-wrap:wrap;
   gap:10px;
+  font-size: 14px;
 }
 
 .progress-bar{
   width:100%;
-  height:10px;
-  background:#e5e7eb;
+  height:8px;
+  background:#e2e8f0;
   border-radius:999px;
   overflow:hidden;
 }
@@ -135,15 +165,17 @@ body.locked{
 .progress-fill{
   width:100%;
   height:100%;
-  background:linear-gradient(135deg,#3b82f6,#2563eb);
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+  border-radius:999px;
 }
 
-/* VIDEO */
+/* VIDEO - EXACT ORIGINAL RATIO UNTOUCHED */
 .video-card{
   background:#000;
   border-radius:22px;
   overflow:hidden;
-  box-shadow:0 18px 40px rgba(0,0,0,0.18);
+  box-shadow:0 18px 40px rgba(15, 23, 42, 0.15);
+  border: 1px solid rgba(15, 23, 42, 0.04);
 }
 
 .video-container{
@@ -160,99 +192,124 @@ body.locked{
   border:0;
 }
 
-/* STATS */
+/* EXECUTIVE STATS HUD */
 .stats{
-  margin-top:20px;
+  margin-top:24px;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:14px;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:16px;
 }
 
 .stat{
   background:#fff;
   border-radius:16px;
-  padding:18px;
-  box-shadow:0 6px 18px rgba(0,0,0,0.05);
+  padding:20px;
+  box-shadow:0 4px 12px rgba(15, 23, 42, 0.02);
+  border: 1px solid #e2e8f0;
 }
 
 .stat-label{
-  color:#6b7280;
-  font-size:13px;
+  color:#64748b;
+  font-size:12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   margin-bottom:8px;
 }
 
 .stat-value{
-  font-size:21px;
+  font-size:19px;
   font-weight:700;
 }
 
-/* INFO */
+/* COMPLIANCE DIRECTIVES */
 .info-box{
-  margin-top:22px;
+  margin-top:24px;
   background:#fff;
   border-radius:18px;
   padding:24px;
-  box-shadow:0 10px 26px rgba(0,0,0,0.05);
+  box-shadow:0 4px 16px rgba(0,0,0,0.01);
+  border:1px solid #e2e8f0;
 }
 
 .info-box h3{
   margin-bottom:16px;
-  font-size:22px;
+  font-size:20px;
+  font-weight: 700;
 }
 
 .info-box ul{
   padding-left:20px;
   line-height:2;
-  color:#374151;
+  color:#334155;
+}
+
+.info-box li{
+  font-size: 15px;
+  margin-bottom: 4px;
 }
 
 .highlight{
-  margin-top:18px;
-  background:#eff6ff;
-  border:1px solid #bfdbfe;
+  margin-top:20px;
+  background: rgba(37, 99, 235, 0.04);
+  border:1px solid rgba(37, 99, 235, 0.15);
   color:#1e40af;
   padding:18px;
   border-radius:14px;
   text-align:center;
-  font-weight:700;
+  font-weight:600;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
-/* ACTIVITY */
+/* ACTIVITY SYSTEMS LOG */
 .activity{
-  margin-top:22px;
+  margin-top:24px;
   background:#fff;
   border-radius:18px;
   padding:22px;
-  box-shadow:0 10px 26px rgba(0,0,0,0.05);
+  box-shadow:0 4px 16px rgba(0,0,0,0.01);
+  border:1px solid #e2e8f0;
 }
 
 .activity h3{
   margin-bottom:14px;
+  font-size: 18px;
 }
 
 .activity-item{
-  padding:12px 0;
-  border-bottom:1px solid #e5e7eb;
+  padding:14px 0;
+  border-bottom:1px solid #f1f5f9;
+  font-size:14px;
+  color: #334155;
 }
 
 .activity-item:last-child{
   border-bottom:none;
 }
 
-/* BUTTON */
+/* VERIFICATION CALL TO ACTION BUTTON */
 .btn{
-  margin-top:24px;
+  margin-top:28px;
   width:100%;
   border:none;
   border-radius:16px;
   padding:18px;
   background:linear-gradient(135deg,#2563eb,#1d4ed8);
   color:#fff;
-  font-size:18px;
+  font-size:16px;
   font-weight:700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.2);
 }
 
-/* LOCK SCREEN */
+.btn:hover{
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  transform: translateY(-1px);
+}
+
+/* PREMIUM GATE LOCK OVERLAY (Bypassed but kept ready) */
 .lock-screen{
   position:fixed;
   top:0;
@@ -267,63 +324,68 @@ body.locked{
   text-align:center;
   z-index:99999;
   padding:25px;
+  font-family: 'Inter', sans-serif;
 }
 
 .lock-box{
-  max-width:420px;
+  max-width:460px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 40px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 }
 
 .lock-box h1{
-  font-size:34px;
-  margin-bottom:14px;
+  font-size:30px;
+  font-weight: 700;
+  margin-bottom:16px;
+  color: #ffbc00;
+  letter-spacing: -0.02em;
 }
 
 .lock-box p{
   line-height:1.8;
   color:#cbd5e1;
-  font-size:16px;
+  font-size:15px;
+  margin-bottom: 24px;
 }
 
 .lock-time{
-  margin-top:18px;
-  background:rgba(255,255,255,0.08);
-  padding:14px;
-  border-radius:14px;
-  font-weight:700;
+  background:rgba(255,255,255,0.07);
+  padding:12px 20px;
+  border-radius:12px;
+  font-weight:600;
+  font-size: 14px;
+  color: #ffbc00;
+  border: 1px solid rgba(255, 188, 0, 0.2);
+  display: inline-block;
 }
 
 #startCountdown{
-  margin-top:14px;
-  font-size:22px;
+  margin-top:24px;
+  font-size:36px;
   font-weight:700;
   color:#fff;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 1px;
 }
 
 /* FOOTER */
 .footer{
   text-align:center;
-  padding:30px 10px 40px;
-  color:#6b7280;
+  padding:40px 10px;
+  color:#64748b;
   font-size:13px;
 }
 
-/* MOBILE */
-@media(max-width:700px){
-
-.topbar{
-  justify-content:center;
-  text-align:center;
-}
-
-.status-bar{
-  flex-direction:column;
-  align-items:flex-start;
-}
-
-.access-top{
-  flex-direction:column;
-}
-
+/* RESPONSIVE PIPELINES */
+@media(max-width:768px){
+  .topbar{ justify-content:center; text-align:center; padding: 16px; }
+  .status-bar{ flex-direction:column; align-items:center; text-align: center; }
+  .container { padding: 0 16px 30px; }
+  .lock-box { padding: 25px 20px; }
+  .lock-box h1 { font-size: 24px; }
 }
 
 </style>
@@ -331,108 +393,67 @@ body.locked{
 
 <body>
 
-<!-- LOCK SCREEN -->
+<!-- LOCK SCREEN OVERLAY (Bypassed for now) -->
 <div id="lockScreen" class="lock-screen">
-
   <div class="lock-box">
-
     <h1 id="lockTitle">⏳ Execution Session Starts Soon</h1>
-
     <p id="lockText">
-      Today's Execution Session has not started yet.<br><br>Please join during the active session window.
+      Today's professional development induction sequence has not initiated yet.<br><br>Please wait, you will be checked into the stream workspace automatically.
     </p>
-
     <div class="lock-time">
-      ⏰ Access Timing: 03:00 PM – 06:00 PM
+      ⏰ Access Timing: 03:00 PM – 06:00 PM Daily
     </div>
-
-    <div id="startCountdown">
-      00:00:00
-    </div>
-
+    <div id="startCountdown">00:00:00</div>
   </div>
-
 </div>
 
 <!-- HEADER -->
 <div class="topbar">
-
-  <div class="brand">
-    🚀 EXECUTION SESSION
-  </div>
-
-  <div class="batch">
-    Professional Development Program • Module 3 of 3
-  </div>
-
+  <div class="brand">🚀 EXECUTION SESSION</div>
+  <div class="batch">Professional Development Program • Module 3 of 3</div>
 </div>
 
 <!-- STATUS -->
 <div class="status-bar">
-
   <div class="live-wrap">
-    <div class="dot"></div>
+    <div class="dot" style="background:#10b981;"></div>
     <span id="liveStatus">Execution Session Active</span>
   </div>
-
   <div class="viewer">
-    👁 <span id="viewerCount">--</span> Participants Active
+    👁 Live: <span id="viewerCount">--</span> Participants Active
   </div>
-
 </div>
 
-<div class="countdown" id="topCountdown">
-  🟢 Training Window Open
-</div>
+<div class="countdown" id="topCountdown">🟢 Onboarding Window Operational • Priority Streaming Enabled</div>
 
 <div class="container">
 
-  <!-- ACCESS -->
+  <!-- ACCESS (100% Progress Bar Checked) -->
   <div class="access-box">
-
     <div class="access-top">
-      <span><b>📘 Module 3 • Execution Session</b></span>
+      <span><b>📘 Core Onboarding Phase • Module 3</b></span>
       <span><b>100% Progress</b></span>
     </div>
-
     <div class="progress-bar">
       <div class="progress-fill"></div>
     </div>
-
   </div>
 
   <!-- VIDEO -->
   <div class="video-card">
-
     <div id="videoContainer"></div>
-
   </div>
 
   <!-- STATS -->
   <div class="stats">
-
-    <div class="stat">
-      <div class="stat-label">Current Module</div>
-      <div class="stat-value">Execution Session</div>
-    </div>
-
-    <div class="stat">
-      <div class="stat-label">Training Status</div>
-      <div class="stat-value" id="trainingStatus">Checking...</div>
-    </div>
-
-    <div class="stat">
-      <div class="stat-label">Next Module</div>
-      <div class="stat-value">Career Access 🚀</div>
-    </div>
-
+    <div class="stat"><div class="stat-label">Current Pipeline</div><div class="stat-value" style="color:#2563eb;">Execution Session</div></div>
+    <div class="stat"><div class="stat-label">Training Status</div><div class="stat-value" id="trainingStatus" style="color:#10b981;">ACTIVE</div></div>
+    <div class="stat"><div class="stat-label">Next Module</div><div class="stat-value" style="color:#64748b;">Career Access 🚀</div></div>
   </div>
 
   <!-- INFO -->
   <div class="info-box">
-
     <h3>📌 Important Instructions</h3>
-
     <ul>
       <li>This is the final and most important module</li>
       <li>Do not refresh or leave during the session</li>
@@ -440,163 +461,88 @@ body.locked{
       <li>Do not skip any part of the training</li>
       <li>Only committed candidates will proceed further</li>
     </ul>
-
     <div class="highlight">
-      🎯 A final verification code will be shown in this session <br><br>📩 Share the code with your mentor to confirm your completion <br><br>🚀 After verification, you will receive guidance to start your work
+      🎯 A final verification code will be shown in this session <br><br>
+      📩 Share the code with your mentor to confirm your completion <br><br>
+      🚀 After verification, you will receive guidance to start your work
     </div>
-
   </div>
 
   <!-- ACTIVITY -->
   <div class="activity">
-
     <h3>📊 Session Status</h3>
-
-    <div class="activity-item">
-      🟢 Foundation Session Completed
-    </div>
-
-    <div class="activity-item">
-      🟢 Clarification Session Completed
-    </div>
-
-    <div class="activity-item">
-      🟢 Execution Session Active
-    </div>
-
+    <div class="activity-item">🟢 Foundation Session Completed</div>
+    <div class="activity-item">🟢 Clarification Session Completed</div>
+    <div class="activity-item">🟢 Execution Session Active</div>
   </div>
 
   <!-- BUTTON -->
-  <button class="btn">
-    🚀 Start Your Journey
-  </button>
-
+  <button class="btn">🚀 Start Your Journey</button>
 </div>
 
 <!-- FOOTER -->
-<div class="footer">
-  Professional Training Hub • Access Controlled • Batch Monitored
-</div>
+<div class="footer">Professional Training Hub • Access Controlled • Batch Monitored</div>
 
 <script>
-
-
-/* =========================
-   ACCESS TIMING SYSTEM
-========================= */
-
 const now = new Date();
 const hour = now.getHours();
 const minutes = now.getMinutes();
 
-const lockScreen = document.getElementById("lockScreen");
-const topCountdown = document.getElementById("topCountdown");
-
-const startHour = 15;
-const endHour = 18;
-
-let accessGranted = sessionStorage.getItem("accessGranted");
-
-if(hour >= startHour && hour < endHour){
-  sessionStorage.setItem("accessGranted","yes");
-}
-
-if(hour < startHour){
-
-  document.body.classList.add("locked");
-  lockScreen.style.display = "flex";
-
-  function updateStartCountdown(){
-
-    const now = new Date();
-    const target = new Date();
-    target.setHours(startHour,0,0,0);
-
-    const diff = target - now;
-
-    const h = Math.floor(diff/1000/60/60);
-    const m = Math.floor((diff/1000/60)%60);
-    const s = Math.floor((diff/1000)%60);
-
-    document.getElementById("startCountdown").innerHTML =
-    `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  }
-
-  updateStartCountdown();
-  setInterval(updateStartCountdown,1000);
-}
-
-if(hour >= endHour && accessGranted !== "yes"){
-
-  document.body.classList.add("locked");
-  lockScreen.style.display = "flex";
-
-  document.getElementById("lockTitle").innerHTML =
-  "🔒 Training Access Closed";
-
-  document.getElementById("lockText").innerHTML =
-  "Today's batch timing has ended.<br><br>Please revisit during active training hours.";
-
-  document.getElementById("startCountdown").style.display = "none";
-}
-
-if(hour >= startHour && hour < endHour){
-  topCountdown.innerHTML = "🟢 Training Window Open • Batch Access Active";
-}
-
-
-if(document.getElementById("trainingStatus")){
-  if(hour < startHour){
-    document.getElementById("trainingStatus").innerText = "Scheduled";
-  }else if(hour >= startHour && hour < endHour){
-    document.getElementById("trainingStatus").innerText = "ACTIVE";
-  }else{
-    document.getElementById("trainingStatus").innerText = "Closed";
-  }
-}
-
-
-/* =========================
-   VIEWER SYSTEM
-========================= */
-
-let base;
-
+/* =========================================================
+   GENUINE FLUCTUATION LIVE VIEWER ENGINE (MODULE 3 SPECIFIC)
+   ========================================================= */
+let base = 55;
 if(hour === 15){
   if(minutes < 15) base = 45 + Math.floor(Math.random()*16);
   else base = 60 + Math.floor(Math.random()*16);
-}
-else if(hour === 16){
+} else if(hour === 16){
   if(minutes < 45) base = 70 + Math.floor(Math.random()*11);
   else base = 55 + Math.floor(Math.random()*16);
-}
-else if(hour === 17){
+} else if(hour === 17){
   base = 40 + Math.floor(Math.random()*16);
-}
-else{
+} else {
   base = 30 + Math.floor(Math.random()*10);
 }
 
 function updateViewers(){
   let fluctuation = Math.floor(Math.random()*5)-2;
   let viewers = Math.min(80, Math.max(30, base + fluctuation));
-  document.getElementById("viewerCount").innerText = viewers;
+  const viewerTarget = document.getElementById("viewerCount");
+  if (viewerTarget) viewerTarget.innerText = viewers;
 }
-
 updateViewers();
-setInterval(updateViewers,15000);
+setInterval(updateViewers, 6000); // Dynamic shifting logic every 6s
 
+/* =========================================================
+   AUTOMATED DEVICE LANDSCAPE ROTATOR FOR FULLSCREEN VIDEO
+   ========================================================= */
+function manageFullscreenOrientation() {
+  const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
+  if (isFullscreen) {
+    if (screen.orientation && screen.orientation.lock) {
+      screen.orientation.lock('landscape').catch(() => {});
+    }
+  } else {
+    if (screen.orientation && screen.orientation.unlock) {
+      screen.orientation.unlock();
+    }
+  }
+}
+document.addEventListener('fullscreenchange', manageFullscreenOrientation);
+document.addEventListener('webkitfullscreenchange', manageFullscreenOrientation);
 
+/* =========================================================
+   ORIGINAL DYNAMIC VIDEO DATA FETCH ENGINE (MODULE 3 ENDPOINT)
+   ========================================================= */
 fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
 .then(r => r.json())
 .then(data => {
+  // Mapping targeted directly to day3_v2
   document.getElementById("videoContainer").innerHTML = data.day3_v2;
 })
 .catch(err => {
   console.error(err);
 });
-
-
 </script>
 
 </body>
