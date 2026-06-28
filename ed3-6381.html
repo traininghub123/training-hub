@@ -9,17 +9,38 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+/* THEME CONTROL PIPELINES */
+:root {
+  --bg-body: #f8fafc;
+  --bg-surface: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --bg-pill: #f1f5f9;
+  --header-grad: linear-gradient(135deg, #0f172a, #1e293b);
+}
+
+[data-theme="dark"] {
+  --bg-body: #0b0f19;
+  --bg-surface: #131c2e;
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --border-color: #1e293b;
+  --bg-pill: #1e293b;
+  --header-grad: linear-gradient(135deg, #020617, #0f172a);
+}
 
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 body{
   font-family: 'Inter', -apple-system, sans-serif;
-  background:#f8fafc;
-  color:#0f172a;
+  background: var(--bg-body);
+  color: var(--text-main);
   line-height: 1.6;
 }
 
@@ -30,7 +51,7 @@ body.locked{
 
 /* HIGH-END CORPORATE HEADER */
 .topbar{
-  background: linear-gradient(135deg, #0f172a, #1e293b);
+  background: var(--header-grad);
   padding: 20px 24px;
   color:#fff;
   display:flex;
@@ -48,6 +69,12 @@ body.locked{
   letter-spacing: -0.02em;
 }
 
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .batch{
   background:rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -58,13 +85,30 @@ body.locked{
   letter-spacing: 0.01em;
 }
 
+.theme-switch {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.theme-switch:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
 /* PREMIUM LIVE STATUS BAR */
 .status-bar{
   max-width:1100px;
   margin:24px auto 0;
-  background:#fff;
+  background: var(--bg-surface);
   border-radius:16px;
-  border:1px solid #e2e8f0;
+  border:1px solid var(--border-color);
   padding:16px 22px;
   display:flex;
   justify-content:space-between;
@@ -80,7 +124,7 @@ body.locked{
   gap:10px;
   font-weight:700;
   font-size: 15px;
-  color: #059669;
+  color: #10b981;
 }
 
 .dot{
@@ -99,18 +143,17 @@ body.locked{
 
 .viewer{
   font-size:14px;
-  color:#475569;
+  color: var(--text-muted);
   font-weight:600;
 }
 
 .viewer span {
-  color: #0f172a;
+  color: var(--text-main);
   font-weight: 700;
-  background: #f1f5f9;
+  background: var(--bg-pill);
   padding: 4px 10px;
   border-radius: 6px;
   font-variant-numeric: tabular-nums;
-  transition: all 0.25s ease;
 }
 
 .countdown{
@@ -128,6 +171,12 @@ body.locked{
   border: 1px solid rgba(37, 99, 235, 0.08);
 }
 
+[data-theme="dark"] .countdown {
+  color: #60a5fa;
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+}
+
 /* MAIN */
 .container{
   max-width:1100px;
@@ -137,11 +186,11 @@ body.locked{
 
 /* ACCESS INDUCTION PROGRESS (100% For Module 3) */
 .access-box{
-  background:#fff;
+  background: var(--bg-surface);
   border-radius:18px;
   padding:22px;
   margin: 20px 0;
-  border:1px solid #e2e8f0;
+  border:1px solid var(--border-color);
   box-shadow:0 4px 16px rgba(0,0,0,0.01);
 }
 
@@ -157,7 +206,7 @@ body.locked{
 .progress-bar{
   width:100%;
   height:8px;
-  background:#e2e8f0;
+  background: var(--bg-pill);
   border-radius:999px;
   overflow:hidden;
 }
@@ -201,15 +250,15 @@ body.locked{
 }
 
 .stat{
-  background:#fff;
+  background: var(--bg-surface);
   border-radius:16px;
   padding:20px;
   box-shadow:0 4px 12px rgba(15, 23, 42, 0.02);
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
 }
 
 .stat-label{
-  color:#64748b;
+  color: var(--text-muted);
   font-size:12px;
   font-weight: 600;
   text-transform: uppercase;
@@ -225,11 +274,11 @@ body.locked{
 /* COMPLIANCE DIRECTIVES */
 .info-box{
   margin-top:24px;
-  background:#fff;
+  background: var(--bg-surface);
   border-radius:18px;
   padding:24px;
   box-shadow:0 4px 16px rgba(0,0,0,0.01);
-  border:1px solid #e2e8f0;
+  border:1px solid var(--border-color);
 }
 
 .info-box h3{
@@ -241,7 +290,7 @@ body.locked{
 .info-box ul{
   padding-left:20px;
   line-height:2;
-  color:#334155;
+  color: var(--text-main);
 }
 
 .info-box li{
@@ -253,7 +302,7 @@ body.locked{
   margin-top:20px;
   background: rgba(37, 99, 235, 0.04);
   border:1px solid rgba(37, 99, 235, 0.15);
-  color:#1e40af;
+  color:#2563eb;
   padding:18px;
   border-radius:14px;
   text-align:center;
@@ -262,14 +311,20 @@ body.locked{
   line-height: 1.5;
 }
 
+[data-theme="dark"] .highlight {
+  color: #60a5fa;
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
 /* ACTIVITY SYSTEMS LOG */
 .activity{
   margin-top:24px;
-  background:#fff;
+  background: var(--bg-surface);
   border-radius:18px;
   padding:22px;
   box-shadow:0 4px 16px rgba(0,0,0,0.01);
-  border:1px solid #e2e8f0;
+  border:1px solid var(--border-color);
 }
 
 .activity h3{
@@ -279,9 +334,9 @@ body.locked{
 
 .activity-item{
   padding:14px 0;
-  border-bottom:1px solid #f1f5f9;
+  border-bottom:1px solid var(--border-color);
   font-size:14px;
-  color: #334155;
+  color: var(--text-main);
 }
 
 .activity-item:last-child{
@@ -300,13 +355,11 @@ body.locked{
   font-size:16px;
   font-weight:700;
   cursor: pointer;
-  transition: all 0.2s ease;
   box-shadow: 0 4px 14px rgba(37, 99, 235, 0.2);
 }
 
 .btn:hover{
   background: linear-gradient(135deg, #1d4ed8, #1e40af);
-  transform: translateY(-1px);
 }
 
 /* PREMIUM GATE LOCK OVERLAY */
@@ -381,13 +434,14 @@ body.locked{
 
 /* RESPONSIVE PIPELINES */
 @media(max-width:768px){
-  .topbar{ justify-content:center; text-align:center; padding: 16px; }
+  .topbar{ justify-content:center; text-align:center; padding: 16px; flex-direction: column; }
+  .header-controls { flex-direction: column; width: 100%; gap: 8px; }
+  .batch, .theme-switch { width: 100%; text-align: center; justify-content: center; }
   .status-bar{ flex-direction:column; align-items:center; text-align: center; }
   .container { padding: 0 16px 30px; }
   .lock-box { padding: 25px 20px; }
   .lock-box h1 { font-size: 24px; }
 }
-
 </style>
 </head>
 
@@ -410,7 +464,10 @@ body.locked{
 <!-- HEADER -->
 <div class="topbar">
   <div class="brand">🚀 EXECUTION SESSION</div>
-  <div class="batch">Professional Development Program • Module 3 of 3</div>
+  <div class="header-controls">
+    <div class="batch">Professional Development Program • Module 3 of 3</div>
+    <button class="theme-switch" id="themeToggle">🌓 Mode: Light</button>
+  </div>
 </div>
 
 <!-- STATUS -->
@@ -495,21 +552,45 @@ const liveStatus = document.getElementById("liveStatus");
 const statusDot = document.getElementById("statusDot");
 
 /* =========================================================
+   PERSISTENT SMART THEME CONTROL SYSTEM
+   ========================================================= */
+const themeToggle = document.getElementById("themeToggle");
+const currentTheme = localStorage.getItem("theme") || "light";
+
+if (currentTheme === "dark") {
+  document.documentElement.setAttribute("data-theme", "dark");
+  themeToggle.innerText = "🌞 Mode: Dark";
+} else {
+  document.documentElement.setAttribute("data-theme", "light");
+  themeToggle.innerText = "🌙 Mode: Light";
+}
+
+themeToggle.addEventListener("click", () => {
+  let theme = document.documentElement.getAttribute("data-theme");
+  if (theme === "dark") {
+    document.documentElement.setAttribute("data-theme", "light");
+    themeToggle.innerText = "🌙 Mode: Light";
+    localStorage.setItem("theme", "light");
+  } else {
+    document.documentElement.setAttribute("data-theme", "dark");
+    themeToggle.innerText = "🌞 Mode: Dark";
+    localStorage.setItem("theme", "dark");
+  }
+});
+
+/* =========================================================
    CORE SECURITY TIMELOCK & ENGINE CONTROLLER
    ========================================================= */
 function evaluateTimeLockEngine() {
   const now = new Date();
   const hour = now.getHours();
 
-  // 🟢 CONDITION 1: WINDOW IS LIVE & OPERATIONAL (3 PM - 6 PM)
   if (hour >= startHour && hour < endHour) {
     sessionStorage.setItem("accessGranted", "yes");
-    
     if (lockScreen.style.display !== "none") {
       lockScreen.style.display = "none";
       document.body.classList.remove("locked");
     }
-
     if (topCountdown) topCountdown.innerHTML = "🟢 Onboarding Window Operational • Priority Streaming Enabled";
     if (trainingStatus) trainingStatus.innerText = "ACTIVE";
     if (liveStatus) liveStatus.innerText = "Execution Session Active";
@@ -519,7 +600,6 @@ function evaluateTimeLockEngine() {
       loadSecureBunnyStream();
     }
   } 
-  // ⏳ CONDITION 2: COUNTDOWN LOCKED ENGINES (Before 3 PM)
   else if (hour < startHour) {
     document.body.classList.add("locked");
     lockScreen.style.display = "flex";
@@ -539,18 +619,15 @@ function evaluateTimeLockEngine() {
     document.getElementById("startCountdown").innerHTML =
       `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
   } 
-  // 🔒 CONDITION 3: TERMINAL LIFETIME CLOSURE (After 6 PM)
   else {
     const accessGranted = sessionStorage.getItem("accessGranted");
     if (accessGranted !== "yes") {
       document.body.classList.add("locked");
       lockScreen.style.display = "flex";
-
       document.getElementById("lockTitle").innerHTML = "🔒 Training Access Closed";
       document.getElementById("lockText").innerHTML = "Today's batch timing has ended.<br><br>Please revisit during active training hours.";
       document.getElementById("startCountdown").style.display = "none";
     }
-    
     if (topCountdown) topCountdown.innerHTML = "🔴 Onboarding Window Closed";
     if (trainingStatus) trainingStatus.innerText = "Closed";
     if (liveStatus) liveStatus.innerText = "Session Expired";
@@ -605,9 +682,6 @@ function manageFullscreenOrientation() {
 document.addEventListener('fullscreenchange', manageFullscreenOrientation);
 document.addEventListener('webkitfullscreenchange', manageFullscreenOrientation);
 
-/* =========================================================
-   ORIGINAL DYNAMIC VIDEO DATA FETCH ENGINE
-   ========================================================= */
 function loadSecureBunnyStream() {
   isVideoLoaded = true;
   fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
@@ -621,10 +695,8 @@ function loadSecureBunnyStream() {
   });
 }
 
-// Engine execution loop registration
 setInterval(evaluateTimeLockEngine, 1000);
 evaluateTimeLockEngine();
 </script>
-
 </body>
 </html>
