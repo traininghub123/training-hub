@@ -309,7 +309,7 @@ body.locked{
   transform: translateY(-1px);
 }
 
-/* PREMIUM GATE LOCK OVERLAY (Bypassed but kept ready) */
+/* PREMIUM GATE LOCK OVERLAY */
 .lock-screen{
   position:fixed;
   top:0;
@@ -393,7 +393,7 @@ body.locked{
 
 <body>
 
-<!-- LOCK SCREEN OVERLAY (Bypassed for now) -->
+<!-- LOCK SCREEN OVERLAY -->
 <div id="lockScreen" class="lock-screen">
   <div class="lock-box">
     <h1 id="lockTitle">⏳ Execution Session Starts Soon</h1>
@@ -416,19 +416,19 @@ body.locked{
 <!-- STATUS -->
 <div class="status-bar">
   <div class="live-wrap">
-    <div class="dot" style="background:#10b981;"></div>
-    <span id="liveStatus">Execution Session Active</span>
+    <div class="dot" id="statusDot"></div>
+    <span id="liveStatus">Checking System Status...</span>
   </div>
   <div class="viewer">
     👁 Live: <span id="viewerCount">--</span> Participants Active
   </div>
 </div>
 
-<div class="countdown" id="topCountdown">🟢 Onboarding Window Operational • Priority Streaming Enabled</div>
+<div class="countdown" id="topCountdown">Checking Window...</div>
 
 <div class="container">
 
-  <!-- ACCESS (100% Progress Bar Checked) -->
+  <!-- ACCESS -->
   <div class="access-box">
     <div class="access-top">
       <span><b>📘 Core Onboarding Phase • Module 3</b></span>
@@ -447,7 +447,7 @@ body.locked{
   <!-- STATS -->
   <div class="stats">
     <div class="stat"><div class="stat-label">Current Pipeline</div><div class="stat-value" style="color:#2563eb;">Execution Session</div></div>
-    <div class="stat"><div class="stat-label">Training Status</div><div class="stat-value" id="trainingStatus" style="color:#10b981;">ACTIVE</div></div>
+    <div class="stat"><div class="stat-label">Training Status</div><div class="stat-value" id="trainingStatus">Checking...</div></div>
     <div class="stat"><div class="stat-label">Next Module</div><div class="stat-value" style="color:#64748b;">Career Access 🚀</div></div>
   </div>
 
@@ -484,21 +484,95 @@ body.locked{
 <div class="footer">Professional Training Hub • Access Controlled • Batch Monitored</div>
 
 <script>
-const now = new Date();
-const hour = now.getHours();
-const minutes = now.getMinutes();
+const startHour = 15; // 3 PM
+const endHour = 18;   // 6 PM
+let isVideoLoaded = false;
+
+const lockScreen = document.getElementById("lockScreen");
+const topCountdown = document.getElementById("topCountdown");
+const trainingStatus = document.getElementById("trainingStatus");
+const liveStatus = document.getElementById("liveStatus");
+const statusDot = document.getElementById("statusDot");
 
 /* =========================================================
-   GENUINE FLUCTUATION LIVE VIEWER ENGINE (MODULE 3 SPECIFIC)
+   CORE SECURITY TIMELOCK & ENGINE CONTROLLER
+   ========================================================= */
+function evaluateTimeLockEngine() {
+  const now = new Date();
+  const hour = now.getHours();
+
+  // 🟢 CONDITION 1: WINDOW IS LIVE & OPERATIONAL (3 PM - 6 PM)
+  if (hour >= startHour && hour < endHour) {
+    sessionStorage.setItem("accessGranted", "yes");
+    
+    if (lockScreen.style.display !== "none") {
+      lockScreen.style.display = "none";
+      document.body.classList.remove("locked");
+    }
+
+    if (topCountdown) topCountdown.innerHTML = "🟢 Onboarding Window Operational • Priority Streaming Enabled";
+    if (trainingStatus) trainingStatus.innerText = "ACTIVE";
+    if (liveStatus) liveStatus.innerText = "Execution Session Active";
+    if (statusDot) statusDot.style.background = "#10b981";
+
+    if (!isVideoLoaded) {
+      loadSecureBunnyStream();
+    }
+  } 
+  // ⏳ CONDITION 2: COUNTDOWN LOCKED ENGINES (Before 3 PM)
+  else if (hour < startHour) {
+    document.body.classList.add("locked");
+    lockScreen.style.display = "flex";
+    if (topCountdown) topCountdown.innerHTML = "⏳ Session Starts Soon";
+    if (trainingStatus) trainingStatus.innerText = "Scheduled";
+    if (liveStatus) liveStatus.innerText = "System Paused";
+    if (statusDot) statusDot.style.background = "#ffbc00";
+
+    const target = new Date();
+    target.setHours(startHour, 0, 0, 0);
+    const diff = target - now;
+
+    const h = Math.floor(diff / 3600000);
+    const m = Math.floor((diff / 60000) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("startCountdown").innerHTML =
+      `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  } 
+  // 🔒 CONDITION 3: TERMINAL LIFETIME CLOSURE (After 6 PM)
+  else {
+    const accessGranted = sessionStorage.getItem("accessGranted");
+    if (accessGranted !== "yes") {
+      document.body.classList.add("locked");
+      lockScreen.style.display = "flex";
+
+      document.getElementById("lockTitle").innerHTML = "🔒 Training Access Closed";
+      document.getElementById("lockText").innerHTML = "Today's batch timing has ended.<br><br>Please revisit during active training hours.";
+      document.getElementById("startCountdown").style.display = "none";
+    }
+    
+    if (topCountdown) topCountdown.innerHTML = "🔴 Onboarding Window Closed";
+    if (trainingStatus) trainingStatus.innerText = "Closed";
+    if (liveStatus) liveStatus.innerText = "Session Expired";
+    if (statusDot) statusDot.style.background = "#ef4444";
+  }
+}
+
+/* =========================================================
+   GENUINE FLUCTUATION LIVE VIEWER ENGINE
    ========================================================= */
 let base = 55;
-if(hour === 15){
+const checkNow = new Date();
+const checkH = checkNow.getHours();
+const minutes = checkNow.getMinutes();
+
+if(checkH === startHour){
   if(minutes < 15) base = 45 + Math.floor(Math.random()*16);
   else base = 60 + Math.floor(Math.random()*16);
-} else if(hour === 16){
+} else if(checkH === 16){
   if(minutes < 45) base = 70 + Math.floor(Math.random()*11);
   else base = 55 + Math.floor(Math.random()*16);
-} else if(hour === 17){
+} else if(checkH === 17){
   base = 40 + Math.floor(Math.random()*16);
 } else {
   base = 30 + Math.floor(Math.random()*10);
@@ -511,7 +585,7 @@ function updateViewers(){
   if (viewerTarget) viewerTarget.innerText = viewers;
 }
 updateViewers();
-setInterval(updateViewers, 6000); // Dynamic shifting logic every 6s
+setInterval(updateViewers, 6000);
 
 /* =========================================================
    AUTOMATED DEVICE LANDSCAPE ROTATOR FOR FULLSCREEN VIDEO
@@ -532,17 +606,24 @@ document.addEventListener('fullscreenchange', manageFullscreenOrientation);
 document.addEventListener('webkitfullscreenchange', manageFullscreenOrientation);
 
 /* =========================================================
-   ORIGINAL DYNAMIC VIDEO DATA FETCH ENGINE (MODULE 3 ENDPOINT)
+   ORIGINAL DYNAMIC VIDEO DATA FETCH ENGINE
    ========================================================= */
-fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
-.then(r => r.json())
-.then(data => {
-  // Mapping targeted directly to day3_v2
-  document.getElementById("videoContainer").innerHTML = data.day3_v2;
-})
-.catch(err => {
-  console.error(err);
-});
+function loadSecureBunnyStream() {
+  isVideoLoaded = true;
+  fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById("videoContainer").innerHTML = data.day3_v2;
+  })
+  .catch(err => {
+    console.error(err);
+    isVideoLoaded = false;
+  });
+}
+
+// Engine execution loop registration
+setInterval(evaluateTimeLockEngine, 1000);
+evaluateTimeLockEngine();
 </script>
 
 </body>
