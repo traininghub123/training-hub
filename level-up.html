@@ -92,10 +92,65 @@ body {
   border-color: var(--gold-accent);
 }
 
+/* HIGH-END LIVE CORE RADAR METRICS BAR */
+.live-radar-bar {
+  max-width: 960px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 16px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 14px;
+  color: #ef4444;
+  letter-spacing: 0.04em;
+}
+
+.live-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.25);
+  animation: radarPulse 1.8s infinite ease-in-out;
+}
+
+@keyframes radarPulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.radar-telemetry {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.radar-telemetry span {
+  color: var(--text-main);
+  background: var(--bg-card);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  font-variant-numeric: tabular-nums;
+}
+
 /* 1. HERO ARCHITECTURE */
 .hero-compartment {
   text-align: center;
-  padding: 16px 0 36px;
+  padding: 8px 0 36px;
 }
 
 .clearance-badge {
@@ -311,7 +366,7 @@ body {
 }
 
 /* =========================================================
-   MOBILE FIRST RESPONSIVE BLUEPRINT GRID CONSTRAINTS
+   STRICT MOBILE FIRST RESPONSIVE BLUEPRINT GRID CONSTRAINTS
    ========================================================= */
 @media(max-width: 800px) {
   .metrics-hud { grid-template-columns: 1fr; gap: 12px; margin-top: 28px; }
@@ -325,6 +380,7 @@ body {
   .hero-compartment { padding: 8px 0 24px; }
   .hero-compartment h1 { font-size: 30px; margin-bottom: 16px; }
   .premium-description { font-size: 15px; line-height: 1.7; }
+  .live-radar-bar { flex-direction: column; text-align: center; padding: 14px; margin: 0 8px 24px; }
   
   .editorial-section, .guidance-box, .access-block {
     padding: 28px 20px;
@@ -341,6 +397,17 @@ body {
   <div class="top-nav">
     <div class="nav-brand">🔒 PRIVATE BRIEFING INTERFACE</div>
     <button class="theme-switch" id="themeToggle">🌞 Mode: Dark</button>
+  </div>
+
+  <!-- HIGH-END LIVE TELEMETRY RADAR BAR -->
+  <div class="live-radar-bar">
+    <div class="live-indicator">
+      <div class="live-dot"></div>
+      <span>LIVE BROADCAST ACTIVE</span>
+    </div>
+    <div class="radar-telemetry">
+      Stream Status: <span id="telemetryStatus">Synchronizing Protocol...</span>
+    </div>
   </div>
 
   <!-- HERO SEGMENT COMPARTMENT -->
@@ -407,7 +474,6 @@ body {
       <div class="hud-value">Finalists Verified</div>
     </div>
     <div class="hud-card">
-      <div class="hud-icon">🔒</div>
       <div class="hud-label">Portal Status</div>
       <div class="hud-value">Account Locked</div>
     </div>
@@ -467,6 +533,30 @@ document.getElementById("streamTriggerBtn").addEventListener("click", () => {
 });
 
 /* =========================================================
+   DYNAMIC REAL-TIME TELEMETRY ENGINE (LIVE MONITOR FEEL)
+   ========================================================= */
+const telemetryPhrases = [
+  "Secure Link Established",
+  "Feed Optimization Stable",
+  "Data Stream Enrypted",
+  "Bandwidth Safe 1080p",
+  "Server Node: Active",
+  "Telemetry Processing..."
+];
+
+function shuffleTelemetry() {
+  const target = document.getElementById("telemetryStatus");
+  if (target) {
+    const randomPhrase = telemetryPhrases[Math.floor(Math.random() * telemetryPhrases.length)];
+    target.innerText = randomPhrase;
+  }
+}
+
+// Initial fire and registration loop every 3.5 seconds
+setInterval(shuffleTelemetry, 3500);
+shuffleTelemetry();
+
+/* =========================================================
    AUTOMATED DEVICE LANDSCAPE ROTATOR FOR FULLSCREEN VIDEO
    ========================================================= */
 function manageFullscreenOrientation() {
@@ -490,7 +580,6 @@ document.addEventListener('webkitfullscreenchange', manageFullscreenOrientation)
 fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
 .then(r => r.json())
 .then(data => {
-  // Mapping targeted safely to elite dynamic endpoint data source
   document.getElementById("videoContainer").innerHTML = data.elite || data.levelup;
 })
 .catch(err => {
