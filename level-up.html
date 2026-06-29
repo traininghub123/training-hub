@@ -6,7 +6,7 @@
 <title>Level Up Session</title>
 
 <!-- Corporate Typography Integration -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 /* =========================================================
@@ -21,8 +21,9 @@
   --border-color: #e2e8f0;
   --bg-pill: #f1f5f9;
   --header-grad: linear-gradient(135deg, #0f172a, #1e293b);
-  --notice-bg: #ecfeff;
-  --notice-text: #0f766e;
+  --notice-bg: #eff6ff;
+  --notice-text: #1e40af;
+  --notice-border: #bfdbfe;
 }
 
 [data-theme="dark"] {
@@ -34,8 +35,9 @@
   --border-color: #1e293b;
   --bg-pill: #1e293b;
   --header-grad: linear-gradient(135deg, #020617, #0f172a);
-  --notice-bg: rgba(6, 182, 212, 0.08);
-  --notice-text: #22d3ee;
+  --notice-bg: rgba(59, 130, 246, 0.08);
+  --notice-text: #60a5fa;
+  --notice-border: rgba(59, 130, 246, 0.2);
 }
 
 * {
@@ -50,6 +52,12 @@ body {
   background: var(--bg-body);
   color: var(--text-main);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.locked {
+  overflow: hidden;
+  height: 100vh;
 }
 
 /* HIGH-END CORPORATE HEADER */
@@ -114,35 +122,58 @@ body {
   border: 1px solid var(--border-color);
   padding: 16px 22px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
+}
+
+.live-wrap {
+  display: flex;
   align-items: center;
   gap: 10px;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
   font-weight: 700;
   font-size: 15px;
+  color: #f59e0b;
 }
 
 .dot {
   height: 9px;
   width: 9px;
-  background: #dc2626;
+  background: #f59e0b;
   border-radius: 50%;
   display: inline-block;
-  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.2);
-  animation: blink 1s infinite;
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);
+}
+
+.live.active-state .live-wrap {
+  color: #10b981;
+}
+.live.active-state .dot {
+  background: #10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+  animation: blink 1.2s infinite;
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.95); }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }
 
 .subtext {
-  text-align: center;
   font-size: 14px;
-  color: var(--text-muted);
-  margin-top: 10px;
-  font-weight: 600;
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+.subtext span {
+  font-variant-numeric: tabular-nums;
+  background: var(--bg-pill);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  margin-left: 4px;
 }
 
 /* CONTAINER */
@@ -152,7 +183,7 @@ body {
   padding: 0 16px 40px;
 }
 
-/* 🎥 VIDEO VIEWPORT - EXACT ORIGINAL BLUEPRINT UNTOUCHED */
+/* 🎥 VIDEO VIEWPORT - 100% ORIGINAL BLUEPRINT RETAINED */
 .video-card {
   background: #000;
   border-radius: 22px;
@@ -176,11 +207,11 @@ body {
   border: 0;
 }
 
-/* BADGES ARCHITECTURE */
+/* BADGES DESIGNS */
 .badges {
   display: flex;
   gap: 12px;
-  margin-top: 16px;
+  margin-top: 18px;
 }
 
 .badge {
@@ -188,36 +219,47 @@ body {
   text-align: center;
   background: var(--bg-surface);
   border: 1px solid var(--border-color);
-  padding: 12px;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 600;
+  padding: 14px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+.badge span {
   color: var(--text-main);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.01);
 }
 
-/* NOTICE CONSTRAINTS */
+/* COMPLIANCE NOTICES */
 .notice {
   margin-top: 20px;
   background: var(--notice-bg);
-  border: 1px solid rgba(15, 118, 110, 0.15);
-  padding: 16px;
-  border-radius: 14px;
+  border: 1px solid var(--notice-border);
+  padding: 18px;
+  border-radius: 16px;
   text-align: center;
   font-weight: 600;
   color: var(--notice-text);
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
-/* COMPLIANCE SYSTEM INSTRUCTIONS */
+/* INSTRUCTIONS SYSTEM */
 .instructions {
   margin-top: 20px;
   background: var(--bg-surface);
   border: 1px solid var(--border-color);
   padding: 24px;
-  border-radius: 18px;
+  border-radius: 20px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.01);
+}
+
+.instructions h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
 }
 
 .instructions ul {
@@ -228,32 +270,31 @@ body {
 
 .instructions li {
   font-size: 15px;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 .instructions li:last-child {
   margin-bottom: 0;
 }
 
-/* ACCESS PHASE WRAPPER */
+/* ACCESS CONTROLLERS PROGRESS STAGE */
 .access {
   margin-top: 20px;
   background: var(--bg-surface);
   border: 1px solid var(--border-color);
   padding: 24px;
-  border-radius: 18px;
+  border-radius: 20px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.01);
 }
 
 .access h3 {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
-  margin-bottom: 12px;
-  color: var(--text-main);
+  margin-bottom: 14px;
 }
 
 .access ul {
   padding-left: 20px;
-  line-weight: 1.8;
+  line-height: 1.8;
   color: var(--text-main);
 }
 
@@ -262,34 +303,36 @@ body {
   margin-bottom: 6px;
 }
 
-/* PROGRESS INTERACTION CTAS */
+/* PROGRESS INTERACTION SUBMIT DIRECTIVE */
 .btn {
-  margin-top: 20px;
+  margin-top: 24px;
   width: 100%;
   padding: 18px;
   border: none;
   border-radius: 16px;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  color: white;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
   font-size: 16px;
   font-weight: 700;
   cursor: not-allowed;
-  opacity: 0.5;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.2);
+  transition: all 0.25s ease;
 }
 
 .btn.active {
-  opacity: 1;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  border: none;
   cursor: pointer;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
 }
 .btn.active:hover {
   background: linear-gradient(135deg, #1d4ed8, #1e40af);
   transform: translateY(-1px);
 }
 
-/* MODAL SYSTEM LAYER LAYOUTS */
-.popup {
+/* NOTION-STYLE WORKSPACE INLINE NOTICE BLOCK */
+.workspace-modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -304,33 +347,35 @@ body {
   padding: 20px;
 }
 
-.popup-box {
+.modal-box {
   background: var(--bg-surface);
   border: 1px solid var(--border-color);
-  padding: 32px 24px;
+  padding: 36px 24px;
   border-radius: 24px;
   width: 100%;
-  max-width: 360px;
+  max-width: 380px;
   text-align: center;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 }
 
-.popup-box h3 {
-  margin-bottom: 12px;
+.modal-box h3 {
+  margin-bottom: 14px;
   font-size: 20px;
   font-weight: 700;
   color: #dc2626;
+  letter-spacing: -0.02em;
 }
 
-.popup-box p {
+.modal-box p {
   font-size: 14px;
   margin: 8px 0;
   color: var(--text-main);
   font-weight: 500;
+  line-height: 1.6;
 }
 
-.popup-btn {
-  margin-top: 18px;
+.modal-btn {
+  margin-top: 20px;
   padding: 14px;
   border: none;
   border-radius: 12px;
@@ -342,18 +387,19 @@ body {
   cursor: pointer;
   transition: all 0.2s ease;
 }
-.popup-btn:hover {
+.modal-btn:hover {
   background: #1d4ed8;
 }
 
-/* SYSTEM RESPONSIVE PIPELINES */
+/* RESPONSIVE BREAKPOINTS (MOBILE FIRST) */
 @media(max-width:768px){
   .header { padding: 16px; flex-direction: column; text-align: center; }
   .header-right { flex-direction: column; width: 100%; gap: 8px; }
   .batch, .theme-switch { width: 100%; text-align: center; justify-content: center; }
-  .live { margin: 16px 16px 0; }
+  .live { flex-direction: column; text-align: center; gap: 8px; margin: 16px 16px 0; }
   .container { padding: 0 16px 30px; }
   .badges { flex-direction: column; gap: 8px; }
+  .badge { text-align: left; display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; }
 }
 </style>
 </head>
@@ -364,84 +410,85 @@ body {
 <div class="header">
   <div class="brand">🚀 LEVEL UP GATEWAY</div>
   <div class="header-right">
-    <div class="batch">Exclusive Training Sequence</div>
+    <div class="batch">Priority Qualification Interface</div>
     <button class="theme-switch" id="themeToggle">🌞 Mode: Dark</button>
   </div>
 </div>
 
-<!-- LIVE METRICS BAR -->
-<div class="live">
-  <span class="dot"></span>
-  <span id="liveStatus">
-    <span style="color:#dc2626;">LIVE</span> • Waiting to Start
-  </span>
-</div>
-
-<div class="subtext">
-  ⏳ Starting in <b id="timer" style="font-variant-numeric: tabular-nums;">09:20</b> • Be Ready
+<!-- LIVE STREAM PIPELINE CONFIG -->
+<div class="live" id="liveContainer">
+  <div class="live-wrap">
+    <span class="dot"></span>
+    <span id="liveStatus">System Initializing</span>
+  </div>
+  <div class="subtext" id="timerWrapper">
+    ⏱ Execution Window Syncing: <span id="timer">09:20</span>
+  </div>
 </div>
 
 <div class="container">
 
-  <!-- VIDEO VIEWPORT (ORIGINAL BLUEPRINT FULLY INTACT) -->
+  <!-- VIDEO BLOCK (EXACT ORIGINALBLUEPRINT STRUCTURALLY INTACT) -->
   <div class="video-card">
     <div id="videoContainer"></div>
   </div>
 
-  <!-- STATUS BADGES -->
+  <!-- METRIC BADGES -->
   <div class="badges">
-    <div class="badge">🎯 Level Up Training</div>
-    <div class="badge">🔒 Exclusive Access</div>
+    <div class="badge">📂 Pipeline Level: <span>Upgrade Phase</span></div>
+    <div class="badge">🛡 Profile Status: <span>Access Restricted</span></div>
   </div>
 
-  <!-- COMPLIANCE NOTICES -->
+  <!-- NOTICE ASSIGNMENTS -->
   <div class="notice">
-    This session is only for selected candidates. Complete it seriously to upgrade your level.
+    This verified session is mapped strictly to selected profiles. Comprehensive evaluation is monitored to upgrade your qualification level.
   </div>
 
-  <!-- DIRECTIONS CARD -->
+  <!-- DIRECTIONS GRID -->
   <div class="instructions">
+    <h3>📌 Compliance Directives</h3>
     <ul>
-      <li>Watch the session fully without skipping</li>
-      <li>Do not exit or refresh in between</li>
-      <li>Stay focused — this is a growth stage</li>
-      <li>📱 Watch in full screen and rotate your device</li>
+      <li>Watch the level progression session completely without internal loop skips.</li>
+      <li>Do not exit the workspace viewport or clear memory logs in between.</li>
+      <li>Stay focused — this data maps your upcoming growth execution stage.</li>
+      <li>📱 Expand screen parameters to landscape mode for structural clarity.</li>
     </ul>
   </div>
 
-  <!-- PIPELINE STAGE NAVIGATION BOX -->
+  <!-- ACCESS PROGRESS PROGRESSION PROGRESS -->
   <div class="access">
-    <h3>🔐 Next Step Progression</h3>
+    <h3>🔐 Progression Prerequisites</h3>
     <ul>
-      <li>This is a level upgrade session</li>
-      <li>Completion is mandatory</li>
-      <li>Further process will be guided personally</li>
+      <li>This session initiates your workspace deployment profile upgrade.</li>
+      <li>Continuous watch time validation log is strictly mandatory.</li>
+      <li>Further operations routing parameters will be deployed to your logs.</li>
     </ul>
 
-    <button id="btn" class="btn">🚀 Proceed to Next Level</button>
+    <button id="btn" class="btn">System Synchronization Pending 🔒</button>
   </div>
 
 </div>
 
-<!-- INTERACTIVE ALERTS DIALOG POPUP -->
-<div id="popup" class="popup" style="display: none;">
-  <div class="popup-box">
-    <h3>🔴 Session is LIVE</h3>
-    <p>Do not take calls or switch apps</p>
-    <p>📱 Tap video → Full screen → Rotate phone</p>
-    <button class="popup-btn" onclick="closePopup()">Continue Workspace</button>
+<!-- INLINE BLUR MODAL OVERLAY -->
+<div id="popup" class="workspace-modal" style="display: none;">
+  <div class="modal-box">
+    <h3>🔴 Stream Workspace Live</h3>
+    <p>Verification engine successfully deployed.</p>
+    <p>📱 Tap video $\rightarrow$ Fullscreen $\rightarrow$ Rotate device for landscape telemetry.</p>
+    <button class="modal-btn" onclick="closePopup()">Enter Stream Matrix</button>
   </div>
 </div>
 
 <script>
 let time = 560;
+let isLiveStateActive = false;
+
+const themeToggle = document.getElementById("themeToggle");
+const currentTheme = localStorage.getItem("theme") || "light"; 
 
 /* =========================================================
    PERSISTENT SMOOTH GLOBAL THEME SYSTEM
    ========================================================= */
-const themeToggle = document.getElementById("themeToggle");
-const currentTheme = localStorage.getItem("theme") || "light"; 
-
 if (currentTheme === "dark") {
   document.documentElement.setAttribute("data-theme", "dark");
   themeToggle.innerText = "🌞 Mode: Dark";
@@ -464,31 +511,34 @@ themeToggle.addEventListener("click", () => {
 });
 
 /* =========================================================
-   LIVE ENGINE RUNTIME MATRIX TIMERS
+   CORE TIME PROGRESSION SYSTEM
    ========================================================= */
 let timer = setInterval(() => {
   let min = Math.floor(time/60);
   let sec = time%60;
 
-  document.getElementById("timer").innerText =
-    (min<10?"0"+min:min)+":"+(sec<10?"0"+sec:sec);
+  const timerTarget = document.getElementById("timer");
+  if (timerTarget) {
+    timerTarget.innerText = (min<10?"0"+min:min)+":"+(sec<10?"0"+sec:sec);
+  }
 
   time--;
 
-  if(time<0){
+  if(time < 0 && !isLiveStateActive){
     clearInterval(timer);
+    isLiveStateActive = true;
 
-    document.getElementById("liveStatus").innerHTML =
-      '<span style="color:#dc2626;">LIVE</span> • Training in Progress';
-
-    document.querySelector(".subtext").innerHTML =
-      "🚀 Session is LIVE — Do not exit or take calls";
+    document.getElementById("liveContainer").classList.add("active-state");
+    document.getElementById("liveStatus").innerHTML = "STREAM OPERATIONAL";
+    document.getElementById("timerWrapper").innerHTML = "🟢 Assessment Active • Complete Notes Mandatory";
 
     document.getElementById("popup").style.display = "flex";
 
-    document.getElementById("btn").classList.add("active");
+    const submitBtn = document.getElementById("btn");
+    submitBtn.classList.add("active");
+    submitBtn.innerText = "🚀 Proceed to Next Level Upgrade";
   }
-},1000);
+}, 1000);
 
 function closePopup(){
   document.getElementById("popup").style.display = "none";
@@ -513,7 +563,7 @@ document.addEventListener('fullscreenchange', manageFullscreenOrientation);
 document.addEventListener('webkitfullscreenchange', manageFullscreenOrientation);
 
 /* =========================================================
-   ORIGINAL API PIPELINE RESTORATION (100% TOUCH FREE)
+   ORIGINAL DYNAMIC VIDEO DATA FETCH ENGINE (TOUCH FREE)
    ========================================================= */
 fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
 .then(r => r.json())
