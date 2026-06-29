@@ -105,9 +105,6 @@ body{
   margin-bottom: 24px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
-[data-theme="light"] .ribbon {
-  color: #fff;
-}
 
 /* HERO COMPARTMENT */
 .hero{
@@ -159,21 +156,6 @@ h1{
   border: 1px solid rgba(255, 255, 255, 0.02);
 }
 
-.video-container {
-  position: relative;
-  width: 100%;
-  padding-top: 56.25%;
-}
-
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
 /* INTERNAL VERIFICATION CARDS GRID */
 .cards{
   display: grid;
@@ -220,9 +202,6 @@ h1{
   font-weight: 700;
   letter-spacing: -0.01em;
   margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
 ul{
@@ -295,7 +274,7 @@ li{
   <!-- PORTAL TOP NAVIGATION HEADER -->
   <div class="topbar">
     <div class="portal-brand">🏛 INTERNAL VERIFICATION SYSTEM</div>
-    <button class="theme-switch" id="themeToggle">🌙 Mode: Dark</button>
+    <button class="theme-switch" id="themeToggle">🌞 Mode: Dark</button>
   </div>
 
   <!-- ARCHIVE TOP BANNER -->
@@ -313,7 +292,7 @@ li{
 
   <!-- VIDEO EMBED BOX (EXACT UNTOUCHED ORIGINAL LAYOUT PROPERTY MAPPED) -->
   <div class="video" id="videoWorkspace">
-    <div id="videoContainer" class="video-container"></div>
+    <div id="videoContainer"></div>
   </div>
 
   <!-- ACCOUNT METER CARD GRID -->
@@ -341,7 +320,7 @@ li{
     <div class="notice">
       This restored recording does not deploy the surprise mechanism or the final framework itself.<br><br>
       The absolute focus of this session is to provide you with context as to why this opportunity generated substantial alignment across senior panels.<br><br>
-      Complete the session without interruptions and align your verification data.
+      Watch the complete session without interruptions and align your verification data.
     </div>
   </div>
 
@@ -357,7 +336,7 @@ li{
    PERSISTENT SMOOTH GLOBAL THEME SYSTEM
    ========================================================= */
 const themeToggle = document.getElementById("themeToggle");
-const currentTheme = localStorage.getItem("theme") || "dark"; // Defaulting configuration to dark for documentary theme
+const currentTheme = localStorage.getItem("theme") || "dark"; 
 
 if (currentTheme === "light") {
   document.documentElement.setAttribute("data-theme", "light");
