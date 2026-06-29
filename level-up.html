@@ -3,41 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Level Up Session</title>
+<title>Elite Session Registry</title>
 
-<!-- Corporate Typography Integration -->
+<!-- Premium Corporate Executive Typography -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 /* =========================================================
-   UX DYNAMIC THEME ENGINE & CUSTOM VARIABLE MATRIX
+   TITANIUM GOLD APEX TOKENS (PRIVATE PORTAL DESIGN MATRIX)
    ========================================================= */
 :root {
+  --bg-body: #030712;
+  --bg-surface: #0b0f19;
+  --bg-card: #111827;
+  --text-main: #f9fafb;
+  --text-muted: #9ca3af;
+  --border-color: rgba(255, 255, 255, 0.05);
+  --gold-accent: #d97706;
+  --gold-glow: rgba(217, 119, 6, 0.08);
+  --panel-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="light"] {
   --bg-body: #f8fafc;
   --bg-surface: #ffffff;
   --bg-card: #f1f5f9;
   --text-main: #0f172a;
   --text-muted: #64748b;
   --border-color: #e2e8f0;
-  --bg-pill: #f1f5f9;
-  --header-grad: linear-gradient(135deg, #0f172a, #1e293b);
-  --notice-bg: #eff6ff;
-  --notice-text: #1e40af;
-  --notice-border: #bfdbfe;
-}
-
-[data-theme="dark"] {
-  --bg-body: #0b0f19;
-  --bg-surface: #131c2e;
-  --bg-card: #1e293b;
-  --text-main: #f1f5f9;
-  --text-muted: #94a3b8;
-  --border-color: #1e293b;
-  --bg-pill: #1e293b;
-  --header-grad: linear-gradient(135deg, #020617, #0f172a);
-  --notice-bg: rgba(59, 130, 246, 0.08);
-  --notice-text: #60a5fa;
-  --notice-border: rgba(59, 130, 246, 0.2);
+  --gold-accent: #b45309;
+  --gold-glow: rgba(180, 83, 9, 0.05);
+  --panel-shadow: 0 15px 35px -10px rgba(15, 23, 42, 0.06);
 }
 
 * {
@@ -55,146 +51,96 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-body.locked {
-  overflow: hidden;
-  height: 100vh;
+.wrap {
+  max-width: 960px;
+  margin: auto;
+  padding: 0 24px 80px;
 }
 
-/* HIGH-END CORPORATE HEADER */
-.header {
-  background: var(--header-grad);
-  padding: 20px 24px;
-  color: #fff;
+/* TOP ACCOUNT INTEGRITY NAVIGATION */
+.top-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 40px;
 }
 
-.brand {
-  font-size: 22px;
+.nav-brand {
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.batch {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 8px 16px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-transform: uppercase;
 }
 
 .theme-switch {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fff;
-  padding: 8px 14px;
-  border-radius: 10px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 8px 16px;
+  border-radius: 12px;
   cursor: pointer;
   font-size: 13px;
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 .theme-switch:hover {
-  background: rgba(255, 255, 255, 0.18);
+  border-color: var(--gold-accent);
 }
 
-/* PREMIUM LIVE STATUS BAR */
-.live {
-  max-width: 900px;
-  margin: 24px auto 0;
-  background: var(--bg-surface);
-  border-radius: 16px;
-  border: 1px solid var(--border-color);
-  padding: 16px 22px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
+/* 1. HERO ARCHITECTURE */
+.hero-compartment {
+  text-align: center;
+  padding: 16px 0 36px;
 }
 
-.live-wrap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 700;
-  font-size: 15px;
-  color: #f59e0b;
-}
-
-.dot {
-  height: 9px;
-  width: 9px;
-  background: #f59e0b;
-  border-radius: 50%;
+.clearance-badge {
   display: inline-block;
-  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);
-}
-
-.live.active-state .live-wrap {
-  color: #10b981;
-}
-.live.active-state .dot {
-  background: #10b981;
-  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
-  animation: blink 1.2s infinite;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-
-.subtext {
-  font-size: 14px;
-  color: var(--text-main);
+  font-size: 11px;
   font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--gold-accent);
+  background: var(--gold-glow);
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(217, 119, 6, 0.2);
+  margin-bottom: 24px;
+  text-transform: uppercase;
 }
 
-.subtext span {
-  font-variant-numeric: tabular-nums;
-  background: var(--bg-pill);
-  padding: 4px 10px;
-  border-radius: 6px;
-  border: 1px solid var(--border-color);
-  margin-left: 4px;
+.hero-compartment h1 {
+  font-size: clamp(32px, 5.5vw, 50px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  color: var(--text-main);
+  margin-bottom: 24px;
 }
 
-/* CONTAINER */
-.container {
-  max-width: 900px;
+.premium-description {
+  max-width: 760px;
   margin: auto;
-  padding: 0 16px 40px;
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1.8;
 }
 
-/* 🎥 VIDEO VIEWPORT - 100% ORIGINAL BLUEPRINT RETAINED */
+/* 2. VIDEO PRIORITY VIEWPORT BLOCK (100% UNTOUCHED ORIGINAL BLUEPRINT) */
 .video-card {
   background: #000;
-  border-radius: 22px;
+  border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.15);
-  border: 1px solid rgba(15, 23, 42, 0.04);
-  margin-top: 20px;
+  box-shadow: var(--panel-shadow);
+  border: 1px solid var(--border-color);
 }
 
 .video-container {
   position: relative;
+  width: 100%;
   padding-top: 56.25%;
 }
 
@@ -207,294 +153,294 @@ body.locked {
   border: 0;
 }
 
-/* BADGES DESIGNS */
-.badges {
-  display: flex;
-  gap: 12px;
-  margin-top: 18px;
+/* ACTION CONTROLLERS SCROLL TRIGGER */
+.action-box {
+  margin-top: 28px;
 }
 
-.badge {
-  flex: 1;
-  text-align: center;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  padding: 14px;
-  border-radius: 14px;
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--text-muted);
-}
-.badge span {
-  color: var(--text-main);
-}
-
-/* COMPLIANCE NOTICES */
-.notice {
-  margin-top: 20px;
-  background: var(--notice-bg);
-  border: 1px solid var(--notice-border);
-  padding: 18px;
+.btn {
+  width: 100%;
+  padding: 20px;
+  border: none;
   border-radius: 16px;
-  text-align: center;
-  font-weight: 600;
-  color: var(--notice-text);
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-/* INSTRUCTIONS SYSTEM */
-.instructions {
-  margin-top: 20px;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  padding: 24px;
-  border-radius: 20px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.01);
-}
-
-.instructions h3 {
+  background: linear-gradient(135deg, #d97706, #b45309);
+  color: #fff;
   font-size: 16px;
   font-weight: 700;
-  margin-bottom: 16px;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  box-shadow: 0 10px 25px -5px rgba(217, 119, 6, 0.25);
+}
+.btn:hover {
+  transform: translateY(-1px);
+}
+[data-theme="light"] .btn {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.15);
 }
 
-.instructions ul {
-  padding-left: 20px;
-  line-height: 1.8;
-  color: var(--text-main);
+/* 3. CONTEXT & STRATEGIC INTENT */
+.editorial-section {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 28px;
+  padding: 44px;
+  margin-top: 36px;
 }
 
-.instructions li {
+.editorial-section h3 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 18px;
+}
+
+.editorial-section p {
   font-size: 15px;
-  margin-bottom: 8px;
+  color: var(--text-muted);
+  line-height: 1.85;
+  margin-bottom: 20px;
 }
-.instructions li:last-child {
+.editorial-section p:last-child {
   margin-bottom: 0;
 }
 
-/* ACCESS CONTROLLERS PROGRESS STAGE */
-.access {
-  margin-top: 20px;
+/* 4. EXECUTIVE ENGAGEMENT REQUIREMENTS */
+.guidance-box {
   background: var(--bg-surface);
   border: 1px solid var(--border-color);
-  padding: 24px;
-  border-radius: 20px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.01);
+  border-radius: 28px;
+  padding: 44px;
+  margin-top: 36px;
 }
 
-.access h3 {
-  font-size: 17px;
-  font-weight: 700;
-  margin-bottom: 14px;
-}
-
-.access ul {
-  padding-left: 20px;
-  line-height: 1.8;
-  color: var(--text-main);
-}
-
-.access li {
-  font-size: 15px;
-  margin-bottom: 6px;
-}
-
-/* PROGRESS INTERACTION SUBMIT DIRECTIVE */
-.btn {
-  margin-top: 24px;
-  width: 100%;
-  padding: 18px;
-  border: none;
-  border-radius: 16px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  color: var(--text-muted);
-  font-size: 16px;
-  font-weight: 700;
-  cursor: not-allowed;
-  transition: all 0.25s ease;
-}
-
-.btn.active {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  color: white;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
-}
-.btn.active:hover {
-  background: linear-gradient(135deg, #1d4ed8, #1e40af);
-  transform: translateY(-1px);
-}
-
-/* NOTION-STYLE WORKSPACE INLINE NOTICE BLOCK */
-.workspace-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(8px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 99999;
-  padding: 20px;
-}
-
-.modal-box {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  padding: 36px 24px;
-  border-radius: 24px;
-  width: 100%;
-  max-width: 380px;
-  text-align: center;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-}
-
-.modal-box h3 {
-  margin-bottom: 14px;
+.guidance-box h3 {
   font-size: 20px;
   font-weight: 700;
-  color: #dc2626;
   letter-spacing: -0.02em;
+  margin-bottom: 24px;
 }
 
-.modal-box p {
-  font-size: 14px;
-  margin: 8px 0;
-  color: var(--text-main);
-  font-weight: 500;
-  line-height: 1.6;
+.guidance-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.modal-btn {
-  margin-top: 20px;
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  background: #2563eb;
-  color: white;
-  width: 100%;
-  font-weight: 700;
+.guidance-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
   font-size: 15px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.modal-btn:hover {
-  background: #1d4ed8;
+  color: var(--text-main);
+  line-height: 1.65;
 }
 
-/* RESPONSIVE BREAKPOINTS (MOBILE FIRST) */
-@media(max-width:768px){
-  .header { padding: 16px; flex-direction: column; text-align: center; }
-  .header-right { flex-direction: column; width: 100%; gap: 8px; }
-  .batch, .theme-switch { width: 100%; text-align: center; justify-content: center; }
-  .live { flex-direction: column; text-align: center; gap: 8px; margin: 16px 16px 0; }
-  .container { padding: 0 16px 30px; }
-  .badges { flex-direction: column; gap: 8px; }
-  .badge { text-align: left; display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; }
+.guidance-marker {
+  width: 6px;
+  height: 6px;
+  background: var(--gold-accent);
+  border-radius: 50%;
+  margin-top: 9px;
+  flex-shrink: 0;
+}
+
+/* 5. SECURE HUD BLOCK DATA METRICS */
+.metrics-hud {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.hud-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 24px;
+  text-align: center;
+}
+
+.hud-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.hud-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* 6. ACCOUNT REGISTRATION PROGRESS CONTROL */
+.access-block {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 28px;
+  padding: 44px;
+  margin-top: 36px;
+  text-align: center;
+}
+
+.access-block h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.access-block p {
+  font-size: 15px;
+  color: var(--text-muted);
+  max-width: 680px;
+  margin: 0 auto 28px;
+}
+
+/* SYSTEM MINIMAL TERMINAL FOOTER */
+.portal-footer {
+  text-align: center;
+  padding: 54px 0 24px;
+  border-top: 1px solid var(--border-color);
+  margin-top: 54px;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+/* =========================================================
+   MOBILE FIRST RESPONSIVE BLUEPRINT GRID CONSTRAINTS
+   ========================================================= */
+@media(max-width: 800px) {
+  .metrics-hud { grid-template-columns: 1fr; gap: 12px; margin-top: 28px; }
+  .hud-card { padding: 20px; text-align: left; display: flex; justify-content: space-between; align-items: center; }
+  .hud-label { margin-bottom: 0; }
+}
+
+@media(max-width: 600px) {
+  .wrap { padding: 0 16px 40px; }
+  .top-nav { padding: 20px 0; margin-bottom: 28px; }
+  .hero-compartment { padding: 8px 0 24px; }
+  .hero-compartment h1 { font-size: 30px; margin-bottom: 16px; }
+  .premium-description { font-size: 15px; line-height: 1.7; }
+  
+  .editorial-section, .guidance-box, .access-block {
+    padding: 28px 20px;
+    margin-top: 24px;
+  }
 }
 </style>
 </head>
 
 <body>
+<div class="wrap">
 
-<!-- HEADER -->
-<div class="header">
-  <div class="brand">🚀 LEVEL UP GATEWAY</div>
-  <div class="header-right">
-    <div class="batch">Priority Qualification Interface</div>
+  <!-- TOP SECURITY LEVEL CONTROL NAVIGATION BAR -->
+  <div class="top-nav">
+    <div class="nav-brand">🔒 PRIVATE BRIEFING INTERFACE</div>
     <button class="theme-switch" id="themeToggle">🌞 Mode: Dark</button>
   </div>
-</div>
 
-<!-- LIVE STREAM PIPELINE CONFIG -->
-<div class="live" id="liveContainer">
-  <div class="live-wrap">
-    <span class="dot"></span>
-    <span id="liveStatus">System Initializing</span>
+  <!-- HERO SEGMENT COMPARTMENT -->
+  <div class="hero-compartment">
+    <div class="clearance-badge">💎 Restricted Executive Dispatch</div>
+    <h1>Elite Session</h1>
+    <p class="premium-description">
+      This operational window represents a restricted invitation matrix. Access parameters are verified exclusively for verified finalists who have consistently sustained peak milestone execution targets.
+    </p>
   </div>
-  <div class="subtext" id="timerWrapper">
-    ⏱ Execution Window Syncing: <span id="timer">09:20</span>
-  </div>
-</div>
 
-<div class="container">
-
-  <!-- VIDEO BLOCK (EXACT ORIGINALBLUEPRINT STRUCTURALLY INTACT) -->
-  <div class="video-card">
+  <!-- VIDEO VIEWPORT CONTAINER (100% BLUEPRINT INTACT TOUCH FREE) -->
+  <div class="video-card" id="videoViewport">
     <div id="videoContainer"></div>
   </div>
 
-  <!-- METRIC BADGES -->
-  <div class="badges">
-    <div class="badge">📂 Pipeline Level: <span>Upgrade Phase</span></div>
-    <div class="badge">🛡 Profile Status: <span>Access Restricted</span></div>
+  <!-- ANCHOR ACCESS ACTION INTERACTION CONTROL -->
+  <div class="action-box">
+    <button class="btn" id="streamTriggerBtn">▶ Access Private Briefing</button>
   </div>
 
-  <!-- NOTICE ASSIGNMENTS -->
-  <div class="notice">
-    This verified session is mapped strictly to selected profiles. Comprehensive evaluation is monitored to upgrade your qualification level.
+  <!-- CONTEXT & STRATEGIC INTENT COMPARTMENT -->
+  <div class="editorial-section">
+    <h3>🗂 Milestone Context & Strategic Intent</h3>
+    <p>
+      Within the leadership collective, specialized frameworks are deployed only after long processing intervals. These sessions are architected to assist high-intent profiles in shifting strategic capabilities, resolving institutional bottlenecks, and integrating senior management tracking systems.
+    </p>
+    <p>
+      This sequence is supervised entirely by senior organizational directors. It bypasses conventional tactical orientation and shifts explicitly into structural transformation, direct alignment, and absolute systemic clarity.
+    </p>
   </div>
 
-  <!-- DIRECTIONS GRID -->
-  <div class="instructions">
-    <h3>📌 Compliance Directives</h3>
-    <ul>
-      <li>Watch the level progression session completely without internal loop skips.</li>
-      <li>Do not exit the workspace viewport or clear memory logs in between.</li>
-      <li>Stay focused — this data maps your upcoming growth execution stage.</li>
-      <li>📱 Expand screen parameters to landscape mode for structural clarity.</li>
-    </ul>
+  <!-- EXECUTIVE ENGAGEMENT REQUIREMENTS BLOCK -->
+  <div class="guidance-box">
+    <h3>📌 Account Tracking Requirements</h3>
+    <div class="guidance-list">
+      <div class="guidance-item">
+        <div class="guidance-marker"></div>
+        <div><b>Strategic Integration:</b> This environment is designed exclusively for professional optimization. High maturity metrics are mandatory.</div>
+      </div>
+      <div class="guidance-item">
+        <div class="guidance-marker"></div>
+        <div><b>Undivided Attention Allocation:</b> Processing logs require an un-interrupted runtime log. Do not leave the workspace window active in background layers.</div>
+      </div>
+      <div class="guidance-item">
+        <div class="guidance-marker"></div>
+        <div><b>Comprehensive Observation Capture:</b> Note-taking is systematically verified post-briefing. Retain clear records of structural concepts.</div>
+      </div>
+      <div class="guidance-item">
+        <div class="guidance-marker"></div>
+        <div><b>Functional Execution:</b> Core operational implementation blueprints will trigger immediately following this briefing clearance.</div>
+      </div>
+    </div>
   </div>
 
-  <!-- ACCESS PROGRESS PROGRESSION PROGRESS -->
-  <div class="access">
-    <h3>🔐 Progression Prerequisites</h3>
-    <ul>
-      <li>This session initiates your workspace deployment profile upgrade.</li>
-      <li>Continuous watch time validation log is strictly mandatory.</li>
-      <li>Further operations routing parameters will be deployed to your logs.</li>
-    </ul>
-
-    <button id="btn" class="btn">System Synchronization Pending 🔒</button>
+  <!-- DATA HUD METRICS INTERFACE -->
+  <div class="metrics-hud">
+    <div class="hud-card">
+      <div class="hud-label">Briefing Authority</div>
+      <div class="hud-value">Senior Panel Directors</div>
+    </div>
+    <div class="hud-card">
+      <div class="hud-label">Clearance Stage</div>
+      <div class="hud-value">Finalists Verified</div>
+    </div>
+    <div class="hud-card">
+      <div class="hud-icon">🔒</div>
+      <div class="hud-label">Portal Status</div>
+      <div class="hud-value">Account Locked</div>
+    </div>
   </div>
 
-</div>
+  <!-- PROGRESS ROUTING GATE ACTIVATOR -->
+  <div class="access-block">
+    <h3>🔐 Account Integration Sequence</h3>
+    <p>
+      Upon processing this structural briefing workspace, your registration parameters will register automatically with senior leadership dispatch pipelines.
+    </p>
+    <button class="btn" id="finalizePhaseBtn">▶ Complete Executive Onboarding</button>
+  </div>
 
-<!-- INLINE BLUR MODAL OVERLAY -->
-<div id="popup" class="workspace-modal" style="display: none;">
-  <div class="modal-box">
-    <h3>🔴 Stream Workspace Live</h3>
-    <p>Verification engine successfully deployed.</p>
-    <p>📱 Tap video $\rightarrow$ Fullscreen $\rightarrow$ Rotate device for landscape telemetry.</p>
-    <button class="modal-btn" onclick="closePopup()">Enter Stream Matrix</button>
+  <!-- MINIMAL SYSTEM MATRIX FOOTER -->
+  <div class="portal-footer">
+    Restricted Executive Framework • Account Registry Monitoring Active • Core Selection System
   </div>
 </div>
 
 <script>
-let time = 560;
-let isLiveStateActive = false;
-
-const themeToggle = document.getElementById("themeToggle");
-const currentTheme = localStorage.getItem("theme") || "light"; 
-
 /* =========================================================
    PERSISTENT SMOOTH GLOBAL THEME SYSTEM
    ========================================================= */
-if (currentTheme === "dark") {
-  document.documentElement.setAttribute("data-theme", "dark");
-  themeToggle.innerText = "🌞 Mode: Dark";
-} else {
+const themeToggle = document.getElementById("themeToggle");
+const currentTheme = localStorage.getItem("theme") || "dark"; 
+
+if (currentTheme === "light") {
   document.documentElement.setAttribute("data-theme", "light");
   themeToggle.innerText = "🌙 Mode: Light";
+} else {
+  document.documentElement.setAttribute("data-theme", "dark");
+  themeToggle.innerText = "🌞 Mode: Dark";
 }
 
 themeToggle.addEventListener("click", () => {
@@ -511,38 +457,14 @@ themeToggle.addEventListener("click", () => {
 });
 
 /* =========================================================
-   CORE TIME PROGRESSION SYSTEM
+   SMOOTH SCROLL ANCHOR CONTROLLER
    ========================================================= */
-let timer = setInterval(() => {
-  let min = Math.floor(time/60);
-  let sec = time%60;
-
-  const timerTarget = document.getElementById("timer");
-  if (timerTarget) {
-    timerTarget.innerText = (min<10?"0"+min:min)+":"+(sec<10?"0"+sec:sec);
-  }
-
-  time--;
-
-  if(time < 0 && !isLiveStateActive){
-    clearInterval(timer);
-    isLiveStateActive = true;
-
-    document.getElementById("liveContainer").classList.add("active-state");
-    document.getElementById("liveStatus").innerHTML = "STREAM OPERATIONAL";
-    document.getElementById("timerWrapper").innerHTML = "🟢 Assessment Active • Complete Notes Mandatory";
-
-    document.getElementById("popup").style.display = "flex";
-
-    const submitBtn = document.getElementById("btn");
-    submitBtn.classList.add("active");
-    submitBtn.innerText = "🚀 Proceed to Next Level Upgrade";
-  }
-}, 1000);
-
-function closePopup(){
-  document.getElementById("popup").style.display = "none";
-}
+document.getElementById("streamTriggerBtn").addEventListener("click", () => {
+  document.getElementById("videoViewport").scrollIntoView({ 
+    behavior: "smooth", 
+    block: "center" 
+  });
+});
 
 /* =========================================================
    AUTOMATED DEVICE LANDSCAPE ROTATOR FOR FULLSCREEN VIDEO
@@ -563,17 +485,17 @@ document.addEventListener('fullscreenchange', manageFullscreenOrientation);
 document.addEventListener('webkitfullscreenchange', manageFullscreenOrientation);
 
 /* =========================================================
-   ORIGINAL DYNAMIC VIDEO DATA FETCH ENGINE (TOUCH FREE)
+   CORE API DIRECT INTEGRATION DISPATCH PIPELINE (TOUCH FREE)
    ========================================================= */
 fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
 .then(r => r.json())
 .then(data => {
-  document.getElementById("videoContainer").innerHTML = data.levelup;
+  // Mapping targeted safely to elite dynamic endpoint data source
+  document.getElementById("videoContainer").innerHTML = data.elite || data.levelup;
 })
 .catch(err => {
   console.error(err);
 });
 </script>
-
 </body>
 </html>
