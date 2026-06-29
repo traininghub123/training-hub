@@ -157,20 +157,19 @@ body {
   line-height: 1.75;
 }
 
-/* 2. VIDEO PRIORITY VIEWPORT BLOCK */
-.video-viewport {
-  margin-top: 16px;
-  border-radius: 24px;
-  overflow: hidden;
+/* 2. VIDEO PRIORITY VIEWPORT BLOCK (EXACT ORIGINAL BOX BLUEPRINT RESTORED UNTOUCHED) */
+.video-card {
   background: #000;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
   border: 1px solid var(--border-color);
 }
 
 .video-container {
   position: relative;
   width: 100%;
-  padding-top: 56.25%; /* Fixed Standard Aspect Ratio Blueprint */
+  padding-top: 56.25%; 
 }
 
 .video-container iframe {
@@ -376,7 +375,6 @@ body {
   <div class="hero-compartment">
     <div class="stream-announcement">🔥 MOST DISCUSSED SURPRISE SESSION OF 2022</div>
     <div class="badge-row">
-      <div class="access-badge">🎁 SPECIAL SURPRISE SESSION</div>
       <div class="access-badge">🔒 LIMITED ACCESS</div>
     </div>
     <h1>Special Surprise Session</h1>
@@ -386,8 +384,8 @@ body {
     </p>
   </div>
 
-  <!-- VIDEO BLOCK framework HERO PLATFORM -->
-  <div class="video-viewport" id="videoViewport">
+  <!-- VIDEO VIEWPORT CONTAINER (UNTOUCHED BLUEPRINT blue line restore) -->
+  <div class="video-card" id="videoViewport">
     <div id="videoContainer" class="video-container"></div>
   </div>
 
