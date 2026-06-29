@@ -3,50 +3,205 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Launchpad Day 2</title>
+<title>Launchpad Day 3</title>
+
+<!-- Corporate Typography Integration -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-body {
+/* =========================================================
+   CORE CONFIGURATION & VARIABLE ARCHITECTURE (THEME ENGINE)
+   ========================================================= */
+:root {
+  --bg-body: #f8fafc;
+  --bg-surface: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --bg-pill: #f1f5f9;
+  --header-grad: linear-gradient(135deg, #0f172a, #1e293b);
+  --urgency-bg: #fef2f2;
+  --urgency-border: #fee2e2;
+  --urgency-text: #991b1b;
+}
+
+[data-theme="dark"] {
+  --bg-body: #0b0f19;
+  --bg-surface: #131c2e;
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --border-color: #1e293b;
+  --bg-pill: #1e293b;
+  --header-grad: linear-gradient(135deg, #020617, #0f172a);
+  --urgency-bg: rgba(239, 68, 68, 0.06);
+  --urgency-border: rgba(239, 68, 68, 0.2);
+  --urgency-text: #ef4444;
+}
+
+*{
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #eef2f7;
-  color: #1f2937;
+  padding: 0;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
-/* Header */
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg-body);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+/* HIGH-END CORPORATE HEADER */
 .header {
-  background: #ffffff;
-  padding: 22px;
-  text-align: center;
-  font-size: 26px;
-  font-weight: 700;
-  border-bottom: 1px solid #e5e7eb;
+  background: var(--header-grad);
+  padding: 20px 24px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
 }
 
-/* Container */
+.brand {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.batch {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* INTERACTIVE THEME SWITCH CONTROLLER */
+.theme-switch {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.theme-switch:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* PREMIUM LIVE STATUS BAR */
+.status-bar {
+  max-width: 1100px;
+  margin: 24px auto 0;
+  background: var(--bg-surface);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  padding: 16px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
+}
+
+.live-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 15px;
+  color: #10b981;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+  animation: pulseBlink 2s infinite;
+}
+
+@keyframes pulseBlink {
+  0%, 100% { transform: scale(0.95); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.5; }
+}
+
+.viewer {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.viewer span {
+  color: var(--text-main);
+  font-weight: 700;
+  background: var(--bg-pill);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* CONTAINER */
 .container {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: auto;
-  padding: 24px;
+  padding: 0 22px 40px;
 }
 
-/* Urgency Box */
+/* URGENCY ALERT BOX */
 .urgency {
-  background: #fee2e2;
-  color: #991b1b;
-  padding: 16px;
-  border-radius: 12px;
+  background: var(--urgency-bg);
+  border: 1px solid var(--urgency-border);
+  color: var(--urgency-text);
+  padding: 16px 20px;
+  border-radius: 14px;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-top: 24px;
+  font-size: 14px;
   text-align: center;
 }
 
-/* Video Card */
+/* INFO SYSTEM BAR */
+.info {
+  background: var(--bg-surface);
+  border-radius: 18px;
+  padding: 22px;
+  margin: 20px 0;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.01);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 14px;
+}
+
+/* VIDEO CONTAINER */
 .video-card {
   background: #000;
-  border-radius: 18px;
+  border-radius: 22px;
   overflow: hidden;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.15);
+  border: 1px solid rgba(15, 23, 42, 0.04);
 }
 
 .video-container {
@@ -64,119 +219,231 @@ body {
   border: 0;
 }
 
-/* Info */
-.info {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 16px;
-  font-size: 17px;
-  font-weight: 600;
-}
-
-/* Instructions */
+/* COMPLIANCE INSTRUCTIONS BOX */
 .instructions {
-  margin-top: 22px;
-  background: #ffffff;
-  padding: 22px;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  margin-top: 24px;
+  background: var(--bg-surface);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.01);
+  border: 1px solid var(--border-color);
 }
 
 .instructions h3 {
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   font-size: 20px;
-}
-
-.instructions ul {
-  padding-left: 18px;
-  line-height: 1.9;
-  font-size: 16px;
-}
-
-/* Highlight */
-.highlight {
-  margin-top: 16px;
-  padding: 16px;
-  background: #e0ecff;
-  border-radius: 12px;
-  font-weight: 600;
-  text-align: center;
-}
-
-/* CTA Button */
-.btn {
-  margin-top: 24px;
-  width: 100%;
-  padding: 18px;
-  border-radius: 12px;
-  border: none;
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: #fff;
-  font-size: 19px;
   font-weight: 700;
 }
 
-/* Mobile */
-@media(max-width:600px){
-  .header {
-    font-size: 22px;
-  }
+.instructions ul {
+  padding-left: 20px;
+  line-height: 2;
+  color: var(--text-main);
+  font-size: 15px;
+}
+
+.instructions li {
+  margin-bottom: 4px;
+}
+
+.highlight {
+  margin-top: 20px;
+  background: rgba(16, 185, 129, 0.04);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+  color: #059669;
+  padding: 18px;
+  border-radius: 14px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+[data-theme="dark"] .highlight {
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+/* GREEN HIGH-END INTERACTIVE CALL TO ACTION BUTTON */
+.btn {
+  margin-top: 28px;
+  width: 100%;
+  border: none;
+  border-radius: 16px;
+  padding: 18px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.2);
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, #059669, #047857);
+  transform: translateY(-1px);
+}
+
+/* RESPONSIVE PIPELINES */
+@media(max-width:768px){
+  .header { padding: 16px; flex-direction: column; text-align: center; }
+  .header-right { flex-direction: column; width: 100%; gap: 8px; }
+  .batch, .theme-switch { width: 100%; text-align: center; justify-content: center; }
+  .status-bar { flex-direction: column; align-items: center; text-align: center; }
+  .info { flex-direction: column; text-align: center; }
+  .container { padding: 0 16px 30px; }
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">🚀 LAUNCHPAD DAY-2</div>
+<!-- HEADER -->
+<div class="header">
+  <div class="brand">🚀 LAUNCHPAD DAY 3</div>
+  <div class="header-right">
+    <div class="batch">Execution & Work Gateway • Module 3</div>
+    <button class="theme-switch" id="themeToggle">🌓 Mode: Light</button>
+  </div>
+</div>
+
+<!-- LIVE METRICS BAR -->
+<div class="status-bar">
+  <div class="live-wrap">
+    <div class="dot"></div>
+    <span id="liveStatus">Final Training Window Operational</span>
+  </div>
+  <div class="viewer">
+    👁 Live: <span id="viewerCount">--</span> Partners Streaming
+  </div>
+</div>
 
 <div class="container">
 
-<div class="urgency">
-⚠️ Limited Slots Available — Only Serious Candidates Will Proceed Further
+  <!-- URGENCY MESSAGE BLOCK -->
+  <div class="urgency">
+    ⚠️ Limited Slots Available — Only Dedicated Partners Will Proceed Further
+  </div>
+
+  <!-- INFO HUB BAR -->
+  <div class="info">
+    <span><b>📘 Module 3 • Execution Training</b></span>
+    <span><b>⏱ Final Session Open</b></span>
+  </div>
+
+  <!-- VIDEO VIEWPORT -->
+  <div class="video-card">
+    <div id="videoContainer"></div>
+  </div>
+
+  <!-- COMPLIANCE INSTRUCTIONS BOX -->
+  <div class="instructions">
+    <h3>📌 Final Instructions</h3>
+    <ul>
+      <li>This is the final and most important training module</li>
+      <li>Watch the complete session with full attention</li>
+      <li>Do not skip any part of the training</li>
+      <li>This module determines your next level workflow access</li>
+      <li>Only committed partners will proceed further to active projects</li>
+    </ul>
+
+    <div class="highlight">
+      🎯 A final verification code will be shown in this session <br><br>
+      📩 Share the code with your mentor to confirm your completion <br><br>
+      🚀 After verification, you will receive guidance to start your work
+    </div>
+  </div>
+
+  <button class="btn">🚀 Start Your Journey</button>
+
 </div>
-
-<div class="video-card">
-<div id="videoContainer"></div>
-</div>
-
-<div class="info">
-<span>📘 Module 3 • Execution Training</span>
-<span>⏱ Final Session</span>
-</div>
-
-<div class="instructions">
-<h3>📌 Final Instructions</h3>
-
-<ul>
-<li>This is the final and most important module</li>
-<li>Watch the complete session with full attention</li>
-<li>Do not skip any part of the training</li>
-<li>This module determines your next level access</li>
-<li>Only committed candidates will proceed further</li>
-</ul>
-
-<div class="highlight">
-🎯 A final verification code will be shown in this session <br><br>
-📩 Share the code with your mentor to confirm your completion <br><br>
-🚀 After verification, you will receive guidance to start your work
-</div>
-
-</div>
-
-<button class="btn">🚀 Start Your Journey</button>
-
-</div>
-
 
 <script>
-fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
-.then(r => r.json())
-.then(data => {
-  document.getElementById("videoContainer").innerHTML = data.day3;
-})
-.catch(err => {
-  console.error(err);
+/* =========================================================
+   PERSISTENT SMART THEME CONTROL SYSTEM
+   ========================================================= */
+const themeToggle = document.getElementById("themeToggle");
+const currentTheme = localStorage.getItem("theme") || "light";
+
+if (currentTheme === "dark") {
+  document.documentElement.setAttribute("data-theme", "dark");
+  themeToggle.innerText = "🌞 Mode: Dark";
+} else {
+  document.documentElement.setAttribute("data-theme", "light");
+  themeToggle.innerText = "🌙 Mode: Light";
+}
+
+themeToggle.addEventListener("click", () => {
+  let theme = document.documentElement.getAttribute("data-theme");
+  if (theme === "dark") {
+    document.documentElement.setAttribute("data-theme", "light");
+    themeToggle.innerText = "🌙 Mode: Light";
+    localStorage.setItem("theme", "light");
+  } else {
+    document.documentElement.setAttribute("data-theme", "dark");
+    themeToggle.innerText = "🌞 Mode: Dark";
+    localStorage.setItem("theme", "dark");
+  }
 });
+
+/* =========================================================
+   GENUINE ZOOM/YOUTUBE-STYLE VIEWER FLUCTUATION ENGINE (24-HOURS)
+   ========================================================= */
+let baseViewers = 62;
+
+function triggerViewerFluctuation() {
+  const shifts = [-2, -1, 0, 1, 1, 2];
+  const change = shifts[Math.floor(Math.random() * shifts.length)];
+  
+  baseViewers = Math.min(82, Math.max(50, baseViewers + change));
+  
+  const targetBadge = document.getElementById("viewerCount");
+  if (targetBadge) targetBadge.innerText = baseViewers;
+}
+
+(function dynamicViewerLoop() {
+  const customInterval = Math.floor(Math.random() * (8000 - 4000 + 1)) + 4000;
+  setTimeout(() => {
+    triggerViewerFluctuation();
+    dynamicViewerLoop();
+  }, customInterval);
+})();
+triggerViewerFluctuation();
+
+/* =========================================================
+   AUTOMATED DEVICE LANDSCAPE ROTATOR FOR FULLSCREEN VIDEO
+   ========================================================= */
+function manageFullscreenOrientation() {
+  const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
+  if (isFullscreen) {
+    if (screen.orientation && screen.orientation.lock) {
+      screen.orientation.lock('landscape').catch(() => {});
+    }
+  } else {
+    if (screen.orientation && screen.orientation.unlock) {
+      screen.orientation.unlock();
+    }
+  }
+}
+document.addEventListener('fullscreenchange', manageFullscreenOrientation);
+document.addEventListener('webkitfullscreenchange', manageFullscreenOrientation);
+
+/* =========================================================
+   ORIGINAL DYNAMIC VIDEO DATA FETCH ENGINE UNTOUCHED
+   ========================================================= */
+function loadSecureLaunchStream() {
+  fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById("videoContainer").innerHTML = data.day3;
+  })
+  .catch(err => {
+    console.error(err);
+  });
+}
+
+loadSecureLaunchStream();
 </script>
 </body>
 </html>
