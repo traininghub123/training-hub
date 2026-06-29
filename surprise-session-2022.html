@@ -2,26 +2,26 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Special Surprise Session</title>
 
-<!-- Premium Executive Typography -->
+<!-- Premium Executive Typography Scale -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 /* =========================================================
-   UX DYNAMIC THEME ENGINE & CUSTOM VARIABLE MATRIX
+   UX DYNAMIC THEME SYSTEM & TOKENS (STRIPE/NOTION INSPIRED)
    ========================================================= */
 :root {
-  --bg-body: #060a13;
-  --bg-surface: #0f172a;
-  --bg-card: #1e293b;
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --border-color: rgba(255, 255, 255, 0.06);
+  --bg-body: #030712;
+  --bg-surface: #0b0f19;
+  --bg-card: #111827;
+  --text-main: #f9fafb;
+  --text-muted: #9ca3af;
+  --border-color: rgba(255, 255, 255, 0.05);
   --gold-accent: #f59e0b;
-  --gold-glow: rgba(245, 158, 11, 0.15);
-  --ribbon-grad: linear-gradient(135deg, #f59e0b, #d97706);
+  --gold-glow: rgba(245, 158, 11, 0.12);
+  --header-grad: linear-gradient(135deg, #030712, #0b0f19);
 }
 
 [data-theme="light"] {
@@ -32,43 +32,43 @@
   --text-muted: #64748b;
   --border-color: #e2e8f0;
   --gold-accent: #d97706;
-  --gold-glow: rgba(217, 119, 6, 0.08);
-  --ribbon-grad: linear-gradient(135deg, #1e293b, #0f172a);
+  --gold-glow: rgba(217, 119, 6, 0.06);
+  --header-grad: linear-gradient(135deg, #ffffff, #f8fafc);
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
 }
 
-body{
+body {
   font-family: 'Inter', -apple-system, sans-serif;
   background: var(--bg-body);
   color: var(--text-main);
   line-height: 1.6;
-  padding-bottom: 40px;
+  -webkit-font-smoothing: antialiased;
 }
 
-.wrap{
-  max-width: 960px;
+.wrap {
+  max-width: 1000px;
   margin: auto;
-  padding: 0 20px;
+  padding: 0 24px 60px;
 }
 
-/* TOP PERSISTENT EXECUTIVE HEADER */
-.topbar {
+/* TOP APPLICATION NAVIGATION BAR */
+.top-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 0 14px;
+  padding: 24px 0;
   border-bottom: 1px solid var(--border-color);
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
-.portal-brand {
-  font-size: 14px;
+.nav-brand {
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--text-muted);
@@ -76,7 +76,7 @@ body{
 }
 
 .theme-switch {
-  background: var(--bg-card);
+  background: var(--bg-surface);
   border: 1px solid var(--border-color);
   color: var(--text-main);
   padding: 8px 16px;
@@ -87,183 +87,278 @@ body{
   display: flex;
   align-items: center;
   gap: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
 }
 .theme-switch:hover {
   border-color: var(--gold-accent);
 }
 
-/* PREMIUM DOCUMENTARY RIBBON */
-.ribbon{
-  background: var(--ribbon-grad);
-  color: #fff;
-  padding: 14px 20px;
-  border-radius: 16px;
+/* 1. HERO SECTION */
+.hero-compartment {
   text-align: center;
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.05em;
-  margin-bottom: 24px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 16px 0 32px;
 }
 
-/* HERO COMPARTMENT */
-.hero{
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-radius: 28px;
-  padding: 40px 30px;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.02);
-}
-
-.badge{
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 16px;
-  border-radius: 999px;
-  background: var(--gold-glow);
-  border: 1px solid var(--gold-accent);
-  color: var(--gold-accent);
-  font-weight: 700;
+.stream-announcement {
+  display: inline-block;
   font-size: 12px;
+  font-weight: 700;
   letter-spacing: 0.06em;
-  margin-bottom: 20px;
+  color: var(--gold-accent);
+  background: var(--gold-glow);
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  margin-bottom: 24px;
 }
 
-h1{
-  font-size: clamp(26px, 5vw, 42px);
+.badge-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.access-badge {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: var(--border-color);
+  color: var(--text-main);
+  padding: 4px 12px;
+  border-radius: 6px;
+}
+
+.hero-compartment h1 {
+  font-size: clamp(28px, 5vw, 44px);
   font-weight: 800;
   letter-spacing: -0.03em;
-  line-height: 1.2;
+  line-height: 1.15;
+  color: var(--text-main);
   margin-bottom: 20px;
 }
 
-.sub{
+.meta-host-line {
+  font-size: 14px;
+  font-weight: 600;
   color: var(--text-muted);
-  max-width: 760px;
+  margin-bottom: 24px;
+}
+.meta-host-line span {
+  color: var(--gold-accent);
+}
+
+.premium-description {
+  max-width: 780px;
   margin: auto;
   font-size: 16px;
+  color: var(--text-muted);
   line-height: 1.75;
 }
 
-/* 🎥 VIDEO VIEWPANEL - UNTOUCHED DIRECT CONTAINER FORMAT */
-.video{
-  margin-top: 28px;
+/* 2. VIDEO PRIORITY VIEWPORT BLOCK */
+.video-viewport {
+  margin-top: 16px;
   border-radius: 24px;
   overflow: hidden;
   background: #000;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.02);
-}
-
-/* INTERNAL VERIFICATION CARDS GRID */
-.cards{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
-  margin-top: 28px;
-}
-
-.card{
-  background: var(--bg-surface);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   border: 1px solid var(--border-color);
-  border-radius: 20px;
-  padding: 22px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.01);
 }
 
-.l{
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
-  margin-bottom: 8px;
-}
-
-.v{
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--text-main);
-}
-
-/* COMPLIANCE DATA CONTAINER BLOCK */
-.section{
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-radius: 24px;
-  padding: 32px;
-  margin-top: 28px;
-}
-
-.section h3{
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  margin-bottom: 20px;
-}
-
-ul{
-  padding-left: 20px;
-}
-
-li{
-  font-size: 15px;
-  color: var(--text-main);
-  margin-bottom: 12px;
-  line-height: 1.7;
-}
-
-.notice{
-  background: var(--bg-card);
-  border-left: 4px solid var(--gold-accent);
-  padding: 20px;
-  border-radius: 14px;
-  font-size: 15px;
-  line-height: 1.75;
-  color: var(--text-main);
-}
-
-/* VIP CALL TO ACTION BUTTON WITH SMOOTH ANCHOR LINK INTERACTIVE SCROLL */
-.btn{
+.video-container {
+  position: relative;
   width: 100%;
-  margin-top: 32px;
+  padding-top: 56.25%; /* Fixed Standard Aspect Ratio Blueprint */
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ACTION CONTROLLERS SYSTEM LINK BUTTON */
+.action-box {
+  margin-top: 24px;
+}
+
+.btn {
+  width: 100%;
   padding: 20px;
   border: none;
-  border-radius: 18px;
-  background: var(--ribbon-grad);
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
   color: #fff;
   font-size: 16px;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   cursor: pointer;
-  box-shadow: 0 10px 25px rgba(245, 158, 11, 0.15);
+  box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.2);
 }
-
-.btn:hover{
+.btn:hover {
   transform: translateY(-1px);
 }
-
-.footer{
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 13px;
-  font-weight: 500;
-  padding: 40px 0 20px;
-  border-top: 1px solid var(--border-color);
-  margin-top: 40px;
+[data-theme="light"] .btn {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
 }
 
-/* MOBILE FIRST RESPONSIVE SYSTEM OVERRIDES */
-@media(max-width:768px){
-  .wrap { padding: 0 16px; }
-  .topbar { padding: 16px 0 10px; }
-  .hero { padding: 30px 16px; }
-  .section { padding: 24px 16px; }
-  .cards { grid-template-columns: 1fr; gap: 12px; }
-  .card { padding: 18px; text-align: left; display: flex; justify-content: space-between; align-items: center; }
-  .l { margin-bottom: 0; }
+/* 3. WHY THIS RECORDING COMPARTMENT */
+.editorial-section {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 40px;
+  margin-top: 32px;
+}
+
+.editorial-section h3 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 18px;
+}
+
+.editorial-section p {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.editorial-section p:last-child {
+  margin-bottom: 0;
+}
+
+/* 4. IMPORTANT BEFORE YOU BEGIN BLOCK */
+.guidance-box {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 40px;
+  margin-top: 32px;
+}
+
+.guidance-box h3 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+
+.guidance-list {
+  list-style: none;
+  padding: 0;
+}
+
+.guidance-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 15px;
+  color: var(--text-main);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+.guidance-item:last-child {
+  margin-bottom: 0;
+}
+
+.guidance-icon {
+  font-size: 16px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+/* 5. RECORDING INFORMATION CARDS GRID */
+.metrics-hud {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.hud-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 24px;
+  text-align: center;
+}
+
+.hud-icon {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.hud-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.hud-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* 6. MINIMAL SYSTEM FOOTER */
+.portal-footer {
+  text-align: center;
+  padding: 48px 0 24px;
+  border-top: 1px solid var(--border-color);
+  margin-top: 48px;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* =========================================================
+   STRICT RESPONSIVE ENGINES (MOBILE FIRST PIPELINES)
+   ========================================================= */
+@media(max-width: 850px) {
+  .metrics-hud {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media(max-width: 600px) {
+  .wrap { padding: 0 16px 40px; }
+  .top-nav { padding: 20px 0; margin-bottom: 24px; }
+  .hero-compartment { padding: 8px 0 24px; }
+  .hero-compartment h1 { font-size: 26px; margin-bottom: 16px; }
+  .premium-description { font-size: 15px; line-height: 1.65; }
+  
+  .editorial-section, .guidance-box {
+    padding: 24px 20px;
+    margin-top: 24px;
+  }
+  
+  .metrics-hud {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  
+  .hud-card {
+    padding: 18px 20px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .hud-icon { margin-bottom: 0; font-size: 18px; }
+  .hud-details { display: flex; flex-direction: column; }
+  .hud-label { margin-bottom: 2px; }
 }
 </style>
 </head>
@@ -271,69 +366,111 @@ li{
 <body>
 <div class="wrap">
 
-  <!-- PORTAL TOP NAVIGATION HEADER -->
-  <div class="topbar">
-    <div class="portal-brand">🏛 INTERNAL VERIFICATION SYSTEM</div>
+  <!-- NAVIGATION TASK OVERLAY HEADER -->
+  <div class="top-nav">
+    <div class="nav-brand">🏛 INTERNAL ARCHIVE NETWORK</div>
     <button class="theme-switch" id="themeToggle">🌞 Mode: Dark</button>
   </div>
 
-  <!-- ARCHIVE TOP BANNER -->
-  <div class="ribbon">🔒 SECURE DISPATCH • RECONSTRUCTED PREPARATION RECORDING (2022)</div>
-
-  <!-- MAIN PRIVILEGE HERO HEADLINE -->
-  <div class="hero">
-    <div class="badge">🛡 PRELIMINARY SHORTLISTED STAGE</div>
-    <h1>SPECIAL SURPRISE SESSION</h1>
-    <p class="sub">
-      For years, leaders across the community have spoken about one particular surprise opportunity.<br><br>
-      To help shortlisted participants understand its structural significance, Nikhil Singh's original preparation session from 2022 has been restored for account integration.
+  <!-- HERO COMPARTMENT FRAMEWORK -->
+  <div class="hero-compartment">
+    <div class="stream-announcement">🔥 MOST DISCUSSED SURPRISE SESSION OF 2022</div>
+    <div class="badge-row">
+      <div class="access-badge">🎁 SPECIAL SURPRISE SESSION</div>
+      <div class="access-badge">🔒 LIMITED ACCESS</div>
+    </div>
+    <h1>Special Surprise Session</h1>
+    <div class="meta-host-line">Originally Recorded in 2022 • Hosted by <span>Nikhil Singh</span></div>
+    <p class="premium-description">
+      For years, leaders across the community have spoken about one particular surprise opportunity. To help shortlisted participants understand its structural significance, the original preparation database has been verified for integration.
     </p>
   </div>
 
-  <!-- VIDEO EMBED BOX (EXACT UNTOUCHED ORIGINAL LAYOUT PROPERTY MAPPED) -->
-  <div class="video" id="videoWorkspace">
-    <div id="videoContainer"></div>
+  <!-- VIDEO BLOCK framework HERO PLATFORM -->
+  <div class="video-viewport" id="videoViewport">
+    <div id="videoContainer" class="video-container"></div>
   </div>
 
-  <!-- ACCOUNT METER CARD GRID -->
-  <div class="cards">
-    <div class="card"><div class="l">🎙 Session Host</div><div class="v">Nikhil Singh</div></div>
-    <div class="card"><div class="l">📅 Recording Year</div><div class="v">2022</div></div>
-    <div class="card"><div class="l">📋 Assessment Level</div><div class="v">Restored Limited Access</div></div>
+  <!-- ACTION ANCHOR BUTTON COMPARTMENT -->
+  <div class="action-box">
+    <button class="btn" id="streamTriggerBtn">▶ Start Watching</button>
   </div>
 
-  <!-- WORKSPACE INSTRUCTIONS SECTION -->
-  <div class="section">
-    <h3>🎯 EVALUATION DIRECTIVES</h3>
-    <ul>
-      <li>Your profile tracking indicates you have successfully cleared the preliminary screening phase.</li>
-      <li>This session breaks down the cultural background and development architecture of the opportunity.</li>
-      <li>Documenting structural observations and preparing comprehensive notes is mandatory.</li>
-      <li>Consistency, professional discipline, and active tracking indicators are monitored.</li>
-      <li>Further processing gates and workspace routing parameters depend directly on this engagement level.</li>
-    </ul>
+  <!-- WHY THIS RECORDING COMPARTMENT -->
+  <div class="editorial-section">
+    <h3>📖 Context & Operational Purpose</h3>
+    <p>
+      This archive is deployed exclusively to candidates who have cleared preliminary verification parameters. It does not initiate final tasks or expose structural systems prematurely.
+    </p>
+    <p>
+      The core objective is architectural orientation. By reviewing the exact setup that structured senior operations, selected profiles acquire the exact clarity required for subsequent onboarding assignments.
+    </p>
   </div>
 
-  <!-- RISK COMPLIANCE DISCLAIMER -->
-  <div class="section">
-    <h3>⚠ MANAGEMENT DIRECTIVE</h3>
-    <div class="notice">
-      This restored recording does not deploy the surprise mechanism or the final framework itself.<br><br>
-      The absolute focus of this session is to provide you with context as to why this opportunity generated substantial alignment across senior panels.<br><br>
-      Watch the complete session without interruptions and align your verification data.
+  <!-- IMPORTANT BEFORE YOU BEGIN BLOCK -->
+  <div class="guidance-box">
+    <h3>📌 Important Before You Begin</h3>
+    <div class="guidance-list">
+      <div class="guidance-item">
+        <div class="guidance-icon">📖</div>
+        <div><b>Complete Streaming Engagement:</b> The session tracking systems expect a contiguous completion log without skipping frameworks.</div>
+      </div>
+      <div class="guidance-item">
+        <div class="guidance-icon">🔒</div>
+        <div><b>Strict Attention Retention:</b> Do not navigate away from the workspace window while the sequence is active.</div>
+      </div>
+      <div class="guidance-item">
+        <div class="guidance-icon">📝</div>
+        <div><b>Structural Note-Taking:</b> Documenting core procedural patterns is mandatory for mentor verification.</div>
+      </div>
+      <div class="guidance-item">
+        <div class="guidance-icon">🎯</div>
+        <div><b>Task Alignment:</b> Final validation prompts generated after this sequence require absolute metric execution.</div>
+      </div>
     </div>
   </div>
 
-  <!-- INTERACTIVE SCROLL CTA BUTTON -->
-  <button class="btn" id="scrollBtn">▶ STREAM SPECIAL PREPARATION SESSION</button>
+  <!-- METRICS INTERFACE HUD GRID -->
+  <div class="metrics-hud">
+    <div class="hud-card">
+      <div class="hud-icon">👥</div>
+      <div class="hud-details">
+        <div class="hud-label">Original Attendees</div>
+        <div class="hud-value">187 Profiles</div>
+      </div>
+    </div>
+    <div class="hud-card">
+      <div class="hud-icon">🎙</div>
+      <div class="hud-details">
+        <div class="hud-label">Session Host</div>
+        <div class="hud-value">Nikhil Singh</div>
+      </div>
+    </div>
+    <div class="hud-card">
+      <div class="hud-icon">📅</div>
+      <div class="hud-details">
+        <div class="hud-label">Recording Year</div>
+        <div class="hud-value">2022</div>
+      </div>
+    </div>
+    <div class="hud-card">
+      <div class="hud-icon">🔒</div>
+      <div class="hud-details">
+        <div class="hud-label">Access Type</div>
+        <div class="hud-value">Shortlisted</div>
+      </div>
+    </div>
+  </div>
 
-  <!-- RECRUITMENT HUB FOOTER -->
-  <div class="footer">Originally Recorded in 2022 • Restricted Internal Archives • System Tracking Armed</div>
+  <!-- MINIMAL PRODUCTION FOOTER -->
+  <div class="portal-footer">
+    Originally Recorded in 2022 • Restored System Architecture Dispatch • Account Restricted
+  </div>
 </div>
 
 <script>
 /* =========================================================
-   PERSISTENT SMOOTH GLOBAL THEME SYSTEM
+   THEME CONSTANTS UTILITY ROUTING LAYER
    ========================================================= */
 const themeToggle = document.getElementById("themeToggle");
 const currentTheme = localStorage.getItem("theme") || "dark"; 
@@ -360,10 +497,10 @@ themeToggle.addEventListener("click", () => {
 });
 
 /* =========================================================
-   INTERACTIVE ANCHOR ENGINE FOR SCROLL CONTROLS
+   SMOOTH SCROLL ANCHOR CONTROLLER
    ========================================================= */
-document.getElementById("scrollBtn").addEventListener("click", () => {
-  document.getElementById("videoWorkspace").scrollIntoView({ 
+document.getElementById("streamTriggerBtn").addEventListener("click", () => {
+  document.getElementById("videoViewport").scrollIntoView({ 
     behavior: "smooth", 
     block: "center" 
   });
@@ -388,7 +525,7 @@ document.addEventListener('fullscreenchange', manageFullscreenOrientation);
 document.addEventListener('webkitfullscreenchange', manageFullscreenOrientation);
 
 /* =========================================================
-   CORE ORIGINAL DATA FETCH PIPELINE (100% TOUCH-FREE)
+   CORE SECURITY INTEGRATION DISPATCH PIPELINE (TOUCH FREE)
    ========================================================= */
 fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
 .then(r => r.json())
