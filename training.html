@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>TARA Induction Portal | Master Learning Workspace</title>
 
+<!-- Corporate Typography Integration -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
@@ -244,7 +245,7 @@ body.locked{
   border-radius:999px;
 }
 
-/* VIDEO - EXACT ORIGINAL RATIO UNTOUCHED */
+/* VIDEO - EXACT ORIGINAL EMBED FORMAT */
 .video-card{
   background:#000;
   border-radius:22px;
@@ -324,7 +325,7 @@ body.locked{
   margin-bottom: 4px;
 }
 
-/* BUTTON */
+/* ACTION COMPLETION BUTTON */
 .btn{
   margin-top:28px;
   width:100%;
@@ -452,7 +453,7 @@ body.locked{
   display: none;
 }
 
-/* PREMIUM GATE LOCK OVERLAY */
+/* TIMELOCK GATE SCREEN */
 .lock-screen{
   position:fixed;
   top:0;
@@ -535,6 +536,7 @@ body.locked{
 
 <body>
 
+<!-- AUTHENTICATION POPUP -->
 <div id="authOverlay" class="auth-overlay">
   <div class="auth-card">
     <div class="auth-badge">Security Access Protocol</div>
@@ -549,9 +551,9 @@ body.locked{
     <div class="auth-input-group">
       <label>Select Session To Access</label>
       <select id="authSessionChoice" class="auth-input" onchange="togglePasscodeVisibility()">
-        <option value="1">Day 1: Foundation Session (Testing: 24h Open)</option>
-        <option value="2">Day 2: Clarification Session (Testing: 24h Open)</option>
-        <option value="3">Day 3: Execution Session (Testing: 24h Open)</option>
+        <option value="1">Day 1: Foundation Session (01:00 PM – 04:00 PM)</option>
+        <option value="2">Day 2: Clarification Session (02:00 PM – 05:00 PM)</option>
+        <option value="3">Day 3: Execution Session (03:00 PM – 06:00 PM)</option>
       </select>
     </div>
 
@@ -567,15 +569,17 @@ body.locked{
   </div>
 </div>
 
+<!-- TIME GATE LOCK SCREEN -->
 <div id="lockScreen" class="lock-screen">
   <div class="lock-box">
     <h1 id="lockTitle">⏳ Session Starts Soon</h1>
-    <p id="lockText">Today's induction sequence has not initiated yet.</p>
+    <p id="lockText">Today's induction sequence has not initiated yet.<br><br>Please wait, you will be checked into the stream workspace automatically.</p>
     <div class="lock-time" id="lockTimeWindow">⏰ Access Timing Active</div>
     <div id="startCountdown">00:00:00</div>
   </div>
 </div>
 
+<!-- HEADER -->
 <div class="topbar">
   <div class="brand">🏛 FOUNDATION SESSION</div>
   <div class="header-controls">
@@ -584,6 +588,7 @@ body.locked{
   </div>
 </div>
 
+<!-- STATUS -->
 <div class="status-bar">
   <div class="live-wrap">
     <div class="dot" id="statusDot"></div>
@@ -601,6 +606,7 @@ body.locked{
     ⚡ <b>Final Stage Active:</b> Less than 15 minutes remaining! Watch carefully as the secret passcode will be revealed shortly.
   </div>
 
+  <!-- ACCESS PROGRESS -->
   <div class="access-box">
     <div class="access-top">
       <span id="progressModuleTitle"><b>📘 Core Onboarding Phase • Module 1</b></span>
@@ -611,10 +617,12 @@ body.locked{
     </div>
   </div>
 
+  <!-- VIDEO EMBED AREA -->
   <div class="video-card">
     <div id="videoContainer"></div>
   </div>
 
+  <!-- STATS -->
   <div class="stats">
     <div class="stat">
       <div class="stat-label">Candidate Name</div>
@@ -630,6 +638,7 @@ body.locked{
     </div>
   </div>
 
+  <!-- INFO -->
   <div class="info-box">
     <h3>📌 Important Instructions</h3>
     <ul>
@@ -650,11 +659,11 @@ body.locked{
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbw79wnaUmMkr4DIHjbInzMTYHvqp5CcPIXrRukvA1kAD2bFgjq9NmDtvqDNvxsE_DrAeg/exec";
 
-// SESSION TIMING CONFIGURATION (0 to 24 for Testing)
+// PRODUCTION TIMING CONFIGURATION (REAL SLOTS)
 const SESSION_CONFIG = {
-  1: { name: "Foundation Session", start: 0, end: 24, timeStr: "Testing: 24 Hours Open", progress: "33%", streamKey: "day1_v2" },
-  2: { name: "Clarification Session", start: 0, end: 24, timeStr: "Testing: 24 Hours Open", progress: "66%", streamKey: "day2_v2" },
-  3: { name: "Execution Session", start: 0, end: 24, timeStr: "Testing: 24 Hours Open", progress: "100%", streamKey: "day3_v2" }
+  1: { name: "Foundation Session", start: 13, end: 16, timeStr: "01:00 PM – 04:00 PM Daily", progress: "33%", streamKey: "day1_v2" },
+  2: { name: "Clarification Session", start: 14, end: 17, timeStr: "02:00 PM – 05:00 PM Daily", progress: "66%", streamKey: "day2_v2" },
+  3: { name: "Execution Session", start: 15, end: 18, timeStr: "03:00 PM – 06:00 PM Daily", progress: "100%", streamKey: "day3_v2" }
 };
 
 let activeSession = 1;
@@ -665,9 +674,7 @@ let secondsWatched = 0;
 let watchTimerInterval = null;
 let isSessionCompleted = false;
 
-/* =========================================================
-   PERSISTENT SMOOTH THEME ENGINE CODE (FROM ORIGINAL FILES)
-   ========================================================= */
+/* THEME ENGINE */
 const themeToggle = document.getElementById("themeToggle");
 const currentTheme = localStorage.getItem("theme") || "light";
 
@@ -704,7 +711,11 @@ function togglePasscodeVisibility() {
 async function verifyCandidateAuthentication() {
   const identifier = document.getElementById("authIdentifier").value.trim();
   const requestedSession = parseInt(document.getElementById("authSessionChoice").value, 10);
-  const passcode = document.getElementById("authPasscode").value.trim();
+  
+  // Sanitize Passcode: Lowercase and strip all whitespace
+  const rawPasscode = document.getElementById("authPasscode").value;
+  const passcode = rawPasscode ? rawPasscode.replace(/\s+/g, "").toLowerCase() : "";
+  
   const errorElement = document.getElementById("authError");
   const submitBtn = document.getElementById("authSubmitBtn");
 
@@ -742,6 +753,7 @@ async function verifyCandidateAuthentication() {
       document.getElementById("progressModuleTitle").innerHTML = `<b>📘 Core Onboarding Phase • Module ${activeSession}</b>`;
       document.getElementById("progressPercent").innerHTML = `<b>${SESSION_CONFIG[activeSession].progress} Progress</b>`;
       document.getElementById("progressFillBar").style.width = SESSION_CONFIG[activeSession].progress;
+      document.getElementById("lockTimeWindow").innerText = `⏰ Access Timing: ${SESSION_CONFIG[activeSession].timeStr}`;
       
       document.getElementById("authOverlay").style.display = "none";
       evaluateTimeLockEngine();
@@ -779,9 +791,34 @@ function evaluateTimeLockEngine() {
     if (statusDot) statusDot.style.background = "#10b981";
 
     if (!isVideoLoaded) loadSecureBunnyStream(cfg.streamKey);
+  } else if (hour < cfg.start) {
+    document.body.classList.add("locked");
+    lockScreen.style.display = "flex";
+    if (topCountdown) topCountdown.innerHTML = "⏳ Session Starts Soon";
+    if (trainingStatus) trainingStatus.innerText = "Scheduled";
+    if (liveStatus) liveStatus.innerText = "System Paused";
+    if (statusDot) statusDot.style.background = "#ffbc00";
+
+    const target = new Date();
+    target.setHours(cfg.start, 0, 0, 0);
+    const diff = target - now;
+
+    const h = Math.floor(diff / 3600000);
+    const m = Math.floor((diff / 60000) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("startCountdown").innerHTML =
+      `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
   } else {
     document.body.classList.add("locked");
     lockScreen.style.display = "flex";
+    document.getElementById("lockTitle").innerHTML = "🔒 Training Access Closed";
+    document.getElementById("lockText").innerHTML = "Today's batch timing has ended.<br><br>Please revisit during active training hours.";
+    document.getElementById("startCountdown").style.display = "none";
+    if (topCountdown) topCountdown.innerHTML = "🔴 Onboarding Window Closed";
+    if (trainingStatus) trainingStatus.innerText = "Closed";
+    if (liveStatus) liveStatus.innerText = "Session Expired";
+    if (statusDot) statusDot.style.background = "#ef4444";
   }
 }
 
@@ -882,9 +919,7 @@ async function markCurrentSessionCompleted(isManualClick) {
   }
 }
 
-/* =========================================================
-   EXACT STREAM FETCHER (FROM YOUR ORIGINAL FILES)
-   ========================================================= */
+/* EXACT STREAM FETCHER */
 function loadSecureBunnyStream(streamKey) {
   isVideoLoaded = true;
   fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
@@ -898,9 +933,7 @@ function loadSecureBunnyStream(streamKey) {
   });
 }
 
-/* =========================================================
-   AUTOMATED DEVICE LANDSCAPE ROTATOR (FROM YOUR ORIGINAL FILES)
-   ========================================================= */
+/* AUTOMATED DEVICE LANDSCAPE ROTATOR */
 function manageFullscreenOrientation() {
   const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
   if (isFullscreen) {
@@ -916,9 +949,7 @@ function manageFullscreenOrientation() {
 document.addEventListener('fullscreenchange', manageFullscreenOrientation);
 document.addEventListener('webkitfullscreenchange', manageFullscreenOrientation);
 
-/* =========================================================
-   GENUINE FLUCTUATION LIVE VIEWER ENGINE (FROM ORIGINAL FILES)
-   ========================================================= */
+/* GENUINE FLUCTUATION LIVE VIEWER ENGINE */
 let base = 65;
 function updateViewers(){
   let fluctuation = Math.floor(Math.random()*5)-2;
