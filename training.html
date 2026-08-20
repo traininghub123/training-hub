@@ -19,6 +19,9 @@
   --bg-pill: #f1f5f9;
   --accent-primary: #2563eb;
   --accent-hover: #1d4ed8;
+  --accent-success: #10b981;
+  --accent-warning: #f59e0b;
+  --accent-danger: #ef4444;
   --header-grad: linear-gradient(135deg, #0f172a, #1e293b);
   --shadow-card: 0 4px 20px rgba(15, 23, 42, 0.04);
 }
@@ -55,6 +58,7 @@ body.locked{
   height:100vh;
 }
 
+/* HIGH-END CORPORATE HEADER */
 .topbar{
   background: var(--header-grad);
   padding: 20px 24px;
@@ -105,6 +109,9 @@ body.locked{
   align-items: center;
   gap: 6px;
 }
+.theme-switch:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
 
 .container{
   max-width:1100px;
@@ -112,6 +119,7 @@ body.locked{
   padding: 0 22px 40px;
 }
 
+/* AUTH MODAL */
 .auth-overlay {
   position: fixed;
   top: 0;
@@ -189,6 +197,11 @@ body.locked{
   outline: none;
 }
 
+.auth-input:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
 .auth-btn {
   width: 100%;
   padding: 16px;
@@ -202,6 +215,10 @@ body.locked{
   margin-top: 10px;
 }
 
+.auth-btn:hover {
+  background: var(--accent-hover);
+}
+
 .auth-error-msg {
   color: #ef4444;
   font-size: 13px;
@@ -210,6 +227,7 @@ body.locked{
   display: none;
 }
 
+/* STATUS BAR */
 .status-bar{
   max-width:1100px;
   margin:24px auto 0;
@@ -276,6 +294,39 @@ body.locked{
   margin-right: auto;
   font-weight:600;
   border: 1px solid rgba(37, 99, 235, 0.08);
+}
+
+[data-theme="dark"] .countdown {
+  color: #60a5fa;
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+/* RETENTION NOTIFICATION POPUP (LAST 15 MINS) */
+.retention-alert {
+  display: none;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(217, 119, 6, 0.08));
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin: 18px 0;
+  color: #d97706;
+  font-size: 14px;
+  font-weight: 600;
+  align-items: center;
+  gap: 12px;
+  animation: slideDownAlert 0.5s ease forwards;
+}
+
+[data-theme="dark"] .retention-alert {
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.3);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+@keyframes slideDownAlert {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .access-box{
@@ -455,6 +506,14 @@ body.locked{
   color:#64748b;
   font-size:13px;
 }
+
+@media(max-width:768px){
+  .topbar{ justify-content:center; text-align:center; flex-direction: column; }
+  .header-controls { flex-direction: column; width: 100%; }
+  .batch, .theme-switch { width: 100%; justify-content: center; }
+  .status-bar{ flex-direction:column; text-align: center; }
+  .container { padding: 0 16px 30px; }
+}
 </style>
 </head>
 
@@ -522,6 +581,11 @@ body.locked{
 <div class="countdown" id="topCountdown">Checking Window...</div>
 
 <div class="container">
+  <!-- RETENTION ALERT BADGE -->
+  <div class="retention-alert" id="retentionBadge">
+    ⚡ <b>Final Stage Active:</b> Less than 15 minutes remaining! Watch carefully as the secret passcode will be revealed shortly.
+  </div>
+
   <div class="access-box">
     <div class="access-top">
       <span id="progressModuleTitle"><b>📘 Core Onboarding Phase • Module 1</b></span>
@@ -542,8 +606,8 @@ body.locked{
       <div class="stat-value" id="hudCandidateName" style="color:var(--accent-primary);">--</div>
     </div>
     <div class="stat">
-      <div class="stat-label">Active Watch Tracker</div>
-      <div class="stat-value" id="hudWatchTimer" style="color:#f59e0b;">Initializing...</div>
+      <div class="stat-label">Session Telemetry</div>
+      <div class="stat-value" id="hudWatchTimer" style="color:#10b981; font-size:16px;">Live Stream Engaged</div>
     </div>
     <div class="stat">
       <div class="stat-label">Training Status</div>
@@ -554,15 +618,15 @@ body.locked{
   <div class="info-box">
     <h3>📌 Important Induction Directives</h3>
     <ul>
-      <li>Watch the complete training carefully without skipping or leaving.</li>
-      <li>If you minimize or switch tabs, the watch-time counter will pause.</li>
-      <li>Once the required watch duration finishes, your session will auto-complete.</li>
-      <li>Next session access will unlock on the next calendar day.</li>
+      <li>Complete this session in one continuous sitting without switching tabs.</li>
+      <li>If you minimize or close the window, your active stream validation will restart.</li>
+      <li>The session unlock key is embedded inside the session video stream.</li>
+      <li>Next session access will strictly unlock on the next calendar day.</li>
     </ul>
   </div>
 
   <button class="btn" id="completeSessionBtn" disabled onclick="markCurrentSessionCompleted(true)">
-    🔒 Complete Training (Watching Required)
+    🔒 Session In Progress (Mandatory Stream Required)
   </button>
 </div>
 
@@ -571,6 +635,7 @@ body.locked{
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbw79wnaUmMkr4DIHjbInzMTYHvqp5CcPIXrRukvA1kAD2bFgjq9NmDtvqDNvxsE_DrAeg/exec";
 
+// SESSION CONFIGURATION (0 to 24 for testing)
 const SESSION_CONFIG = {
   1: { name: "Foundation Session", start: 0, end: 24, timeStr: "Testing: 24 Hours Open", progress: "33%", streamKey: "day1_v2" },
   2: { name: "Clarification Session", start: 0, end: 24, timeStr: "Testing: 24 Hours Open", progress: "66%", streamKey: "day2_v2" },
@@ -581,7 +646,7 @@ let activeSession = 1;
 let currentCandidate = null;
 let isVideoLoaded = false;
 let requiredSeconds = 3352;
-let secondsWatched = 0;
+let secondsWatched = 0; // Starts fresh from 0 (No LocalStorage Resume)
 let watchTimerInterval = null;
 let isSessionCompleted = false;
 
@@ -700,21 +765,17 @@ function evaluateTimeLockEngine() {
   }
 }
 
-// ANTI-CHEAT VISIBILITY WATCH TRACKER
+// ANTI-CHEAT VISIBILITY WATCH TRACKER (START FRESH ON REFRESH)
 function initWatchTracker() {
-  const storeKey = `tara_watch_${currentCandidate.phone || currentCandidate.email}_s${activeSession}`;
-  const saved = parseInt(localStorage.getItem(storeKey) || "0", 10);
-  secondsWatched = isNaN(saved) ? 0 : saved;
-
+  secondsWatched = 0;
   updateWatchTimerUI();
 
   if (watchTimerInterval) clearInterval(watchTimerInterval);
 
   watchTimerInterval = setInterval(() => {
-    // Only increment when document is visible and not minimized
+    // Only increment when document is focused and visible
     if (!document.hidden && !isSessionCompleted) {
       secondsWatched++;
-      localStorage.setItem(storeKey, secondsWatched);
       updateWatchTimerUI();
 
       if (secondsWatched >= requiredSeconds) {
@@ -733,20 +794,35 @@ function formatSecs(s) {
 function updateWatchTimerUI() {
   const timerElement = document.getElementById("hudWatchTimer");
   const btn = document.getElementById("completeSessionBtn");
+  const alertBadge = document.getElementById("retentionBadge");
   const remaining = Math.max(0, requiredSeconds - secondsWatched);
 
+  // Trigger Last 15 Minutes Alert Badge (or <= 900s)
+  if (remaining > 0 && remaining <= 900) {
+    alertBadge.style.display = "flex";
+  } else {
+    alertBadge.style.display = "none";
+  }
+
   if (remaining > 0) {
-    timerElement.innerText = `⏳ Remaining: ${formatSecs(remaining)}`;
-    timerElement.style.color = "#f59e0b";
+    // Hidden countdown from user (Only reveals in last 15 mins)
+    if (remaining <= 900) {
+      timerElement.innerText = `⏳ Final Stage: ${formatSecs(remaining)} left`;
+      timerElement.style.color = "#f59e0b";
+      btn.innerText = `🔒 Final Stage Active (${formatSecs(remaining)} left)`;
+    } else {
+      timerElement.innerText = `🟢 Streaming & Attention Verified`;
+      timerElement.style.color = "#10b981";
+      btn.innerText = `🔒 Video Watching in Progress...`;
+    }
     btn.disabled = true;
     btn.classList.remove("active-ready");
-    btn.innerText = `🔒 Video In Progress (${formatSecs(remaining)} left)`;
   } else {
-    timerElement.innerText = `✅ Watch Requirement Met`;
+    timerElement.innerText = `✅ Session Stream Completed`;
     timerElement.style.color = "#10b981";
     btn.disabled = false;
     btn.classList.add("active-ready");
-    btn.innerText = `🎉 Session Completed (Click To Re-Confirm)`;
+    btn.innerText = `🎉 Mark Session Completed & Log Attendance`;
   }
 }
 
@@ -756,7 +832,7 @@ function unlockAndAutoCompleteSession() {
   isSessionCompleted = true;
   clearInterval(watchTimerInterval);
   updateWatchTimerUI();
-  markCurrentSessionCompleted(false); // Auto-trigger backend log
+  markCurrentSessionCompleted(false); // Background auto-log
 }
 
 async function markCurrentSessionCompleted(isManualClick) {
@@ -779,7 +855,7 @@ async function markCurrentSessionCompleted(isManualClick) {
     const result = await res.json();
     if (result.success) {
       if (isManualClick) {
-        alert(`🎉 Session ${activeSession} logged successfully! Next module unlocks tomorrow.`);
+        alert(`🎉 Congratulations ${currentCandidate.name}! Module ${activeSession} logged successfully.\n\nYour next module will unlock tomorrow during its scheduled timing.`);
         window.location.reload();
       }
     }
