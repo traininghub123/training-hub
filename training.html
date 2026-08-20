@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>TARA Induction Portal | Master Learning Workspace</title>
 
-<!-- Corporate Typography Integration -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
@@ -17,13 +16,7 @@
   --text-muted: #64748b;
   --border-color: #e2e8f0;
   --bg-pill: #f1f5f9;
-  --accent-primary: #2563eb;
-  --accent-hover: #1d4ed8;
-  --accent-success: #10b981;
-  --accent-warning: #f59e0b;
-  --accent-danger: #ef4444;
   --header-grad: linear-gradient(135deg, #0f172a, #1e293b);
-  --shadow-card: 0 4px 20px rgba(15, 23, 42, 0.04);
 }
 
 [data-theme="dark"] {
@@ -33,10 +26,7 @@
   --text-muted: #94a3b8;
   --border-color: #1e293b;
   --bg-pill: #1e293b;
-  --accent-primary: #3b82f6;
-  --accent-hover: #2563eb;
   --header-grad: linear-gradient(135deg, #020617, #0f172a);
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 *{
@@ -58,6 +48,7 @@ body.locked{
   height:100vh;
 }
 
+/* HIGH-END CORPORATE HEADER */
 .topbar{
   background: var(--header-grad);
   padding: 20px 24px;
@@ -68,16 +59,13 @@ body.locked{
   flex-wrap:wrap;
   gap:12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
 }
 
 .brand{
-  font-size:20px;
-  font-weight:800;
+  font-size:22px;
+  font-weight:700;
   letter-spacing: -0.02em;
-}
-
-.brand span {
-  color: #3b82f6;
 }
 
 .header-controls {
@@ -93,6 +81,7 @@ body.locked{
   border-radius:999px;
   font-size:13px;
   font-weight:600;
+  letter-spacing: 0.01em;
 }
 
 .theme-switch {
@@ -108,111 +97,11 @@ body.locked{
   align-items: center;
   gap: 6px;
 }
-
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding: 0 22px 40px;
+.theme-switch:hover {
+  background: rgba(255, 255, 255, 0.18);
 }
 
-.auth-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(11, 15, 25, 0.88);
-  backdrop-filter: blur(8px);
-  z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-
-.auth-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-radius: 20px;
-  padding: 36px 32px;
-  width: 100%;
-  max-width: 460px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  text-align: center;
-}
-
-.auth-badge {
-  display: inline-block;
-  background: rgba(37, 99, 235, 0.1);
-  color: var(--accent-primary);
-  border: 1px solid rgba(37, 99, 235, 0.2);
-  padding: 4px 14px;
-  border-radius: 50px;
-  font-size: 12px;
-  font-weight: 700;
-  margin-bottom: 16px;
-  text-transform: uppercase;
-}
-
-.auth-card h2 {
-  font-size: 22px;
-  font-weight: 800;
-  margin-bottom: 8px;
-}
-
-.auth-card p {
-  color: var(--text-muted);
-  font-size: 14px;
-  margin-bottom: 24px;
-}
-
-.auth-input-group {
-  text-align: left;
-  margin-bottom: 16px;
-}
-
-.auth-input-group label {
-  display: block;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 6px;
-}
-
-.auth-input {
-  width: 100%;
-  padding: 14px 16px;
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-body);
-  color: var(--text-main);
-  font-size: 15px;
-  font-family: inherit;
-  outline: none;
-}
-
-.auth-btn {
-  width: 100%;
-  padding: 16px;
-  border-radius: 12px;
-  background: var(--accent-primary);
-  color: #fff;
-  border: none;
-  font-size: 15px;
-  font-weight: 700;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.auth-error-msg {
-  color: #ef4444;
-  font-size: 13px;
-  font-weight: 600;
-  margin-top: 12px;
-  display: none;
-}
-
+/* PREMIUM LIVE STATUS BAR */
 .status-bar{
   max-width:1100px;
   margin:24px auto 0;
@@ -225,7 +114,7 @@ body.locked{
   align-items:center;
   flex-wrap:wrap;
   gap:12px;
-  box-shadow: var(--shadow-card);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
 }
 
 .live-wrap{
@@ -281,6 +170,13 @@ body.locked{
   border: 1px solid rgba(37, 99, 235, 0.08);
 }
 
+[data-theme="dark"] .countdown {
+  color: #60a5fa;
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+/* RETENTION ALERT (LAST 15 MINS) */
 .retention-alert {
   display: none;
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(217, 119, 6, 0.08));
@@ -296,18 +192,32 @@ body.locked{
   animation: slideDownAlert 0.5s ease forwards;
 }
 
+[data-theme="dark"] .retention-alert {
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.3);
+  background: rgba(245, 158, 11, 0.08);
+}
+
 @keyframes slideDownAlert {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* MAIN CONTAINER */
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding: 0 22px 40px;
+}
+
+/* ACCESS BOX */
 .access-box{
   background: var(--bg-surface);
   border-radius:18px;
   padding:22px;
   margin: 20px 0;
   border:1px solid var(--border-color);
-  box-shadow: var(--shadow-card);
+  box-shadow:0 4px 16px rgba(0,0,0,0.01);
 }
 
 .access-top{
@@ -334,17 +244,30 @@ body.locked{
   border-radius:999px;
 }
 
-/* VIDEO CONTAINER CLEAN EMBED */
+/* VIDEO - EXACT ORIGINAL RATIO UNTOUCHED */
 .video-card{
   background:#000;
   border-radius:22px;
   overflow:hidden;
   box-shadow:0 18px 40px rgba(15, 23, 42, 0.15);
   border: 1px solid rgba(15, 23, 42, 0.04);
-  position: relative;
-  width: 100%;
 }
 
+.video-container{
+  position:relative;
+  padding-top:56.25%;
+}
+
+.video-container iframe{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  border:0;
+}
+
+/* EXECUTIVE STATS HUD */
 .stats{
   margin-top:24px;
   display:grid;
@@ -356,7 +279,7 @@ body.locked{
   background: var(--bg-surface);
   border-radius:16px;
   padding:20px;
-  box-shadow: var(--shadow-card);
+  box-shadow:0 4px 12px rgba(15, 23, 42, 0.02);
   border: 1px solid var(--border-color);
 }
 
@@ -365,6 +288,7 @@ body.locked{
   font-size:12px;
   font-weight: 600;
   text-transform: uppercase;
+  letter-spacing: 0.04em;
   margin-bottom:8px;
 }
 
@@ -373,12 +297,13 @@ body.locked{
   font-weight:700;
 }
 
+/* INSTRUCTIONS */
 .info-box{
   margin-top:24px;
   background: var(--bg-surface);
   border-radius:18px;
   padding:24px;
-  box-shadow: var(--shadow-card);
+  box-shadow:0 4px 16px rgba(0,0,0,0.01);
   border:1px solid var(--border-color);
 }
 
@@ -391,8 +316,15 @@ body.locked{
 .info-box ul{
   padding-left:20px;
   line-height:2;
+  color: var(--text-main);
 }
 
+.info-box li{
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+/* BUTTON */
 .btn{
   margin-top:28px;
   width:100%;
@@ -412,11 +344,115 @@ body.locked{
 }
 
 .btn.active-ready {
-  background: linear-gradient(135deg, #10b981, #059669);
+  background: linear-gradient(135deg,#10b981,#059669);
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
 }
 
+/* AUTH MODAL */
+.auth-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(11, 15, 25, 0.88);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.auth-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 36px 32px;
+  width: 100%;
+  max-width: 460px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.auth-badge {
+  display: inline-block;
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  padding: 4px 14px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.auth-card h2 {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.auth-card p {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.auth-input-group {
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+.auth-input-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-body);
+  color: var(--text-main);
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.auth-btn:hover {
+  background: #1d4ed8;
+}
+
+.auth-error-msg {
+  color: #ef4444;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 12px;
+  display: none;
+}
+
+/* PREMIUM GATE LOCK OVERLAY */
 .lock-screen{
   position:fixed;
   top:0;
@@ -431,6 +467,7 @@ body.locked{
   text-align:center;
   z-index:99999;
   padding:25px;
+  font-family: 'Inter', sans-serif;
 }
 
 .lock-box{
@@ -443,16 +480,17 @@ body.locked{
 }
 
 .lock-box h1{
-  font-size:26px;
+  font-size:30px;
   font-weight: 700;
   margin-bottom:16px;
   color: #ffbc00;
+  letter-spacing: -0.02em;
 }
 
 .lock-box p{
   line-height:1.8;
   color:#cbd5e1;
-  font-size:14px;
+  font-size:15px;
   margin-bottom: 24px;
 }
 
@@ -461,8 +499,9 @@ body.locked{
   padding:12px 20px;
   border-radius:12px;
   font-weight:600;
-  font-size: 13px;
+  font-size: 14px;
   color: #ffbc00;
+  border: 1px solid rgba(255, 188, 0, 0.2);
   display: inline-block;
 }
 
@@ -472,6 +511,7 @@ body.locked{
   font-weight:700;
   color:#fff;
   font-variant-numeric: tabular-nums;
+  letter-spacing: 1px;
 }
 
 .footer{
@@ -482,11 +522,13 @@ body.locked{
 }
 
 @media(max-width:768px){
-  .topbar{ justify-content:center; text-align:center; flex-direction: column; }
-  .header-controls { flex-direction: column; width: 100%; }
-  .batch, .theme-switch { width: 100%; justify-content: center; }
-  .status-bar{ flex-direction:column; text-align: center; }
+  .topbar{ justify-content:center; text-align:center; padding: 16px; flex-direction: column; }
+  .header-controls { flex-direction: column; width: 100%; gap: 8px; }
+  .batch, .theme-switch { width: 100%; text-align: center; justify-content: center; }
+  .status-bar{ flex-direction:column; align-items:center; text-align: center; }
   .container { padding: 0 16px 30px; }
+  .lock-box { padding: 25px 20px; }
+  .lock-box h1 { font-size: 24px; }
 }
 </style>
 </head>
@@ -535,10 +577,10 @@ body.locked{
 </div>
 
 <div class="topbar">
-  <div class="brand">🏛 <span>TARA</span> INDUCTION PORTAL</div>
+  <div class="brand">🏛 FOUNDATION SESSION</div>
   <div class="header-controls">
     <div class="batch" id="headerModuleTag">Professional Development Program • Day 1 of 3</div>
-    <button class="theme-switch" id="themeToggle">🌙 Mode: Light</button>
+    <button class="theme-switch" id="themeToggle">🌓 Mode: Light</button>
   </div>
 </div>
 
@@ -569,7 +611,6 @@ body.locked{
     </div>
   </div>
 
-  <!-- VIDEO PLAYER MOUNT AREA -->
   <div class="video-card">
     <div id="videoContainer"></div>
   </div>
@@ -577,7 +618,7 @@ body.locked{
   <div class="stats">
     <div class="stat">
       <div class="stat-label">Candidate Name</div>
-      <div class="stat-value" id="hudCandidateName" style="color:var(--accent-primary);">--</div>
+      <div class="stat-value" id="hudCandidateName" style="color:#2563eb;">--</div>
     </div>
     <div class="stat">
       <div class="stat-label">Session Telemetry</div>
@@ -590,12 +631,12 @@ body.locked{
   </div>
 
   <div class="info-box">
-    <h3>📌 Important Induction Directives</h3>
+    <h3>📌 Important Instructions</h3>
     <ul>
-      <li>Complete this session in one continuous sitting without switching tabs.</li>
-      <li>If you minimize or close the window, your active stream validation will restart.</li>
-      <li>The session unlock key is embedded inside the session video stream.</li>
-      <li>Next session access will strictly unlock on the next calendar day.</li>
+      <li>Watch the complete training carefully without skipping or leaving.</li>
+      <li>Complete this module in one sitting without switching tabs.</li>
+      <li>The verification code will appear inside the session video.</li>
+      <li>Next module access is unlocked only after complete verification.</li>
     </ul>
   </div>
 
@@ -609,7 +650,7 @@ body.locked{
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbw79wnaUmMkr4DIHjbInzMTYHvqp5CcPIXrRukvA1kAD2bFgjq9NmDtvqDNvxsE_DrAeg/exec";
 
-// TESTING CONFIGURATION (24 Hours Open)
+// SESSION TIMING CONFIGURATION (0 to 24 for Testing)
 const SESSION_CONFIG = {
   1: { name: "Foundation Session", start: 0, end: 24, timeStr: "Testing: 24 Hours Open", progress: "33%", streamKey: "day1_v2" },
   2: { name: "Clarification Session", start: 0, end: 24, timeStr: "Testing: 24 Hours Open", progress: "66%", streamKey: "day2_v2" },
@@ -624,9 +665,12 @@ let secondsWatched = 0;
 let watchTimerInterval = null;
 let isSessionCompleted = false;
 
-// THEME ENGINE
+/* =========================================================
+   PERSISTENT SMOOTH THEME ENGINE CODE (FROM ORIGINAL FILES)
+   ========================================================= */
 const themeToggle = document.getElementById("themeToggle");
-const currentTheme = localStorage.getItem("tara_theme") || "light";
+const currentTheme = localStorage.getItem("theme") || "light";
+
 if (currentTheme === "dark") {
   document.documentElement.setAttribute("data-theme", "dark");
   themeToggle.innerText = "🌞 Mode: Dark";
@@ -634,16 +678,17 @@ if (currentTheme === "dark") {
   document.documentElement.setAttribute("data-theme", "light");
   themeToggle.innerText = "🌙 Mode: Light";
 }
+
 themeToggle.addEventListener("click", () => {
   let theme = document.documentElement.getAttribute("data-theme");
   if (theme === "dark") {
     document.documentElement.setAttribute("data-theme", "light");
     themeToggle.innerText = "🌙 Mode: Light";
-    localStorage.setItem("tara_theme", "light");
+    localStorage.setItem("theme", "light");
   } else {
     document.documentElement.setAttribute("data-theme", "dark");
     themeToggle.innerText = "🌞 Mode: Dark";
-    localStorage.setItem("tara_theme", "dark");
+    localStorage.setItem("theme", "dark");
   }
 });
 
@@ -692,6 +737,7 @@ async function verifyCandidateAuthentication() {
       requiredSeconds = result.requiredSeconds || 3352;
       
       document.getElementById("hudCandidateName").innerText = currentCandidate.name;
+      document.querySelector(".brand").innerText = `🏛 ${SESSION_CONFIG[activeSession].name.toUpperCase()}`;
       document.getElementById("headerModuleTag").innerText = `Professional Development Program • Day ${activeSession} of 3`;
       document.getElementById("progressModuleTitle").innerHTML = `<b>📘 Core Onboarding Phase • Module ${activeSession}</b>`;
       document.getElementById("progressPercent").innerHTML = `<b>${SESSION_CONFIG[activeSession].progress} Progress</b>`;
@@ -836,28 +882,43 @@ async function markCurrentSessionCompleted(isManualClick) {
   }
 }
 
-// AUTOPLAY-PERMITTED STREAM LOADER
+/* =========================================================
+   EXACT STREAM FETCHER (FROM YOUR ORIGINAL FILES)
+   ========================================================= */
 function loadSecureBunnyStream(streamKey) {
   isVideoLoaded = true;
   fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
   .then(r => r.json())
   .then(data => {
-    let rawHtml = data[streamKey] || "<p style='color:#fff;text-align:center;padding:40px;'>Stream Offline</p>";
-    
-    // Inject Autoplay and Fullscreen Permissions into iframe
-    if (rawHtml.includes("<iframe")) {
-      rawHtml = rawHtml.replace(
-        "<iframe", 
-        '<iframe allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen="true"'
-      );
-    }
-
-    const container = document.getElementById("videoContainer");
-    container.innerHTML = rawHtml;
+    document.getElementById("videoContainer").innerHTML = data[streamKey];
   })
-  .catch(() => { isVideoLoaded = false; });
+  .catch(err => {
+    console.error(err);
+    isVideoLoaded = false;
+  });
 }
 
+/* =========================================================
+   AUTOMATED DEVICE LANDSCAPE ROTATOR (FROM YOUR ORIGINAL FILES)
+   ========================================================= */
+function manageFullscreenOrientation() {
+  const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
+  if (isFullscreen) {
+    if (screen.orientation && screen.orientation.lock) {
+      screen.orientation.lock('landscape').catch(() => {});
+    }
+  } else {
+    if (screen.orientation && screen.orientation.unlock) {
+      screen.orientation.unlock();
+    }
+  }
+}
+document.addEventListener('fullscreenchange', manageFullscreenOrientation);
+document.addEventListener('webkitfullscreenchange', manageFullscreenOrientation);
+
+/* =========================================================
+   GENUINE FLUCTUATION LIVE VIEWER ENGINE (FROM ORIGINAL FILES)
+   ========================================================= */
 let base = 65;
 function updateViewers(){
   let fluctuation = Math.floor(Math.random()*5)-2;
