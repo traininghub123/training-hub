@@ -19,9 +19,6 @@
   --bg-pill: #f1f5f9;
   --accent-primary: #2563eb;
   --accent-hover: #1d4ed8;
-  --accent-success: #10b981;
-  --accent-warning: #f59e0b;
-  --accent-danger: #ef4444;
   --header-grad: linear-gradient(135deg, #0f172a, #1e293b);
   --shadow-card: 0 4px 20px rgba(15, 23, 42, 0.04);
 }
@@ -58,7 +55,6 @@ body.locked{
   height:100vh;
 }
 
-/* HIGH-END CORPORATE HEADER */
 .topbar{
   background: var(--header-grad);
   padding: 20px 24px;
@@ -108,9 +104,6 @@ body.locked{
   display: flex;
   align-items: center;
   gap: 6px;
-}
-.theme-switch:hover {
-  background: rgba(255, 255, 255, 0.18);
 }
 
 .container{
@@ -197,11 +190,6 @@ body.locked{
   outline: none;
 }
 
-.auth-input:focus {
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-}
-
 .auth-btn {
   width: 100%;
   padding: 16px;
@@ -215,10 +203,6 @@ body.locked{
   margin-top: 10px;
 }
 
-.auth-btn:hover {
-  background: var(--accent-hover);
-}
-
 .auth-error-msg {
   color: #ef4444;
   font-size: 13px;
@@ -227,7 +211,6 @@ body.locked{
   display: none;
 }
 
-/* STATUS BAR */
 .status-bar{
   max-width:1100px;
   margin:24px auto 0;
@@ -296,13 +279,6 @@ body.locked{
   border: 1px solid rgba(37, 99, 235, 0.08);
 }
 
-[data-theme="dark"] .countdown {
-  color: #60a5fa;
-  background: rgba(59, 130, 246, 0.08);
-  border: 1px solid rgba(59, 130, 246, 0.15);
-}
-
-/* RETENTION NOTIFICATION POPUP (LAST 15 MINS) */
 .retention-alert {
   display: none;
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(217, 119, 6, 0.08));
@@ -316,12 +292,6 @@ body.locked{
   align-items: center;
   gap: 12px;
   animation: slideDownAlert 0.5s ease forwards;
-}
-
-[data-theme="dark"] .retention-alert {
-  color: #fbbf24;
-  border-color: rgba(251, 191, 36, 0.3);
-  background: rgba(245, 158, 11, 0.08);
 }
 
 @keyframes slideDownAlert {
@@ -362,12 +332,24 @@ body.locked{
   border-radius:999px;
 }
 
+/* FULLSCREEN ENABLED VIDEO PLAYER FRAME */
 .video-card{
   background:#000;
   border-radius:22px;
   overflow:hidden;
   box-shadow:0 18px 40px rgba(15, 23, 42, 0.15);
   border: 1px solid rgba(15, 23, 42, 0.04);
+  position: relative;
+  width: 100%;
+}
+
+.video-card iframe,
+.video-card embed,
+.video-card object {
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+  display: block;
 }
 
 .stats{
@@ -418,7 +400,6 @@ body.locked{
   line-height:2;
 }
 
-/* SMART TIMER LOCKED BUTTON STYLING */
 .btn{
   margin-top:28px;
   width:100%;
@@ -581,7 +562,6 @@ body.locked{
 <div class="countdown" id="topCountdown">Checking Window...</div>
 
 <div class="container">
-  <!-- RETENTION ALERT BADGE -->
   <div class="retention-alert" id="retentionBadge">
     ⚡ <b>Final Stage Active:</b> Less than 15 minutes remaining! Watch carefully as the secret passcode will be revealed shortly.
   </div>
@@ -596,6 +576,7 @@ body.locked{
     </div>
   </div>
 
+  <!-- VIDEO PLAYER CONTAINER -->
   <div class="video-card">
     <div id="videoContainer"></div>
   </div>
@@ -635,7 +616,6 @@ body.locked{
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbw79wnaUmMkr4DIHjbInzMTYHvqp5CcPIXrRukvA1kAD2bFgjq9NmDtvqDNvxsE_DrAeg/exec";
 
-// SESSION CONFIGURATION (0 to 24 for testing)
 const SESSION_CONFIG = {
   1: { name: "Foundation Session", start: 0, end: 24, timeStr: "Testing: 24 Hours Open", progress: "33%", streamKey: "day1_v2" },
   2: { name: "Clarification Session", start: 0, end: 24, timeStr: "Testing: 24 Hours Open", progress: "66%", streamKey: "day2_v2" },
@@ -646,7 +626,7 @@ let activeSession = 1;
 let currentCandidate = null;
 let isVideoLoaded = false;
 let requiredSeconds = 3352;
-let secondsWatched = 0; // Starts fresh from 0 (No LocalStorage Resume)
+let secondsWatched = 0;
 let watchTimerInterval = null;
 let isSessionCompleted = false;
 
@@ -765,7 +745,6 @@ function evaluateTimeLockEngine() {
   }
 }
 
-// ANTI-CHEAT VISIBILITY WATCH TRACKER (START FRESH ON REFRESH)
 function initWatchTracker() {
   secondsWatched = 0;
   updateWatchTimerUI();
@@ -773,7 +752,6 @@ function initWatchTracker() {
   if (watchTimerInterval) clearInterval(watchTimerInterval);
 
   watchTimerInterval = setInterval(() => {
-    // Only increment when document is focused and visible
     if (!document.hidden && !isSessionCompleted) {
       secondsWatched++;
       updateWatchTimerUI();
@@ -797,7 +775,6 @@ function updateWatchTimerUI() {
   const alertBadge = document.getElementById("retentionBadge");
   const remaining = Math.max(0, requiredSeconds - secondsWatched);
 
-  // Trigger Last 15 Minutes Alert Badge (or <= 900s)
   if (remaining > 0 && remaining <= 900) {
     alertBadge.style.display = "flex";
   } else {
@@ -805,7 +782,6 @@ function updateWatchTimerUI() {
   }
 
   if (remaining > 0) {
-    // Hidden countdown from user (Only reveals in last 15 mins)
     if (remaining <= 900) {
       timerElement.innerText = `⏳ Final Stage: ${formatSecs(remaining)} left`;
       timerElement.style.color = "#f59e0b";
@@ -826,13 +802,12 @@ function updateWatchTimerUI() {
   }
 }
 
-// AUTO-COMPLETE CONTROLLER
 function unlockAndAutoCompleteSession() {
   if (isSessionCompleted) return;
   isSessionCompleted = true;
   clearInterval(watchTimerInterval);
   updateWatchTimerUI();
-  markCurrentSessionCompleted(false); // Background auto-log
+  markCurrentSessionCompleted(false);
 }
 
 async function markCurrentSessionCompleted(isManualClick) {
@@ -867,15 +842,52 @@ async function markCurrentSessionCompleted(isManualClick) {
   }
 }
 
+// SECURE STREAM FETCHER WITH FULLSCREEN & AUTO-ROTATE INJECTION
 function loadSecureBunnyStream(streamKey) {
   isVideoLoaded = true;
   fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
   .then(r => r.json())
   .then(data => {
-    document.getElementById("videoContainer").innerHTML = data[streamKey] || "<p style='color:#fff;text-align:center;padding:40px;'>Stream Offline</p>";
+    let rawHtml = data[streamKey] || "<p style='color:#fff;text-align:center;padding:40px;'>Stream Offline</p>";
+    
+    // Inject Fullscreen & Device Orientation Capabilities into dynamic iframe
+    if (rawHtml.includes("<iframe")) {
+      rawHtml = rawHtml.replace(
+        "<iframe", 
+        '<iframe allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"'
+      );
+    }
+    
+    const container = document.getElementById("videoContainer");
+    container.innerHTML = rawHtml;
+
+    // Attach Mobile Landscape Rotation Controller
+    const iframe = container.querySelector("iframe");
+    if (iframe) {
+      iframe.style.width = "100%";
+      iframe.style.height = "100%";
+    }
   })
   .catch(() => { isVideoLoaded = false; });
 }
+
+// AUTO-LANDSCAPE ORIENTATION CONTROLLER ON FULLSCREEN TAP
+function handleFullscreenChange() {
+  const isFs = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+  if (isFs) {
+    if (screen.orientation && screen.orientation.lock) {
+      screen.orientation.lock("landscape").catch(() => {});
+    }
+  } else {
+    if (screen.orientation && screen.orientation.unlock) {
+      screen.orientation.unlock().catch(() => {});
+    }
+  }
+}
+
+document.addEventListener("fullscreenchange", handleFullscreenChange);
+document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
+document.addEventListener("mozfullscreenchange", handleFullscreenChange);
 
 let base = 65;
 function updateViewers(){
