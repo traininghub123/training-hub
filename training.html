@@ -334,7 +334,7 @@ body.locked{
   border-radius:999px;
 }
 
-/* VIDEO PLAYER WRAPPER */
+/* VIDEO CONTAINER CLEAN EMBED */
 .video-card{
   background:#000;
   border-radius:22px;
@@ -343,17 +343,6 @@ body.locked{
   border: 1px solid rgba(15, 23, 42, 0.04);
   position: relative;
   width: 100%;
-}
-
-.video-shield-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: calc(100% - 40px); /* Leaves bottom bar active if controls exist */
-  z-index: 5;
-  background: transparent;
-  cursor: default;
 }
 
 .stats{
@@ -580,9 +569,8 @@ body.locked{
     </div>
   </div>
 
-  <!-- VIDEO EMBED AREA -->
+  <!-- VIDEO PLAYER MOUNT AREA -->
   <div class="video-card">
-    <div class="video-shield-overlay" onclick="event.preventDefault(); event.stopPropagation();"></div>
     <div id="videoContainer"></div>
   </div>
 
@@ -621,6 +609,7 @@ body.locked{
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbw79wnaUmMkr4DIHjbInzMTYHvqp5CcPIXrRukvA1kAD2bFgjq9NmDtvqDNvxsE_DrAeg/exec";
 
+// TESTING CONFIGURATION (24 Hours Open)
 const SESSION_CONFIG = {
   1: { name: "Foundation Session", start: 0, end: 24, timeStr: "Testing: 24 Hours Open", progress: "33%", streamKey: "day1_v2" },
   2: { name: "Clarification Session", start: 0, end: 24, timeStr: "Testing: 24 Hours Open", progress: "66%", streamKey: "day2_v2" },
@@ -847,13 +836,24 @@ async function markCurrentSessionCompleted(isManualClick) {
   }
 }
 
-// ORIGINAL STREAM INJECTION MATRIX
+// AUTOPLAY-PERMITTED STREAM LOADER
 function loadSecureBunnyStream(streamKey) {
   isVideoLoaded = true;
   fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
   .then(r => r.json())
   .then(data => {
-    document.getElementById("videoContainer").innerHTML = data[streamKey] || "<p style='color:#fff;text-align:center;padding:40px;'>Stream Offline</p>";
+    let rawHtml = data[streamKey] || "<p style='color:#fff;text-align:center;padding:40px;'>Stream Offline</p>";
+    
+    // Inject Autoplay and Fullscreen Permissions into iframe
+    if (rawHtml.includes("<iframe")) {
+      rawHtml = rawHtml.replace(
+        "<iframe", 
+        '<iframe allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen="true"'
+      );
+    }
+
+    const container = document.getElementById("videoContainer");
+    container.innerHTML = rawHtml;
   })
   .catch(() => { isVideoLoaded = false; });
 }
