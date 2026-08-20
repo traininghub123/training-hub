@@ -546,9 +546,9 @@ body.locked{
     <div class="auth-input-group">
       <label>Select Session To Access</label>
       <select id="authSessionChoice" class="auth-input" onchange="togglePasscodeVisibility()">
-        <option value="1">Day 1: Foundation Session (1:00 PM – 4:00 PM)</option>
-        <option value="2">Day 2: Clarification Session (2:00 PM – 5:00 PM)</option>
-        <option value="3">Day 3: Execution Session (3:00 PM – 6:00 PM)</option>
+        <option value="1">Day 1: Foundation Session (Testing: 24h Open)</option>
+        <option value="2">Day 2: Clarification Session (Testing: 24h Open)</option>
+        <option value="3">Day 3: Execution Session (Testing: 24h Open)</option>
       </select>
     </div>
 
@@ -662,11 +662,11 @@ body.locked{
 // 🟢 API CONFIGURATION
 const API_URL = "https://script.google.com/macros/s/AKfycbw79wnaUmMkr4DIHjbInzMTYHvqp5CcPIXrRukvA1kAD2bFgjq9NmDtvqDNvxsE_DrAeg/exec";
 
-// SESSION TIME WINDOWS
+// SESSION TIME WINDOWS (OPEN FOR TESTING 0 to 24)
 const SESSION_CONFIG = {
-  1: { name: "Foundation Session", start: 13, end: 16, timeStr: "01:00 PM – 04:00 PM", progress: "33%", streamKey: "day1_v2" },
-  2: { name: "Clarification Session", start: 14, end: 17, timeStr: "02:00 PM – 05:00 PM", progress: "66%", streamKey: "day2_v2" },
-  3: { name: "Execution Session", start: 15, end: 18, timeStr: "03:00 PM – 06:00 PM", progress: "100%", streamKey: "day3_v2" }
+  1: { name: "Foundation Session", start: 0, end: 24, timeStr: "Testing: 24 Hours Open", progress: "33%", streamKey: "day1_v2" },
+  2: { name: "Clarification Session", start: 0, end: 24, timeStr: "Testing: 24 Hours Open", progress: "66%", streamKey: "day2_v2" },
+  3: { name: "Execution Session", start: 0, end: 24, timeStr: "Testing: 24 Hours Open", progress: "100%", streamKey: "day3_v2" }
 };
 
 let activeSession = 1;
@@ -756,7 +756,7 @@ async function verifyCandidateAuthentication() {
       document.getElementById("progressModuleTitle").innerHTML = `<b>📘 Core Onboarding Phase • Module ${activeSession}</b>`;
       document.getElementById("progressPercent").innerHTML = `<b>${SESSION_CONFIG[activeSession].progress} Progress</b>`;
       document.getElementById("progressFillBar").style.width = SESSION_CONFIG[activeSession].progress;
-      document.getElementById("lockTimeWindow").innerText = `⏰ Access Timing: ${SESSION_CONFIG[activeSession].timeStr} Daily`;
+      document.getElementById("lockTimeWindow").innerText = `⏰ Access Timing: ${SESSION_CONFIG[activeSession].timeStr}`;
       
       // Hide Auth Dialog
       document.getElementById("authOverlay").style.display = "none";
