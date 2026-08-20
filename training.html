@@ -13,16 +13,12 @@
 :root {
   --bg-body: #f8fafc;
   --bg-surface: #ffffff;
-  --bg-card-alt: #f1f5f9;
   --text-main: #0f172a;
   --text-muted: #64748b;
   --border-color: #e2e8f0;
   --bg-pill: #f1f5f9;
   --accent-primary: #2563eb;
   --accent-hover: #1d4ed8;
-  --accent-success: #10b981;
-  --accent-warning: #f59e0b;
-  --accent-danger: #ef4444;
   --header-grad: linear-gradient(135deg, #0f172a, #1e293b);
   --shadow-card: 0 4px 20px rgba(15, 23, 42, 0.04);
 }
@@ -30,7 +26,6 @@
 [data-theme="dark"] {
   --bg-body: #0b0f19;
   --bg-surface: #131c2e;
-  --bg-card-alt: #1e293b;
   --text-main: #f1f5f9;
   --text-muted: #94a3b8;
   --border-color: #1e293b;
@@ -53,7 +48,6 @@ body{
   background: var(--bg-body);
   color: var(--text-main);
   line-height: 1.6;
-  min-height: 100vh;
 }
 
 body.locked{
@@ -116,14 +110,14 @@ body.locked{
   background: rgba(255, 255, 255, 0.18);
 }
 
-/* CONTAINER & LAYOUT */
+/* CONTAINER */
 .container{
   max-width:1100px;
   margin:auto;
   padding: 0 22px 40px;
 }
 
-/* AUTHENTICATION MODAL OVERLAY */
+/* AUTH MODAL */
 .auth-overlay {
   position: fixed;
   top: 0;
@@ -224,7 +218,7 @@ body.locked{
 }
 
 .auth-error-msg {
-  color: var(--accent-danger);
+  color: #ef4444;
   font-size: 13px;
   font-weight: 600;
   margin-top: 12px;
@@ -341,7 +335,7 @@ body.locked{
   transition: width 0.4s ease;
 }
 
-/* VIDEO CONTAINER */
+/* VIDEO - EXACT ORIGINAL EMBED FORMAT */
 .video-card{
   background:#000;
   border-radius:22px;
@@ -394,7 +388,7 @@ body.locked{
   font-weight:700;
 }
 
-/* INSTRUCTIONS */
+/* DIRECTIVES */
 .info-box{
   margin-top:24px;
   background: var(--bg-surface);
@@ -434,7 +428,7 @@ body.locked{
   border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
-/* ACTION BUTTON */
+/* BUTTON */
 .btn{
   margin-top:28px;
   width:100%;
@@ -453,7 +447,7 @@ body.locked{
   background: linear-gradient(135deg, #1d4ed8, #1e40af);
 }
 
-/* TIME LOCK OVERLAY */
+/* TIMELOCK */
 .lock-screen{
   position:fixed;
   top:0;
@@ -613,9 +607,9 @@ body.locked{
     </div>
   </div>
 
-  <!-- VIDEO EMBED MATRIX -->
+  <!-- VIDEO EMBED MATRIX (EXACT ORIGINAL STRUCTURE) -->
   <div class="video-card">
-    <div id="videoContainer" class="video-container"></div>
+    <div id="videoContainer"></div>
   </div>
 
   <!-- STATS HUD -->
@@ -650,7 +644,7 @@ body.locked{
     </div>
   </div>
 
-  <!-- ACTION LOG COMPLETION BUTTON -->
+  <!-- ACTION BUTTON -->
   <button class="btn" id="completeSessionBtn" onclick="markCurrentSessionCompleted()">
     Mark Today's Session Completed
   </button>
@@ -659,10 +653,10 @@ body.locked{
 <div class="footer">Professional Training Hub • Access Controlled • Batch Monitored</div>
 
 <script>
-// 🟢 API CONFIGURATION
+// API CONFIGURATION
 const API_URL = "https://script.google.com/macros/s/AKfycbw79wnaUmMkr4DIHjbInzMTYHvqp5CcPIXrRukvA1kAD2bFgjq9NmDtvqDNvxsE_DrAeg/exec";
 
-// SESSION TIME WINDOWS (OPEN FOR TESTING 0 to 24)
+// SESSION CONFIGURATION (0 to 24 for testing)
 const SESSION_CONFIG = {
   1: { name: "Foundation Session", start: 0, end: 24, timeStr: "Testing: 24 Hours Open", progress: "33%", streamKey: "day1_v2" },
   2: { name: "Clarification Session", start: 0, end: 24, timeStr: "Testing: 24 Hours Open", progress: "66%", streamKey: "day2_v2" },
@@ -697,7 +691,7 @@ themeToggle.addEventListener("click", () => {
   }
 });
 
-// PASSCODE FIELD VISIBILITY
+// PASSCODE FIELD HANDLER
 function togglePasscodeVisibility() {
   const chosen = parseInt(document.getElementById("authSessionChoice").value, 10);
   const passcodeBlock = document.getElementById("passcodeBlock");
@@ -714,7 +708,7 @@ function togglePasscodeVisibility() {
   }
 }
 
-// CANDIDATE AUTHENTICATION VERIFICATION
+// AUTHENTICATION LOGIC
 async function verifyCandidateAuthentication() {
   const identifier = document.getElementById("authIdentifier").value.trim();
   const requestedSession = parseInt(document.getElementById("authSessionChoice").value, 10);
@@ -749,7 +743,6 @@ async function verifyCandidateAuthentication() {
       currentCandidate = result.candidate;
       activeSession = result.unlockedSession;
       
-      // Update UI HUD
       document.getElementById("hudCandidateName").innerText = currentCandidate.name;
       document.getElementById("hudSessionName").innerText = SESSION_CONFIG[activeSession].name;
       document.getElementById("headerModuleTag").innerText = `Professional Development Program • Day ${activeSession} of 3`;
@@ -758,10 +751,7 @@ async function verifyCandidateAuthentication() {
       document.getElementById("progressFillBar").style.width = SESSION_CONFIG[activeSession].progress;
       document.getElementById("lockTimeWindow").innerText = `⏰ Access Timing: ${SESSION_CONFIG[activeSession].timeStr}`;
       
-      // Hide Auth Dialog
       document.getElementById("authOverlay").style.display = "none";
-      
-      // Trigger Engine Loop
       evaluateTimeLockEngine();
     } else {
       errorElement.innerText = result.message || "Access denied.";
@@ -777,7 +767,7 @@ async function verifyCandidateAuthentication() {
   }
 }
 
-// TIME LOCK ENGINE
+// TIMELOCK ENGINE
 function evaluateTimeLockEngine() {
   if (!currentCandidate) return;
 
@@ -834,7 +824,7 @@ function evaluateTimeLockEngine() {
   }
 }
 
-// LOG COMPLETION CONTROLLER
+// LOG COMPLETION
 async function markCurrentSessionCompleted() {
   if (!currentCandidate) return;
 
@@ -869,7 +859,7 @@ async function markCurrentSessionCompleted() {
   }
 }
 
-// STREAM FETCHER
+// STREAM LOADER
 function loadSecureBunnyStream(streamKey) {
   isVideoLoaded = true;
   fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
@@ -883,7 +873,7 @@ function loadSecureBunnyStream(streamKey) {
   });
 }
 
-// SIMULATED VIEWER FLUCTUATION
+// LIVE VIEWERS COUNTER
 let base = 65;
 function updateViewers(){
   let fluctuation = Math.floor(Math.random()*5)-2;
