@@ -296,6 +296,11 @@ body.locked{
   animation: slideDownAlert 0.5s ease forwards;
 }
 
+@keyframes slideDownAlert {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .access-box{
   background: var(--bg-surface);
   border-radius:18px;
@@ -329,7 +334,7 @@ body.locked{
   border-radius:999px;
 }
 
-/* ANTI-PAUSE SHIELD MATRIX */
+/* VIDEO PLAYER WRAPPER */
 .video-card{
   background:#000;
   border-radius:22px;
@@ -345,19 +350,10 @@ body.locked{
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  z-index: 10;
+  height: calc(100% - 40px); /* Leaves bottom bar active if controls exist */
+  z-index: 5;
   background: transparent;
   cursor: default;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-.video-card iframe {
-  width: 100% !important;
-  height: 100% !important;
-  border: 0 !important;
-  display: block;
 }
 
 .stats{
@@ -584,9 +580,9 @@ body.locked{
     </div>
   </div>
 
-  <!-- VIDEO PLAYER WITH TRANSPARENT ANTI-PAUSE SHIELD -->
+  <!-- VIDEO EMBED AREA -->
   <div class="video-card">
-    <div class="video-shield-overlay" id="videoShield" onclick="preventVideoPause(event)" ontouchstart="preventVideoPause(event)"></div>
+    <div class="video-shield-overlay" onclick="event.preventDefault(); event.stopPropagation();"></div>
     <div id="videoContainer"></div>
   </div>
 
@@ -625,7 +621,6 @@ body.locked{
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbw79wnaUmMkr4DIHjbInzMTYHvqp5CcPIXrRukvA1kAD2bFgjq9NmDtvqDNvxsE_DrAeg/exec";
 
-// SESSION CONFIGURATION (0 to 24 for testing)
 const SESSION_CONFIG = {
   1: { name: "Foundation Session", start: 0, end: 24, timeStr: "Testing: 24 Hours Open", progress: "33%", streamKey: "day1_v2" },
   2: { name: "Clarification Session", start: 0, end: 24, timeStr: "Testing: 24 Hours Open", progress: "66%", streamKey: "day2_v2" },
@@ -670,14 +665,6 @@ function togglePasscodeVisibility() {
   if (chosen === 1) passcodeBlock.style.display = "none";
   else if (chosen === 2) { passcodeBlock.style.display = "block"; passcodeLabel.innerText = "Session 1 Video Passcode"; }
   else if (chosen === 3) { passcodeBlock.style.display = "block"; passcodeLabel.innerText = "Mentor Secret Passcode"; }
-}
-
-// ANTI-PAUSE SHIELD CONTROLLER
-function preventVideoPause(e) {
-  if (e) {
-    e.preventDefault();
-    e.stopPropagation();
-  }
 }
 
 async function verifyCandidateAuthentication() {
@@ -860,30 +847,13 @@ async function markCurrentSessionCompleted(isManualClick) {
   }
 }
 
+// ORIGINAL STREAM INJECTION MATRIX
 function loadSecureBunnyStream(streamKey) {
   isVideoLoaded = true;
   fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
   .then(r => r.json())
   .then(data => {
-    let rawHtml = data[streamKey] || "<p style='color:#fff;text-align:center;padding:40px;'>Stream Offline</p>";
-    
-    // Auto-inject URL query parameters to force autoplay & hide native controls
-    if (rawHtml.includes("src=\"")) {
-      rawHtml = rawHtml.replace(/src="([^"]+)"/, (match, url) => {
-        const delimiter = url.includes("?") ? "&" : "?";
-        return `src="${url}${delimiter}autoplay=true&controls=false"`;
-      });
-    }
-
-    const container = document.getElementById("videoContainer");
-    container.innerHTML = rawHtml;
-
-    const iframe = container.querySelector("iframe");
-    if (iframe) {
-      iframe.style.width = "100%";
-      iframe.style.height = "100%";
-      iframe.style.pointerEvents = "none"; // Disable all touch/clicks on iframe
-    }
+    document.getElementById("videoContainer").innerHTML = data[streamKey] || "<p style='color:#fff;text-align:center;padding:40px;'>Stream Offline</p>";
   })
   .catch(() => { isVideoLoaded = false; });
 }
