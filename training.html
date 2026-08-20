@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>TARA Induction Portal | Master Learning Workspace</title>
+
+<!-- Corporate Typography Integration -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* THEME CONTROL PIPELINES */
+:root {
+  --bg-body: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-card-alt: #f1f5f9;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --bg-pill: #f1f5f9;
+  --accent-primary: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-success: #10b981;
+  --accent-warning: #f59e0b;
+  --accent-danger: #ef4444;
+  --header-grad: linear-gradient(135deg, #0f172a, #1e293b);
+  --shadow-card: 0 4px 20px rgba(15, 23, 42, 0.04);
+}
+
+[data-theme="dark"] {
+  --bg-body: #0b0f19;
+  --bg-surface: #131c2e;
+  --bg-card-alt: #1e293b;
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --border-color: #1e293b;
+  --bg-pill: #1e293b;
+  --accent-primary: #3b82f6;
+  --accent-hover: #2563eb;
+  --header-grad: linear-gradient(135deg, #020617, #0f172a);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+body{
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg-body);
+  color: var(--text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+body.locked{
+  overflow:hidden;
+  height:100vh;
+}
+
+/* HIGH-END CORPORATE HEADER */
+.topbar{
+  background: var(--header-grad);
+  padding: 20px 24px;
+  color:#fff;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.brand{
+  font-size:20px;
+  font-weight:800;
+  letter-spacing: -0.02em;
+}
+
+.brand span {
+  color: #3b82f6;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.batch{
+  background:rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding:8px 16px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:600;
+}
+
+.theme-switch {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.theme-switch:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* CONTAINER & LAYOUT */
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding: 0 22px 40px;
+}
+
+/* AUTHENTICATION MODAL OVERLAY */
+.auth-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(11, 15, 25, 0.88);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.auth-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 36px 32px;
+  width: 100%;
+  max-width: 460px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.auth-badge {
+  display: inline-block;
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--accent-primary);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  padding: 4px 14px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.auth-card h2 {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.auth-card p {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.auth-input-group {
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+.auth-input-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-body);
+  color: var(--text-main);
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+}
+
+.auth-input:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--accent-primary);
+  color: #fff;
+  border: none;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.auth-btn:hover {
+  background: var(--accent-hover);
+}
+
+.auth-error-msg {
+  color: var(--accent-danger);
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 12px;
+  display: none;
+}
+
+/* STATUS BAR */
+.status-bar{
+  max-width:1100px;
+  margin:24px auto 0;
+  background: var(--bg-surface);
+  border-radius:16px;
+  border:1px solid var(--border-color);
+  padding:16px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+  box-shadow: var(--shadow-card);
+}
+
+.live-wrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:700;
+  font-size: 15px;
+  color: #10b981;
+}
+
+.dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+  animation: pulseBlink 2s infinite;
+}
+
+@keyframes pulseBlink{
+  0%, 100% { transform: scale(0.95); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.5; }
+}
+
+.viewer{
+  font-size:14px;
+  color: var(--text-muted);
+  font-weight:600;
+}
+
+.viewer span {
+  color: var(--text-main);
+  font-weight: 700;
+  background: var(--bg-pill);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown{
+  text-align:center;
+  margin-top:14px;
+  font-size:14px;
+  color:#2563eb;
+  background: rgba(37, 99, 235, 0.05);
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight:600;
+  border: 1px solid rgba(37, 99, 235, 0.08);
+}
+
+[data-theme="dark"] .countdown {
+  color: #60a5fa;
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+/* PROGRESS */
+.access-box{
+  background: var(--bg-surface);
+  border-radius:18px;
+  padding:22px;
+  margin: 20px 0;
+  border:1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
+}
+
+.access-top{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:12px;
+  flex-wrap:wrap;
+  gap:10px;
+  font-size: 14px;
+}
+
+.progress-bar{
+  width:100%;
+  height:8px;
+  background: var(--bg-pill);
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  width:33%;
+  height:100%;
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+  border-radius:999px;
+  transition: width 0.4s ease;
+}
+
+/* VIDEO CONTAINER */
+.video-card{
+  background:#000;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 18px 40px rgba(15, 23, 42, 0.15);
+  border: 1px solid rgba(15, 23, 42, 0.04);
+}
+
+.video-container{
+  position:relative;
+  padding-top:56.25%;
+}
+
+.video-container iframe{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  border:0;
+}
+
+/* STATS */
+.stats{
+  margin-top:24px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:16px;
+}
+
+.stat{
+  background: var(--bg-surface);
+  border-radius:16px;
+  padding:20px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-color);
+}
+
+.stat-label{
+  color: var(--text-muted);
+  font-size:12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom:8px;
+}
+
+.stat-value{
+  font-size:19px;
+  font-weight:700;
+}
+
+/* INSTRUCTIONS */
+.info-box{
+  margin-top:24px;
+  background: var(--bg-surface);
+  border-radius:18px;
+  padding:24px;
+  box-shadow: var(--shadow-card);
+  border:1px solid var(--border-color);
+}
+
+.info-box h3{
+  margin-bottom:16px;
+  font-size:20px;
+  font-weight: 700;
+}
+
+.info-box ul{
+  padding-left:20px;
+  line-height:2;
+}
+
+.highlight{
+  margin-top:20px;
+  background: rgba(37, 99, 235, 0.04);
+  border:1px solid rgba(37, 99, 235, 0.15);
+  color:#2563eb;
+  padding:18px;
+  border-radius:14px;
+  text-align:center;
+  font-weight:600;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+[data-theme="dark"] .highlight {
+  color: #60a5fa;
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* ACTION BUTTON */
+.btn{
+  margin-top:28px;
+  width:100%;
+  border:none;
+  border-radius:16px;
+  padding:18px;
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:#fff;
+  font-size:16px;
+  font-weight:700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.2);
+}
+
+.btn:hover{
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+}
+
+/* TIME LOCK OVERLAY */
+.lock-screen{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#0f172a;
+  color:#fff;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  z-index:99999;
+  padding:25px;
+}
+
+.lock-box{
+  max-width:460px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 40px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.lock-box h1{
+  font-size:26px;
+  font-weight: 700;
+  margin-bottom:16px;
+  color: #ffbc00;
+}
+
+.lock-box p{
+  line-height:1.8;
+  color:#cbd5e1;
+  font-size:14px;
+  margin-bottom: 24px;
+}
+
+.lock-time{
+  background:rgba(255,255,255,0.07);
+  padding:12px 20px;
+  border-radius:12px;
+  font-weight:600;
+  font-size: 13px;
+  color: #ffbc00;
+  border: 1px solid rgba(255, 188, 0, 0.2);
+  display: inline-block;
+}
+
+#startCountdown{
+  margin-top:24px;
+  font-size:36px;
+  font-weight:700;
+  color:#fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.footer{
+  text-align:center;
+  padding:40px 10px;
+  color:#64748b;
+  font-size:13px;
+}
+
+@media(max-width:768px){
+  .topbar{ justify-content:center; text-align:center; flex-direction: column; }
+  .header-controls { flex-direction: column; width: 100%; }
+  .batch, .theme-switch { width: 100%; justify-content: center; }
+  .status-bar{ flex-direction:column; text-align: center; }
+  .container { padding: 0 16px 30px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- AUTHENTICATION DIALOG -->
+<div id="authOverlay" class="auth-overlay">
+  <div class="auth-card">
+    <div class="auth-badge">Security Access Protocol</div>
+    <h2>Candidate Login</h2>
+    <p>Enter your registered Email or Mobile Number to access your scheduled training module.</p>
+    
+    <div class="auth-input-group">
+      <label>Registered Identifier</label>
+      <input type="text" id="authIdentifier" class="auth-input" placeholder="e.g. 9876543210 or email@domain.com">
+    </div>
+
+    <div class="auth-input-group">
+      <label>Select Session To Access</label>
+      <select id="authSessionChoice" class="auth-input" onchange="togglePasscodeVisibility()">
+        <option value="1">Day 1: Foundation Session (1:00 PM – 4:00 PM)</option>
+        <option value="2">Day 2: Clarification Session (2:00 PM – 5:00 PM)</option>
+        <option value="3">Day 3: Execution Session (3:00 PM – 6:00 PM)</option>
+      </select>
+    </div>
+
+    <div class="auth-input-group" id="passcodeBlock" style="display: none;">
+      <label id="passcodeLabel">Passcode</label>
+      <input type="password" id="authPasscode" class="auth-input" placeholder="Enter session unlock passcode">
+    </div>
+
+    <button type="button" id="authSubmitBtn" class="auth-btn" onclick="verifyCandidateAuthentication()">
+      Authenticate & Unlock Session
+    </button>
+    <div id="authError" class="auth-error-msg"></div>
+  </div>
+</div>
+
+<!-- TIME WINDOW LOCK SCREEN -->
+<div id="lockScreen" class="lock-screen">
+  <div class="lock-box">
+    <h1 id="lockTitle">⏳ Session Starts Soon</h1>
+    <p id="lockText">
+      Today's professional development induction sequence has not initiated yet.<br><br>Please wait, you will be checked into the stream workspace automatically.
+    </p>
+    <div class="lock-time" id="lockTimeWindow">
+      ⏰ Access Timing Active
+    </div>
+    <div id="startCountdown">00:00:00</div>
+  </div>
+</div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="brand">🏛 <span>TARA</span> INDUCTION PORTAL</div>
+  <div class="header-controls">
+    <div class="batch" id="headerModuleTag">Professional Development Program • Day 1 of 3</div>
+    <button class="theme-switch" id="themeToggle">🌙 Mode: Light</button>
+  </div>
+</div>
+
+<!-- STATUS BAR -->
+<div class="status-bar">
+  <div class="live-wrap">
+    <div class="dot" id="statusDot"></div>
+    <span id="liveStatus">Checking System Status...</span>
+  </div>
+  <div class="viewer">
+    👁 Live: <span id="viewerCount">--</span> Participants Active
+  </div>
+</div>
+
+<div class="countdown" id="topCountdown">Checking Window...</div>
+
+<div class="container">
+
+  <!-- PROGRESS BLOCK -->
+  <div class="access-box">
+    <div class="access-top">
+      <span id="progressModuleTitle"><b>📘 Core Onboarding Phase • Module 1</b></span>
+      <span id="progressPercent"><b>33% Progress</b></span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFillBar"></div>
+    </div>
+  </div>
+
+  <!-- VIDEO EMBED MATRIX -->
+  <div class="video-card">
+    <div id="videoContainer" class="video-container"></div>
+  </div>
+
+  <!-- STATS HUD -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-label">Candidate Name</div>
+      <div class="stat-value" id="hudCandidateName" style="color:var(--accent-primary);">--</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Current Pipeline</div>
+      <div class="stat-value" id="hudSessionName">Foundation Session</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Training Status</div>
+      <div class="stat-value" id="trainingStatus">Checking...</div>
+    </div>
+  </div>
+
+  <!-- COMPLIANCE DIRECTIVES -->
+  <div class="info-box">
+    <h3>📌 Important Induction Directives</h3>
+    <ul>
+      <li>Watch the complete training carefully without skipping any part.</li>
+      <li>Do not refresh or leave during the active session.</li>
+      <li>Complete this module in one single sitting.</li>
+      <li id="directivePasscodeHint">A verification code will appear at the end of the video.</li>
+      <li>Next session access will unlock on the next calendar day.</li>
+    </ul>
+    <div class="highlight" id="hudHighlightBox">
+      🎯 Session passcodes are strictly date-gated. <br><br>
+      📩 Complete today's module to advance to the next pipeline stage tomorrow.
+    </div>
+  </div>
+
+  <!-- ACTION LOG COMPLETION BUTTON -->
+  <button class="btn" id="completeSessionBtn" onclick="markCurrentSessionCompleted()">
+    Mark Today's Session Completed
+  </button>
+</div>
+
+<div class="footer">Professional Training Hub • Access Controlled • Batch Monitored</div>
+
+<script>
+// 🟢 API CONFIGURATION
+const API_URL = "https://script.google.com/macros/s/AKfycbw79wnaUmMkr4DIHjbInzMTYHvqp5CcPIXrRukvA1kAD2bFgjq9NmDtvqDNvxsE_DrAeg/exec";
+
+// SESSION TIME WINDOWS
+const SESSION_CONFIG = {
+  1: { name: "Foundation Session", start: 13, end: 16, timeStr: "01:00 PM – 04:00 PM", progress: "33%", streamKey: "day1_v2" },
+  2: { name: "Clarification Session", start: 14, end: 17, timeStr: "02:00 PM – 05:00 PM", progress: "66%", streamKey: "day2_v2" },
+  3: { name: "Execution Session", start: 15, end: 18, timeStr: "03:00 PM – 06:00 PM", progress: "100%", streamKey: "day3_v2" }
+};
+
+let activeSession = 1;
+let currentCandidate = null;
+let isVideoLoaded = false;
+
+// THEME ENGINE
+const themeToggle = document.getElementById("themeToggle");
+const currentTheme = localStorage.getItem("tara_theme") || "light";
+if (currentTheme === "dark") {
+  document.documentElement.setAttribute("data-theme", "dark");
+  themeToggle.innerText = "🌞 Mode: Dark";
+} else {
+  document.documentElement.setAttribute("data-theme", "light");
+  themeToggle.innerText = "🌙 Mode: Light";
+}
+
+themeToggle.addEventListener("click", () => {
+  let theme = document.documentElement.getAttribute("data-theme");
+  if (theme === "dark") {
+    document.documentElement.setAttribute("data-theme", "light");
+    themeToggle.innerText = "🌙 Mode: Light";
+    localStorage.setItem("tara_theme", "light");
+  } else {
+    document.documentElement.setAttribute("data-theme", "dark");
+    themeToggle.innerText = "🌞 Mode: Dark";
+    localStorage.setItem("tara_theme", "dark");
+  }
+});
+
+// PASSCODE FIELD VISIBILITY
+function togglePasscodeVisibility() {
+  const chosen = parseInt(document.getElementById("authSessionChoice").value, 10);
+  const passcodeBlock = document.getElementById("passcodeBlock");
+  const passcodeLabel = document.getElementById("passcodeLabel");
+  
+  if (chosen === 1) {
+    passcodeBlock.style.display = "none";
+  } else if (chosen === 2) {
+    passcodeBlock.style.display = "block";
+    passcodeLabel.innerText = "Session 1 Video Passcode";
+  } else if (chosen === 3) {
+    passcodeBlock.style.display = "block";
+    passcodeLabel.innerText = "Mentor Secret Passcode";
+  }
+}
+
+// CANDIDATE AUTHENTICATION VERIFICATION
+async function verifyCandidateAuthentication() {
+  const identifier = document.getElementById("authIdentifier").value.trim();
+  const requestedSession = parseInt(document.getElementById("authSessionChoice").value, 10);
+  const passcode = document.getElementById("authPasscode").value.trim();
+  const errorElement = document.getElementById("authError");
+  const submitBtn = document.getElementById("authSubmitBtn");
+
+  if (!identifier) {
+    errorElement.innerText = "Please enter your registered Mobile or Email.";
+    errorElement.style.display = "block";
+    return;
+  }
+
+  submitBtn.innerText = "Verifying Onboarding Records...";
+  submitBtn.disabled = true;
+  errorElement.style.display = "none";
+
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      body: JSON.stringify({
+        action: "VERIFY_LOGIN",
+        identifier: identifier,
+        requestedSession: requestedSession,
+        passcode: passcode
+      })
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      currentCandidate = result.candidate;
+      activeSession = result.unlockedSession;
+      
+      // Update UI HUD
+      document.getElementById("hudCandidateName").innerText = currentCandidate.name;
+      document.getElementById("hudSessionName").innerText = SESSION_CONFIG[activeSession].name;
+      document.getElementById("headerModuleTag").innerText = `Professional Development Program • Day ${activeSession} of 3`;
+      document.getElementById("progressModuleTitle").innerHTML = `<b>📘 Core Onboarding Phase • Module ${activeSession}</b>`;
+      document.getElementById("progressPercent").innerHTML = `<b>${SESSION_CONFIG[activeSession].progress} Progress</b>`;
+      document.getElementById("progressFillBar").style.width = SESSION_CONFIG[activeSession].progress;
+      document.getElementById("lockTimeWindow").innerText = `⏰ Access Timing: ${SESSION_CONFIG[activeSession].timeStr} Daily`;
+      
+      // Hide Auth Dialog
+      document.getElementById("authOverlay").style.display = "none";
+      
+      // Trigger Engine Loop
+      evaluateTimeLockEngine();
+    } else {
+      errorElement.innerText = result.message || "Access denied.";
+      errorElement.style.display = "block";
+    }
+  } catch (err) {
+    console.error(err);
+    errorElement.innerText = "Connection error. Please try again.";
+    errorElement.style.display = "block";
+  } finally {
+    submitBtn.innerText = "Authenticate & Unlock Session";
+    submitBtn.disabled = false;
+  }
+}
+
+// TIME LOCK ENGINE
+function evaluateTimeLockEngine() {
+  if (!currentCandidate) return;
+
+  const now = new Date();
+  const hour = now.getHours();
+  const cfg = SESSION_CONFIG[activeSession];
+  const lockScreen = document.getElementById("lockScreen");
+  const topCountdown = document.getElementById("topCountdown");
+  const trainingStatus = document.getElementById("trainingStatus");
+  const liveStatus = document.getElementById("liveStatus");
+  const statusDot = document.getElementById("statusDot");
+
+  if (hour >= cfg.start && hour < cfg.end) {
+    if (lockScreen.style.display !== "none") {
+      lockScreen.style.display = "none";
+      document.body.classList.remove("locked");
+    }
+    if (topCountdown) topCountdown.innerHTML = "🟢 Onboarding Window Operational • Priority Streaming Enabled";
+    if (trainingStatus) trainingStatus.innerText = "ACTIVE";
+    if (liveStatus) liveStatus.innerText = `${cfg.name} Active`;
+    if (statusDot) statusDot.style.background = "#10b981";
+
+    if (!isVideoLoaded) {
+      loadSecureBunnyStream(cfg.streamKey);
+    }
+  } else if (hour < cfg.start) {
+    document.body.classList.add("locked");
+    lockScreen.style.display = "flex";
+    if (topCountdown) topCountdown.innerHTML = "⏳ Session Starts Soon";
+    if (trainingStatus) trainingStatus.innerText = "Scheduled";
+    if (liveStatus) liveStatus.innerText = "System Paused";
+    if (statusDot) statusDot.style.background = "#ffbc00";
+
+    const target = new Date();
+    target.setHours(cfg.start, 0, 0, 0);
+    const diff = target - now;
+
+    const h = Math.floor(diff / 3600000);
+    const m = Math.floor((diff / 60000) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("startCountdown").innerHTML =
+      `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  } else {
+    document.body.classList.add("locked");
+    lockScreen.style.display = "flex";
+    document.getElementById("lockTitle").innerHTML = "🔒 Training Access Closed";
+    document.getElementById("lockText").innerHTML = "Today's batch timing has ended.<br><br>Please revisit during active training hours.";
+    document.getElementById("startCountdown").style.display = "none";
+    if (topCountdown) topCountdown.innerHTML = "🔴 Onboarding Window Closed";
+    if (trainingStatus) trainingStatus.innerText = "Closed";
+    if (liveStatus) liveStatus.innerText = "Session Expired";
+    if (statusDot) statusDot.style.background = "#ef4444";
+  }
+}
+
+// LOG COMPLETION CONTROLLER
+async function markCurrentSessionCompleted() {
+  if (!currentCandidate) return;
+
+  const btn = document.getElementById("completeSessionBtn");
+  btn.disabled = true;
+  btn.innerText = "Logging Completion In Central Matrix...";
+
+  try {
+    const res = await fetch(API_URL, {
+      method: "POST",
+      body: JSON.stringify({
+        action: "COMPLETE_SESSION",
+        identifier: currentCandidate.email || currentCandidate.phone,
+        sessionNumber: activeSession
+      })
+    });
+
+    const result = await res.json();
+    if (result.success) {
+      alert(`🎉 Congratulations ${currentCandidate.name}! Module ${activeSession} has been marked as Completed.\n\nYour next module will unlock tomorrow during its scheduled timing.`);
+      window.location.reload();
+    } else {
+      alert(result.message || "Failed to log completion.");
+      btn.disabled = false;
+      btn.innerText = "Mark Today's Session Completed";
+    }
+  } catch (e) {
+    console.error(e);
+    alert("Connection error. Please try again.");
+    btn.disabled = false;
+    btn.innerText = "Mark Today's Session Completed";
+  }
+}
+
+// STREAM FETCHER
+function loadSecureBunnyStream(streamKey) {
+  isVideoLoaded = true;
+  fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById("videoContainer").innerHTML = data[streamKey] || "<p style='color:#fff;text-align:center;padding:40px;'>Stream Offline</p>";
+  })
+  .catch(err => {
+    console.error(err);
+    isVideoLoaded = false;
+  });
+}
+
+// SIMULATED VIEWER FLUCTUATION
+let base = 65;
+function updateViewers(){
+  let fluctuation = Math.floor(Math.random()*5)-2;
+  let viewers = Math.min(100, Math.max(30, base + fluctuation));
+  const viewerTarget = document.getElementById("viewerCount");
+  if (viewerTarget) viewerTarget.innerText = viewers;
+}
+updateViewers();
+setInterval(updateViewers, 6000);
+
+// LANDSCAPE ORIENTATION HANDLER
+function manageFullscreenOrientation() {
+  const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
+  if (isFullscreen && screen.orientation && screen.orientation.lock) {
+    screen.orientation.lock('landscape').catch(() => {});
+  } else if (screen.orientation && screen.orientation.unlock) {
+    screen.orientation.unlock();
+  }
+}
+document.addEventListener('fullscreenchange', manageFullscreenOrientation);
+document.addEventListener('webkitfullscreenchange', manageFullscreenOrientation);
+
+setInterval(evaluateTimeLockEngine, 1000);
+</script>
+</body>
+</html>
