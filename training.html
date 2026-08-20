@@ -55,7 +55,6 @@ body.locked{
   height:100vh;
 }
 
-/* HIGH-END CORPORATE HEADER */
 .topbar{
   background: var(--header-grad);
   padding: 20px 24px;
@@ -106,18 +105,13 @@ body.locked{
   align-items: center;
   gap: 6px;
 }
-.theme-switch:hover {
-  background: rgba(255, 255, 255, 0.18);
-}
 
-/* CONTAINER */
 .container{
   max-width:1100px;
   margin:auto;
   padding: 0 22px 40px;
 }
 
-/* AUTH MODAL */
 .auth-overlay {
   position: fixed;
   top: 0;
@@ -195,11 +189,6 @@ body.locked{
   outline: none;
 }
 
-.auth-input:focus {
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-}
-
 .auth-btn {
   width: 100%;
   padding: 16px;
@@ -213,10 +202,6 @@ body.locked{
   margin-top: 10px;
 }
 
-.auth-btn:hover {
-  background: var(--accent-hover);
-}
-
 .auth-error-msg {
   color: #ef4444;
   font-size: 13px;
@@ -225,7 +210,6 @@ body.locked{
   display: none;
 }
 
-/* STATUS BAR */
 .status-bar{
   max-width:1100px;
   margin:24px auto 0;
@@ -294,13 +278,6 @@ body.locked{
   border: 1px solid rgba(37, 99, 235, 0.08);
 }
 
-[data-theme="dark"] .countdown {
-  color: #60a5fa;
-  background: rgba(59, 130, 246, 0.08);
-  border: 1px solid rgba(59, 130, 246, 0.15);
-}
-
-/* PROGRESS */
 .access-box{
   background: var(--bg-surface);
   border-radius:18px;
@@ -332,10 +309,8 @@ body.locked{
   height:100%;
   background: linear-gradient(90deg, #3b82f6, #2563eb);
   border-radius:999px;
-  transition: width 0.4s ease;
 }
 
-/* VIDEO - EXACT ORIGINAL EMBED FORMAT */
 .video-card{
   background:#000;
   border-radius:22px;
@@ -344,21 +319,6 @@ body.locked{
   border: 1px solid rgba(15, 23, 42, 0.04);
 }
 
-.video-container{
-  position:relative;
-  padding-top:56.25%;
-}
-
-.video-container iframe{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  border:0;
-}
-
-/* STATS */
 .stats{
   margin-top:24px;
   display:grid;
@@ -379,7 +339,6 @@ body.locked{
   font-size:12px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
   margin-bottom:8px;
 }
 
@@ -388,7 +347,6 @@ body.locked{
   font-weight:700;
 }
 
-/* DIRECTIVES */
 .info-box{
   margin-top:24px;
   background: var(--bg-surface);
@@ -409,45 +367,31 @@ body.locked{
   line-height:2;
 }
 
-.highlight{
-  margin-top:20px;
-  background: rgba(37, 99, 235, 0.04);
-  border:1px solid rgba(37, 99, 235, 0.15);
-  color:#2563eb;
-  padding:18px;
-  border-radius:14px;
-  text-align:center;
-  font-weight:600;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-[data-theme="dark"] .highlight {
-  color: #60a5fa;
-  background: rgba(59, 130, 246, 0.08);
-  border: 1px solid rgba(59, 130, 246, 0.2);
-}
-
-/* BUTTON */
+/* SMART TIMER LOCKED BUTTON STYLING */
 .btn{
   margin-top:28px;
   width:100%;
   border:none;
   border-radius:16px;
   padding:18px;
-  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  background: #64748b;
   color:#fff;
   font-size:16px;
   font-weight:700;
+  cursor: not-allowed;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn.active-ready {
+  background: linear-gradient(135deg, #10b981, #059669);
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
 }
 
-.btn:hover{
-  background: linear-gradient(135deg, #1d4ed8, #1e40af);
-}
-
-/* TIMELOCK */
 .lock-screen{
   position:fixed;
   top:0;
@@ -494,7 +438,6 @@ body.locked{
   font-weight:600;
   font-size: 13px;
   color: #ffbc00;
-  border: 1px solid rgba(255, 188, 0, 0.2);
   display: inline-block;
 }
 
@@ -512,25 +455,16 @@ body.locked{
   color:#64748b;
   font-size:13px;
 }
-
-@media(max-width:768px){
-  .topbar{ justify-content:center; text-align:center; flex-direction: column; }
-  .header-controls { flex-direction: column; width: 100%; }
-  .batch, .theme-switch { width: 100%; justify-content: center; }
-  .status-bar{ flex-direction:column; text-align: center; }
-  .container { padding: 0 16px 30px; }
-}
 </style>
 </head>
 
 <body>
 
-<!-- AUTHENTICATION DIALOG -->
 <div id="authOverlay" class="auth-overlay">
   <div class="auth-card">
     <div class="auth-badge">Security Access Protocol</div>
     <h2>Candidate Login</h2>
-    <p>Enter your registered Email or Mobile Number to access your scheduled training module.</p>
+    <p>Enter your registered Email or Mobile Number to access your scheduled module.</p>
     
     <div class="auth-input-group">
       <label>Registered Identifier</label>
@@ -558,21 +492,15 @@ body.locked{
   </div>
 </div>
 
-<!-- TIME WINDOW LOCK SCREEN -->
 <div id="lockScreen" class="lock-screen">
   <div class="lock-box">
     <h1 id="lockTitle">⏳ Session Starts Soon</h1>
-    <p id="lockText">
-      Today's professional development induction sequence has not initiated yet.<br><br>Please wait, you will be checked into the stream workspace automatically.
-    </p>
-    <div class="lock-time" id="lockTimeWindow">
-      ⏰ Access Timing Active
-    </div>
+    <p id="lockText">Today's induction sequence has not initiated yet.</p>
+    <div class="lock-time" id="lockTimeWindow">⏰ Access Timing Active</div>
     <div id="startCountdown">00:00:00</div>
   </div>
 </div>
 
-<!-- TOPBAR -->
 <div class="topbar">
   <div class="brand">🏛 <span>TARA</span> INDUCTION PORTAL</div>
   <div class="header-controls">
@@ -581,7 +509,6 @@ body.locked{
   </div>
 </div>
 
-<!-- STATUS BAR -->
 <div class="status-bar">
   <div class="live-wrap">
     <div class="dot" id="statusDot"></div>
@@ -595,8 +522,6 @@ body.locked{
 <div class="countdown" id="topCountdown">Checking Window...</div>
 
 <div class="container">
-
-  <!-- PROGRESS BLOCK -->
   <div class="access-box">
     <div class="access-top">
       <span id="progressModuleTitle"><b>📘 Core Onboarding Phase • Module 1</b></span>
@@ -607,20 +532,18 @@ body.locked{
     </div>
   </div>
 
-  <!-- VIDEO EMBED MATRIX (EXACT ORIGINAL STRUCTURE) -->
   <div class="video-card">
     <div id="videoContainer"></div>
   </div>
 
-  <!-- STATS HUD -->
   <div class="stats">
     <div class="stat">
       <div class="stat-label">Candidate Name</div>
       <div class="stat-value" id="hudCandidateName" style="color:var(--accent-primary);">--</div>
     </div>
     <div class="stat">
-      <div class="stat-label">Current Pipeline</div>
-      <div class="stat-value" id="hudSessionName">Foundation Session</div>
+      <div class="stat-label">Active Watch Tracker</div>
+      <div class="stat-value" id="hudWatchTimer" style="color:#f59e0b;">Initializing...</div>
     </div>
     <div class="stat">
       <div class="stat-label">Training Status</div>
@@ -628,35 +551,26 @@ body.locked{
     </div>
   </div>
 
-  <!-- COMPLIANCE DIRECTIVES -->
   <div class="info-box">
     <h3>📌 Important Induction Directives</h3>
     <ul>
-      <li>Watch the complete training carefully without skipping any part.</li>
-      <li>Do not refresh or leave during the active session.</li>
-      <li>Complete this module in one single sitting.</li>
-      <li id="directivePasscodeHint">A verification code will appear at the end of the video.</li>
+      <li>Watch the complete training carefully without skipping or leaving.</li>
+      <li>If you minimize or switch tabs, the watch-time counter will pause.</li>
+      <li>Once the required watch duration finishes, your session will auto-complete.</li>
       <li>Next session access will unlock on the next calendar day.</li>
     </ul>
-    <div class="highlight" id="hudHighlightBox">
-      🎯 Session passcodes are strictly date-gated. <br><br>
-      📩 Complete today's module to advance to the next pipeline stage tomorrow.
-    </div>
   </div>
 
-  <!-- ACTION BUTTON -->
-  <button class="btn" id="completeSessionBtn" onclick="markCurrentSessionCompleted()">
-    Mark Today's Session Completed
+  <button class="btn" id="completeSessionBtn" disabled onclick="markCurrentSessionCompleted(true)">
+    🔒 Complete Training (Watching Required)
   </button>
 </div>
 
 <div class="footer">Professional Training Hub • Access Controlled • Batch Monitored</div>
 
 <script>
-// API CONFIGURATION
 const API_URL = "https://script.google.com/macros/s/AKfycbw79wnaUmMkr4DIHjbInzMTYHvqp5CcPIXrRukvA1kAD2bFgjq9NmDtvqDNvxsE_DrAeg/exec";
 
-// SESSION CONFIGURATION (0 to 24 for testing)
 const SESSION_CONFIG = {
   1: { name: "Foundation Session", start: 0, end: 24, timeStr: "Testing: 24 Hours Open", progress: "33%", streamKey: "day1_v2" },
   2: { name: "Clarification Session", start: 0, end: 24, timeStr: "Testing: 24 Hours Open", progress: "66%", streamKey: "day2_v2" },
@@ -666,6 +580,10 @@ const SESSION_CONFIG = {
 let activeSession = 1;
 let currentCandidate = null;
 let isVideoLoaded = false;
+let requiredSeconds = 3352;
+let secondsWatched = 0;
+let watchTimerInterval = null;
+let isSessionCompleted = false;
 
 // THEME ENGINE
 const themeToggle = document.getElementById("themeToggle");
@@ -677,7 +595,6 @@ if (currentTheme === "dark") {
   document.documentElement.setAttribute("data-theme", "light");
   themeToggle.innerText = "🌙 Mode: Light";
 }
-
 themeToggle.addEventListener("click", () => {
   let theme = document.documentElement.getAttribute("data-theme");
   if (theme === "dark") {
@@ -691,24 +608,15 @@ themeToggle.addEventListener("click", () => {
   }
 });
 
-// PASSCODE FIELD HANDLER
 function togglePasscodeVisibility() {
   const chosen = parseInt(document.getElementById("authSessionChoice").value, 10);
   const passcodeBlock = document.getElementById("passcodeBlock");
   const passcodeLabel = document.getElementById("passcodeLabel");
-  
-  if (chosen === 1) {
-    passcodeBlock.style.display = "none";
-  } else if (chosen === 2) {
-    passcodeBlock.style.display = "block";
-    passcodeLabel.innerText = "Session 1 Video Passcode";
-  } else if (chosen === 3) {
-    passcodeBlock.style.display = "block";
-    passcodeLabel.innerText = "Mentor Secret Passcode";
-  }
+  if (chosen === 1) passcodeBlock.style.display = "none";
+  else if (chosen === 2) { passcodeBlock.style.display = "block"; passcodeLabel.innerText = "Session 1 Video Passcode"; }
+  else if (chosen === 3) { passcodeBlock.style.display = "block"; passcodeLabel.innerText = "Mentor Secret Passcode"; }
 }
 
-// AUTHENTICATION LOGIC
 async function verifyCandidateAuthentication() {
   const identifier = document.getElementById("authIdentifier").value.trim();
   const requestedSession = parseInt(document.getElementById("authSessionChoice").value, 10);
@@ -722,7 +630,7 @@ async function verifyCandidateAuthentication() {
     return;
   }
 
-  submitBtn.innerText = "Verifying Onboarding Records...";
+  submitBtn.innerText = "Verifying Records...";
   submitBtn.disabled = true;
   errorElement.style.display = "none";
 
@@ -742,23 +650,22 @@ async function verifyCandidateAuthentication() {
     if (result.success) {
       currentCandidate = result.candidate;
       activeSession = result.unlockedSession;
+      requiredSeconds = result.requiredSeconds || 3352;
       
       document.getElementById("hudCandidateName").innerText = currentCandidate.name;
-      document.getElementById("hudSessionName").innerText = SESSION_CONFIG[activeSession].name;
       document.getElementById("headerModuleTag").innerText = `Professional Development Program • Day ${activeSession} of 3`;
       document.getElementById("progressModuleTitle").innerHTML = `<b>📘 Core Onboarding Phase • Module ${activeSession}</b>`;
       document.getElementById("progressPercent").innerHTML = `<b>${SESSION_CONFIG[activeSession].progress} Progress</b>`;
       document.getElementById("progressFillBar").style.width = SESSION_CONFIG[activeSession].progress;
-      document.getElementById("lockTimeWindow").innerText = `⏰ Access Timing: ${SESSION_CONFIG[activeSession].timeStr}`;
       
       document.getElementById("authOverlay").style.display = "none";
       evaluateTimeLockEngine();
+      initWatchTracker();
     } else {
       errorElement.innerText = result.message || "Access denied.";
       errorElement.style.display = "block";
     }
   } catch (err) {
-    console.error(err);
     errorElement.innerText = "Connection error. Please try again.";
     errorElement.style.display = "block";
   } finally {
@@ -767,10 +674,8 @@ async function verifyCandidateAuthentication() {
   }
 }
 
-// TIMELOCK ENGINE
 function evaluateTimeLockEngine() {
   if (!currentCandidate) return;
-
   const now = new Date();
   const hour = now.getHours();
   const cfg = SESSION_CONFIG[activeSession];
@@ -781,56 +686,85 @@ function evaluateTimeLockEngine() {
   const statusDot = document.getElementById("statusDot");
 
   if (hour >= cfg.start && hour < cfg.end) {
-    if (lockScreen.style.display !== "none") {
-      lockScreen.style.display = "none";
-      document.body.classList.remove("locked");
-    }
+    lockScreen.style.display = "none";
+    document.body.classList.remove("locked");
     if (topCountdown) topCountdown.innerHTML = "🟢 Onboarding Window Operational • Priority Streaming Enabled";
     if (trainingStatus) trainingStatus.innerText = "ACTIVE";
     if (liveStatus) liveStatus.innerText = `${cfg.name} Active`;
     if (statusDot) statusDot.style.background = "#10b981";
 
-    if (!isVideoLoaded) {
-      loadSecureBunnyStream(cfg.streamKey);
-    }
-  } else if (hour < cfg.start) {
-    document.body.classList.add("locked");
-    lockScreen.style.display = "flex";
-    if (topCountdown) topCountdown.innerHTML = "⏳ Session Starts Soon";
-    if (trainingStatus) trainingStatus.innerText = "Scheduled";
-    if (liveStatus) liveStatus.innerText = "System Paused";
-    if (statusDot) statusDot.style.background = "#ffbc00";
-
-    const target = new Date();
-    target.setHours(cfg.start, 0, 0, 0);
-    const diff = target - now;
-
-    const h = Math.floor(diff / 3600000);
-    const m = Math.floor((diff / 60000) % 60);
-    const s = Math.floor((diff / 1000) % 60);
-
-    document.getElementById("startCountdown").innerHTML =
-      `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    if (!isVideoLoaded) loadSecureBunnyStream(cfg.streamKey);
   } else {
     document.body.classList.add("locked");
     lockScreen.style.display = "flex";
-    document.getElementById("lockTitle").innerHTML = "🔒 Training Access Closed";
-    document.getElementById("lockText").innerHTML = "Today's batch timing has ended.<br><br>Please revisit during active training hours.";
-    document.getElementById("startCountdown").style.display = "none";
-    if (topCountdown) topCountdown.innerHTML = "🔴 Onboarding Window Closed";
-    if (trainingStatus) trainingStatus.innerText = "Closed";
-    if (liveStatus) liveStatus.innerText = "Session Expired";
-    if (statusDot) statusDot.style.background = "#ef4444";
   }
 }
 
-// LOG COMPLETION
-async function markCurrentSessionCompleted() {
+// ANTI-CHEAT VISIBILITY WATCH TRACKER
+function initWatchTracker() {
+  const storeKey = `tara_watch_${currentCandidate.phone || currentCandidate.email}_s${activeSession}`;
+  const saved = parseInt(localStorage.getItem(storeKey) || "0", 10);
+  secondsWatched = isNaN(saved) ? 0 : saved;
+
+  updateWatchTimerUI();
+
+  if (watchTimerInterval) clearInterval(watchTimerInterval);
+
+  watchTimerInterval = setInterval(() => {
+    // Only increment when document is visible and not minimized
+    if (!document.hidden && !isSessionCompleted) {
+      secondsWatched++;
+      localStorage.setItem(storeKey, secondsWatched);
+      updateWatchTimerUI();
+
+      if (secondsWatched >= requiredSeconds) {
+        unlockAndAutoCompleteSession();
+      }
+    }
+  }, 1000);
+}
+
+function formatSecs(s) {
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+}
+
+function updateWatchTimerUI() {
+  const timerElement = document.getElementById("hudWatchTimer");
+  const btn = document.getElementById("completeSessionBtn");
+  const remaining = Math.max(0, requiredSeconds - secondsWatched);
+
+  if (remaining > 0) {
+    timerElement.innerText = `⏳ Remaining: ${formatSecs(remaining)}`;
+    timerElement.style.color = "#f59e0b";
+    btn.disabled = true;
+    btn.classList.remove("active-ready");
+    btn.innerText = `🔒 Video In Progress (${formatSecs(remaining)} left)`;
+  } else {
+    timerElement.innerText = `✅ Watch Requirement Met`;
+    timerElement.style.color = "#10b981";
+    btn.disabled = false;
+    btn.classList.add("active-ready");
+    btn.innerText = `🎉 Session Completed (Click To Re-Confirm)`;
+  }
+}
+
+// AUTO-COMPLETE CONTROLLER
+function unlockAndAutoCompleteSession() {
+  if (isSessionCompleted) return;
+  isSessionCompleted = true;
+  clearInterval(watchTimerInterval);
+  updateWatchTimerUI();
+  markCurrentSessionCompleted(false); // Auto-trigger backend log
+}
+
+async function markCurrentSessionCompleted(isManualClick) {
   if (!currentCandidate) return;
 
   const btn = document.getElementById("completeSessionBtn");
   btn.disabled = true;
-  btn.innerText = "Logging Completion In Central Matrix...";
+  btn.innerText = "Syncing Central Database...";
 
   try {
     const res = await fetch(API_URL, {
@@ -844,22 +778,19 @@ async function markCurrentSessionCompleted() {
 
     const result = await res.json();
     if (result.success) {
-      alert(`🎉 Congratulations ${currentCandidate.name}! Module ${activeSession} has been marked as Completed.\n\nYour next module will unlock tomorrow during its scheduled timing.`);
-      window.location.reload();
-    } else {
-      alert(result.message || "Failed to log completion.");
-      btn.disabled = false;
-      btn.innerText = "Mark Today's Session Completed";
+      if (isManualClick) {
+        alert(`🎉 Session ${activeSession} logged successfully! Next module unlocks tomorrow.`);
+        window.location.reload();
+      }
     }
   } catch (e) {
     console.error(e);
-    alert("Connection error. Please try again.");
+  } finally {
     btn.disabled = false;
-    btn.innerText = "Mark Today's Session Completed";
+    btn.innerText = `🎉 Session Completed (Logged in Sheet)`;
   }
 }
 
-// STREAM LOADER
 function loadSecureBunnyStream(streamKey) {
   isVideoLoaded = true;
   fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
@@ -867,13 +798,9 @@ function loadSecureBunnyStream(streamKey) {
   .then(data => {
     document.getElementById("videoContainer").innerHTML = data[streamKey] || "<p style='color:#fff;text-align:center;padding:40px;'>Stream Offline</p>";
   })
-  .catch(err => {
-    console.error(err);
-    isVideoLoaded = false;
-  });
+  .catch(() => { isVideoLoaded = false; });
 }
 
-// LIVE VIEWERS COUNTER
 let base = 65;
 function updateViewers(){
   let fluctuation = Math.floor(Math.random()*5)-2;
@@ -883,18 +810,6 @@ function updateViewers(){
 }
 updateViewers();
 setInterval(updateViewers, 6000);
-
-// LANDSCAPE ORIENTATION HANDLER
-function manageFullscreenOrientation() {
-  const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
-  if (isFullscreen && screen.orientation && screen.orientation.lock) {
-    screen.orientation.lock('landscape').catch(() => {});
-  } else if (screen.orientation && screen.orientation.unlock) {
-    screen.orientation.unlock();
-  }
-}
-document.addEventListener('fullscreenchange', manageFullscreenOrientation);
-document.addEventListener('webkitfullscreenchange', manageFullscreenOrientation);
 
 setInterval(evaluateTimeLockEngine, 1000);
 </script>
