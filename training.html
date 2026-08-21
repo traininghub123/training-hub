@@ -9,7 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-/* THEME CONTROL PIPELINES */
 :root {
   --bg-body: #f8fafc;
   --bg-surface: #ffffff;
@@ -49,7 +48,6 @@ body.locked{
   height:100vh;
 }
 
-/* HIGH-END CORPORATE HEADER */
 .topbar{
   background: var(--header-grad);
   padding: 20px 24px;
@@ -98,11 +96,7 @@ body.locked{
   align-items: center;
   gap: 6px;
 }
-.theme-switch:hover {
-  background: rgba(255, 255, 255, 0.18);
-}
 
-/* PREMIUM LIVE STATUS BAR */
 .status-bar{
   max-width:1100px;
   margin:24px auto 0;
@@ -177,7 +171,6 @@ body.locked{
   border: 1px solid rgba(59, 130, 246, 0.15);
 }
 
-/* RETENTION ALERT (LAST 15 MINS) */
 .retention-alert {
   display: none;
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(217, 119, 6, 0.08));
@@ -190,7 +183,6 @@ body.locked{
   font-weight: 600;
   align-items: center;
   gap: 12px;
-  animation: slideDownAlert 0.5s ease forwards;
 }
 
 [data-theme="dark"] .retention-alert {
@@ -199,26 +191,18 @@ body.locked{
   background: rgba(245, 158, 11, 0.08);
 }
 
-@keyframes slideDownAlert {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* MAIN CONTAINER */
 .container{
   max-width:1100px;
   margin:auto;
   padding: 0 22px 40px;
 }
 
-/* ACCESS BOX */
 .access-box{
   background: var(--bg-surface);
   border-radius:18px;
   padding:22px;
   margin: 20px 0;
   border:1px solid var(--border-color);
-  box-shadow:0 4px 16px rgba(0,0,0,0.01);
 }
 
 .access-top{
@@ -245,7 +229,6 @@ body.locked{
   border-radius:999px;
 }
 
-/* VIDEO EMBED */
 .video-card{
   background:#000;
   border-radius:22px;
@@ -268,7 +251,6 @@ body.locked{
   border:0;
 }
 
-/* EXECUTIVE STATS HUD */
 .stats{
   margin-top:24px;
   display:grid;
@@ -289,7 +271,6 @@ body.locked{
   font-size:12px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
   margin-bottom:8px;
 }
 
@@ -298,13 +279,11 @@ body.locked{
   font-weight:700;
 }
 
-/* INSTRUCTIONS */
 .info-box{
   margin-top:24px;
   background: var(--bg-surface);
   border-radius:18px;
   padding:24px;
-  box-shadow:0 4px 16px rgba(0,0,0,0.01);
   border:1px solid var(--border-color);
 }
 
@@ -320,12 +299,6 @@ body.locked{
   color: var(--text-main);
 }
 
-.info-box li{
-  font-size: 15px;
-  margin-bottom: 4px;
-}
-
-/* ACTION COMPLETION BUTTON */
 .btn{
   margin-top:28px;
   width:100%;
@@ -350,7 +323,6 @@ body.locked{
   box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
 }
 
-/* AUTH MODAL */
 .auth-overlay {
   position: fixed;
   top: 0;
@@ -388,18 +360,6 @@ body.locked{
   font-weight: 700;
   margin-bottom: 16px;
   text-transform: uppercase;
-}
-
-.auth-card h2 {
-  font-size: 22px;
-  font-weight: 800;
-  margin-bottom: 8px;
-}
-
-.auth-card p {
-  color: var(--text-muted);
-  font-size: 14px;
-  margin-bottom: 24px;
 }
 
 .auth-input-group {
@@ -441,10 +401,6 @@ body.locked{
   margin-top: 10px;
 }
 
-.auth-btn:hover {
-  background: #1d4ed8;
-}
-
 .auth-error-msg {
   color: #ef4444;
   font-size: 13px;
@@ -453,7 +409,6 @@ body.locked{
   display: none;
 }
 
-/* TIMELOCK GATE SCREEN */
 .lock-screen{
   position:fixed;
   top:0;
@@ -468,7 +423,6 @@ body.locked{
   text-align:center;
   z-index:99999;
   padding:25px;
-  font-family: 'Inter', sans-serif;
 }
 
 .lock-box{
@@ -477,22 +431,6 @@ body.locked{
   padding: 40px;
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-}
-
-.lock-box h1{
-  font-size:30px;
-  font-weight: 700;
-  margin-bottom:16px;
-  color: #ffbc00;
-  letter-spacing: -0.02em;
-}
-
-.lock-box p{
-  line-height:1.8;
-  color:#cbd5e1;
-  font-size:15px;
-  margin-bottom: 24px;
 }
 
 .lock-time{
@@ -502,7 +440,6 @@ body.locked{
   font-weight:600;
   font-size: 14px;
   color: #ffbc00;
-  border: 1px solid rgba(255, 188, 0, 0.2);
   display: inline-block;
 }
 
@@ -511,8 +448,54 @@ body.locked{
   font-size:36px;
   font-weight:700;
   color:#fff;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 1px;
+}
+
+/* CERTIFICATE MODAL (DAY 3 COMPLETE) */
+.cert-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 100000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.cert-card {
+  background: #fff;
+  color: #0f172a;
+  border-radius: 20px;
+  padding: 40px 30px;
+  max-width: 550px;
+  width: 100%;
+  text-align: center;
+  border: 6px double #2563eb;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+}
+
+.cert-badge {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.cert-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #1e293b;
+  text-transform: uppercase;
+}
+
+.cert-candidate {
+  font-size: 26px;
+  font-weight: 800;
+  color: #2563eb;
+  margin: 16px 0 8px;
+  text-decoration: underline;
 }
 
 .footer{
@@ -528,8 +511,6 @@ body.locked{
   .batch, .theme-switch { width: 100%; text-align: center; justify-content: center; }
   .status-bar{ flex-direction:column; align-items:center; text-align: center; }
   .container { padding: 0 16px 30px; }
-  .lock-box { padding: 25px 20px; }
-  .lock-box h1 { font-size: 24px; }
 }
 </style>
 </head>
@@ -541,7 +522,7 @@ body.locked{
   <div class="auth-card">
     <div class="auth-badge">Security Access Protocol</div>
     <h2>Candidate Login</h2>
-    <p>Enter your registered Email or Mobile Number to access your scheduled module.</p>
+    <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">Enter your registered identifier to unlock your session.</p>
     
     <div class="auth-input-group">
       <label>Registered Identifier</label>
@@ -576,6 +557,23 @@ body.locked{
     <p id="lockText">Today's induction sequence has not initiated yet.<br><br>Please wait, training workspace opens at 09:00 AM.</p>
     <div class="lock-time" id="lockTimeWindow">⏰ Access Timing: 09:00 AM – 08:00 PM Daily</div>
     <div id="startCountdown">00:00:00</div>
+  </div>
+</div>
+
+<!-- FINAL CLEARANCE CERTIFICATE MODAL -->
+<div id="certOverlay" class="cert-overlay">
+  <div class="cert-card">
+    <div class="cert-badge">🏆</div>
+    <div class="cert-title">Induction Completion Clearance</div>
+    <p style="font-size:14px; color:#64748b; margin-top:6px;">TARA Talent Solutions • Induction & Enablement Program</p>
+    <div class="cert-candidate" id="certCandidateName">CANDIDATE NAME</div>
+    <p style="font-size:15px; line-height:1.6; margin: 15px 0;">Has successfully completed all <b>3 Mandatory Induction Modules</b>, verified continuous video stream requirements, and is formally cleared for team integration.</p>
+    <div style="background:#f1f5f9; padding:12px; border-radius:10px; font-size:13px; font-weight:700; color:#334155; margin-bottom:20px;">
+      Status: <span style="color:#10b981;">QUALIFIED & RECORDED</span> • Date: <span id="certDate">--</span>
+    </div>
+    <button onclick="window.print()" style="background:#2563eb; color:#fff; border:none; padding:12px 24px; border-radius:10px; font-weight:700; cursor:pointer;">
+      🖨 Print / Save Clearance Proof
+    </button>
   </div>
 </div>
 
@@ -643,7 +641,8 @@ body.locked{
     <h3>📌 Important Instructions</h3>
     <ul>
       <li>Watch the complete training carefully without skipping or leaving.</li>
-      <li>Complete this module in one sitting without switching tabs.</li>
+      <li>Single-device session active. Logging in from another browser terminates this stream.</li>
+      <li>Accidental reload protection is active; watched time resumes smoothly.</li>
       <li>The verification code will appear inside the session video.</li>
       <li>Next module access is strictly unlocked on the next calendar day.</li>
     </ul>
@@ -659,7 +658,6 @@ body.locked{
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbw79wnaUmMkr4DIHjbInzMTYHvqp5CcPIXrRukvA1kAD2bFgjq9NmDtvqDNvxsE_DrAeg/exec";
 
-// UNIFIED OPERATIONAL WINDOW: 09:00 AM – 08:00 PM FOR ALL SESSIONS
 const SESSION_CONFIG = {
   1: { name: "Foundation Session", start: 9, end: 20, timeStr: "09:00 AM – 08:00 PM Daily", progress: "33%", streamKey: "day1_v2" },
   2: { name: "Clarification Session", start: 9, end: 20, timeStr: "09:00 AM – 08:00 PM Daily", progress: "66%", streamKey: "day2_v2" },
@@ -668,10 +666,12 @@ const SESSION_CONFIG = {
 
 let activeSession = 1;
 let currentCandidate = null;
+let currentSessionToken = null;
 let isVideoLoaded = false;
 let requiredSeconds = 3352;
 let secondsWatched = 0;
 let watchTimerInterval = null;
+let heartbeatInterval = null;
 let isSessionCompleted = false;
 
 /* THEME ENGINE */
@@ -712,7 +712,6 @@ async function verifyCandidateAuthentication() {
   const identifier = document.getElementById("authIdentifier").value.trim();
   const requestedSession = parseInt(document.getElementById("authSessionChoice").value, 10);
   
-  // Sanitize: lowercase and remove all whitespace
   const rawPasscode = document.getElementById("authPasscode").value;
   const passcode = rawPasscode ? rawPasscode.replace(/\s+/g, "").toLowerCase() : "";
   
@@ -746,6 +745,7 @@ async function verifyCandidateAuthentication() {
       currentCandidate = result.candidate;
       activeSession = result.unlockedSession;
       requiredSeconds = result.requiredSeconds || 3352;
+      currentSessionToken = result.sessionToken;
       
       document.getElementById("hudCandidateName").innerText = currentCandidate.name;
       document.querySelector(".brand").innerText = `🏛 ${SESSION_CONFIG[activeSession].name.toUpperCase()}`;
@@ -758,6 +758,7 @@ async function verifyCandidateAuthentication() {
       document.getElementById("authOverlay").style.display = "none";
       evaluateTimeLockEngine();
       initWatchTracker();
+      startHeartbeatCheck();
     } else {
       errorElement.innerText = result.message || "Access denied.";
       errorElement.style.display = "block";
@@ -822,8 +823,17 @@ function evaluateTimeLockEngine() {
   }
 }
 
+/* ANTI-LOSS WATCH BUFFER & TRACKER */
 function initWatchTracker() {
-  secondsWatched = 0;
+  const saveKey = `tara_progress_${currentCandidate.phone || currentCandidate.email}_s${activeSession}`;
+  const savedSecs = parseInt(sessionStorage.getItem(saveKey), 10);
+  
+  if (savedSecs && savedSecs < requiredSeconds) {
+    secondsWatched = savedSecs;
+  } else {
+    secondsWatched = 0;
+  }
+  
   updateWatchTimerUI();
 
   if (watchTimerInterval) clearInterval(watchTimerInterval);
@@ -831,6 +841,12 @@ function initWatchTracker() {
   watchTimerInterval = setInterval(() => {
     if (!document.hidden && !isSessionCompleted) {
       secondsWatched++;
+      
+      // Save checkpoint every 10 seconds
+      if (secondsWatched % 10 === 0) {
+        sessionStorage.setItem(saveKey, secondsWatched);
+      }
+      
       updateWatchTimerUI();
 
       if (secondsWatched >= requiredSeconds) {
@@ -838,6 +854,29 @@ function initWatchTracker() {
       }
     }
   }, 1000);
+}
+
+/* SINGLE DEVICE HEARTBEAT (Auto Kick on Simultaneous Login) */
+function startHeartbeatCheck() {
+  if (heartbeatInterval) clearInterval(heartbeatInterval);
+  heartbeatInterval = setInterval(async () => {
+    if (!currentCandidate || !currentSessionToken) return;
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          action: "HEARTBEAT_SYNC",
+          identifier: currentCandidate.email || currentCandidate.phone,
+          sessionToken: currentSessionToken
+        })
+      });
+      const check = await res.json();
+      if (check && check.valid === false) {
+        alert("⚠️ You have logged in from another device/browser. This session has been terminated.");
+        window.location.reload();
+      }
+    } catch(e) {}
+  }, 30000);
 }
 
 function formatSecs(s) {
@@ -906,7 +945,16 @@ async function markCurrentSessionCompleted(isManualClick) {
 
     const result = await res.json();
     if (result.success) {
-      if (isManualClick) {
+      // Clear progress buffer on completion
+      const saveKey = `tara_progress_${currentCandidate.phone || currentCandidate.email}_s${activeSession}`;
+      sessionStorage.removeItem(saveKey);
+
+      if (activeSession === 3) {
+        // Show Digital Clearance Certificate
+        document.getElementById("certCandidateName").innerText = currentCandidate.name;
+        document.getElementById("certDate").innerText = result.completionDate || new Date().toLocaleDateString();
+        document.getElementById("certOverlay").style.display = "flex";
+      } else if (isManualClick) {
         alert(`🎉 Congratulations ${currentCandidate.name}! Module ${activeSession} logged successfully.\n\nYour next module will unlock tomorrow between 09:00 AM – 08:00 PM.`);
         window.location.reload();
       }
@@ -933,7 +981,6 @@ function loadSecureBunnyStream(streamKey) {
   });
 }
 
-/* AUTOMATED DEVICE LANDSCAPE ROTATOR */
 function manageFullscreenOrientation() {
   const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
   if (isFullscreen) {
@@ -949,7 +996,6 @@ function manageFullscreenOrientation() {
 document.addEventListener('fullscreenchange', manageFullscreenOrientation);
 document.addEventListener('webkitfullscreenchange', manageFullscreenOrientation);
 
-/* GENUINE FLUCTUATION LIVE VIEWER ENGINE */
 let base = 65;
 function updateViewers(){
   let fluctuation = Math.floor(Math.random()*5)-2;
