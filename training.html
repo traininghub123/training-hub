@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>TARA Induction Portal | Master Learning Workspace (Testing Mode)</title>
+<title>TARA Induction Portal | Master Learning Workspace</title>
 
 <!-- Corporate Typography Integration -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -158,27 +158,6 @@ body{
   margin-right: auto;
   font-weight:600;
   border: 1px solid rgba(16, 185, 129, 0.2);
-}
-
-/* ANTI-RELOAD WARNING BANNER */
-.stream-warning-banner {
-  display: flex;
-  background: rgba(239, 68, 68, 0.08);
-  border: 1px solid rgba(239, 68, 68, 0.25);
-  border-radius: 14px;
-  padding: 14px 18px;
-  margin: 18px 0;
-  color: #dc2626;
-  font-size: 13.5px;
-  font-weight: 600;
-  align-items: center;
-  gap: 12px;
-}
-
-[data-theme="dark"] .stream-warning-banner {
-  color: #f87171;
-  background: rgba(239, 68, 68, 0.12);
-  border-color: rgba(239, 68, 68, 0.3);
 }
 
 .retention-alert {
@@ -486,7 +465,7 @@ body{
 <!-- AUTHENTICATION POPUP -->
 <div id="authOverlay" class="auth-overlay">
   <div class="auth-card">
-    <div class="auth-badge">Testing Mode Access</div>
+    <div class="auth-badge">Secure Access Protocol</div>
     <h2>Candidate Login</h2>
     <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">Enter your registered identifier to unlock your session.</p>
     
@@ -553,14 +532,9 @@ body{
   </div>
 </div>
 
-<div class="countdown" id="topCountdown">🟢 24/7 Access Enabled (Testing Mode Active)</div>
+<div class="countdown" id="topCountdown">🟢 System Operational • High Priority Stream</div>
 
 <div class="container">
-  <!-- RELOAD WARNING ALERT -->
-  <div class="stream-warning-banner">
-    ⚠️ <b>Important Notice:</b> Do not refresh, minimize, or close this page during training. Reloading will reset your session timer and video stream to 0.
-  </div>
-
   <div class="retention-alert" id="retentionBadge">
     ⚡ <b>Final Stage Active:</b> Less than 15 minutes remaining! Watch carefully as the secret passcode will be revealed shortly.
   </div>
@@ -602,8 +576,7 @@ body{
     <h3>📌 Important Instructions</h3>
     <ul>
       <li>Watch the complete training carefully without skipping or leaving.</li>
-      <li>Complete this module in one single sitting without closing or reloading the tab.</li>
-      <li>Single-device session active. Logging in from another browser terminates this stream.</li>
+      <li>Single-device session active. Logging in from another device terminates this stream.</li>
       <li>The verification code will appear inside the session video.</li>
       <li>Next module access is strictly unlocked on the next calendar day.</li>
     </ul>
@@ -747,7 +720,7 @@ function disableReloadProtection() {
 function handlePageUnload(e) {
   if (currentCandidate && !isSessionCompleted) {
     e.preventDefault();
-    e.returnValue = "Warning: Training stream is active. If you reload or leave, your progress will be lost and restarted.";
+    e.returnValue = "Warning: Training stream is active. Reloading will reset progress.";
     return e.returnValue;
   }
 }
@@ -771,11 +744,11 @@ function initWatchTracker() {
   }, 1000);
 }
 
-/* SINGLE DEVICE HEARTBEAT */
+/* FAST SINGLE DEVICE HEARTBEAT (Kicks out in ~6 seconds) */
 function startHeartbeatCheck() {
   if (heartbeatInterval) clearInterval(heartbeatInterval);
   heartbeatInterval = setInterval(async () => {
-    if (!currentCandidate || !currentSessionToken) return;
+    if (!currentCandidate || !currentSessionToken || isSessionCompleted) return;
     try {
       const res = await fetch(API_URL, {
         method: "POST",
@@ -788,11 +761,14 @@ function startHeartbeatCheck() {
       const check = await res.json();
       if (check && check.valid === false) {
         disableReloadProtection();
-        alert("⚠️ You have logged in from another device/browser. This session has been terminated.");
+        clearInterval(heartbeatInterval);
+        clearInterval(watchTimerInterval);
+        document.getElementById("videoContainer").innerHTML = "<div style='color:#fff; padding:60px; text-align:center; font-weight:700;'>⛔ ACCESS TERMINATED: Another active session was detected on a different device.</div>";
+        alert("⚠️ MULTI-DEVICE DETECTED: You have logged in from another device/browser. This session has been terminated.");
         window.location.reload();
       }
     } catch(e) {}
-  }, 30000);
+  }, 6000);
 }
 
 function formatSecs(s) {
