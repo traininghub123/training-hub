@@ -160,6 +160,27 @@ body{
   border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
+/* ANTI-RELOAD WARNING BANNER */
+.stream-warning-banner {
+  display: flex;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin: 18px 0;
+  color: #dc2626;
+  font-size: 13.5px;
+  font-weight: 600;
+  align-items: center;
+  gap: 12px;
+}
+
+[data-theme="dark"] .stream-warning-banner {
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
 .retention-alert {
   display: none;
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(217, 119, 6, 0.08));
@@ -535,6 +556,11 @@ body{
 <div class="countdown" id="topCountdown">🟢 24/7 Access Enabled (Testing Mode Active)</div>
 
 <div class="container">
+  <!-- RELOAD WARNING ALERT -->
+  <div class="stream-warning-banner">
+    ⚠️ <b>Important Notice:</b> Do not refresh, minimize, or close this page during training. Reloading will reset your session timer and video stream to 0.
+  </div>
+
   <div class="retention-alert" id="retentionBadge">
     ⚡ <b>Final Stage Active:</b> Less than 15 minutes remaining! Watch carefully as the secret passcode will be revealed shortly.
   </div>
@@ -576,8 +602,8 @@ body{
     <h3>📌 Important Instructions</h3>
     <ul>
       <li>Watch the complete training carefully without skipping or leaving.</li>
+      <li>Complete this module in one single sitting without closing or reloading the tab.</li>
       <li>Single-device session active. Logging in from another browser terminates this stream.</li>
-      <li>Accidental reload protection is active; watched time resumes smoothly.</li>
       <li>The verification code will appear inside the session video.</li>
       <li>Next module access is strictly unlocked on the next calendar day.</li>
     </ul>
@@ -695,6 +721,7 @@ async function verifyCandidateAuthentication() {
       if (!isVideoLoaded) loadSecureBunnyStream(SESSION_CONFIG[activeSession].streamKey);
       initWatchTracker();
       startHeartbeatCheck();
+      enableReloadProtection();
     } else {
       errorElement.innerText = result.message || "Access denied.";
       errorElement.style.display = "block";
@@ -708,17 +735,26 @@ async function verifyCandidateAuthentication() {
   }
 }
 
-/* ANTI-LOSS WATCH BUFFER & TRACKER */
-function initWatchTracker() {
-  const saveKey = `tara_progress_${currentCandidate.phone || currentCandidate.email}_s${activeSession}`;
-  const savedSecs = parseInt(sessionStorage.getItem(saveKey), 10);
-  
-  if (savedSecs && savedSecs < requiredSeconds) {
-    secondsWatched = savedSecs;
-  } else {
-    secondsWatched = 0;
+/* RELOAD & TAB-CLOSE PROTECTION */
+function enableReloadProtection() {
+  window.addEventListener("beforeunload", handlePageUnload);
+}
+
+function disableReloadProtection() {
+  window.removeEventListener("beforeunload", handlePageUnload);
+}
+
+function handlePageUnload(e) {
+  if (currentCandidate && !isSessionCompleted) {
+    e.preventDefault();
+    e.returnValue = "Warning: Training stream is active. If you reload or leave, your progress will be lost and restarted.";
+    return e.returnValue;
   }
-  
+}
+
+/* WATCH TRACKER */
+function initWatchTracker() {
+  secondsWatched = 0;
   updateWatchTimerUI();
 
   if (watchTimerInterval) clearInterval(watchTimerInterval);
@@ -726,11 +762,6 @@ function initWatchTracker() {
   watchTimerInterval = setInterval(() => {
     if (!document.hidden && !isSessionCompleted) {
       secondsWatched++;
-      
-      if (secondsWatched % 10 === 0) {
-        sessionStorage.setItem(saveKey, secondsWatched);
-      }
-      
       updateWatchTimerUI();
 
       if (secondsWatched >= requiredSeconds) {
@@ -756,6 +787,7 @@ function startHeartbeatCheck() {
       });
       const check = await res.json();
       if (check && check.valid === false) {
+        disableReloadProtection();
         alert("⚠️ You have logged in from another device/browser. This session has been terminated.");
         window.location.reload();
       }
@@ -805,6 +837,7 @@ function updateWatchTimerUI() {
 function unlockAndAutoCompleteSession() {
   if (isSessionCompleted) return;
   isSessionCompleted = true;
+  disableReloadProtection();
   clearInterval(watchTimerInterval);
   updateWatchTimerUI();
   markCurrentSessionCompleted(false);
@@ -829,9 +862,7 @@ async function markCurrentSessionCompleted(isManualClick) {
 
     const result = await res.json();
     if (result.success) {
-      const saveKey = `tara_progress_${currentCandidate.phone || currentCandidate.email}_s${activeSession}`;
-      sessionStorage.removeItem(saveKey);
-
+      disableReloadProtection();
       if (activeSession === 3) {
         document.getElementById("certCandidateName").innerText = currentCandidate.name;
         document.getElementById("certDate").innerText = result.completionDate || new Date().toLocaleDateString();
