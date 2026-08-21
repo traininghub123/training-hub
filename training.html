@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>TARA Induction Portal | Master Learning Workspace</title>
+<title>TARA Induction Portal | Master Learning Workspace (Testing Mode)</title>
 
 <!-- Corporate Typography Integration -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -41,11 +41,6 @@ body{
   background: var(--bg-body);
   color: var(--text-main);
   line-height: 1.6;
-}
-
-body.locked{
-  overflow:hidden;
-  height:100vh;
 }
 
 .topbar{
@@ -154,21 +149,15 @@ body.locked{
   text-align:center;
   margin-top:14px;
   font-size:14px;
-  color:#2563eb;
-  background: rgba(37, 99, 235, 0.05);
+  color:#10b981;
+  background: rgba(16, 185, 129, 0.08);
   padding: 10px;
   border-radius: 10px;
   max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
   font-weight:600;
-  border: 1px solid rgba(37, 99, 235, 0.08);
-}
-
-[data-theme="dark"] .countdown {
-  color: #60a5fa;
-  background: rgba(59, 130, 246, 0.08);
-  border: 1px solid rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
 .retention-alert {
@@ -183,12 +172,6 @@ body.locked{
   font-weight: 600;
   align-items: center;
   gap: 12px;
-}
-
-[data-theme="dark"] .retention-alert {
-  color: #fbbf24;
-  border-color: rgba(251, 191, 36, 0.3);
-  background: rgba(245, 158, 11, 0.08);
 }
 
 .container{
@@ -401,6 +384,10 @@ body.locked{
   margin-top: 10px;
 }
 
+.auth-btn:hover {
+  background: #1d4ed8;
+}
+
 .auth-error-msg {
   color: #ef4444;
   font-size: 13px;
@@ -409,48 +396,6 @@ body.locked{
   display: none;
 }
 
-.lock-screen{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:#0f172a;
-  color:#fff;
-  display:none;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  z-index:99999;
-  padding:25px;
-}
-
-.lock-box{
-  max-width:460px;
-  background: rgba(255, 255, 255, 0.03);
-  padding: 40px;
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.lock-time{
-  background:rgba(255,255,255,0.07);
-  padding:12px 20px;
-  border-radius:12px;
-  font-weight:600;
-  font-size: 14px;
-  color: #ffbc00;
-  display: inline-block;
-}
-
-#startCountdown{
-  margin-top:24px;
-  font-size:36px;
-  font-weight:700;
-  color:#fff;
-}
-
-/* CERTIFICATE MODAL (DAY 3 COMPLETE) */
 .cert-overlay {
   position: fixed;
   top: 0;
@@ -520,7 +465,7 @@ body.locked{
 <!-- AUTHENTICATION POPUP -->
 <div id="authOverlay" class="auth-overlay">
   <div class="auth-card">
-    <div class="auth-badge">Security Access Protocol</div>
+    <div class="auth-badge">Testing Mode Access</div>
     <h2>Candidate Login</h2>
     <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">Enter your registered identifier to unlock your session.</p>
     
@@ -532,9 +477,9 @@ body.locked{
     <div class="auth-input-group">
       <label>Select Session To Access</label>
       <select id="authSessionChoice" class="auth-input" onchange="togglePasscodeVisibility()">
-        <option value="1">Day 1: Foundation Session (09:00 AM – 08:00 PM)</option>
-        <option value="2">Day 2: Clarification Session (09:00 AM – 08:00 PM)</option>
-        <option value="3">Day 3: Execution Session (09:00 AM – 08:00 PM)</option>
+        <option value="1">Day 1: Foundation Session</option>
+        <option value="2">Day 2: Clarification Session</option>
+        <option value="3">Day 3: Execution Session</option>
       </select>
     </div>
 
@@ -547,16 +492,6 @@ body.locked{
       Authenticate & Unlock Session
     </button>
     <div id="authError" class="auth-error-msg"></div>
-  </div>
-</div>
-
-<!-- TIME GATE LOCK SCREEN -->
-<div id="lockScreen" class="lock-screen">
-  <div class="lock-box">
-    <h1 id="lockTitle">⏳ Session Starts Soon</h1>
-    <p id="lockText">Today's induction sequence has not initiated yet.<br><br>Please wait, training workspace opens at 09:00 AM.</p>
-    <div class="lock-time" id="lockTimeWindow">⏰ Access Timing: 09:00 AM – 08:00 PM Daily</div>
-    <div id="startCountdown">00:00:00</div>
   </div>
 </div>
 
@@ -597,7 +532,7 @@ body.locked{
   </div>
 </div>
 
-<div class="countdown" id="topCountdown">Checking Window...</div>
+<div class="countdown" id="topCountdown">🟢 24/7 Access Enabled (Testing Mode Active)</div>
 
 <div class="container">
   <div class="retention-alert" id="retentionBadge">
@@ -632,7 +567,7 @@ body.locked{
     </div>
     <div class="stat">
       <div class="stat-label">Training Status</div>
-      <div class="stat-value" id="trainingStatus">Checking...</div>
+      <div class="stat-value" id="trainingStatus">ACTIVE</div>
     </div>
   </div>
 
@@ -659,9 +594,9 @@ body.locked{
 const API_URL = "https://script.google.com/macros/s/AKfycbw79wnaUmMkr4DIHjbInzMTYHvqp5CcPIXrRukvA1kAD2bFgjq9NmDtvqDNvxsE_DrAeg/exec";
 
 const SESSION_CONFIG = {
-  1: { name: "Foundation Session", start: 9, end: 20, timeStr: "09:00 AM – 08:00 PM Daily", progress: "33%", streamKey: "day1_v2" },
-  2: { name: "Clarification Session", start: 9, end: 20, timeStr: "09:00 AM – 08:00 PM Daily", progress: "66%", streamKey: "day2_v2" },
-  3: { name: "Execution Session", start: 9, end: 20, timeStr: "09:00 AM – 08:00 PM Daily", progress: "100%", streamKey: "day3_v2" }
+  1: { name: "Foundation Session", progress: "33%", streamKey: "day1_v2" },
+  2: { name: "Clarification Session", progress: "66%", streamKey: "day2_v2" },
+  3: { name: "Execution Session", progress: "100%", streamKey: "day3_v2" }
 };
 
 let activeSession = 1;
@@ -753,10 +688,11 @@ async function verifyCandidateAuthentication() {
       document.getElementById("progressModuleTitle").innerHTML = `<b>📘 Core Onboarding Phase • Module ${activeSession}</b>`;
       document.getElementById("progressPercent").innerHTML = `<b>${SESSION_CONFIG[activeSession].progress} Progress</b>`;
       document.getElementById("progressFillBar").style.width = SESSION_CONFIG[activeSession].progress;
-      document.getElementById("lockTimeWindow").innerText = `⏰ Access Timing: ${SESSION_CONFIG[activeSession].timeStr}`;
+      document.getElementById("liveStatus").innerText = `${SESSION_CONFIG[activeSession].name} Active`;
       
       document.getElementById("authOverlay").style.display = "none";
-      evaluateTimeLockEngine();
+      
+      if (!isVideoLoaded) loadSecureBunnyStream(SESSION_CONFIG[activeSession].streamKey);
       initWatchTracker();
       startHeartbeatCheck();
     } else {
@@ -769,57 +705,6 @@ async function verifyCandidateAuthentication() {
   } finally {
     submitBtn.innerText = "Authenticate & Unlock Session";
     submitBtn.disabled = false;
-  }
-}
-
-function evaluateTimeLockEngine() {
-  if (!currentCandidate) return;
-  const now = new Date();
-  const hour = now.getHours();
-  const cfg = SESSION_CONFIG[activeSession];
-  const lockScreen = document.getElementById("lockScreen");
-  const topCountdown = document.getElementById("topCountdown");
-  const trainingStatus = document.getElementById("trainingStatus");
-  const liveStatus = document.getElementById("liveStatus");
-  const statusDot = document.getElementById("statusDot");
-
-  if (hour >= cfg.start && hour < cfg.end) {
-    lockScreen.style.display = "none";
-    document.body.classList.remove("locked");
-    if (topCountdown) topCountdown.innerHTML = "🟢 Onboarding Window Operational • Priority Streaming Enabled";
-    if (trainingStatus) trainingStatus.innerText = "ACTIVE";
-    if (liveStatus) liveStatus.innerText = `${cfg.name} Active`;
-    if (statusDot) statusDot.style.background = "#10b981";
-
-    if (!isVideoLoaded) loadSecureBunnyStream(cfg.streamKey);
-  } else if (hour < cfg.start) {
-    document.body.classList.add("locked");
-    lockScreen.style.display = "flex";
-    if (topCountdown) topCountdown.innerHTML = "⏳ Session Starts Soon (09:00 AM)";
-    if (trainingStatus) trainingStatus.innerText = "Scheduled";
-    if (liveStatus) liveStatus.innerText = "System Paused";
-    if (statusDot) statusDot.style.background = "#ffbc00";
-
-    const target = new Date();
-    target.setHours(cfg.start, 0, 0, 0);
-    const diff = target - now;
-
-    const h = Math.floor(diff / 3600000);
-    const m = Math.floor((diff / 60000) % 60);
-    const s = Math.floor((diff / 1000) % 60);
-
-    document.getElementById("startCountdown").innerHTML =
-      `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  } else {
-    document.body.classList.add("locked");
-    lockScreen.style.display = "flex";
-    document.getElementById("lockTitle").innerHTML = "🔒 Training Access Closed";
-    document.getElementById("lockText").innerHTML = "Today's batch timing (09:00 AM – 08:00 PM) has ended.<br><br>Please revisit tomorrow at 09:00 AM.";
-    document.getElementById("startCountdown").style.display = "none";
-    if (topCountdown) topCountdown.innerHTML = "🔴 Onboarding Window Closed (Reopens 09:00 AM)";
-    if (trainingStatus) trainingStatus.innerText = "Closed";
-    if (liveStatus) liveStatus.innerText = "Session Expired";
-    if (statusDot) statusDot.style.background = "#ef4444";
   }
 }
 
@@ -842,7 +727,6 @@ function initWatchTracker() {
     if (!document.hidden && !isSessionCompleted) {
       secondsWatched++;
       
-      // Save checkpoint every 10 seconds
       if (secondsWatched % 10 === 0) {
         sessionStorage.setItem(saveKey, secondsWatched);
       }
@@ -856,7 +740,7 @@ function initWatchTracker() {
   }, 1000);
 }
 
-/* SINGLE DEVICE HEARTBEAT (Auto Kick on Simultaneous Login) */
+/* SINGLE DEVICE HEARTBEAT */
 function startHeartbeatCheck() {
   if (heartbeatInterval) clearInterval(heartbeatInterval);
   heartbeatInterval = setInterval(async () => {
@@ -945,17 +829,15 @@ async function markCurrentSessionCompleted(isManualClick) {
 
     const result = await res.json();
     if (result.success) {
-      // Clear progress buffer on completion
       const saveKey = `tara_progress_${currentCandidate.phone || currentCandidate.email}_s${activeSession}`;
       sessionStorage.removeItem(saveKey);
 
       if (activeSession === 3) {
-        // Show Digital Clearance Certificate
         document.getElementById("certCandidateName").innerText = currentCandidate.name;
         document.getElementById("certDate").innerText = result.completionDate || new Date().toLocaleDateString();
         document.getElementById("certOverlay").style.display = "flex";
       } else if (isManualClick) {
-        alert(`🎉 Congratulations ${currentCandidate.name}! Module ${activeSession} logged successfully.\n\nYour next module will unlock tomorrow between 09:00 AM – 08:00 PM.`);
+        alert(`🎉 Congratulations ${currentCandidate.name}! Module ${activeSession} logged successfully.\n\nYour next module will unlock tomorrow.`);
         window.location.reload();
       }
     }
@@ -967,7 +849,6 @@ async function markCurrentSessionCompleted(isManualClick) {
   }
 }
 
-/* EXACT STREAM FETCHER */
 function loadSecureBunnyStream(streamKey) {
   isVideoLoaded = true;
   fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
@@ -1005,8 +886,6 @@ function updateViewers(){
 }
 updateViewers();
 setInterval(updateViewers, 6000);
-
-setInterval(evaluateTimeLockEngine, 1000);
 </script>
 </body>
 </html>
