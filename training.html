@@ -245,7 +245,7 @@ body.locked{
   border-radius:999px;
 }
 
-/* VIDEO - EXACT ORIGINAL EMBED FORMAT */
+/* VIDEO EMBED */
 .video-card{
   background:#000;
   border-radius:22px;
@@ -551,9 +551,9 @@ body.locked{
     <div class="auth-input-group">
       <label>Select Session To Access</label>
       <select id="authSessionChoice" class="auth-input" onchange="togglePasscodeVisibility()">
-        <option value="1">Day 1: Foundation Session (01:00 PM – 04:00 PM)</option>
-        <option value="2">Day 2: Clarification Session (02:00 PM – 05:00 PM)</option>
-        <option value="3">Day 3: Execution Session (03:00 PM – 06:00 PM)</option>
+        <option value="1">Day 1: Foundation Session (09:00 AM – 08:00 PM)</option>
+        <option value="2">Day 2: Clarification Session (09:00 AM – 08:00 PM)</option>
+        <option value="3">Day 3: Execution Session (09:00 AM – 08:00 PM)</option>
       </select>
     </div>
 
@@ -573,8 +573,8 @@ body.locked{
 <div id="lockScreen" class="lock-screen">
   <div class="lock-box">
     <h1 id="lockTitle">⏳ Session Starts Soon</h1>
-    <p id="lockText">Today's induction sequence has not initiated yet.<br><br>Please wait, you will be checked into the stream workspace automatically.</p>
-    <div class="lock-time" id="lockTimeWindow">⏰ Access Timing Active</div>
+    <p id="lockText">Today's induction sequence has not initiated yet.<br><br>Please wait, training workspace opens at 09:00 AM.</p>
+    <div class="lock-time" id="lockTimeWindow">⏰ Access Timing: 09:00 AM – 08:00 PM Daily</div>
     <div id="startCountdown">00:00:00</div>
   </div>
 </div>
@@ -645,7 +645,7 @@ body.locked{
       <li>Watch the complete training carefully without skipping or leaving.</li>
       <li>Complete this module in one sitting without switching tabs.</li>
       <li>The verification code will appear inside the session video.</li>
-      <li>Next module access is unlocked only after complete verification.</li>
+      <li>Next module access is strictly unlocked on the next calendar day.</li>
     </ul>
   </div>
 
@@ -659,11 +659,11 @@ body.locked{
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbw79wnaUmMkr4DIHjbInzMTYHvqp5CcPIXrRukvA1kAD2bFgjq9NmDtvqDNvxsE_DrAeg/exec";
 
-// PRODUCTION TIMING CONFIGURATION (REAL SLOTS)
+// UNIFIED OPERATIONAL WINDOW: 09:00 AM – 08:00 PM FOR ALL SESSIONS
 const SESSION_CONFIG = {
-  1: { name: "Foundation Session", start: 13, end: 16, timeStr: "01:00 PM – 04:00 PM Daily", progress: "33%", streamKey: "day1_v2" },
-  2: { name: "Clarification Session", start: 14, end: 17, timeStr: "02:00 PM – 05:00 PM Daily", progress: "66%", streamKey: "day2_v2" },
-  3: { name: "Execution Session", start: 15, end: 18, timeStr: "03:00 PM – 06:00 PM Daily", progress: "100%", streamKey: "day3_v2" }
+  1: { name: "Foundation Session", start: 9, end: 20, timeStr: "09:00 AM – 08:00 PM Daily", progress: "33%", streamKey: "day1_v2" },
+  2: { name: "Clarification Session", start: 9, end: 20, timeStr: "09:00 AM – 08:00 PM Daily", progress: "66%", streamKey: "day2_v2" },
+  3: { name: "Execution Session", start: 9, end: 20, timeStr: "09:00 AM – 08:00 PM Daily", progress: "100%", streamKey: "day3_v2" }
 };
 
 let activeSession = 1;
@@ -712,7 +712,7 @@ async function verifyCandidateAuthentication() {
   const identifier = document.getElementById("authIdentifier").value.trim();
   const requestedSession = parseInt(document.getElementById("authSessionChoice").value, 10);
   
-  // Sanitize Passcode: Lowercase and strip all whitespace
+  // Sanitize: lowercase and remove all whitespace
   const rawPasscode = document.getElementById("authPasscode").value;
   const passcode = rawPasscode ? rawPasscode.replace(/\s+/g, "").toLowerCase() : "";
   
@@ -794,7 +794,7 @@ function evaluateTimeLockEngine() {
   } else if (hour < cfg.start) {
     document.body.classList.add("locked");
     lockScreen.style.display = "flex";
-    if (topCountdown) topCountdown.innerHTML = "⏳ Session Starts Soon";
+    if (topCountdown) topCountdown.innerHTML = "⏳ Session Starts Soon (09:00 AM)";
     if (trainingStatus) trainingStatus.innerText = "Scheduled";
     if (liveStatus) liveStatus.innerText = "System Paused";
     if (statusDot) statusDot.style.background = "#ffbc00";
@@ -813,9 +813,9 @@ function evaluateTimeLockEngine() {
     document.body.classList.add("locked");
     lockScreen.style.display = "flex";
     document.getElementById("lockTitle").innerHTML = "🔒 Training Access Closed";
-    document.getElementById("lockText").innerHTML = "Today's batch timing has ended.<br><br>Please revisit during active training hours.";
+    document.getElementById("lockText").innerHTML = "Today's batch timing (09:00 AM – 08:00 PM) has ended.<br><br>Please revisit tomorrow at 09:00 AM.";
     document.getElementById("startCountdown").style.display = "none";
-    if (topCountdown) topCountdown.innerHTML = "🔴 Onboarding Window Closed";
+    if (topCountdown) topCountdown.innerHTML = "🔴 Onboarding Window Closed (Reopens 09:00 AM)";
     if (trainingStatus) trainingStatus.innerText = "Closed";
     if (liveStatus) liveStatus.innerText = "Session Expired";
     if (statusDot) statusDot.style.background = "#ef4444";
@@ -907,7 +907,7 @@ async function markCurrentSessionCompleted(isManualClick) {
     const result = await res.json();
     if (result.success) {
       if (isManualClick) {
-        alert(`🎉 Congratulations ${currentCandidate.name}! Module ${activeSession} logged successfully.\n\nYour next module will unlock tomorrow during its scheduled timing.`);
+        alert(`🎉 Congratulations ${currentCandidate.name}! Module ${activeSession} logged successfully.\n\nYour next module will unlock tomorrow between 09:00 AM – 08:00 PM.`);
         window.location.reload();
       }
     }
