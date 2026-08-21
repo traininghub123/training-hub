@@ -282,6 +282,11 @@ body{
   color: var(--text-main);
 }
 
+.info-box li{
+  font-size: 14.5px;
+  margin-bottom: 6px;
+}
+
 .btn{
   margin-top:28px;
   width:100%;
@@ -396,13 +401,14 @@ body{
   display: none;
 }
 
+/* HIGH-END EXECUTIVE CERTIFICATE MODAL */
 .cert-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(15, 23, 42, 0.95);
+  background: rgba(15, 23, 42, 0.9);
   backdrop-filter: blur(10px);
   z-index: 100000;
   display: none;
@@ -412,34 +418,57 @@ body{
 }
 
 .cert-card {
+  position: relative;
   background: #fff;
   color: #0f172a;
   border-radius: 20px;
   padding: 40px 30px;
-  max-width: 550px;
+  max-width: 540px;
   width: 100%;
   text-align: center;
   border: 6px double #2563eb;
   box-shadow: 0 25px 60px rgba(0,0,0,0.5);
 }
 
+.cert-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  background: #f1f5f9;
+  border: none;
+  font-size: 18px;
+  font-weight: 700;
+  color: #64748b;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cert-close-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
 .cert-badge {
-  font-size: 48px;
-  margin-bottom: 12px;
+  font-size: 44px;
+  margin-bottom: 8px;
 }
 
 .cert-title {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 800;
   color: #1e293b;
   text-transform: uppercase;
 }
 
 .cert-candidate {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 800;
   color: #2563eb;
-  margin: 16px 0 8px;
+  margin: 14px 0 6px;
   text-decoration: underline;
 }
 
@@ -495,20 +524,26 @@ body{
   </div>
 </div>
 
-<!-- FINAL CLEARANCE CERTIFICATE MODAL -->
+<!-- DIGITAL CLEARANCE CERTIFICATE MODAL -->
 <div id="certOverlay" class="cert-overlay">
   <div class="cert-card">
+    <button class="cert-close-btn" onclick="closeCertModal()">✕</button>
     <div class="cert-badge">🏆</div>
-    <div class="cert-title">Induction Completion Clearance</div>
-    <p style="font-size:14px; color:#64748b; margin-top:6px;">TARA Talent Solutions • Induction & Enablement Program</p>
+    <div class="cert-title">Induction Clearance Certificate</div>
+    <p style="font-size:13.5px; color:#64748b; margin-top:4px;">TARA Talent Solutions • Induction & Enablement Program</p>
     <div class="cert-candidate" id="certCandidateName">CANDIDATE NAME</div>
-    <p style="font-size:15px; line-height:1.6; margin: 15px 0;">Has successfully completed all <b>3 Mandatory Induction Modules</b>, verified continuous video stream requirements, and is formally cleared for team integration.</p>
-    <div style="background:#f1f5f9; padding:12px; border-radius:10px; font-size:13px; font-weight:700; color:#334155; margin-bottom:20px;">
+    <p style="font-size:14.5px; line-height:1.6; margin: 14px 0;">Has successfully completed all <b>3 Mandatory Induction Modules</b>, satisfied continuous telemetry requirements, and is formally cleared for team integration.</p>
+    <div style="background:#f1f5f9; padding:10px; border-radius:10px; font-size:13px; font-weight:700; color:#334155; margin-bottom:18px;">
       Status: <span style="color:#10b981;">QUALIFIED & RECORDED</span> • Date: <span id="certDate">--</span>
     </div>
-    <button onclick="window.print()" style="background:#2563eb; color:#fff; border:none; padding:12px 24px; border-radius:10px; font-weight:700; cursor:pointer;">
-      🖨 Print / Save Clearance Proof
-    </button>
+    <div style="display:flex; gap:10px; justify-content:center;">
+      <button onclick="window.print()" style="background:#2563eb; color:#fff; border:none; padding:12px 20px; border-radius:10px; font-weight:700; cursor:pointer;">
+        🖨 Print / Save PDF
+      </button>
+      <button onclick="closeCertModal()" style="background:#e2e8f0; color:#1e293b; border:none; padding:12px 18px; border-radius:10px; font-weight:700; cursor:pointer;">
+        Back to Meeting
+      </button>
+    </div>
   </div>
 </div>
 
@@ -571,18 +606,19 @@ body{
     </div>
   </div>
 
-  <!-- INFO -->
+  <!-- INSTRUCTIONS -->
   <div class="info-box">
     <h3>📌 Important Instructions</h3>
     <ul>
       <li>Watch the complete training carefully without skipping or leaving.</li>
+      <li>Do not refresh, switch tabs, or minimize the browser during the session; doing so will reset your stream progress.</li>
       <li>Single-device session active. Logging in from another device terminates this stream.</li>
       <li>The verification code will appear inside the session video.</li>
       <li>Next module access is strictly unlocked on the next calendar day.</li>
     </ul>
   </div>
 
-  <button class="btn" id="completeSessionBtn" disabled onclick="markCurrentSessionCompleted(true)">
+  <button class="btn" id="completeSessionBtn" disabled onclick="handleSessionActionButtonClick()">
     🔒 Session In Progress (Mandatory Stream Required)
   </button>
 </div>
@@ -593,9 +629,9 @@ body{
 const API_URL = "https://script.google.com/macros/s/AKfycbw79wnaUmMkr4DIHjbInzMTYHvqp5CcPIXrRukvA1kAD2bFgjq9NmDtvqDNvxsE_DrAeg/exec";
 
 const SESSION_CONFIG = {
-  1: { name: "Foundation Session", progress: "33%", streamKey: "day1_v2" },
-  2: { name: "Clarification Session", progress: "66%", streamKey: "day2_v2" },
-  3: { name: "Execution Session", progress: "100%", streamKey: "day3_v2" }
+  1: { name: "Foundation Session", progress: "33%", streamKey: "day1_v2", baseViewers: 52, maxViewers: 86 },
+  2: { name: "Clarification Session", progress: "66%", streamKey: "day2_v2", baseViewers: 36, maxViewers: 62 },
+  3: { name: "Execution Session", progress: "100%", streamKey: "day3_v2", baseViewers: 25, maxViewers: 46 }
 };
 
 let activeSession = 1;
@@ -607,6 +643,7 @@ let secondsWatched = 0;
 let watchTimerInterval = null;
 let heartbeatInterval = null;
 let isSessionCompleted = false;
+let finalCompletionDate = "";
 
 /* THEME ENGINE */
 const themeToggle = document.getElementById("themeToggle");
@@ -695,6 +732,7 @@ async function verifyCandidateAuthentication() {
       initWatchTracker();
       startHeartbeatCheck();
       enableReloadProtection();
+      updateViewers();
     } else {
       errorElement.innerText = result.message || "Access denied.";
       errorElement.style.display = "block";
@@ -744,7 +782,7 @@ function initWatchTracker() {
   }, 1000);
 }
 
-/* FAST SINGLE DEVICE HEARTBEAT (Kicks out in ~6 seconds) */
+/* SINGLE DEVICE HEARTBEAT */
 function startHeartbeatCheck() {
   if (heartbeatInterval) clearInterval(heartbeatInterval);
   heartbeatInterval = setInterval(async () => {
@@ -806,7 +844,12 @@ function updateWatchTimerUI() {
     timerElement.style.color = "#10b981";
     btn.disabled = false;
     btn.classList.add("active-ready");
-    btn.innerText = `🎉 Mark Session Completed & Log Attendance`;
+    
+    if (activeSession === 3) {
+      btn.innerText = `🏆 View / Download Clearance Certificate`;
+    } else {
+      btn.innerText = `🎉 Mark Session Completed & Log Attendance`;
+    }
   }
 }
 
@@ -823,8 +866,6 @@ async function markCurrentSessionCompleted(isManualClick) {
   if (!currentCandidate) return;
 
   const btn = document.getElementById("completeSessionBtn");
-  btn.disabled = true;
-  btn.innerText = "Syncing Central Database...";
 
   try {
     const res = await fetch(API_URL, {
@@ -838,11 +879,11 @@ async function markCurrentSessionCompleted(isManualClick) {
 
     const result = await res.json();
     if (result.success) {
-      disableReloadProtection();
+      finalCompletionDate = result.completionDate || new Date().toISOString().split("T")[0];
       if (activeSession === 3) {
-        document.getElementById("certCandidateName").innerText = currentCandidate.name;
-        document.getElementById("certDate").innerText = result.completionDate || new Date().toLocaleDateString();
-        document.getElementById("certOverlay").style.display = "flex";
+        btn.disabled = false;
+        btn.classList.add("active-ready");
+        btn.innerText = `🏆 View / Download Clearance Certificate`;
       } else if (isManualClick) {
         alert(`🎉 Congratulations ${currentCandidate.name}! Module ${activeSession} logged successfully.\n\nYour next module will unlock tomorrow.`);
         window.location.reload();
@@ -850,10 +891,21 @@ async function markCurrentSessionCompleted(isManualClick) {
     }
   } catch (e) {
     console.error(e);
-  } finally {
-    btn.disabled = false;
-    btn.innerText = `🎉 Session Completed (Logged in Sheet)`;
   }
+}
+
+function handleSessionActionButtonClick() {
+  if (activeSession === 3) {
+    document.getElementById("certCandidateName").innerText = currentCandidate.name;
+    document.getElementById("certDate").innerText = finalCompletionDate || new Date().toLocaleDateString();
+    document.getElementById("certOverlay").style.display = "flex";
+  } else {
+    markCurrentSessionCompleted(true);
+  }
+}
+
+function closeCertModal() {
+  document.getElementById("certOverlay").style.display = "none";
 }
 
 function loadSecureBunnyStream(streamKey) {
@@ -884,15 +936,26 @@ function manageFullscreenOrientation() {
 document.addEventListener('fullscreenchange', manageFullscreenOrientation);
 document.addEventListener('webkitfullscreenchange', manageFullscreenOrientation);
 
-let base = 65;
+/* REALISTIC STAGE & TIME-AWARE VIEWER ENGINE */
 function updateViewers(){
-  let fluctuation = Math.floor(Math.random()*5)-2;
-  let viewers = Math.min(100, Math.max(30, base + fluctuation));
+  const cfg = SESSION_CONFIG[activeSession] || SESSION_CONFIG[1];
+  const now = new Date();
+  const hour = now.getHours();
+  
+  let targetBase = cfg.baseViewers;
+  if ((hour >= 11 && hour <= 13) || (hour >= 15 && hour <= 18)) {
+    targetBase = Math.floor((cfg.baseViewers + cfg.maxViewers) / 2) + 6;
+  }
+  
+  let fluctuation = Math.floor(Math.random() * 5) - 2;
+  let currentViewers = Math.min(cfg.maxViewers, Math.max(cfg.baseViewers - 6, targetBase + fluctuation));
+  
   const viewerTarget = document.getElementById("viewerCount");
-  if (viewerTarget) viewerTarget.innerText = viewers;
+  if (viewerTarget) viewerTarget.innerText = currentViewers;
 }
+
 updateViewers();
-setInterval(updateViewers, 6000);
+setInterval(updateViewers, 5000);
 </script>
 </body>
 </html>
