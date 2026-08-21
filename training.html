@@ -884,6 +884,10 @@ async function markCurrentSessionCompleted(isManualClick) {
         btn.disabled = false;
         btn.classList.add("active-ready");
         btn.innerText = `🏆 View / Download Clearance Certificate`;
+        // Auto-popup Certificate instantly on complete
+        document.getElementById("certCandidateName").innerText = currentCandidate.name;
+        document.getElementById("certDate").innerText = finalCompletionDate || new Date().toLocaleDateString();
+        document.getElementById("certOverlay").style.display = "flex";
       } else if (isManualClick) {
         alert(`🎉 Congratulations ${currentCandidate.name}! Module ${activeSession} logged successfully.\n\nYour next module will unlock tomorrow.`);
         window.location.reload();
