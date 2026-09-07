@@ -587,9 +587,9 @@ body.locked{
     <div class="auth-input-group">
       <label>Select Session To Access</label>
       <select id="authSessionChoice" class="auth-input" onchange="togglePasscodeVisibility()">
-        <option value="1">Day 1: Foundation Session (09:00 AM – 08:00 PM)</option>
-        <option value="2">Day 2: Clarification Session (09:00 AM – 08:00 PM)</option>
-        <option value="3">Day 3: Execution Session (09:00 AM – 08:00 PM)</option>
+        <option value="1">Day 1: Foundation Session (01:00 PM – 04:00 PM)</option>
+        <option value="2">Day 2: Clarification Session (02:00 PM – 05:00 PM)</option>
+        <option value="3">Day 3: Execution Session (03:00 PM – 06:00 PM)</option>
       </select>
     </div>
 
@@ -609,8 +609,8 @@ body.locked{
 <div id="lockScreen" class="lock-screen">
   <div class="lock-box">
     <h1 id="lockTitle">⏳ Session Starts Soon</h1>
-    <p id="lockText">Today's induction sequence has not initiated yet.<br><br>Please wait, training workspace opens at 09:00 AM.</p>
-    <div class="lock-time" id="lockTimeWindow">⏰ Access Timing: 09:00 AM – 08:00 PM Daily</div>
+    <p id="lockText">Today's induction sequence has not initiated yet.<br><br>Please wait, training workspace opens at its scheduled time.</p>
+    <div class="lock-time" id="lockTimeWindow">⏰ Access Timing: Scheduled Slot</div>
     <div id="startCountdown">00:00:00</div>
   </div>
 </div>
@@ -719,11 +719,11 @@ body.locked{
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbw79wnaUmMkr4DIHjbInzMTYHvqp5CcPIXrRukvA1kAD2bFgjq9NmDtvqDNvxsE_DrAeg/exec";
 
-// UNIFIED 09:00 AM – 08:00 PM PRODUCTION WINDOW
+// ORIGINAL STAGGERED ACCESS WINDOWS RESTORED
 const SESSION_CONFIG = {
-  1: { name: "Foundation Session", start: 9, end: 20, timeStr: "09:00 AM – 08:00 PM Daily", progress: "33%", streamKey: "day1_v2", baseViewers: 52, maxViewers: 86 },
-  2: { name: "Clarification Session", start: 9, end: 20, timeStr: "09:00 AM – 08:00 PM Daily", progress: "66%", streamKey: "day2_v2", baseViewers: 36, maxViewers: 62 },
-  3: { name: "Execution Session", start: 9, end: 20, timeStr: "09:00 AM – 08:00 PM Daily", progress: "100%", streamKey: "day3_v2", baseViewers: 25, maxViewers: 46 }
+  1: { name: "Foundation Session", start: 13, end: 16, timeStr: "01:00 PM – 04:00 PM Daily", progress: "33%", streamKey: "day1_v2", baseViewers: 52, maxViewers: 86 },
+  2: { name: "Clarification Session", start: 14, end: 17, timeStr: "02:00 PM – 05:00 PM Daily", progress: "66%", streamKey: "day2_v2", baseViewers: 36, maxViewers: 62 },
+  3: { name: "Execution Session", start: 15, end: 18, timeStr: "03:00 PM – 06:00 PM Daily", progress: "100%", streamKey: "day3_v2", baseViewers: 25, maxViewers: 46 }
 };
 
 let activeSession = 1;
@@ -838,7 +838,7 @@ async function verifyCandidateAuthentication() {
   }
 }
 
-/* PRODUCTION TIMELOCK ENGINE */
+/* PRODUCTION TIMELOCK ENGINE (STAGGERED SLOTS) */
 function evaluateTimeLockEngine() {
   if (!currentCandidate) return;
   const now = new Date();
@@ -850,10 +850,13 @@ function evaluateTimeLockEngine() {
   const liveStatus = document.getElementById("liveStatus");
   const statusDot = document.getElementById("statusDot");
 
+  const startFormatted = `${String(cfg.start > 12 ? cfg.start - 12 : cfg.start).padStart(2, '0')}:00 ${cfg.start >= 12 ? 'PM' : 'AM'}`;
+  const endFormatted = `${String(cfg.end > 12 ? cfg.end - 12 : cfg.end).padStart(2, '0')}:00 ${cfg.end >= 12 ? 'PM' : 'AM'}`;
+
   if (hour >= cfg.start && hour < cfg.end) {
     lockScreen.style.display = "none";
     document.body.classList.remove("locked");
-    if (topCountdown) topCountdown.innerHTML = "🟢 Onboarding Window Operational • Priority Streaming Enabled";
+    if (topCountdown) topCountdown.innerHTML = `🟢 Onboarding Window Operational (${cfg.timeStr})`;
     if (trainingStatus) trainingStatus.innerText = "ACTIVE";
     if (liveStatus) liveStatus.innerText = `${cfg.name} Active`;
     if (statusDot) statusDot.style.background = "#10b981";
@@ -862,7 +865,12 @@ function evaluateTimeLockEngine() {
   } else if (hour < cfg.start) {
     document.body.classList.add("locked");
     lockScreen.style.display = "flex";
-    if (topCountdown) topCountdown.innerHTML = "⏳ Session Starts Soon (09:00 AM)";
+    document.getElementById("lockTitle").innerHTML = "⏳ Session Starts Soon";
+    document.getElementById("lockText").innerHTML = `Today's induction sequence has not initiated yet.<br><br>Please wait, training workspace opens at ${startFormatted}.`;
+    document.getElementById("lockTimeWindow").innerText = `⏰ Access Timing: ${cfg.timeStr}`;
+    document.getElementById("startCountdown").style.display = "block";
+
+    if (topCountdown) topCountdown.innerHTML = `⏳ Session Starts at ${startFormatted}`;
     if (trainingStatus) trainingStatus.innerText = "Scheduled";
     if (liveStatus) liveStatus.innerText = "System Paused";
     if (statusDot) statusDot.style.background = "#ffbc00";
@@ -881,9 +889,11 @@ function evaluateTimeLockEngine() {
     document.body.classList.add("locked");
     lockScreen.style.display = "flex";
     document.getElementById("lockTitle").innerHTML = "🔒 Training Access Closed";
-    document.getElementById("lockText").innerHTML = "Today's batch timing (09:00 AM – 08:00 PM) has ended.<br><br>Please revisit tomorrow at 09:00 AM.";
+    document.getElementById("lockText").innerHTML = `Today's batch timing (${cfg.timeStr}) has ended.<br><br>Please revisit tomorrow during your scheduled slot.`;
+    document.getElementById("lockTimeWindow").innerText = `⏰ Access Timing: ${cfg.timeStr}`;
     document.getElementById("startCountdown").style.display = "none";
-    if (topCountdown) topCountdown.innerHTML = "🔴 Onboarding Window Closed (Reopens 09:00 AM)";
+
+    if (topCountdown) topCountdown.innerHTML = `🔴 Session Closed (Reopens Tomorrow at ${startFormatted})`;
     if (trainingStatus) trainingStatus.innerText = "Closed";
     if (liveStatus) liveStatus.innerText = "Session Expired";
     if (statusDot) statusDot.style.background = "#ef4444";
@@ -1033,7 +1043,8 @@ async function markCurrentSessionCompleted(isManualClick) {
         document.getElementById("certDate").innerText = finalCompletionDate || new Date().toLocaleDateString();
         document.getElementById("certOverlay").style.display = "flex";
       } else if (isManualClick) {
-        alert(`🎉 Congratulations ${currentCandidate.name}! Module ${activeSession} logged successfully.\n\nYour next module will unlock tomorrow between 09:00 AM – 08:00 PM.`);
+        const nextCfg = SESSION_CONFIG[activeSession + 1] || SESSION_CONFIG[1];
+        alert(`🎉 Congratulations ${currentCandidate.name}! Module ${activeSession} logged successfully.\n\nYour next module will unlock tomorrow between ${nextCfg.timeStr}.`);
         window.location.reload();
       }
     }
@@ -1091,7 +1102,7 @@ function updateViewers(){
   const hour = now.getHours();
   
   let targetBase = cfg.baseViewers;
-  if ((hour >= 11 && hour <= 13) || (hour >= 15 && hour <= 18)) {
+  if ((hour >= 13 && hour <= 14) || (hour >= 15 && hour <= 17)) {
     targetBase = Math.floor((cfg.baseViewers + cfg.maxViewers) / 2) + 6;
   }
   
@@ -1105,7 +1116,7 @@ function updateViewers(){
 updateViewers();
 setInterval(updateViewers, 5000);
 
-// Evaluate time every second for seamless live gates
+// Evaluate time every second for dynamic slots
 setInterval(evaluateTimeLockEngine, 1000);
 </script>
 </body>
