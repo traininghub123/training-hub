@@ -54,22 +54,39 @@ body.locked{
   height:100vh;
 }
 
+/* TOPBAR */
 .topbar{
   background: var(--header-grad);
-  padding: 20px 24px;
+  padding: 16px 24px;
   color:#fff;
   display:flex;
   justify-content:space-between;
   align-items:center;
   flex-wrap:wrap;
   gap:12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-logo-img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 3px;
 }
 
 .brand{
-  font-size:22px;
-  font-weight:700;
+  font-size:20px;
+  font-weight:800;
   letter-spacing: -0.02em;
 }
 
@@ -82,9 +99,9 @@ body.locked{
 .batch{
   background:rgba(255,255,255,0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  padding:8px 16px;
+  padding:7px 16px;
   border-radius:999px;
-  font-size:13px;
+  font-size:12.5px;
   font-weight:600;
   letter-spacing: 0.01em;
 }
@@ -93,7 +110,7 @@ body.locked{
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
-  padding: 8px 14px;
+  padding: 7px 14px;
   border-radius: 10px;
   cursor: pointer;
   font-size: 13px;
@@ -103,13 +120,14 @@ body.locked{
   gap: 6px;
 }
 
+/* STATUS BAR */
 .status-bar{
   max-width:1100px;
-  margin:24px auto 0;
+  margin:20px auto 0;
   background: var(--bg-surface);
   border-radius:16px;
   border:1px solid var(--border-color);
-  padding:16px 22px;
+  padding:14px 20px;
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -123,7 +141,7 @@ body.locked{
   align-items:center;
   gap:10px;
   font-weight:700;
-  font-size: 15px;
+  font-size: 14.5px;
   color: #10b981;
 }
 
@@ -142,7 +160,7 @@ body.locked{
 }
 
 .viewer{
-  font-size:14px;
+  font-size:13.5px;
   color: var(--text-muted);
   font-weight:600;
 }
@@ -159,16 +177,16 @@ body.locked{
 .countdown{
   text-align:center;
   margin-top:14px;
-  font-size:14px;
+  font-size:13.5px;
   color:#2563eb;
-  background: rgba(37, 99, 235, 0.05);
-  padding: 10px;
+  background: rgba(37, 99, 235, 0.06);
+  padding: 10px 14px;
   border-radius: 10px;
   max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
   font-weight:600;
-  border: 1px solid rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.12);
 }
 
 [data-theme="dark"] .countdown {
@@ -181,11 +199,11 @@ body.locked{
   display: none;
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(217, 119, 6, 0.08));
   border: 1px solid rgba(245, 158, 11, 0.3);
-  border-radius: 16px;
-  padding: 16px 20px;
+  border-radius: 14px;
+  padding: 14px 18px;
   margin: 18px 0;
   color: #d97706;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
   align-items: center;
   gap: 12px;
@@ -200,29 +218,29 @@ body.locked{
 .container{
   max-width:1100px;
   margin:auto;
-  padding: 0 22px 40px;
+  padding: 0 20px 40px;
 }
 
 .access-box{
   background: var(--bg-surface);
-  border-radius:18px;
-  padding:22px;
-  margin: 20px 0;
+  border-radius:16px;
+  padding:18px 22px;
+  margin: 18px 0;
   border:1px solid var(--border-color);
 }
 
 .access-top{
   display:flex;
   justify-content:space-between;
-  margin-bottom:12px;
+  margin-bottom:10px;
   flex-wrap:wrap;
-  gap:10px;
-  font-size: 14px;
+  gap:8px;
+  font-size: 13.5px;
 }
 
 .progress-bar{
   width:100%;
-  height:8px;
+  height:7px;
   background: var(--bg-pill);
   border-radius:999px;
   overflow:hidden;
@@ -237,10 +255,10 @@ body.locked{
 
 .video-card{
   background:#000;
-  border-radius:22px;
+  border-radius:20px;
   overflow:hidden;
   box-shadow:0 18px 40px rgba(15, 23, 42, 0.15);
-  border: 1px solid rgba(15, 23, 42, 0.04);
+  border: 1px solid rgba(15, 23, 42, 0.05);
 }
 
 .video-container{
@@ -258,67 +276,68 @@ body.locked{
 }
 
 .stats{
-  margin-top:24px;
+  margin-top:20px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:16px;
+  gap:14px;
 }
 
 .stat{
   background: var(--bg-surface);
-  border-radius:16px;
-  padding:20px;
+  border-radius:14px;
+  padding:18px;
   box-shadow:0 4px 12px rgba(15, 23, 42, 0.02);
   border: 1px solid var(--border-color);
 }
 
 .stat-label{
   color: var(--text-muted);
-  font-size:12px;
-  font-weight: 600;
+  font-size:11.5px;
+  font-weight: 700;
   text-transform: uppercase;
-  margin-bottom:8px;
+  margin-bottom:6px;
+  letter-spacing: 0.5px;
 }
 
 .stat-value{
-  font-size:19px;
+  font-size:18px;
   font-weight:700;
 }
 
 .info-box{
-  margin-top:24px;
+  margin-top:20px;
   background: var(--bg-surface);
-  border-radius:18px;
-  padding:24px;
+  border-radius:16px;
+  padding:22px;
   border:1px solid var(--border-color);
 }
 
 .info-box h3{
-  margin-bottom:16px;
-  font-size:20px;
+  margin-bottom:14px;
+  font-size:18px;
   font-weight: 700;
 }
 
 .info-box ul{
-  padding-left:20px;
-  line-height:2;
+  padding-left:18px;
+  line-height:1.9;
   color: var(--text-main);
 }
 
 .info-box li{
-  font-size: 14.5px;
-  margin-bottom: 6px;
+  font-size: 14px;
+  margin-bottom: 4px;
 }
 
 .btn{
-  margin-top:28px;
+  margin-top:24px;
   width:100%;
   border:none;
-  border-radius:16px;
-  padding:18px;
+  border-radius:14px;
+  padding:16px;
   background: #64748b;
   color:#fff;
-  font-size:16px;
+  font-size:15.5px;
   font-weight:700;
   cursor: not-allowed;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
@@ -335,7 +354,7 @@ body.locked{
 }
 
 /* ==========================================================================
-   ENTERPRISE CANDIDATE LOGIN INTERFACE (CORPORATE NODE)
+   ENTERPRISE CANDIDATE LOGIN (LOGO EMBEDDED)
    ========================================================================== */
 .auth-overlay {
   position: fixed;
@@ -343,26 +362,27 @@ body.locked{
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 50% 20%, rgba(37, 99, 235, 0.12) 0%, rgba(7, 10, 19, 0.94) 75%);
+  background: radial-gradient(circle at 50% 18%, rgba(37, 99, 235, 0.15) 0%, rgba(7, 10, 19, 0.94) 80%);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 24px;
+  padding: 20px;
 }
 
 .auth-card {
   background: var(--bg-surface);
   border: 1px solid var(--border-color);
-  border-radius: 24px;
-  padding: 38px 32px 30px;
+  border-radius: 22px;
+  padding: 34px 28px 24px;
   width: 100%;
-  max-width: 480px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  max-width: 460px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
   position: relative;
   overflow: hidden;
+  text-align: center;
 }
 
 .auth-card::before {
@@ -375,32 +395,32 @@ body.locked{
   background: linear-gradient(90deg, #3b82f6, #6366f1, #10b981);
 }
 
-.auth-brand-row {
+.auth-logo-badge {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 12px;
+  background: var(--bg-pill);
+  border: 1.5px solid var(--border-color);
+  border-radius: 20px;
+  padding: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  margin-bottom: 8px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
 }
 
-.auth-shield-icon {
-  width: 38px;
-  height: 38px;
-  background: rgba(37, 99, 235, 0.1);
-  border: 1px solid rgba(37, 99, 235, 0.25);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 19px;
-  color: var(--accent-blue);
+.auth-logo-badge img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .auth-header-title {
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 800;
   letter-spacing: -0.4px;
   color: var(--text-main);
+  margin-bottom: 4px;
 }
 
 .auth-header-title span {
@@ -413,23 +433,21 @@ body.locked{
   text-transform: uppercase;
   letter-spacing: 0.8px;
   color: var(--text-muted);
-  text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .auth-security-pill {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
   background: var(--bg-pill);
   border: 1px solid var(--border-color);
   padding: 6px 14px;
   border-radius: 50px;
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--text-muted);
-  margin-bottom: 24px;
+  margin-bottom: 22px;
 }
 
 .auth-security-pill .sec-dot {
@@ -442,18 +460,18 @@ body.locked{
 
 .auth-input-group {
   text-align: left;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .auth-label-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 7px;
+  margin-bottom: 6px;
 }
 
 .auth-label-row label {
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.6px;
@@ -461,7 +479,7 @@ body.locked{
 }
 
 .auth-hint {
-  font-size: 11px;
+  font-size: 10.5px;
   color: var(--text-muted);
   font-weight: 500;
 }
@@ -475,7 +493,7 @@ body.locked{
 .auth-input-box .input-icon {
   position: absolute;
   left: 14px;
-  font-size: 15px;
+  font-size: 14px;
   color: var(--text-muted);
   pointer-events: none;
 }
@@ -496,7 +514,7 @@ body.locked{
 select.auth-input {
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg2+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 14px center;
   padding-right: 36px;
@@ -515,21 +533,21 @@ select.auth-input {
   background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-hover) 100%);
   color: #ffffff;
   border: none;
-  font-size: 14.5px;
+  font-size: 14px;
   font-weight: 700;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.28);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.28);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .auth-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.38);
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.38);
 }
 
 .auth-btn:disabled {
@@ -539,22 +557,15 @@ select.auth-input {
 }
 
 .auth-compliance-footer {
-  margin-top: 22px;
-  padding-top: 16px;
+  margin-top: 20px;
+  padding-top: 14px;
   border-top: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  text-align: center;
-  font-size: 11px;
-  color: var(--text-muted);
-}
-
-.auth-compliance-footer span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 4px;
+  text-align: center;
+  font-size: 10.5px;
+  color: var(--text-muted);
 }
 
 .auth-error-msg {
@@ -597,10 +608,26 @@ select.auth-input {
   box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 }
 
+.lock-logo-wrapper {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 18px;
+  padding: 8px;
+}
+
+.lock-logo-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .lock-box h1{
-  font-size:28px;
+  font-size:26px;
   font-weight: 700;
-  margin-bottom:16px;
+  margin-bottom:14px;
   color: #ffbc00;
   letter-spacing: -0.02em;
 }
@@ -608,24 +635,24 @@ select.auth-input {
 .lock-box p{
   line-height:1.8;
   color:#cbd5e1;
-  font-size:15px;
-  margin-bottom: 24px;
+  font-size:14.5px;
+  margin-bottom: 22px;
 }
 
 .lock-time{
   background:rgba(255,255,255,0.07);
-  padding:12px 20px;
+  padding:12px 18px;
   border-radius:12px;
   font-weight:600;
-  font-size: 14px;
+  font-size: 13.5px;
   color: #ffbc00;
   border: 1px solid rgba(255, 188, 0, 0.2);
   display: inline-block;
 }
 
 #startCountdown{
-  margin-top:24px;
-  font-size:36px;
+  margin-top:22px;
+  font-size:34px;
   font-weight:700;
   color:#fff;
   font-variant-numeric: tabular-nums;
@@ -705,35 +732,37 @@ select.auth-input {
 
 .footer{
   text-align:center;
-  padding:40px 10px;
+  padding:36px 10px;
   color:#64748b;
-  font-size:13px;
+  font-size:12.5px;
 }
 
 @media(max-width:768px){
-  .topbar{ justify-content:center; text-align:center; padding: 16px; flex-direction: column; }
+  .topbar{ justify-content:center; text-align:center; padding: 14px; flex-direction: column; }
   .header-controls { flex-direction: column; width: 100%; gap: 8px; }
   .batch, .theme-switch { width: 100%; text-align: center; justify-content: center; }
   .status-bar{ flex-direction:column; align-items:center; text-align: center; }
-  .container { padding: 0 16px 30px; }
-  .auth-card { padding: 30px 20px 24px; }
-  .lock-box { padding: 25px 20px; }
-  .lock-box h1 { font-size: 24px; }
+  .container { padding: 0 14px 30px; }
+  .auth-card { padding: 28px 18px 20px; }
+  .lock-box { padding: 25px 18px; }
+  .lock-box h1 { font-size: 22px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- EXECUTIVE CANDIDATE LOGIN INTERFACE -->
+<!-- EXECUTIVE CANDIDATE LOGIN INTERFACE (WITH LOGO) -->
 <div id="authOverlay" class="auth-overlay">
   <div class="auth-card">
     
-    <!-- Brand Header -->
-    <div class="auth-brand-row">
-      <div class="auth-shield-icon">🏛️</div>
-      <div class="auth-header-title"><span>TARA</span> INDUCTION</div>
+    <!-- Official Logo Icon -->
+    <div class="auth-logo-badge">
+      <img src="https://lh3.googleusercontent.com/d/1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N" alt="TARA Logo" onerror="this.src='https://drive.google.com/thumbnail?id=1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N&sz=w200'">
     </div>
+
+    <!-- Brand Header -->
+    <div class="auth-header-title"><span>TARA</span> TALENT SOLUTIONS</div>
     <div class="auth-dept-tag">Executive Induction & Enablement Directorate</div>
 
     <!-- Security & Telemetry Badge -->
@@ -745,7 +774,7 @@ select.auth-input {
     <div class="auth-input-group">
       <div class="auth-label-row">
         <label>Registered Identifier</label>
-        <span class="auth-hint">Official Email or Phone</span>
+        <span class="auth-hint">Email or Phone</span>
       </div>
       <div class="auth-input-box">
         <span class="input-icon">👤</span>
@@ -773,7 +802,7 @@ select.auth-input {
     <div class="auth-input-group" id="passcodeBlock" style="display: none;">
       <div class="auth-label-row">
         <label id="passcodeLabel">Session Security Passcode</label>
-        <span class="auth-hint">From Prior Session</span>
+        <span class="auth-hint">From Prior Module</span>
       </div>
       <div class="auth-input-box">
         <span class="input-icon">🔑</span>
@@ -797,9 +826,12 @@ select.auth-input {
   </div>
 </div>
 
-<!-- TIME GATE LOCK SCREEN -->
+<!-- TIME GATE LOCK SCREEN (WITH LOGO) -->
 <div id="lockScreen" class="lock-screen">
   <div class="lock-box">
+    <div class="lock-logo-wrapper">
+      <img src="https://lh3.googleusercontent.com/d/1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N" alt="TARA Logo" onerror="this.src='https://drive.google.com/thumbnail?id=1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N&sz=w200'">
+    </div>
     <h1 id="lockTitle">⏳ Session Starts Soon</h1>
     <p id="lockText">Today's induction sequence has not initiated yet.<br><br>Please wait, training workspace opens at its scheduled time.</p>
     <div class="lock-time" id="lockTimeWindow">⏰ Access Timing: Scheduled Slot</div>
@@ -830,9 +862,12 @@ select.auth-input {
   </div>
 </div>
 
-<!-- HEADER -->
+<!-- HEADER (WITH LOGO) -->
 <div class="topbar">
-  <div class="brand">🏛 FOUNDATION SESSION</div>
+  <div class="brand-wrapper">
+    <img class="brand-logo-img" src="https://lh3.googleusercontent.com/d/1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N" alt="TARA Logo" onerror="this.src='https://drive.google.com/thumbnail?id=1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N&sz=w200'">
+    <div class="brand">🏛 FOUNDATION SESSION</div>
+  </div>
   <div class="header-controls">
     <div class="batch" id="headerModuleTag">Professional Development Program • Day 1 of 3</div>
     <button class="theme-switch" id="themeToggle">🌓 Mode: Light</button>
