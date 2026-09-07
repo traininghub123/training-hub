@@ -12,21 +12,27 @@
 :root {
   --bg-body: #f8fafc;
   --bg-surface: #ffffff;
+  --bg-surface-elevated: #ffffff;
   --text-main: #0f172a;
   --text-muted: #64748b;
   --border-color: #e2e8f0;
   --bg-pill: #f1f5f9;
   --header-grad: linear-gradient(135deg, #0f172a, #1e293b);
+  --accent-blue: #2563eb;
+  --accent-hover: #1d4ed8;
 }
 
 [data-theme="dark"] {
-  --bg-body: #0b0f19;
-  --bg-surface: #131c2e;
+  --bg-body: #070a13;
+  --bg-surface: #0f1626;
+  --bg-surface-elevated: #151f36;
   --text-main: #f1f5f9;
   --text-muted: #94a3b8;
   --border-color: #1e293b;
   --bg-pill: #1e293b;
   --header-grad: linear-gradient(135deg, #020617, #0f172a);
+  --accent-blue: #3b82f6;
+  --accent-hover: #2563eb;
 }
 
 *{
@@ -328,94 +334,240 @@ body.locked{
   box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
 }
 
+/* ==========================================================================
+   ENTERPRISE CANDIDATE LOGIN INTERFACE (CORPORATE NODE)
+   ========================================================================== */
 .auth-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(11, 15, 25, 0.88);
-  backdrop-filter: blur(8px);
+  background: radial-gradient(circle at 50% 20%, rgba(37, 99, 235, 0.12) 0%, rgba(7, 10, 19, 0.94) 75%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 24px;
 }
 
 .auth-card {
   background: var(--bg-surface);
   border: 1px solid var(--border-color);
-  border-radius: 20px;
-  padding: 36px 32px;
+  border-radius: 24px;
+  padding: 38px 32px 30px;
   width: 100%;
-  max-width: 460px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  text-align: center;
+  max-width: 480px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
 }
 
-.auth-badge {
-  display: inline-block;
+.auth-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #3b82f6, #6366f1, #10b981);
+}
+
+.auth-brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.auth-shield-icon {
+  width: 38px;
+  height: 38px;
   background: rgba(37, 99, 235, 0.1);
-  color: #2563eb;
-  border: 1px solid rgba(37, 99, 235, 0.2);
-  padding: 4px 14px;
-  border-radius: 50px;
-  font-size: 12px;
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  color: var(--accent-blue);
+}
+
+.auth-header-title {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  color: var(--text-main);
+}
+
+.auth-header-title span {
+  color: var(--accent-blue);
+}
+
+.auth-dept-tag {
+  font-size: 11px;
   font-weight: 700;
-  margin-bottom: 16px;
   text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.auth-security-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--bg-pill);
+  border: 1px solid var(--border-color);
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.auth-security-pill .sec-dot {
+  width: 7px;
+  height: 7px;
+  background: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #10b981;
 }
 
 .auth-input-group {
   text-align: left;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
-.auth-input-group label {
-  display: block;
-  font-size: 12px;
+.auth-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 7px;
+}
+
+.auth-label-row label {
+  font-size: 11.5px;
   font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-main);
+}
+
+.auth-hint {
+  font-size: 11px;
   color: var(--text-muted);
-  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.auth-input-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.auth-input-box .input-icon {
+  position: absolute;
+  left: 14px;
+  font-size: 15px;
+  color: var(--text-muted);
+  pointer-events: none;
 }
 
 .auth-input {
   width: 100%;
-  padding: 14px 16px;
+  padding: 13px 14px 13px 40px;
   border-radius: 12px;
   border: 1px solid var(--border-color);
   background: var(--bg-body);
   color: var(--text-main);
-  font-size: 15px;
+  font-size: 14px;
   font-family: inherit;
   outline: none;
+  transition: all 0.2s ease;
+}
+
+select.auth-input {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg2+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+.auth-input:focus {
+  border-color: var(--accent-blue);
+  background: var(--bg-surface);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
 }
 
 .auth-btn {
   width: 100%;
-  padding: 16px;
+  padding: 15px 20px;
   border-radius: 12px;
-  background: #2563eb;
-  color: #fff;
+  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-hover) 100%);
+  color: #ffffff;
   border: none;
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 700;
   cursor: pointer;
   margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.28);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .auth-btn:hover {
-  background: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.38);
+}
+
+.auth-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.auth-compliance-footer {
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.auth-compliance-footer span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 
 .auth-error-msg {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 10px;
   color: #ef4444;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
-  margin-top: 12px;
+  padding: 10px 14px;
+  margin-top: 14px;
   display: none;
+  text-align: left;
 }
 
 /* TIMELOCK GATE SCREEN */
@@ -564,6 +716,7 @@ body.locked{
   .batch, .theme-switch { width: 100%; text-align: center; justify-content: center; }
   .status-bar{ flex-direction:column; align-items:center; text-align: center; }
   .container { padding: 0 16px 30px; }
+  .auth-card { padding: 30px 20px 24px; }
   .lock-box { padding: 25px 20px; }
   .lock-box h1 { font-size: 24px; }
 }
@@ -572,36 +725,75 @@ body.locked{
 
 <body>
 
-<!-- AUTHENTICATION POPUP -->
+<!-- EXECUTIVE CANDIDATE LOGIN INTERFACE -->
 <div id="authOverlay" class="auth-overlay">
   <div class="auth-card">
-    <div class="auth-badge">Secure Access Protocol</div>
-    <h2>Candidate Login</h2>
-    <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">Enter your registered identifier to unlock your session.</p>
     
+    <!-- Brand Header -->
+    <div class="auth-brand-row">
+      <div class="auth-shield-icon">🏛️</div>
+      <div class="auth-header-title"><span>TARA</span> INDUCTION</div>
+    </div>
+    <div class="auth-dept-tag">Executive Induction & Enablement Directorate</div>
+
+    <!-- Security & Telemetry Badge -->
+    <div class="auth-security-pill">
+      <span class="sec-dot"></span> Single-Device Attendance Node Active
+    </div>
+    
+    <!-- Identifier Input -->
     <div class="auth-input-group">
-      <label>Registered Identifier</label>
-      <input type="text" id="authIdentifier" class="auth-input" placeholder="e.g. 9876543210 or email@domain.com">
+      <div class="auth-label-row">
+        <label>Registered Identifier</label>
+        <span class="auth-hint">Official Email or Phone</span>
+      </div>
+      <div class="auth-input-box">
+        <span class="input-icon">👤</span>
+        <input type="text" id="authIdentifier" class="auth-input" placeholder="e.g. 9876543210 or name@domain.com" autocomplete="username">
+      </div>
     </div>
 
+    <!-- Session Selection Dropdown -->
     <div class="auth-input-group">
-      <label>Select Session To Access</label>
-      <select id="authSessionChoice" class="auth-input" onchange="togglePasscodeVisibility()">
-        <option value="1">Day 1: Foundation Session (01:00 PM – 04:00 PM)</option>
-        <option value="2">Day 2: Clarification Session (02:00 PM – 05:00 PM)</option>
-        <option value="3">Day 3: Execution Session (03:00 PM – 06:00 PM)</option>
-      </select>
+      <div class="auth-label-row">
+        <label>Allocated Training Module</label>
+        <span class="auth-hint">Official Schedule</span>
+      </div>
+      <div class="auth-input-box">
+        <span class="input-icon">📅</span>
+        <select id="authSessionChoice" class="auth-input" onchange="togglePasscodeVisibility()">
+          <option value="1">Day 1: Foundation Session (01:00 PM – 04:00 PM)</option>
+          <option value="2">Day 2: Clarification Session (02:00 PM – 05:00 PM)</option>
+          <option value="3">Day 3: Execution Session (03:00 PM – 06:00 PM)</option>
+        </select>
+      </div>
     </div>
 
+    <!-- Passcode Block (For Day 2 & Day 3) -->
     <div class="auth-input-group" id="passcodeBlock" style="display: none;">
-      <label id="passcodeLabel">Passcode</label>
-      <input type="password" id="authPasscode" class="auth-input" placeholder="Enter session unlock passcode">
+      <div class="auth-label-row">
+        <label id="passcodeLabel">Session Security Passcode</label>
+        <span class="auth-hint">From Prior Session</span>
+      </div>
+      <div class="auth-input-box">
+        <span class="input-icon">🔑</span>
+        <input type="password" id="authPasscode" class="auth-input" placeholder="Enter session unlock passcode" autocomplete="current-password">
+      </div>
     </div>
 
+    <!-- Action Button -->
     <button type="button" id="authSubmitBtn" class="auth-btn" onclick="verifyCandidateAuthentication()">
-      Authenticate & Unlock Session
+      <span>Authenticate & Launch Workspace</span> ➔
     </button>
+
+    <!-- Error Alert Box -->
     <div id="authError" class="auth-error-msg"></div>
+
+    <!-- Corporate Compliance Footer -->
+    <div class="auth-compliance-footer">
+      <span>🔒 Encrypted 256-Bit Telemetry Verification Protocol</span>
+      <span>TARA Talent Solutions • Induction Management Matrix</span>
+    </div>
   </div>
 </div>
 
@@ -719,7 +911,7 @@ body.locked{
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbw79wnaUmMkr4DIHjbInzMTYHvqp5CcPIXrRukvA1kAD2bFgjq9NmDtvqDNvxsE_DrAeg/exec";
 
-// ORIGINAL STAGGERED ACCESS WINDOWS RESTORED
+// STAGGERED ACCESS WINDOWS
 const SESSION_CONFIG = {
   1: { name: "Foundation Session", start: 13, end: 16, timeStr: "01:00 PM – 04:00 PM Daily", progress: "33%", streamKey: "day1_v2", baseViewers: 52, maxViewers: 86 },
   2: { name: "Clarification Session", start: 14, end: 17, timeStr: "02:00 PM – 05:00 PM Daily", progress: "66%", streamKey: "day2_v2", baseViewers: 36, maxViewers: 62 },
@@ -766,9 +958,15 @@ function togglePasscodeVisibility() {
   const chosen = parseInt(document.getElementById("authSessionChoice").value, 10);
   const passcodeBlock = document.getElementById("passcodeBlock");
   const passcodeLabel = document.getElementById("passcodeLabel");
-  if (chosen === 1) passcodeBlock.style.display = "none";
-  else if (chosen === 2) { passcodeBlock.style.display = "block"; passcodeLabel.innerText = "Session 1 Video Passcode"; }
-  else if (chosen === 3) { passcodeBlock.style.display = "block"; passcodeLabel.innerText = "Mentor Secret Passcode"; }
+  if (chosen === 1) {
+    passcodeBlock.style.display = "none";
+  } else if (chosen === 2) {
+    passcodeBlock.style.display = "block";
+    passcodeLabel.innerText = "Session 1 Video Passcode";
+  } else if (chosen === 3) {
+    passcodeBlock.style.display = "block";
+    passcodeLabel.innerText = "Mentor Secret Passcode";
+  }
 }
 
 async function verifyCandidateAuthentication() {
@@ -782,12 +980,12 @@ async function verifyCandidateAuthentication() {
   const submitBtn = document.getElementById("authSubmitBtn");
 
   if (!identifier) {
-    errorElement.innerText = "Please enter your registered Mobile or Email.";
+    errorElement.innerText = "Please enter your registered Mobile or Email identifier.";
     errorElement.style.display = "block";
     return;
   }
 
-  submitBtn.innerText = "Verifying Records...";
+  submitBtn.innerHTML = "<span>Verifying Security Protocol...</span>";
   submitBtn.disabled = true;
   errorElement.style.display = "none";
 
@@ -826,19 +1024,19 @@ async function verifyCandidateAuthentication() {
       enableReloadProtection();
       updateViewers();
     } else {
-      errorElement.innerText = result.message || "Access denied.";
+      errorElement.innerText = result.message || "Access denied. Candidate identity not found.";
       errorElement.style.display = "block";
     }
   } catch (err) {
-    errorElement.innerText = "Connection error. Please try again.";
+    errorElement.innerText = "Server connectivity failure. Please re-authenticate.";
     errorElement.style.display = "block";
   } finally {
-    submitBtn.innerText = "Authenticate & Unlock Session";
+    submitBtn.innerHTML = "<span>Authenticate & Launch Workspace</span> ➔";
     submitBtn.disabled = false;
   }
 }
 
-/* PRODUCTION TIMELOCK ENGINE (STAGGERED SLOTS) */
+/* PRODUCTION TIMELOCK ENGINE */
 function evaluateTimeLockEngine() {
   if (!currentCandidate) return;
   const now = new Date();
@@ -851,7 +1049,6 @@ function evaluateTimeLockEngine() {
   const statusDot = document.getElementById("statusDot");
 
   const startFormatted = `${String(cfg.start > 12 ? cfg.start - 12 : cfg.start).padStart(2, '0')}:00 ${cfg.start >= 12 ? 'PM' : 'AM'}`;
-  const endFormatted = `${String(cfg.end > 12 ? cfg.end - 12 : cfg.end).padStart(2, '0')}:00 ${cfg.end >= 12 ? 'PM' : 'AM'}`;
 
   if (hour >= cfg.start && hour < cfg.end) {
     lockScreen.style.display = "none";
@@ -1038,7 +1235,6 @@ async function markCurrentSessionCompleted(isManualClick) {
         btn.disabled = false;
         btn.classList.add("active-ready");
         btn.innerText = `🏆 View / Download Clearance Certificate`;
-        // Auto-popup Certificate instantly
         document.getElementById("certCandidateName").innerText = currentCandidate.name;
         document.getElementById("certDate").innerText = finalCompletionDate || new Date().toLocaleDateString();
         document.getElementById("certOverlay").style.display = "flex";
@@ -1116,7 +1312,7 @@ function updateViewers(){
 updateViewers();
 setInterval(updateViewers, 5000);
 
-// Evaluate time every second for dynamic slots
+// Evaluate time every second
 setInterval(evaluateTimeLockEngine, 1000);
 </script>
 </body>
