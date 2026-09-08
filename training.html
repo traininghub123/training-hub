@@ -20,6 +20,20 @@
   --header-grad: linear-gradient(135deg, #0f172a, #1e293b);
   --accent-blue: #2563eb;
   --accent-hover: #1d4ed8;
+
+  /* Theme-adaptive login variables (Light Default) */
+  --auth-overlay-bg: radial-gradient(circle at 50% 15%, rgba(37, 99, 235, 0.12) 0%, rgba(15, 23, 42, 0.78) 85%);
+  --auth-card-bg: #ffffff;
+  --auth-card-border: #cbd5e1;
+  --auth-card-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
+  --auth-input-bg: #f8fafc;
+  --auth-input-border: #cbd5e1;
+  --auth-input-color: #0f172a;
+  --auth-input-focus-bg: #ffffff;
+  --auth-input-placeholder: #94a3b8;
+  --auth-logo-bg: #ffffff;
+  --auth-logo-border: rgba(226, 232, 240, 0.9);
+  --auth-logo-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
 [data-theme="dark"] {
@@ -31,15 +45,29 @@
   --border-color: #1e293b;
   --bg-pill: #1e293b;
   --header-grad: linear-gradient(135deg, #020617, #0f172a);
-  --accent-blue: #3b82f6;
-  --accent-hover: #2563eb;
+  --accent-blue: #38bdf8;
+  --accent-hover: #0284c7;
+
+  /* Theme-adaptive login variables (Dark Theme) */
+  --auth-overlay-bg: radial-gradient(circle at 50% 15%, rgba(37, 99, 235, 0.2) 0%, rgba(3, 7, 18, 0.96) 85%);
+  --auth-card-bg: #0f172a;
+  --auth-card-border: #334155;
+  --auth-card-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8);
+  --auth-input-bg: #1e293b;
+  --auth-input-border: #334155;
+  --auth-input-color: #ffffff;
+  --auth-input-focus-bg: #0f172a;
+  --auth-input-placeholder: #64748b;
+  --auth-logo-bg: #ffffff;
+  --auth-logo-border: rgba(255, 255, 255, 0.2);
+  --auth-logo-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.25);
 }
 
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
 }
 
 body{
@@ -57,7 +85,7 @@ body.locked{
 /* TOPBAR */
 .topbar{
   background: var(--header-grad);
-  padding: 16px 24px;
+  padding: 14px 24px;
   color:#fff;
   display:flex;
   justify-content:space-between;
@@ -74,19 +102,28 @@ body.locked{
   gap: 12px;
 }
 
-.brand-logo-img {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
+.brand-logo-container {
+  width: 42px;
+  height: 42px;
   background: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 4px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  flex-shrink: 0;
+}
+
+.brand-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .brand{
-  font-size:20px;
+  font-size:19px;
   font-weight:800;
   letter-spacing: -0.02em;
 }
@@ -355,7 +392,7 @@ body.locked{
 }
 
 /* ==========================================================================
-   HIGH-FOCUS CORPORATE LOGIN MODAL (HIGH CONTRAST & CLEAR AFFORDANCE)
+   ADAPTIVE CORPORATE LOGIN MODAL (THEME-AWARE + HIGH AFFORDANCE)
    ========================================================================== */
 .auth-overlay {
   position: fixed;
@@ -363,9 +400,9 @@ body.locked{
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 50% 15%, rgba(37, 99, 235, 0.2) 0%, rgba(3, 7, 18, 0.96) 80%);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: var(--auth-overlay-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   z-index: 9999;
   display: flex;
   justify-content: center;
@@ -374,13 +411,13 @@ body.locked{
 }
 
 .auth-card {
-  background: #0f172a;
-  border: 1px solid #334155;
+  background: var(--auth-card-bg);
+  border: 1px solid var(--auth-card-border);
   border-radius: 26px;
-  padding: 36px 32px 28px;
+  padding: 34px 30px 26px;
   width: 100%;
-  max-width: 480px;
-  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  max-width: 470px;
+  box-shadow: var(--auth-card-shadow);
   position: relative;
   text-align: center;
 }
@@ -397,59 +434,61 @@ body.locked{
   border-top-right-radius: 26px;
 }
 
-/* Elevated White Glass Logo */
+/* Responsive Logo Badge */
 .auth-logo-badge {
-  width: 82px;
-  height: 82px;
-  margin: 0 auto 16px;
-  background: #ffffff;
+  width: 78px;
+  height: 78px;
+  margin: 0 auto 14px;
+  background: var(--auth-logo-bg);
+  border: 1.5px solid var(--auth-logo-border);
   border-radius: 22px;
   padding: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.25);
+  box-shadow: var(--auth-logo-shadow);
 }
 
 .auth-logo-badge img {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
+  display: block;
 }
 
 .auth-header-title {
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 800;
   letter-spacing: -0.3px;
-  color: #f8fafc;
+  color: var(--text-main);
   margin-bottom: 4px;
 }
 
 .auth-header-title span {
-  color: #38bdf8;
+  color: var(--accent-blue);
 }
 
 .auth-dept-tag {
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #94a3b8;
-  margin-bottom: 18px;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
 }
 
 .auth-security-pill {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #1e293b;
-  border: 1px solid #334155;
+  background: var(--bg-pill);
+  border: 1px solid var(--border-color);
   padding: 6px 14px;
   border-radius: 50px;
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 600;
-  color: #cbd5e1;
-  margin-bottom: 22px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
 }
 
 .auth-security-pill .sec-dot {
@@ -463,27 +502,27 @@ body.locked{
 /* Form Groups */
 .auth-input-group {
   text-align: left;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .auth-label-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .auth-label-row label {
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #e2e8f0;
+  color: var(--text-main);
 }
 
 .auth-hint {
-  font-size: 11px;
-  color: #38bdf8;
+  font-size: 10.5px;
+  color: var(--accent-blue);
   font-weight: 600;
 }
 
@@ -496,37 +535,59 @@ body.locked{
 .auth-input-box .input-icon {
   position: absolute;
   left: 14px;
-  font-size: 16px;
-  color: #94a3b8;
+  font-size: 15px;
+  color: var(--text-muted);
   pointer-events: none;
   z-index: 2;
 }
 
-/* Ultra High-Contrast Active Input */
+/* Adaptive Inputs */
 .auth-input {
   width: 100%;
-  padding: 14px 14px 14px 44px;
+  padding: 13px 14px 13px 44px;
   border-radius: 12px;
-  border: 1.5px solid #334155;
-  background: #1e293b;
-  color: #ffffff;
-  font-size: 14.5px;
+  border: 1.5px solid var(--auth-input-border);
+  background: var(--auth-input-bg);
+  color: var(--auth-input-color);
+  font-size: 14px;
   font-weight: 500;
   font-family: inherit;
   outline: none;
   transition: all 0.2s ease;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .auth-input::placeholder {
-  color: #64748b;
-  font-size: 13.5px;
+  color: var(--auth-input-placeholder);
+  font-size: 13px;
 }
 
 .auth-input:focus {
-  border-color: #38bdf8;
-  background: #0f172a;
-  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  border-color: var(--accent-blue);
+  background: var(--auth-input-focus-bg);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+}
+
+/* Passcode Visibility Toggle Button */
+.toggle-pass-btn {
+  position: absolute;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 6px 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease, background-color 0.15s ease;
+  z-index: 2;
+}
+
+.toggle-pass-btn:hover {
+  background: var(--bg-pill);
+  color: var(--text-main);
 }
 
 /* Dropdown Explicit Affordance */
@@ -539,54 +600,47 @@ body.locked{
   appearance: none;
   -webkit-appearance: none;
   cursor: pointer;
-  padding-right: 48px;
-  background-color: #1e293b;
-  color: #f8fafc;
+  padding-right: 44px;
   font-weight: 600;
 }
 
 .auth-select-wrapper::after {
   content: "";
   position: absolute;
-  right: 18px;
+  right: 16px;
   top: 50%;
   transform: translateY(-50%);
   width: 0;
   height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 7px solid #38bdf8;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--accent-blue);
   pointer-events: none;
 }
 
-.auth-select-wrapper:hover select.auth-input {
-  border-color: #475569;
-}
-
-/* Big Action Button */
+/* Submit Action Button */
 .auth-btn {
   width: 100%;
-  padding: 16px 20px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  padding: 15px 20px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-hover) 100%);
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  font-size: 15px;
+  border: none;
+  font-size: 14.5px;
   font-weight: 700;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.32);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .auth-btn:hover {
   transform: translateY(-1px);
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  box-shadow: 0 10px 28px rgba(37, 99, 235, 0.45);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.42);
 }
 
 .auth-btn:disabled {
@@ -596,25 +650,25 @@ body.locked{
 }
 
 .auth-compliance-footer {
-  margin-top: 22px;
-  padding-top: 16px;
-  border-top: 1px solid #1e293b;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
   gap: 4px;
   text-align: center;
-  font-size: 11px;
-  color: #64748b;
+  font-size: 10.5px;
+  color: var(--text-muted);
 }
 
 .auth-error-msg {
-  background: rgba(239, 68, 68, 0.12);
+  background: rgba(239, 68, 68, 0.1);
   border: 1px solid rgba(239, 68, 68, 0.3);
   border-radius: 10px;
-  color: #f87171;
+  color: #ef4444;
   font-size: 12.5px;
   font-weight: 600;
-  padding: 11px 14px;
+  padding: 10px 14px;
   margin-top: 14px;
   display: none;
   text-align: left;
@@ -641,30 +695,33 @@ body.locked{
 .lock-box{
   max-width:460px;
   background: rgba(255, 255, 255, 0.03);
-  padding: 40px;
+  padding: 38px 30px;
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 }
 
 .lock-logo-wrapper {
-  width: 70px;
-  height: 70px;
+  width: 72px;
+  height: 72px;
   margin: 0 auto 16px;
   background: #ffffff;
-  border-radius: 18px;
-  padding: 6px;
+  border-radius: 20px;
+  padding: 8px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .lock-logo-wrapper img {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
 }
 
 .lock-box h1{
-  font-size:26px;
+  font-size:25px;
   font-weight: 700;
   margin-bottom:14px;
   color: #ffbc00;
@@ -674,7 +731,7 @@ body.locked{
 .lock-box p{
   line-height:1.8;
   color:#cbd5e1;
-  font-size:14.5px;
+  font-size:14px;
   margin-bottom: 22px;
 }
 
@@ -777,12 +834,12 @@ body.locked{
 }
 
 @media(max-width:768px){
-  .topbar{ justify-content:center; text-align:center; padding: 14px; flex-direction: column; }
+  .topbar{ justify-content:center; text-align:center; padding: 12px 16px; flex-direction: column; }
   .header-controls { flex-direction: column; width: 100%; gap: 8px; }
   .batch, .theme-switch { width: 100%; text-align: center; justify-content: center; }
   .status-bar{ flex-direction:column; align-items:center; text-align: center; }
   .container { padding: 0 14px 30px; }
-  .auth-card { padding: 28px 20px 22px; }
+  .auth-card { padding: 26px 18px 20px; }
   .lock-box { padding: 25px 18px; }
   .lock-box h1 { font-size: 22px; }
 }
@@ -791,16 +848,16 @@ body.locked{
 
 <body>
 
-<!-- EXECUTIVE CANDIDATE LOGIN INTERFACE (HIGH-FOCUS & INTUITIVE) -->
+<!-- THEME-ADAPTIVE CORPORATE CANDIDATE LOGIN INTERFACE -->
 <div id="authOverlay" class="auth-overlay">
   <div class="auth-card">
     
-    <!-- Crisp White Logo Badge -->
+    <!-- White Elevated Crisp Logo Badge -->
     <div class="auth-logo-badge">
-      <img src="https://lh3.googleusercontent.com/d/1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N" alt="TARA Logo" onerror="this.src='https://drive.google.com/thumbnail?id=1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N&sz=w200'">
+      <img src="https://lh3.googleusercontent.com/d/1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N" alt="TARA Official Logo" onerror="this.src='https://drive.google.com/thumbnail?id=1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N&sz=w200'">
     </div>
 
-    <!-- Title & Department Subhead -->
+    <!-- Title & Department -->
     <div class="auth-header-title"><span>TARA</span> TALENT SOLUTIONS</div>
     <div class="auth-dept-tag">Executive Induction Portal</div>
 
@@ -809,7 +866,7 @@ body.locked{
       <span class="sec-dot"></span> Single-Device Induction Protocol
     </div>
     
-    <!-- Field 1: Candidate Identifier (Auto-Focused) -->
+    <!-- Field 1: Candidate Identifier -->
     <div class="auth-input-group">
       <div class="auth-label-row">
         <label>Enter Registered Identifier</label>
@@ -821,11 +878,11 @@ body.locked{
       </div>
     </div>
 
-    <!-- Field 2: Interactive Session Dropdown with Visual Chevron Indicator -->
+    <!-- Field 2: Interactive Session Dropdown -->
     <div class="auth-input-group">
       <div class="auth-label-row">
         <label>Select Your Session</label>
-        <span class="auth-hint">Click to Change ▾</span>
+        <span class="auth-hint">Click to Choose ▾</span>
       </div>
       <div class="auth-select-wrapper auth-input-box">
         <span class="input-icon">🗓️</span>
@@ -837,30 +894,33 @@ body.locked{
       </div>
     </div>
 
-    <!-- Field 3: Dynamic Passcode Input (For Day 2 & Day 3) -->
+    <!-- Field 3: Dynamic Passcode Input (With Eye Toggle Button) -->
     <div class="auth-input-group" id="passcodeBlock" style="display: none;">
       <div class="auth-label-row">
         <label id="passcodeLabel">Session Security Passcode</label>
-        <span class="auth-hint">Required</span>
+        <span class="auth-hint">Check Accuracy</span>
       </div>
       <div class="auth-input-box">
         <span class="input-icon">🔑</span>
-        <input type="password" id="authPasscode" class="auth-input" placeholder="Enter session unlock passcode" autocomplete="current-password">
+        <input type="password" id="authPasscode" class="auth-input" placeholder="Enter session unlock passcode" autocomplete="current-password" style="padding-right: 44px;">
+        <button type="button" id="togglePassBtn" class="toggle-pass-btn" onclick="togglePasscodeVisibilityField()" title="Show/Hide Passcode">
+          👁️
+        </button>
       </div>
     </div>
 
-    <!-- Submit Button -->
+    <!-- Submit Action Button -->
     <button type="button" id="authSubmitBtn" class="auth-btn" onclick="verifyCandidateAuthentication()">
       <span>Verify & Start Session</span> ➔
     </button>
 
-    <!-- Error Message Display -->
+    <!-- Error Alert Box -->
     <div id="authError" class="auth-error-msg"></div>
 
-    <!-- Footer Security Note -->
+    <!-- Corporate Footer -->
     <div class="auth-compliance-footer">
-      <span>🔒 Official Training & Attendance Portal</span>
-      <span>TARA Talent Solutions Management Matrix</span>
+      <span>🔒 Official Training & Attendance Protocol</span>
+      <span>TARA Talent Solutions • Induction Directorate</span>
     </div>
   </div>
 </div>
@@ -901,15 +961,17 @@ body.locked{
   </div>
 </div>
 
-<!-- HEADER -->
+<!-- TOP HEADER -->
 <div class="topbar">
   <div class="brand-wrapper">
-    <img class="brand-logo-img" src="https://lh3.googleusercontent.com/d/1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N" alt="TARA Logo" onerror="this.src='https://drive.google.com/thumbnail?id=1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N&sz=w200'">
+    <div class="brand-logo-container">
+      <img class="brand-logo-img" src="https://lh3.googleusercontent.com/d/1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N" alt="TARA Logo" onerror="this.src='https://drive.google.com/thumbnail?id=1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N&sz=w200'">
+    </div>
     <div class="brand">🏛 FOUNDATION SESSION</div>
   </div>
   <div class="header-controls">
     <div class="batch" id="headerModuleTag">Professional Development Program • Day 1 of 3</div>
-    <button class="theme-switch" id="themeToggle">🌓 Mode: Light</button>
+    <button class="theme-switch" id="themeToggle">🌓 Mode: Auto</button>
   </div>
 </div>
 
@@ -1003,36 +1065,52 @@ let heartbeatInterval = null;
 let isSessionCompleted = false;
 let finalCompletionDate = "";
 
+/* DYNAMIC DEVICE-ADAPTIVE THEME ENGINE */
+const themeToggle = document.getElementById("themeToggle");
+const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+const savedTheme = localStorage.getItem("theme");
+let currentTheme = savedTheme || (systemPrefersDark ? "dark" : "light");
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  if (theme === "dark") {
+    themeToggle.innerText = "🌞 Mode: Dark";
+  } else {
+    themeToggle.innerText = "🌙 Mode: Light";
+  }
+  localStorage.setItem("theme", theme);
+}
+
+applyTheme(currentTheme);
+
+themeToggle.addEventListener("click", () => {
+  const active = document.documentElement.getAttribute("data-theme");
+  const nextTheme = active === "dark" ? "light" : "dark";
+  applyTheme(nextTheme);
+});
+
 // Auto-focus the identifier on load
 window.addEventListener("DOMContentLoaded", () => {
   const idInput = document.getElementById("authIdentifier");
   if (idInput) setTimeout(() => idInput.focus(), 300);
 });
 
-/* THEME ENGINE */
-const themeToggle = document.getElementById("themeToggle");
-const currentTheme = localStorage.getItem("theme") || "light";
+/* TOGGLE PASSCODE VIEW / HIDE */
+function togglePasscodeVisibilityField() {
+  const passInput = document.getElementById("authPasscode");
+  const toggleBtn = document.getElementById("togglePassBtn");
+  if (!passInput) return;
 
-if (currentTheme === "dark") {
-  document.documentElement.setAttribute("data-theme", "dark");
-  themeToggle.innerText = "🌞 Mode: Dark";
-} else {
-  document.documentElement.setAttribute("data-theme", "light");
-  themeToggle.innerText = "🌙 Mode: Light";
-}
-
-themeToggle.addEventListener("click", () => {
-  let theme = document.documentElement.getAttribute("data-theme");
-  if (theme === "dark") {
-    document.documentElement.setAttribute("data-theme", "light");
-    themeToggle.innerText = "🌙 Mode: Light";
-    localStorage.setItem("theme", "light");
+  if (passInput.type === "password") {
+    passInput.type = "text";
+    toggleBtn.innerText = "🙈";
+    toggleBtn.title = "Hide Passcode";
   } else {
-    document.documentElement.setAttribute("data-theme", "dark");
-    themeToggle.innerText = "🌞 Mode: Dark";
-    localStorage.setItem("theme", "dark");
+    passInput.type = "password";
+    toggleBtn.innerText = "👁️";
+    toggleBtn.title = "Show Passcode";
   }
-});
+}
 
 function togglePasscodeVisibility() {
   const chosen = parseInt(document.getElementById("authSessionChoice").value, 10);
