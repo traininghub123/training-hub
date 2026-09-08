@@ -355,7 +355,7 @@ body.locked{
 }
 
 /* ==========================================================================
-   ENTERPRISE CANDIDATE LOGIN (HIGH-CONTRAST + WHITE GLOW LOGO)
+   HIGH-FOCUS CORPORATE LOGIN MODAL (HIGH CONTRAST & CLEAR AFFORDANCE)
    ========================================================================== */
 .auth-overlay {
   position: fixed;
@@ -363,9 +363,9 @@ body.locked{
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 50% 18%, rgba(37, 99, 235, 0.18) 0%, rgba(7, 10, 19, 0.95) 80%);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: radial-gradient(circle at 50% 15%, rgba(37, 99, 235, 0.2) 0%, rgba(3, 7, 18, 0.96) 80%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   z-index: 9999;
   display: flex;
   justify-content: center;
@@ -374,15 +374,14 @@ body.locked{
 }
 
 .auth-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-radius: 24px;
-  padding: 34px 28px 24px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 26px;
+  padding: 36px 32px 28px;
   width: 100%;
-  max-width: 460px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  max-width: 480px;
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
   position: relative;
-  overflow: hidden;
   text-align: center;
 }
 
@@ -393,49 +392,49 @@ body.locked{
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #3b82f6, #6366f1, #10b981);
+  background: linear-gradient(90deg, #38bdf8, #6366f1, #10b981);
+  border-top-left-radius: 26px;
+  border-top-right-radius: 26px;
 }
 
-/* Prominent White Glass Logo Container */
+/* Elevated White Glass Logo */
 .auth-logo-badge {
   width: 82px;
   height: 82px;
   margin: 0 auto 16px;
   background: #ffffff;
-  border: 2px solid rgba(255, 255, 255, 0.9);
   border-radius: 22px;
   padding: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.28), 0 0 20px rgba(56, 189, 248, 0.25);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.25);
 }
 
 .auth-logo-badge img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.12));
 }
 
 .auth-header-title {
-  font-size: 21px;
+  font-size: 22px;
   font-weight: 800;
-  letter-spacing: -0.4px;
-  color: var(--text-main);
+  letter-spacing: -0.3px;
+  color: #f8fafc;
   margin-bottom: 4px;
 }
 
 .auth-header-title span {
-  color: var(--accent-blue);
+  color: #38bdf8;
 }
 
 .auth-dept-tag {
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: var(--text-muted);
+  letter-spacing: 1px;
+  color: #94a3b8;
   margin-bottom: 18px;
 }
 
@@ -443,13 +442,13 @@ body.locked{
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--bg-pill);
-  border: 1px solid var(--border-color);
+  background: #1e293b;
+  border: 1px solid #334155;
   padding: 6px 14px;
   border-radius: 50px;
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 600;
-  color: var(--text-muted);
+  color: #cbd5e1;
   margin-bottom: 22px;
 }
 
@@ -458,33 +457,34 @@ body.locked{
   height: 7px;
   background: #10b981;
   border-radius: 50%;
-  box-shadow: 0 0 6px #10b981;
+  box-shadow: 0 0 8px #10b981;
 }
 
+/* Form Groups */
 .auth-input-group {
   text-align: left;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .auth-label-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .auth-label-row label {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.6px;
-  color: var(--text-main);
+  letter-spacing: 0.5px;
+  color: #e2e8f0;
 }
 
 .auth-hint {
-  font-size: 10.5px;
-  color: var(--text-muted);
-  font-weight: 500;
+  font-size: 11px;
+  color: #38bdf8;
+  font-weight: 600;
 }
 
 .auth-input-box {
@@ -496,107 +496,125 @@ body.locked{
 .auth-input-box .input-icon {
   position: absolute;
   left: 14px;
-  font-size: 14px;
-  color: var(--text-muted);
+  font-size: 16px;
+  color: #94a3b8;
   pointer-events: none;
+  z-index: 2;
 }
 
-/* High-Contrast Inputs */
+/* Ultra High-Contrast Active Input */
 .auth-input {
   width: 100%;
-  padding: 13px 14px 13px 40px;
+  padding: 14px 14px 14px 44px;
   border-radius: 12px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-body);
-  color: var(--text-main);
-  font-size: 14px;
+  border: 1.5px solid #334155;
+  background: #1e293b;
+  color: #ffffff;
+  font-size: 14.5px;
+  font-weight: 500;
   font-family: inherit;
   outline: none;
   transition: all 0.2s ease;
-}
-
-[data-theme="dark"] .auth-input {
-  background: rgba(15, 23, 42, 0.7);
-  border-color: rgba(255, 255, 255, 0.12);
-  color: #f8fafc;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .auth-input::placeholder {
-  color: #94a3b8;
-  opacity: 0.85;
-}
-
-select.auth-input {
-  cursor: pointer;
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 14px center;
-  padding-right: 36px;
+  color: #64748b;
+  font-size: 13.5px;
 }
 
 .auth-input:focus {
-  border-color: var(--accent-blue);
-  background: var(--bg-surface);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
-}
-
-[data-theme="dark"] .auth-input:focus {
-  background: rgba(15, 23, 42, 0.95);
   border-color: #38bdf8;
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+  background: #0f172a;
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+/* Dropdown Explicit Affordance */
+.auth-select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.auth-select-wrapper select.auth-input {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding-right: 48px;
+  background-color: #1e293b;
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+.auth-select-wrapper::after {
+  content: "";
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 7px solid #38bdf8;
+  pointer-events: none;
+}
+
+.auth-select-wrapper:hover select.auth-input {
+  border-color: #475569;
+}
+
+/* Big Action Button */
 .auth-btn {
   width: 100%;
-  padding: 15px 20px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-hover) 100%);
+  padding: 16px 20px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   color: #ffffff;
-  border: none;
-  font-size: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 15px;
   font-weight: 700;
   cursor: pointer;
-  margin-top: 8px;
+  margin-top: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.28);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .auth-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.38);
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  box-shadow: 0 10px 28px rgba(37, 99, 235, 0.45);
 }
 
 .auth-btn:disabled {
-  opacity: 0.7;
+  opacity: 0.65;
   cursor: not-allowed;
   transform: none;
 }
 
 .auth-compliance-footer {
-  margin-top: 20px;
-  padding-top: 14px;
-  border-top: 1px solid var(--border-color);
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid #1e293b;
   display: flex;
   flex-direction: column;
   gap: 4px;
   text-align: center;
-  font-size: 10.5px;
-  color: var(--text-muted);
+  font-size: 11px;
+  color: #64748b;
 }
 
 .auth-error-msg {
-  background: rgba(239, 68, 68, 0.08);
-  border: 1px solid rgba(239, 68, 68, 0.25);
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
   border-radius: 10px;
-  color: #ef4444;
+  color: #f87171;
   font-size: 12.5px;
   font-weight: 600;
-  padding: 10px 14px;
+  padding: 11px 14px;
   margin-top: 14px;
   display: none;
   text-align: left;
@@ -764,7 +782,7 @@ select.auth-input {
   .batch, .theme-switch { width: 100%; text-align: center; justify-content: center; }
   .status-bar{ flex-direction:column; align-items:center; text-align: center; }
   .container { padding: 0 14px 30px; }
-  .auth-card { padding: 28px 18px 20px; }
+  .auth-card { padding: 28px 20px 22px; }
   .lock-box { padding: 25px 18px; }
   .lock-box h1 { font-size: 22px; }
 }
@@ -773,57 +791,57 @@ select.auth-input {
 
 <body>
 
-<!-- EXECUTIVE CANDIDATE LOGIN INTERFACE -->
+<!-- EXECUTIVE CANDIDATE LOGIN INTERFACE (HIGH-FOCUS & INTUITIVE) -->
 <div id="authOverlay" class="auth-overlay">
   <div class="auth-card">
     
-    <!-- White Elevated Glass Logo Badge -->
+    <!-- Crisp White Logo Badge -->
     <div class="auth-logo-badge">
       <img src="https://lh3.googleusercontent.com/d/1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N" alt="TARA Logo" onerror="this.src='https://drive.google.com/thumbnail?id=1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N&sz=w200'">
     </div>
 
-    <!-- Brand Header -->
+    <!-- Title & Department Subhead -->
     <div class="auth-header-title"><span>TARA</span> TALENT SOLUTIONS</div>
-    <div class="auth-dept-tag">Executive Induction & Enablement Directorate</div>
+    <div class="auth-dept-tag">Executive Induction Portal</div>
 
-    <!-- Security & Telemetry Badge -->
+    <!-- Security Indicator -->
     <div class="auth-security-pill">
-      <span class="sec-dot"></span> Single-Device Attendance Node Active
+      <span class="sec-dot"></span> Single-Device Induction Protocol
     </div>
     
-    <!-- Identifier Input -->
+    <!-- Field 1: Candidate Identifier (Auto-Focused) -->
     <div class="auth-input-group">
       <div class="auth-label-row">
-        <label>Registered Identifier</label>
-        <span class="auth-hint">Email or Phone</span>
+        <label>Enter Registered Identifier</label>
+        <span class="auth-hint">Mobile or Email</span>
       </div>
       <div class="auth-input-box">
-        <span class="input-icon">👤</span>
-        <input type="text" id="authIdentifier" class="auth-input" placeholder="e.g. 9876543210 or name@domain.com" autocomplete="username">
+        <span class="input-icon">📱</span>
+        <input type="text" id="authIdentifier" class="auth-input" placeholder="e.g. 9876543210 or yourname@gmail.com" autocomplete="username" autofocus>
       </div>
     </div>
 
-    <!-- Session Selection Dropdown -->
+    <!-- Field 2: Interactive Session Dropdown with Visual Chevron Indicator -->
     <div class="auth-input-group">
       <div class="auth-label-row">
-        <label>Allocated Training Module</label>
-        <span class="auth-hint">Official Schedule</span>
+        <label>Select Your Session</label>
+        <span class="auth-hint">Click to Change ▾</span>
       </div>
-      <div class="auth-input-box">
-        <span class="input-icon">📅</span>
+      <div class="auth-select-wrapper auth-input-box">
+        <span class="input-icon">🗓️</span>
         <select id="authSessionChoice" class="auth-input" onchange="togglePasscodeVisibility()">
-          <option value="1">Day 1: Foundation Session (01:00 PM – 04:00 PM)</option>
-          <option value="2">Day 2: Clarification Session (02:00 PM – 05:00 PM)</option>
-          <option value="3">Day 3: Execution Session (03:00 PM – 06:00 PM)</option>
+          <option value="1">Day 1: Foundation (01:00 PM – 04:00 PM)</option>
+          <option value="2">Day 2: Clarification (02:00 PM – 05:00 PM)</option>
+          <option value="3">Day 3: Execution (03:00 PM – 06:00 PM)</option>
         </select>
       </div>
     </div>
 
-    <!-- Passcode Block (For Day 2 & Day 3) -->
+    <!-- Field 3: Dynamic Passcode Input (For Day 2 & Day 3) -->
     <div class="auth-input-group" id="passcodeBlock" style="display: none;">
       <div class="auth-label-row">
         <label id="passcodeLabel">Session Security Passcode</label>
-        <span class="auth-hint">From Prior Module</span>
+        <span class="auth-hint">Required</span>
       </div>
       <div class="auth-input-box">
         <span class="input-icon">🔑</span>
@@ -831,23 +849,23 @@ select.auth-input {
       </div>
     </div>
 
-    <!-- Action Button -->
+    <!-- Submit Button -->
     <button type="button" id="authSubmitBtn" class="auth-btn" onclick="verifyCandidateAuthentication()">
-      <span>Authenticate & Launch Workspace</span> ➔
+      <span>Verify & Start Session</span> ➔
     </button>
 
-    <!-- Error Alert Box -->
+    <!-- Error Message Display -->
     <div id="authError" class="auth-error-msg"></div>
 
-    <!-- Corporate Compliance Footer -->
+    <!-- Footer Security Note -->
     <div class="auth-compliance-footer">
-      <span>🔒 Encrypted 256-Bit Telemetry Verification Protocol</span>
-      <span>TARA Talent Solutions • Induction Management Matrix</span>
+      <span>🔒 Official Training & Attendance Portal</span>
+      <span>TARA Talent Solutions Management Matrix</span>
     </div>
   </div>
 </div>
 
-<!-- TIME GATE LOCK SCREEN (WITH LOGO) -->
+<!-- TIME GATE LOCK SCREEN -->
 <div id="lockScreen" class="lock-screen">
   <div class="lock-box">
     <div class="lock-logo-wrapper">
@@ -985,6 +1003,12 @@ let heartbeatInterval = null;
 let isSessionCompleted = false;
 let finalCompletionDate = "";
 
+// Auto-focus the identifier on load
+window.addEventListener("DOMContentLoaded", () => {
+  const idInput = document.getElementById("authIdentifier");
+  if (idInput) setTimeout(() => idInput.focus(), 300);
+});
+
 /* THEME ENGINE */
 const themeToggle = document.getElementById("themeToggle");
 const currentTheme = localStorage.getItem("theme") || "light";
@@ -1038,10 +1062,11 @@ async function verifyCandidateAuthentication() {
   if (!identifier) {
     errorElement.innerText = "Please enter your registered Mobile or Email identifier.";
     errorElement.style.display = "block";
+    document.getElementById("authIdentifier").focus();
     return;
   }
 
-  submitBtn.innerHTML = "<span>Verifying Security Protocol...</span>";
+  submitBtn.innerHTML = "<span>Verifying Credentials...</span>";
   submitBtn.disabled = true;
   errorElement.style.display = "none";
 
@@ -1087,7 +1112,7 @@ async function verifyCandidateAuthentication() {
     errorElement.innerText = "Server connectivity failure. Please re-authenticate.";
     errorElement.style.display = "block";
   } finally {
-    submitBtn.innerHTML = "<span>Authenticate & Launch Workspace</span> ➔";
+    submitBtn.innerHTML = "<span>Verify & Start Session</span> ➔";
     submitBtn.disabled = false;
   }
 }
