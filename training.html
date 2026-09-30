@@ -231,6 +231,30 @@ body{background:radial-gradient(900px 520px at 88% -8%,rgba(47,84,235,.30),trans
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media print{body>*:not(#certOverlay){display:none!important}#certOverlay{position:static;display:flex!important;background:#fff}.cert-close-btn,.cert-actions{display:none}}
+
+/* ---- v4: lobby / lock screen ---- */
+.lock-screen{background:radial-gradient(700px 420px at 80% -5%,rgba(47,84,235,.38),transparent 60%),radial-gradient(600px 420px at 0% 100%,rgba(14,165,164,.25),transparent 60%),#070B16;color:#E8EEFB}
+.lock-box{max-width:460px;background:rgba(18,27,50,.78);border:1px solid rgba(120,140,190,.22);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);padding:24px 20px 22px;text-align:center;animation:rise .6s cubic-bezier(.2,.8,.2,1) both}
+.lock-top{display:flex;align-items:center;gap:12px;text-align:left;margin-bottom:20px}
+.lock-logo-wrapper{width:44px;height:44px;margin:0;background:#fff;border-radius:12px;padding:5px;flex:none}
+.lock-eyebrow{font-size:13px;font-weight:700;line-height:1.35;color:#E8EEFB}.lock-eyebrow span{font-weight:500;color:#8FA0C2}
+.lock-track{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+.lt{position:relative;padding-top:14px;font-size:11.5px;color:#6F80A6;font-weight:600}
+.lt i{position:absolute;top:0;left:0;right:0;height:5px;border-radius:99px;background:#1E2A47}
+.lt.done i{background:#16A34A}.lt.done{color:#9FB0D3}
+.lt.cur i{background:linear-gradient(90deg,#6C8BFF,#22D3EE);box-shadow:0 0 14px rgba(108,139,255,.7)}.lt.cur{color:#fff}
+.lock-badge{display:inline-block;font-size:12px;font-weight:700;color:#8FA8FF;background:rgba(108,139,255,.14);padding:5px 12px;border-radius:99px}
+.lock-box h1{font-size:30px;line-height:1.15;font-weight:800;letter-spacing:-.02em;margin:12px 0 6px;color:#fff}
+.lock-about{font-size:14px;color:#9FB0D3;max-width:340px;margin:0 auto}
+.lock-time{margin:16px 0 18px;background:rgba(255,255,255,.06);color:#E8EEFB;border:1px solid rgba(120,140,190,.2)}
+.lock-status{font-size:15px;font-weight:700;color:#E8EEFB;margin-bottom:10px}
+.lock-box .seg-clock{gap:8px;margin:4px 0 14px}
+.lock-box .seg{width:92px;padding:14px 0 10px;background:linear-gradient(180deg,rgba(108,139,255,.22),rgba(108,139,255,.08));border:1px solid rgba(108,139,255,.3);border-radius:16px}
+.lock-box .seg b{font-size:36px;color:#fff;letter-spacing:-.02em}.lock-box .seg small{color:#9FB0D3;font-size:11.5px}
+.lock-box #lockText{font-size:13.5px;color:#9FB0D3}
+.lock-lobby{display:inline-flex;align-items:center;gap:9px;margin:16px 0 12px;font-size:13px;font-weight:600;color:#C9D6F2}
+.lock-checks{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:6px 14px;font-size:12px;color:#34D399;padding-top:14px;border-top:1px solid rgba(120,140,190,.18)}
+@media(max-width:380px){.lock-box .seg{width:78px}.lock-box .seg b{font-size:30px}}
 </style>
 </head>
 <body>
@@ -286,15 +310,19 @@ body{background:radial-gradient(900px 520px at 88% -8%,rgba(47,84,235,.30),trans
 
 <div id="lockScreen" class="lock-screen">
   <div class="lock-box">
-    <div class="lock-logo-wrapper"><img src="https://lh3.googleusercontent.com/d/1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N" alt="TARA Logo" onerror="this.src='https://drive.google.com/thumbnail?id=1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N&sz=w200'"></div>
-    <div class="lock-eyebrow">TARA Talent Solutions</div>
-    <div class="lock-welcome" id="lockWelcome"></div>
-    <h1 id="lockTitle">Session starts soon</h1>
-    <p id="lockText">Your workspace opens at the scheduled time.</p>
+    <div class="lock-top"><div class="lock-logo-wrapper"><img src="https://lh3.googleusercontent.com/d/1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N" alt="TARA Logo" onerror="this.src='https://drive.google.com/thumbnail?id=1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N&sz=w200'"></div><div class="lock-eyebrow">TARA Learning Hub<br><span id="lockWelcome"></span></div></div>
+    <div class="lock-track" id="lockTrack">
+      <div class="lt"><i></i><span>Foundation</span></div><div class="lt"><i></i><span>Clarification</span></div><div class="lt"><i></i><span>Execution</span></div>
+    </div>
+    <div class="lock-badge" id="lockBadge">Day 1 of 3</div>
+    <h1 id="lockSession">Foundation Session</h1>
+    <p class="lock-about" id="lockAbout"></p>
     <div class="lock-time" id="lockTimeWindow">Scheduled slot</div>
+    <h2 id="lockTitle" class="lock-status">Opens soon</h2>
     <div id="startCountdown">00:00:00</div>
-    <div class="lock-checks"><span>✔ Identity verified</span><span>✔ Secure single-device link</span></div>
-    <div class="lock-foot">Keep this page open. It unlocks automatically.</div>
+    <p id="lockText">Your workspace opens by itself at the scheduled time.</p>
+    <div class="lock-lobby"><span class="sec-dot"></span><span id="lockLobby">Lobby is open</span></div>
+    <div class="lock-checks"><span>✔ Identity verified</span><span>✔ Device secured</span><span>✔ Attendance will be recorded</span></div>
   </div>
 </div>
 
@@ -537,7 +565,7 @@ async function verifyCandidateAuthentication() {
       currentSessionToken = result.sessionToken;
       
       document.getElementById("hudCandidateName").innerText = currentCandidate.name;
-      document.getElementById("lockWelcome").innerText = `Welcome, ${currentCandidate.name}`;
+      document.getElementById("lockWelcome").innerText = `Signed in as ${currentCandidate.name}`;
       document.querySelectorAll(".step").forEach((el, i) => { el.classList.toggle("on", i < activeSession); el.classList.toggle("cur", i === activeSession - 1); });
       document.querySelector(".brand").innerText = SESSION_CONFIG[activeSession].name;
       document.getElementById("headerModuleTag").innerText = `Professional Development Program • Day ${activeSession} of 3`;
@@ -593,20 +621,28 @@ function evaluateTimeLockEngine() {
 
   document.body.classList.add("locked");
   g("lockScreen").style.display = "flex";
-  g("lockTimeWindow").innerText = `Open ${fmt(cfg.start)} to ${fmt(cfg.end)}`;
+  const NAMES = { 1: "Foundation", 2: "Clarification", 3: "Execution" };
+  const ABOUT = { 1: "Program overview, what is expected from you, and how your first weeks will run.", 2: "Clear your doubts, understand the process, and ask the instructor live.", 3: "The final module: your execution plan, then your completion certificate." };
+  g("lockBadge").textContent = `Day ${activeSession} of 3`;
+  g("lockSession").textContent = `${NAMES[activeSession]} Session`;
+  g("lockAbout").textContent = ABOUT[activeSession];
+  g("lockTimeWindow").innerText = `Live today ${fmt(cfg.start)} to ${fmt(cfg.end)}`;
+  document.querySelectorAll("#lockTrack .lt").forEach((el, i) => { el.classList.toggle("cur", i === activeSession - 1); el.classList.toggle("done", i < activeSession - 1); });
   g("statusDot").style.background = now < startAt ? "#F59E0B" : "#EF4444";
   if (now < startAt) {
-    g("lockTitle").innerText = `Day ${activeSession} opens at ${fmt(cfg.start)}`;
-    g("lockText").innerHTML = "You are signed in. This page opens by itself when your session starts. Keep it open, no need to refresh.";
+    const diff = startAt - now;
+    g("lockTitle").innerText = `Room opens at ${fmt(cfg.start)}`;
+    g("lockText").innerHTML = "Stay on this page. The session opens by itself, no refresh needed.";
     g("startCountdown").style.display = "block";
+    g("lockLobby").textContent = `${Math.max(3, Math.round(cfg.baseViewers * 0.6 * (1 - Math.min(1, diff / 7200000))))} participants waiting in the lobby`;
     g("trainingStatus").innerText = "Scheduled";
     g("topCountdown").textContent = `Starts at ${fmt(cfg.start)}`;
-    const diff = startAt - now;
     renderSegClock(Math.floor(diff / 3600000), Math.floor(diff / 60000) % 60, Math.floor(diff / 1000) % 60);
   } else {
-    g("lockTitle").innerText = "Today's window has closed";
-    g("lockText").innerHTML = `Day ${activeSession} was open ${fmt(cfg.start)} to ${fmt(cfg.end)}. Please sign in again tomorrow during this time.`;
+    g("lockTitle").innerText = "Today's session has ended";
+    g("lockText").innerHTML = `This session ran ${fmt(cfg.start)} to ${fmt(cfg.end)}. Sign in again tomorrow at the same time.`;
     g("startCountdown").style.display = "none";
+    g("lockLobby").textContent = "Lobby is closed";
     g("trainingStatus").innerText = "Closed";
     g("topCountdown").textContent = `Closed · opens tomorrow at ${fmt(cfg.start)}`;
   }
