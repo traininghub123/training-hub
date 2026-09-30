@@ -391,27 +391,288 @@ body.locked{
   box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
 }
 
-/* PREMIUM ENTERPRISE LOGIN */
-.auth-overlay{position:fixed;inset:0;background:radial-gradient(circle at 50% 0%,rgba(37,99,235,.20),transparent 38%),linear-gradient(135deg,#020617 0%,#0f172a 52%,#111827 100%);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:9999;display:flex;justify-content:center;align-items:center;padding:24px;overflow:auto}
-.auth-overlay:before{content:"";position:absolute;width:620px;height:620px;border:1px solid rgba(255,255,255,.05);border-radius:50%;top:-330px;right:-180px;pointer-events:none}
-.auth-card{width:100%;max-width:480px;background:rgba(255,255,255,.97);border:1px solid rgba(255,255,255,.7);border-radius:28px;padding:34px 32px 24px;box-shadow:0 35px 90px rgba(0,0,0,.42),0 0 0 1px rgba(255,255,255,.08);position:relative;text-align:left;overflow:hidden}
-[data-theme="dark"] .auth-card{background:rgba(15,23,42,.98);border-color:#334155}
-.auth-card:before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,#2563eb,#38bdf8,#10b981)}
-.auth-topline{display:flex;align-items:center;gap:14px;margin-bottom:26px}
-.auth-logo-badge{width:58px;height:58px;flex:0 0 58px;margin:0;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:7px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(15,23,42,.12)}
-.auth-logo-badge img{max-width:100%;max-height:100%;object-fit:contain;display:block}
-.auth-brand-copy{min-width:0}.auth-brand-name{font-size:16px;font-weight:800;color:var(--text-main);letter-spacing:-.2px}.auth-brand-name span{color:#2563eb}.auth-dept-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-top:3px}
-.auth-secure-badge{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:9.5px;font-weight:700;color:#059669;background:#ecfdf5;border:1px solid #bbf7d0;border-radius:999px;padding:6px 9px;white-space:nowrap}.auth-secure-badge i{width:6px;height:6px;border-radius:50%;background:#10b981;box-shadow:0 0 8px #10b981}
-.auth-welcome{margin-bottom:22px}.auth-welcome h2{font-size:25px;line-height:1.2;letter-spacing:-.7px;color:var(--text-main);margin-bottom:7px}.auth-welcome p{font-size:12.5px;color:var(--text-muted);line-height:1.6}
-.auth-input-group{text-align:left;margin-bottom:15px}.auth-label-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}.auth-label-row label{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--text-main)}.auth-hint{font-size:10px;color:#2563eb;font-weight:700}
-.auth-input-box{position:relative;display:flex;align-items:center}.auth-input-box .input-icon{position:absolute;left:14px;font-size:15px;pointer-events:none;z-index:2;opacity:.75}.auth-input{width:100%;padding:13px 14px 13px 43px;border-radius:12px;border:1px solid var(--auth-input-border);background:var(--auth-input-bg);color:var(--auth-input-color);font-size:13.5px;font-weight:500;font-family:inherit;outline:none;transition:.2s}.auth-input::placeholder{color:var(--auth-input-placeholder);font-size:12px}.auth-input:focus{border-color:#2563eb;background:var(--auth-input-focus-bg);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
-.auth-select-wrapper select.auth-input{appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:44px;font-weight:600}.auth-select-wrapper:after{content:"";position:absolute;right:16px;top:50%;transform:translateY(-50%);border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid #2563eb;pointer-events:none}
-.toggle-pass-btn{position:absolute;right:9px;background:transparent;border:0;font-size:15px;cursor:pointer;color:var(--text-muted);padding:7px;border-radius:8px;z-index:2}.toggle-pass-btn:hover{background:var(--bg-pill);color:var(--text-main)}
-.auth-session-card{margin:18px 0 20px;padding:12px 14px;border-radius:12px;background:linear-gradient(135deg,rgba(37,99,235,.06),rgba(16,185,129,.05));border:1px solid rgba(37,99,235,.12);display:flex;gap:10px;align-items:flex-start}.auth-session-card .session-icon{font-size:18px}.auth-session-card strong{display:block;font-size:11px;color:var(--text-main);margin-bottom:2px}.auth-session-card span{font-size:10.5px;color:var(--text-muted)}
-.auth-btn{width:100%;padding:14px 20px;border-radius:12px;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;border:none;font-size:14px;font-weight:800;cursor:pointer;margin-top:3px;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 8px 22px rgba(37,99,235,.28);transition:.18s}.auth-btn:hover{transform:translateY(-1px);box-shadow:0 11px 28px rgba(37,99,235,.34)}.auth-btn:disabled{opacity:.65;cursor:not-allowed;transform:none}
-.auth-error-msg{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:10px;color:#dc2626;font-size:11.5px;font-weight:600;padding:10px 12px;margin-top:12px;display:none;text-align:left}
-.auth-compliance-footer{margin-top:18px;padding-top:14px;border-top:1px solid var(--border-color);display:flex;justify-content:space-between;gap:10px;font-size:9.5px;color:var(--text-muted)}
-@media(max-width:520px){.auth-overlay{padding:14px}.auth-card{padding:28px 20px 20px;border-radius:22px}.auth-topline{margin-bottom:22px}.auth-secure-badge{display:none}.auth-welcome h2{font-size:22px}.auth-compliance-footer{flex-direction:column;text-align:center}}
+/* ==========================================================================
+   ADAPTIVE CORPORATE LOGIN MODAL (THEME-AWARE + HIGH AFFORDANCE)
+   ========================================================================== */
+.auth-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--auth-overlay-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.auth-card {
+  background: var(--auth-card-bg);
+  border: 1px solid var(--auth-card-border);
+  border-radius: 26px;
+  padding: 34px 30px 26px;
+  width: 100%;
+  max-width: 470px;
+  box-shadow: var(--auth-card-shadow);
+  position: relative;
+  text-align: center;
+}
+
+.auth-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #38bdf8, #6366f1, #10b981);
+  border-top-left-radius: 26px;
+  border-top-right-radius: 26px;
+}
+
+/* Responsive Logo Badge */
+.auth-logo-badge {
+  width: 78px;
+  height: 78px;
+  margin: 0 auto 14px;
+  background: var(--auth-logo-bg);
+  border: 1.5px solid var(--auth-logo-border);
+  border-radius: 22px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--auth-logo-shadow);
+}
+
+.auth-logo-badge img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.auth-header-title {
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.auth-header-title span {
+  color: var(--accent-blue);
+}
+
+.auth-dept-tag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.auth-security-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-pill);
+  border: 1px solid var(--border-color);
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.auth-security-pill .sec-dot {
+  width: 7px;
+  height: 7px;
+  background: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #10b981;
+}
+
+/* Form Groups */
+.auth-input-group {
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+.auth-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.auth-label-row label {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-main);
+}
+
+.auth-hint {
+  font-size: 10.5px;
+  color: var(--accent-blue);
+  font-weight: 600;
+}
+
+.auth-input-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.auth-input-box .input-icon {
+  position: absolute;
+  left: 14px;
+  font-size: 15px;
+  color: var(--text-muted);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Adaptive Inputs */
+.auth-input {
+  width: 100%;
+  padding: 13px 14px 13px 44px;
+  border-radius: 12px;
+  border: 1.5px solid var(--auth-input-border);
+  background: var(--auth-input-bg);
+  color: var(--auth-input-color);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.auth-input::placeholder {
+  color: var(--auth-input-placeholder);
+  font-size: 13px;
+}
+
+.auth-input:focus {
+  border-color: var(--accent-blue);
+  background: var(--auth-input-focus-bg);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+}
+
+/* Passcode Visibility Toggle Button */
+.toggle-pass-btn {
+  position: absolute;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 6px 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease, background-color 0.15s ease;
+  z-index: 2;
+}
+
+.toggle-pass-btn:hover {
+  background: var(--bg-pill);
+  color: var(--text-main);
+}
+
+/* Dropdown Explicit Affordance */
+.auth-select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.auth-select-wrapper select.auth-input {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding-right: 44px;
+  font-weight: 600;
+}
+
+.auth-select-wrapper::after {
+  content: "";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--accent-blue);
+  pointer-events: none;
+}
+
+/* Submit Action Button */
+.auth-btn {
+  width: 100%;
+  padding: 15px 20px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-hover) 100%);
+  color: #ffffff;
+  border: none;
+  font-size: 14.5px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.32);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.auth-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.42);
+}
+
+.auth-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.auth-compliance-footer {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+  font-size: 10.5px;
+  color: var(--text-muted);
+}
+
+.auth-error-msg {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 10px;
+  color: #ef4444;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 10px 14px;
+  margin-top: 14px;
+  display: none;
+  text-align: left;
+}
 
 /* TIMELOCK GATE SCREEN */
 .lock-screen{
@@ -582,68 +843,424 @@ body.locked{
   .lock-box { padding: 25px 18px; }
   .lock-box h1 { font-size: 22px; }
 }
+
+/* ===== ENTERPRISE BOARDROOM EXPERIENCE ===== */
+.boardroom-shell{
+  margin-top:18px;
+  background:var(--bg-surface);
+  border:1px solid var(--border-color);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 18px 45px rgba(15,23,42,.10);
+}
+.boardroom-gallery{
+  display:flex;
+  gap:10px;
+  padding:12px;
+  background:linear-gradient(180deg,var(--bg-surface-elevated),var(--bg-surface));
+  border-bottom:1px solid var(--border-color);
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.boardroom-gallery::-webkit-scrollbar{display:none}
+.participant-tile{
+  min-width:142px;
+  height:76px;
+  border:1px solid var(--border-color);
+  background:var(--bg-body);
+  border-radius:12px;
+  padding:9px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  position:relative;
+  flex-shrink:0;
+}
+.participant-tile.host{
+  border-color:rgba(37,99,235,.35);
+  background:rgba(37,99,235,.05);
+}
+.participant-top{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:11px;
+  font-weight:800;
+  color:var(--text-main);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.participant-avatar{
+  width:25px;height:25px;border-radius:8px;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,#2563eb,#4f46e5);
+  color:#fff;font-size:10px;font-weight:800;
+  flex-shrink:0;
+}
+.participant-meta{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:9px;color:var(--text-muted);font-weight:700;
+}
+.live-indicator{
+  width:6px;height:6px;border-radius:50%;
+  background:#10b981;box-shadow:0 0 0 3px rgba(16,185,129,.12);
+}
+.room-toolbar{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:10px 14px;
+  background:#0b1220;color:#e5e7eb;
+  font-size:11px;font-weight:700;
+}
+.room-id{
+  padding:5px 9px;border-radius:7px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.10);
+}
+.recording-badge{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:5px 9px;border-radius:999px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.10);
+}
+.recording-badge .rec-dot{
+  width:7px;height:7px;border-radius:50%;background:#ef4444;
+  animation:boardroomRecPulse 1.3s infinite;
+}
+@keyframes boardroomRecPulse{50%{opacity:.35;transform:scale(.75)}}
+.boardroom-main{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 330px;
+  min-height:560px;
+  background:#020617;
+}
+.boardroom-stage{
+  min-width:0;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.boardroom-video-card{
+  background:#000;
+  width:100%;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  overflow:hidden;
+}
+.boardroom-video-card .video-container{
+  padding-top:56.25%;
+  background:#020617;
+}
+.boardroom-video-card .video-container iframe{
+  pointer-events:none;
+}
+.stream-hud{
+  position:absolute;left:14px;top:14px;
+  display:flex;gap:8px;flex-wrap:wrap;
+  z-index:5;pointer-events:none;
+}
+.stream-hud-badge{
+  padding:7px 10px;border-radius:8px;
+  background:rgba(2,6,23,.78);
+  color:#fff;border:1px solid rgba(255,255,255,.13);
+  backdrop-filter:blur(8px);
+  font-size:10px;font-weight:800;letter-spacing:.02em;
+}
+.stream-waiting{
+  position:absolute;inset:0;z-index:4;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:25px;
+  background:linear-gradient(180deg,rgba(2,6,23,.35),rgba(2,6,23,.78));
+  color:#fff;pointer-events:none;
+}
+.stream-waiting.hidden{display:none}
+.waiting-card{
+  max-width:390px;padding:24px;border-radius:18px;
+  background:rgba(15,23,42,.76);
+  border:1px solid rgba(255,255,255,.13);
+  backdrop-filter:blur(12px);
+}
+.waiting-spinner{
+  width:38px;height:38px;border-radius:50%;
+  border:3px solid rgba(255,255,255,.16);
+  border-top-color:#38bdf8;
+  animation:boardroomSpin 1s linear infinite;
+  margin:0 auto 14px;
+}
+@keyframes boardroomSpin{to{transform:rotate(360deg)}}
+.waiting-card h3{font-size:17px;margin-bottom:5px}
+.waiting-card p{font-size:11.5px;color:#cbd5e1;line-height:1.6}
+.waiting-timer{margin-top:12px;font-size:22px;font-weight:800;font-variant-numeric:tabular-nums}
+.boardroom-chat{
+  background:#0b1220;color:#e5e7eb;
+  border-left:1px solid rgba(255,255,255,.08);
+  display:flex;flex-direction:column;min-width:0;
+}
+.chat-header{
+  padding:14px 15px;border-bottom:1px solid rgba(255,255,255,.08);
+}
+.chat-header-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.chat-title{font-size:13px;font-weight:800}
+.chat-subtitle{font-size:10px;color:#94a3b8;margin-top:3px}
+.chat-demo-tag{
+  font-size:8px;font-weight:800;letter-spacing:.05em;
+  color:#fbbf24;background:rgba(245,158,11,.10);
+  border:1px solid rgba(245,158,11,.22);
+  padding:4px 6px;border-radius:6px;
+}
+.chat-messages{
+  flex:1;min-height:300px;max-height:470px;overflow:auto;padding:12px;
+}
+.chat-message{
+  padding:9px 10px;margin-bottom:9px;border-radius:10px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.06);
+}
+.chat-message.you{
+  background:rgba(37,99,235,.16);
+  border-color:rgba(59,130,246,.20);
+}
+.chat-author{font-size:9.5px;font-weight:800;color:#93c5fd;margin-bottom:3px}
+.chat-text{font-size:11px;line-height:1.5;color:#e2e8f0}
+.chat-time{font-size:8px;color:#64748b;margin-top:4px}
+.chat-compose{
+  padding:10px;border-top:1px solid rgba(255,255,255,.08);
+  display:flex;gap:7px;
+}
+.chat-compose input{
+  flex:1;min-width:0;padding:10px 11px;border-radius:9px;
+  border:1px solid rgba(255,255,255,.10);
+  background:#111827;color:#fff;outline:none;font:500 11px Inter,sans-serif;
+}
+.chat-compose button{
+  width:40px;border:0;border-radius:9px;background:#2563eb;color:#fff;
+  cursor:pointer;font-weight:800;
+}
+.boardroom-telemetry{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border-color);
+  border-top:1px solid var(--border-color);
+}
+.telemetry-cell{padding:12px 14px;background:var(--bg-surface)}
+.telemetry-label{
+  font-size:9px;color:var(--text-muted);font-weight:800;
+  text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;
+}
+.telemetry-value{font-size:13px;font-weight:800;color:var(--text-main)}
+.telemetry-value.online{color:#10b981}
+@media(max-width:900px){
+  .boardroom-main{grid-template-columns:1fr}
+  .boardroom-chat{border-left:0;border-top:1px solid rgba(255,255,255,.08)}
+  .chat-messages{max-height:290px}
+}
+@media(max-width:600px){
+  .participant-tile{min-width:128px;height:70px}
+  .boardroom-telemetry{grid-template-columns:1fr}
+  .room-toolbar{font-size:10px}
+}
+
+
+/* ===== PREMIUM ENTERPRISE AUTH REDESIGN ===== */
+.auth-overlay{
+  background:
+    radial-gradient(circle at 15% 10%,rgba(56,189,248,.18),transparent 28%),
+    radial-gradient(circle at 90% 85%,rgba(99,102,241,.18),transparent 32%),
+    linear-gradient(135deg,#020617 0%,#0b1220 52%,#111827 100%);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  padding:18px;
+}
+.auth-card{
+  max-width:980px;
+  padding:0;
+  overflow:hidden;
+  border-radius:24px;
+  background:rgba(15,23,42,.94);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 35px 90px rgba(0,0,0,.55);
+  color:#fff;
+  display:grid;
+  grid-template-columns:42% 58%;
+  text-align:left;
+}
+.auth-card::before{display:none}
+.auth-brand-panel{
+  position:relative;padding:42px 34px;
+  background:
+    radial-gradient(circle at 20% 15%,rgba(56,189,248,.18),transparent 35%),
+    linear-gradient(160deg,#0f172a,#111c32);
+  border-right:1px solid rgba(255,255,255,.08);
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.auth-brand-top{display:flex;align-items:center;gap:12px}
+.auth-brand-mark{
+  width:48px;height:48px;padding:7px;border-radius:14px;
+  background:#fff;display:grid;place-items:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.25)
+}
+.auth-brand-mark img{width:100%;height:100%;object-fit:contain}
+.auth-brand-name{font-size:14px;font-weight:800;letter-spacing:.02em}
+.auth-brand-kicker{font-size:10px;color:#94a3b8;margin-top:2px}
+.auth-hero{margin-top:54px}
+.auth-hero h1{font-size:32px;line-height:1.13;letter-spacing:-.04em;margin-bottom:14px}
+.auth-hero h1 span{color:#38bdf8}
+.auth-hero p{font-size:12px;line-height:1.75;color:#94a3b8;max-width:320px}
+.auth-trust-list{margin-top:28px;display:grid;gap:11px}
+.auth-trust-item{display:flex;align-items:center;gap:9px;font-size:10.5px;color:#cbd5e1}
+.auth-trust-item i{
+  width:22px;height:22px;border-radius:7px;background:rgba(16,185,129,.12);
+  color:#34d399;display:grid;place-items:center;font-style:normal
+}
+.auth-side-footer{font-size:9.5px;color:#64748b;line-height:1.5}
+.auth-form-panel{padding:38px 38px 28px;background:#fff;color:#0f172a}
+.auth-form-panel .auth-logo-badge{display:none}
+.auth-form-panel .auth-header-title,
+.auth-form-panel .auth-dept-tag,
+.auth-form-panel .auth-security-pill{display:none}
+.auth-form-heading{font-size:23px;font-weight:800;letter-spacing:-.025em;margin-bottom:5px}
+.auth-form-description{font-size:11px;color:#64748b;margin-bottom:24px}
+.auth-form-panel .auth-input-group{margin-bottom:17px}
+.auth-form-panel .auth-label-row label{color:#334155}
+.auth-form-panel .auth-hint{color:#2563eb}
+.auth-form-panel .auth-input{
+  padding:13px 14px 13px 42px;
+  background:#f8fafc;color:#0f172a;border-color:#dbe3ee;
+}
+.auth-form-panel .auth-input:focus{
+  background:#fff;border-color:#2563eb;
+  box-shadow:0 0 0 4px rgba(37,99,235,.10)
+}
+.auth-form-panel .auth-input-box .input-icon{color:#64748b}
+.auth-form-panel .auth-btn{
+  margin-top:7px;border-radius:11px;padding:14px;
+  box-shadow:0 8px 22px rgba(37,99,235,.22)
+}
+.auth-form-panel .auth-compliance-footer{
+  color:#94a3b8;border-color:#e2e8f0;margin-top:18px
+}
+[data-theme="dark"] .auth-form-panel{
+  background:#0f172a;color:#f8fafc;
+}
+[data-theme="dark"] .auth-form-panel .auth-input{
+  background:#111c30;color:#fff;border-color:#334155
+}
+[data-theme="dark"] .auth-form-panel .auth-input:focus{background:#0f172a}
+[data-theme="dark"] .auth-form-panel .auth-label-row label{color:#e2e8f0}
+[data-theme="dark"] .auth-form-panel .auth-compliance-footer{border-color:#334155}
+@media(max-width:760px){
+  .auth-card{grid-template-columns:1fr;max-width:520px;max-height:94vh;overflow:auto}
+  .auth-brand-panel{padding:25px 24px}
+  .auth-hero{margin-top:25px}
+  .auth-hero h1{font-size:25px}
+  .auth-trust-list,.auth-side-footer{display:none}
+  .auth-form-panel{padding:27px 22px 22px}
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- PREMIUM ENTERPRISE CANDIDATE LOGIN -->
+<!-- THEME-ADAPTIVE CORPORATE CANDIDATE LOGIN INTERFACE -->
 <div id="authOverlay" class="auth-overlay">
   <div class="auth-card">
-    <div class="auth-topline">
-      <div class="auth-logo-badge">
-        <img src="https://lh3.googleusercontent.com/d/1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N" alt="TARA Official Logo" onerror="this.src='https://drive.google.com/thumbnail?id=1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N&sz=w200'">
+    <section class="auth-brand-panel">
+      <div>
+        <div class="auth-brand-top">
+          <div class="auth-brand-mark">
+            <img src="https://lh3.googleusercontent.com/d/1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N"
+                 alt="TARA Official Logo"
+                 onerror="this.src='https://drive.google.com/thumbnail?id=1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N&sz=w200'">
+          </div>
+          <div>
+            <div class="auth-brand-name">TARA TALENT SOLUTIONS</div>
+            <div class="auth-brand-kicker">Executive Induction Directorate</div>
+          </div>
+        </div>
+
+        <div class="auth-hero">
+          <div class="auth-security-pill">
+            <span class="sec-dot"></span> Single-Device Induction Protocol
+          </div>
+          <h1>Welcome to your<br><span>Induction Room.</span></h1>
+          <p>
+            Enter your registered credentials to access the assigned learning session,
+            attendance telemetry and controlled training workspace.
+          </p>
+
+          <div class="auth-trust-list">
+            <div class="auth-trust-item"><i>✓</i> Secure candidate verification</div>
+            <div class="auth-trust-item"><i>✓</i> Session-specific access control</div>
+            <div class="auth-trust-item"><i>✓</i> Single-device attendance protocol</div>
+          </div>
+        </div>
       </div>
-      <div class="auth-brand-copy">
-        <div class="auth-brand-name"><span>TARA</span> TALENT SOLUTIONS</div>
-        <div class="auth-dept-tag">Executive Induction Portal</div>
+      <div class="auth-side-footer">
+        Authorized learning environment • TARA Talent Solutions<br>
+        Please use your registered mobile number or email.
       </div>
-      <div class="auth-secure-badge"><i></i> SECURE</div>
-    </div>
+    </section>
 
-    <div class="auth-welcome">
-      <h2>Welcome to your induction</h2>
-      <p>Verify your registered details to securely enter the assigned training workspace.</p>
-    </div>
+    <section class="auth-form-panel">
+      <div class="auth-form-heading">Start your session</div>
+      <div class="auth-form-description">Verify your identity to enter the assigned boardroom.</div>
 
-    <div class="auth-input-group">
-      <div class="auth-label-row"><label>Registered Identifier</label><span class="auth-hint">Mobile / Email</span></div>
-      <div class="auth-input-box">
-        <span class="input-icon">📱</span>
-        <input type="text" id="authIdentifier" class="auth-input" placeholder="Enter your registered mobile or email" autocomplete="username" autofocus>
+      <div class="auth-input-group">
+        <div class="auth-label-row">
+          <label>Registered Identifier</label>
+          <span class="auth-hint">Mobile or Email</span>
+        </div>
+        <div class="auth-input-box">
+          <span class="input-icon">📱</span>
+          <input type="text" id="authIdentifier" class="auth-input"
+                 placeholder="9876543210 or yourname@gmail.com"
+                 autocomplete="username" autofocus>
+        </div>
       </div>
-    </div>
 
-    <div class="auth-input-group">
-      <div class="auth-label-row"><label>Training Session</label><span class="auth-hint">Select module</span></div>
-      <div class="auth-select-wrapper auth-input-box">
-        <span class="input-icon">🗓️</span>
-        <select id="authSessionChoice" class="auth-input" onchange="togglePasscodeVisibility()">
-          <option value="1">Day 1 · Foundation (01:00 PM – 04:00 PM)</option>
-          <option value="2">Day 2 · Clarification (02:00 PM – 05:00 PM)</option>
-          <option value="3">Day 3 · Execution (03:00 PM – 06:00 PM)</option>
-        </select>
+      <div class="auth-input-group">
+        <div class="auth-label-row">
+          <label>Induction Session</label>
+          <span class="auth-hint">Select session</span>
+        </div>
+        <div class="auth-select-wrapper auth-input-box">
+          <span class="input-icon">🗓️</span>
+          <select id="authSessionChoice" class="auth-input" onchange="togglePasscodeVisibility()">
+            <option value="1">Day 1 · Foundation · 01:00 PM – 04:00 PM</option>
+            <option value="2">Day 2 · Clarification · 02:00 PM – 05:00 PM</option>
+            <option value="3">Day 3 · Execution · 03:00 PM – 06:00 PM</option>
+          </select>
+        </div>
       </div>
-    </div>
 
-    <div class="auth-input-group" id="passcodeBlock" style="display:none;">
-      <div class="auth-label-row"><label id="passcodeLabel">Session Security Passcode</label><span class="auth-hint">Required</span></div>
-      <div class="auth-input-box">
-        <span class="input-icon">🔑</span>
-        <input type="password" id="authPasscode" class="auth-input" placeholder="Enter session unlock passcode" autocomplete="current-password" style="padding-right:44px;">
-        <button type="button" id="togglePassBtn" class="toggle-pass-btn" onclick="togglePasscodeVisibilityField()" title="Show/Hide Passcode">👁️</button>
+      <div class="auth-input-group" id="passcodeBlock" style="display:none;">
+        <div class="auth-label-row">
+          <label id="passcodeLabel">Session Security Passcode</label>
+          <span class="auth-hint">Required</span>
+        </div>
+        <div class="auth-input-box">
+          <span class="input-icon">🔑</span>
+          <input type="password" id="authPasscode" class="auth-input"
+                 placeholder="Enter session unlock passcode"
+                 autocomplete="current-password" style="padding-right:44px;">
+          <button type="button" id="togglePassBtn" class="toggle-pass-btn"
+                  onclick="togglePasscodeVisibilityField()" title="Show/Hide Passcode">👁️</button>
+        </div>
       </div>
-    </div>
 
-    <div class="auth-session-card">
-      <div class="session-icon">🔐</div>
-      <div><strong>Single-device training protocol</strong><span>Your session is protected by live attendance and device verification.</span></div>
-    </div>
+      <button type="button" id="authSubmitBtn" class="auth-btn" onclick="verifyCandidateAuthentication()">
+        <span>Verify & Enter Boardroom</span> ➜
+      </button>
 
-    <button type="button" id="authSubmitBtn" class="auth-btn" onclick="verifyCandidateAuthentication()"><span>Verify & Start Session</span> ➜</button>
-    <div id="authError" class="auth-error-msg"></div>
+      <div id="authError" class="auth-error-msg"></div>
 
-    <div class="auth-compliance-footer"><span>🔒 Official Training & Attendance Protocol</span><span>TARA Talent Solutions • Induction Directorate</span></div>
+      <div class="auth-compliance-footer">
+        <span>🔒 Official Training & Attendance Protocol</span>
+        <span>TARA Talent Solutions • Controlled Learning Workspace</span>
+      </div>
+    </section>
   </div>
 </div>
 
@@ -726,10 +1343,69 @@ body.locked{
     </div>
   </div>
 
-  <!-- VIDEO EMBED AREA -->
-  <div class="video-card">
-    <div id="videoContainer"></div>
-  </div>
+  <!-- ENTERPRISE BOARDROOM -->
+  <section class="boardroom-shell" aria-label="Training boardroom">
+    <div class="boardroom-gallery" id="participantGallery"></div>
+
+    <div class="room-toolbar">
+      <div>● TARA INDUCTION ROOM · <span class="room-id">Room ID: 942-8812-TTS</span></div>
+      <div class="recording-badge"><span class="rec-dot"></span> SESSION RECORDING</div>
+    </div>
+
+    <div class="boardroom-main">
+      <div class="boardroom-stage">
+        <div class="stream-hud">
+          <span class="stream-hud-badge">● BUNNY STREAM · 1080P HD</span>
+          <span class="stream-hud-badge" id="streamStateBadge">SECURE PLAYBACK</span>
+        </div>
+
+        <div class="stream-waiting" id="streamWaiting">
+          <div class="waiting-card">
+            <div class="waiting-spinner"></div>
+            <h3>Establishing Boardroom Link</h3>
+            <p>Preparing the secure training stream. The recorded session will begin automatically.</p>
+            <div class="waiting-timer" id="waitingTimer">04:00</div>
+          </div>
+        </div>
+
+        <div class="boardroom-video-card">
+          <div id="videoContainer" class="video-container"></div>
+        </div>
+      </div>
+
+      <aside class="boardroom-chat">
+        <div class="chat-header">
+          <div class="chat-header-row">
+            <div>
+              <div class="chat-title">Session Chat</div>
+              <div class="chat-subtitle">Candidate discussion panel</div>
+            </div>
+            <span class="chat-demo-tag">DEMO ACTIVITY</span>
+          </div>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-compose">
+          <input id="chatInput" type="text" maxlength="240" placeholder="Write a message…">
+          <button id="chatSendBtn" type="button" aria-label="Send message">➤</button>
+        </div>
+      </aside>
+    </div>
+
+    <div class="boardroom-telemetry">
+      <div class="telemetry-cell">
+        <div class="telemetry-label">Candidate</div>
+        <div class="telemetry-value" id="boardCandidateName">—</div>
+      </div>
+      <div class="telemetry-cell">
+        <div class="telemetry-label">Stream Telemetry</div>
+        <div class="telemetry-value online" id="boardWatchTimer">00:00</div>
+      </div>
+      <div class="telemetry-cell">
+        <div class="telemetry-label">Active Attendees</div>
+        <div class="telemetry-value" id="boardAttendeeCount">—</div>
+      </div>
+    </div>
+  </section>
 
   <!-- STATS -->
   <div class="stats">
@@ -815,6 +1491,7 @@ themeToggle.addEventListener("click", () => {
 window.addEventListener("DOMContentLoaded", () => {
   const idInput = document.getElementById("authIdentifier");
   if (idInput) setTimeout(() => idInput.focus(), 300);
+  setupCandidateChat();
 });
 
 /* TOGGLE PASSCODE VIEW / HIDE */
@@ -904,6 +1581,7 @@ async function verifyCandidateAuthentication() {
       startHeartbeatCheck();
       enableReloadProtection();
       updateViewers();
+      initBoardroomExperience();
     } else {
       errorElement.innerText = result.message || "Access denied. Candidate identity not found.";
       errorElement.style.display = "block";
@@ -920,6 +1598,22 @@ async function verifyCandidateAuthentication() {
 /* PRODUCTION TIMELOCK ENGINE */
 function evaluateTimeLockEngine() {
   if (!currentCandidate) return;
+  if (TESTING_TIMELOCK_BYPASS) {
+    const lockScreen = document.getElementById("lockScreen");
+    const topCountdown = document.getElementById("topCountdown");
+    const trainingStatus = document.getElementById("trainingStatus");
+    const liveStatus = document.getElementById("liveStatus");
+    const statusDot = document.getElementById("statusDot");
+    if(lockScreen) lockScreen.style.display="none";
+    document.body.classList.remove("locked");
+    if(topCountdown) topCountdown.innerHTML="🟢 Testing Mode · Stream Available Immediately";
+    if(trainingStatus) trainingStatus.innerText="ACTIVE";
+    if(liveStatus) liveStatus.innerText=`${SESSION_CONFIG[activeSession].name} Active`;
+    if(statusDot) statusDot.style.background="#10b981";
+    if(!isVideoLoaded) loadSecureBunnyStream(SESSION_CONFIG[activeSession].streamKey);
+    return;
+  }
+
   const now = new Date();
   const hour = now.getHours();
   const cfg = SESSION_CONFIG[activeSession];
@@ -928,53 +1622,38 @@ function evaluateTimeLockEngine() {
   const trainingStatus = document.getElementById("trainingStatus");
   const liveStatus = document.getElementById("liveStatus");
   const statusDot = document.getElementById("statusDot");
-
   const startFormatted = `${String(cfg.start > 12 ? cfg.start - 12 : cfg.start).padStart(2, '0')}:00 ${cfg.start >= 12 ? 'PM' : 'AM'}`;
 
   if (hour >= cfg.start && hour < cfg.end) {
-    lockScreen.style.display = "none";
+    lockScreen.style.display="none";
     document.body.classList.remove("locked");
-    if (topCountdown) topCountdown.innerHTML = `🟢 Onboarding Window Operational (${cfg.timeStr})`;
-    if (trainingStatus) trainingStatus.innerText = "ACTIVE";
-    if (liveStatus) liveStatus.innerText = `${cfg.name} Active`;
-    if (statusDot) statusDot.style.background = "#10b981";
-
-    if (!isVideoLoaded) loadSecureBunnyStream(cfg.streamKey);
+    if(topCountdown) topCountdown.innerHTML=`🟢 Onboarding Window Operational (${cfg.timeStr})`;
+    if(trainingStatus) trainingStatus.innerText="ACTIVE";
+    if(liveStatus) liveStatus.innerText=`${cfg.name} Active`;
+    if(statusDot) statusDot.style.background="#10b981";
+    if(!isVideoLoaded) loadSecureBunnyStream(cfg.streamKey);
   } else if (hour < cfg.start) {
     document.body.classList.add("locked");
-    lockScreen.style.display = "flex";
-    document.getElementById("lockTitle").innerHTML = "⏳ Session Starts Soon";
-    document.getElementById("lockText").innerHTML = `Today's induction sequence has not initiated yet.<br><br>Please wait, training workspace opens at ${startFormatted}.`;
-    document.getElementById("lockTimeWindow").innerText = `⏰ Access Timing: ${cfg.timeStr}`;
-    document.getElementById("startCountdown").style.display = "block";
-
-    if (topCountdown) topCountdown.innerHTML = `⏳ Session Starts at ${startFormatted}`;
-    if (trainingStatus) trainingStatus.innerText = "Scheduled";
-    if (liveStatus) liveStatus.innerText = "System Paused";
-    if (statusDot) statusDot.style.background = "#ffbc00";
-
-    const target = new Date();
-    target.setHours(cfg.start, 0, 0, 0);
-    const diff = target - now;
-
-    const h = Math.floor(diff / 3600000);
-    const m = Math.floor((diff / 60000) % 60);
-    const s = Math.floor((diff / 1000) % 60);
-
-    document.getElementById("startCountdown").innerHTML =
-      `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    lockScreen.style.display="flex";
+    document.getElementById("lockTitle").innerHTML="⏳ Session Starts Soon";
+    document.getElementById("lockText").innerHTML=`Today's induction sequence has not initiated yet.<br><br>Please wait, training workspace opens at ${startFormatted}.`;
+    document.getElementById("lockTimeWindow").innerText=`⏰ Access Timing: ${cfg.timeStr}`;
+    document.getElementById("startCountdown").style.display="block";
+    if(topCountdown) topCountdown.innerHTML=`⏳ Session Starts at ${startFormatted}`;
+    if(trainingStatus) trainingStatus.innerText="Scheduled";
+    if(liveStatus) liveStatus.innerText="System Paused";
+    if(statusDot) statusDot.style.background="#ffbc00";
   } else {
     document.body.classList.add("locked");
-    lockScreen.style.display = "flex";
-    document.getElementById("lockTitle").innerHTML = "🔒 Training Access Closed";
-    document.getElementById("lockText").innerHTML = `Today's batch timing (${cfg.timeStr}) has ended.<br><br>Please revisit tomorrow during your scheduled slot.`;
-    document.getElementById("lockTimeWindow").innerText = `⏰ Access Timing: ${cfg.timeStr}`;
-    document.getElementById("startCountdown").style.display = "none";
-
-    if (topCountdown) topCountdown.innerHTML = `🔴 Session Closed (Reopens Tomorrow at ${startFormatted})`;
-    if (trainingStatus) trainingStatus.innerText = "Closed";
-    if (liveStatus) liveStatus.innerText = "Session Expired";
-    if (statusDot) statusDot.style.background = "#ef4444";
+    lockScreen.style.display="flex";
+    document.getElementById("lockTitle").innerHTML="🔒 Training Access Closed";
+    document.getElementById("lockText").innerHTML=`Today's batch timing (${cfg.timeStr}) has ended.<br><br>Please revisit tomorrow during your scheduled slot.`;
+    document.getElementById("lockTimeWindow").innerText=`⏰ Access Timing: ${cfg.timeStr}`;
+    document.getElementById("startCountdown").style.display="none";
+    if(topCountdown) topCountdown.innerHTML=`🔴 Session Closed (Reopens Tomorrow at ${startFormatted})`;
+    if(trainingStatus) trainingStatus.innerText="Closed";
+    if(liveStatus) liveStatus.innerText="Session Expired";
+    if(statusDot) statusDot.style.background="#ef4444";
   }
 }
 
@@ -1052,6 +1731,7 @@ function updateWatchTimerUI() {
   const btn = document.getElementById("completeSessionBtn");
   const alertBadge = document.getElementById("retentionBadge");
   const remaining = Math.max(0, requiredSeconds - secondsWatched);
+  updateBoardroomTelemetry();
 
   if (remaining > 0 && remaining <= 900) {
     alertBadge.style.display = "flex";
@@ -1144,12 +1824,204 @@ function closeCertModal() {
   document.getElementById("certOverlay").style.display = "none";
 }
 
+
+/* ===== ENTERPRISE BOARDROOM ENGINE =====
+   Demo attendee activity is explicitly labeled in the UI.
+   The stream remains a recorded Bunny-hosted session. */
+const TESTING_TIMELOCK_BYPASS = true;
+const BOARDROOM_PEERS = [
+  ["Vikram Sharma","Pune"],["Neha Deshmukh","Nagpur"],["Priya Nair","Bengaluru"],
+  ["Rohan Joshi","Indore"],["Amit Verma","Jaipur"],["Sneha Kulkarni","Bhopal"],
+  ["Arjun Mehta","Mumbai"],["Kavya Iyer","Chennai"],["Rahul Kapoor","Delhi"],
+  ["Ananya Rao","Hyderabad"],["Siddharth Patil","Nashik"],["Meera Shah","Ahmedabad"],
+  ["Karan Malhotra","Gurugram"],["Pooja Mishra","Lucknow"],["Aditya Sinha","Patna"],
+  ["Nikhil Bansal","Chandigarh"],["Ishita Sen","Kolkata"],["Varun Reddy","Pune"],
+  ["Ayesha Khan","Indore"],["Manish Tiwari","Bhopal"],["Shreya Jain","Surat"],
+  ["Harsh Vardhan","Noida"],["Tanvi Gupta","Vadodara"],["Akash Choudhary","Udaipur"],
+  ["Divya Menon","Kochi"],["Mohit Agarwal","Kanpur"],["Ritika Bose","Ranchi"],
+  ["Yash Thakur","Nagpur"],["Simran Kaur","Amritsar"],["Abhishek Dubey","Raipur"],
+  ["Nandini Prasad","Bhubaneswar"],["Saurabh Jain","Indore"],["Riya Mukherjee","Kolkata"],
+  ["Deepak Saini","Delhi"],["Mansi Trivedi","Ahmedabad"],["Aman Gupta","Jaipur"],
+  ["Komal Arora","Ludhiana"],["Vivek Pillai","Kochi"],["Sakshi Pawar","Pune"],
+  ["Devansh Roy","Guwahati"],["Shivani Das","Bengaluru"],["Ankit Yadav","Agra"],
+  ["Muskan Kapoor","Noida"],["Raghav Bhat","Mysuru"],["Preeti Sharma","Dehradun"],
+  ["Abhinav Singh","Lucknow"],["Nisha Bhatia","Chandigarh"],["Ritesh Kumar","Patna"],
+  ["Ira Kulkarni","Nashik"],["Sameer Sheikh","Mumbai"],["Anushka Roy","Kolkata"],
+  ["Gaurav Saxena","Bhopal"],["Kriti Nair","Bengaluru"],["Vishal Jain","Surat"]
+];
+
+const DEMO_CHAT_MESSAGES = [
+  "Screen and audio are clear.",
+  "Point noted regarding operational compliance.",
+  "Understood the Module 1 execution steps.",
+  "Taking detailed notes.",
+  "The workflow sequence is clear.",
+  "Following the session carefully.",
+  "Noted the attendance requirement.",
+  "Understood the next-step process.",
+  "The explanation is clear so far.",
+  "Noted the escalation process.",
+  "Following along with the checklist.",
+  "The module structure makes sense."
+];
+
+let boardroomChatTimer = null;
+let boardroomViewerTimer = null;
+let boardroomWaitingTimer = null;
+let boardroomWaitingSeconds = 0;
+let boardroomSelectedPeers = [];
+
+function shuffleBoardroom(list){
+  const a = [...list];
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function initials(name){
+  return name.split(/\s+/).slice(0,2).map(x=>x[0]).join("").toUpperCase();
+}
+
+function renderParticipantGallery(){
+  const gallery = document.getElementById("participantGallery");
+  if(!gallery) return;
+  boardroomSelectedPeers = shuffleBoardroom(BOARDROOM_PEERS).slice(0,4);
+  const candidateName = currentCandidate?.name || "Candidate";
+  const people = [
+    {name:"Lead Instructor", city:"Host", role:"Presenting", host:true},
+    {name:candidateName, city:"You", role:"Camera Verified", you:true},
+    ...boardroomSelectedPeers.map(([name,city])=>({name,city,role:"Attendee"}))
+  ];
+  gallery.innerHTML = people.map(p => `
+    <div class="participant-tile ${p.host ? "host":""}">
+      <div class="participant-top">
+        <span class="participant-avatar">${initials(p.name)}</span>
+        <span title="${p.name}">${p.name}</span>
+      </div>
+      <div class="participant-meta">
+        <span>${p.role}${p.city ? " · "+p.city : ""}</span>
+        <span class="live-indicator"></span>
+      </div>
+    </div>`).join("");
+}
+
+function addChatMessage(author,message,isYou=false){
+  const box=document.getElementById("chatMessages");
+  if(!box) return;
+  const now=new Date();
+  const time=now.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"});
+  const item=document.createElement("div");
+  item.className="chat-message"+(isYou?" you":"");
+  item.innerHTML=`<div class="chat-author">${escapeHtml(author)}</div>
+    <div class="chat-text">${escapeHtml(message)}</div>
+    <div class="chat-time">${time}</div>`;
+  box.appendChild(item);
+  box.scrollTop=box.scrollHeight;
+  while(box.children.length>18) box.removeChild(box.firstChild);
+}
+
+function escapeHtml(value){
+  return String(value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));
+}
+
+function scheduleDemoChat(){
+  clearTimeout(boardroomChatTimer);
+  const send=()=>{
+    const peer=boardroomSelectedPeers[Math.floor(Math.random()*boardroomSelectedPeers.length)];
+    const msg=DEMO_CHAT_MESSAGES[Math.floor(Math.random()*DEMO_CHAT_MESSAGES.length)];
+    addChatMessage(`${peer[0]} · ${peer[1]}`,msg,false);
+    boardroomChatTimer=setTimeout(send,25000+Math.floor(Math.random()*20000));
+  };
+  boardroomChatTimer=setTimeout(send,25000+Math.floor(Math.random()*20000));
+}
+
+function setupCandidateChat(){
+  const input=document.getElementById("chatInput");
+  const button=document.getElementById("chatSendBtn");
+  if(!input || !button || input.dataset.bound) return;
+  input.dataset.bound="1";
+  const send=()=>{
+    const text=input.value.trim();
+    if(!text) return;
+    const name=currentCandidate?.name || "Candidate";
+    addChatMessage(`${name} (You)`,text,true);
+    input.value="";
+  };
+  button.addEventListener("click",send);
+  input.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();send();}});
+}
+
+function updateBoardroomTelemetry(){
+  const name=document.getElementById("boardCandidateName");
+  const timer=document.getElementById("boardWatchTimer");
+  const count=document.getElementById("boardAttendeeCount");
+  if(name) name.innerText=currentCandidate?.name || "—";
+  if(timer) timer.innerText=formatSecs(secondsWatched);
+  if(count){
+    const cfg=SESSION_CONFIG[activeSession]||SESSION_CONFIG[1];
+    const low=Math.max(68,cfg.baseViewers+16);
+    const high=Math.max(low+8,Math.min(92,cfg.maxViewers+6));
+    count.innerText=low+Math.floor(Math.random()*(high-low+1));
+  }
+}
+
+function startBoardroomWaitingPhase(){
+  clearInterval(boardroomWaitingTimer);
+  const overlay=document.getElementById("streamWaiting");
+  const timer=document.getElementById("waitingTimer");
+  if(!overlay || !timer) return;
+  boardroomWaitingSeconds = activeSession===1 ? 240 : 120;
+  overlay.classList.remove("hidden");
+  const tick=()=>{
+    const m=Math.floor(boardroomWaitingSeconds/60);
+    const sec=boardroomWaitingSeconds%60;
+    timer.innerText=`${String(m).padStart(2,"0")}:${String(sec).padStart(2,"0")}`;
+    if(boardroomWaitingSeconds<=0){
+      clearInterval(boardroomWaitingTimer);
+      overlay.classList.add("hidden");
+      const badge=document.getElementById("streamStateBadge");
+      if(badge) badge.innerText="PLAYBACK READY";
+      return;
+    }
+    boardroomWaitingSeconds--;
+  };
+  tick();
+  boardroomWaitingTimer=setInterval(tick,1000);
+}
+
+function initBoardroomExperience(){
+  renderParticipantGallery();
+  setupCandidateChat();
+  const box=document.getElementById("chatMessages");
+  if(box && !box.children.length){
+    addChatMessage("Lead Instructor","Welcome to the induction room. Please remain focused on the session.",false);
+    addChatMessage("System","Demo attendee activity is shown for interface testing.",false);
+  }
+  scheduleDemoChat();
+  clearInterval(boardroomViewerTimer);
+  updateBoardroomTelemetry();
+  boardroomViewerTimer=setInterval(updateBoardroomTelemetry,5000);
+  startBoardroomWaitingPhase();
+}
+
 function loadSecureBunnyStream(streamKey) {
   isVideoLoaded = true;
   fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
   .then(r => r.json())
   .then(data => {
     document.getElementById("videoContainer").innerHTML = data[streamKey];
+    const iframe = document.querySelector("#videoContainer iframe");
+    if (iframe) {
+      iframe.setAttribute("allow", "autoplay; fullscreen; picture-in-picture");
+      iframe.setAttribute("allowfullscreen", "");
+      iframe.setAttribute("title", "TARA Training Session");
+      iframe.style.pointerEvents = "none";
+    }
+    const badge = document.getElementById("streamStateBadge");
+    if (badge) badge.innerText = "SECURE PLAYBACK";
+    startBoardroomWaitingPhase();
   })
   .catch(err => {
     console.error(err);
