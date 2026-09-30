@@ -391,288 +391,27 @@ body.locked{
   box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
 }
 
-/* ==========================================================================
-   ADAPTIVE CORPORATE LOGIN MODAL (THEME-AWARE + HIGH AFFORDANCE)
-   ========================================================================== */
-.auth-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--auth-overlay-bg);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-
-.auth-card {
-  background: var(--auth-card-bg);
-  border: 1px solid var(--auth-card-border);
-  border-radius: 26px;
-  padding: 34px 30px 26px;
-  width: 100%;
-  max-width: 470px;
-  box-shadow: var(--auth-card-shadow);
-  position: relative;
-  text-align: center;
-}
-
-.auth-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #38bdf8, #6366f1, #10b981);
-  border-top-left-radius: 26px;
-  border-top-right-radius: 26px;
-}
-
-/* Responsive Logo Badge */
-.auth-logo-badge {
-  width: 78px;
-  height: 78px;
-  margin: 0 auto 14px;
-  background: var(--auth-logo-bg);
-  border: 1.5px solid var(--auth-logo-border);
-  border-radius: 22px;
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--auth-logo-shadow);
-}
-
-.auth-logo-badge img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
-.auth-header-title {
-  font-size: 21px;
-  font-weight: 800;
-  letter-spacing: -0.3px;
-  color: var(--text-main);
-  margin-bottom: 4px;
-}
-
-.auth-header-title span {
-  color: var(--accent-blue);
-}
-
-.auth-dept-tag {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: var(--text-muted);
-  margin-bottom: 16px;
-}
-
-.auth-security-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--bg-pill);
-  border: 1px solid var(--border-color);
-  padding: 6px 14px;
-  border-radius: 50px;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-muted);
-  margin-bottom: 20px;
-}
-
-.auth-security-pill .sec-dot {
-  width: 7px;
-  height: 7px;
-  background: #10b981;
-  border-radius: 50%;
-  box-shadow: 0 0 8px #10b981;
-}
-
-/* Form Groups */
-.auth-input-group {
-  text-align: left;
-  margin-bottom: 16px;
-}
-
-.auth-label-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 6px;
-}
-
-.auth-label-row label {
-  font-size: 11.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--text-main);
-}
-
-.auth-hint {
-  font-size: 10.5px;
-  color: var(--accent-blue);
-  font-weight: 600;
-}
-
-.auth-input-box {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.auth-input-box .input-icon {
-  position: absolute;
-  left: 14px;
-  font-size: 15px;
-  color: var(--text-muted);
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* Adaptive Inputs */
-.auth-input {
-  width: 100%;
-  padding: 13px 14px 13px 44px;
-  border-radius: 12px;
-  border: 1.5px solid var(--auth-input-border);
-  background: var(--auth-input-bg);
-  color: var(--auth-input-color);
-  font-size: 14px;
-  font-weight: 500;
-  font-family: inherit;
-  outline: none;
-  transition: all 0.2s ease;
-}
-
-.auth-input::placeholder {
-  color: var(--auth-input-placeholder);
-  font-size: 13px;
-}
-
-.auth-input:focus {
-  border-color: var(--accent-blue);
-  background: var(--auth-input-focus-bg);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
-}
-
-/* Passcode Visibility Toggle Button */
-.toggle-pass-btn {
-  position: absolute;
-  right: 10px;
-  background: transparent;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-  color: var(--text-muted);
-  padding: 6px 8px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.15s ease, background-color 0.15s ease;
-  z-index: 2;
-}
-
-.toggle-pass-btn:hover {
-  background: var(--bg-pill);
-  color: var(--text-main);
-}
-
-/* Dropdown Explicit Affordance */
-.auth-select-wrapper {
-  position: relative;
-  width: 100%;
-}
-
-.auth-select-wrapper select.auth-input {
-  appearance: none;
-  -webkit-appearance: none;
-  cursor: pointer;
-  padding-right: 44px;
-  font-weight: 600;
-}
-
-.auth-select-wrapper::after {
-  content: "";
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 6px solid var(--accent-blue);
-  pointer-events: none;
-}
-
-/* Submit Action Button */
-.auth-btn {
-  width: 100%;
-  padding: 15px 20px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-hover) 100%);
-  color: #ffffff;
-  border: none;
-  font-size: 14.5px;
-  font-weight: 700;
-  cursor: pointer;
-  margin-top: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.32);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.auth-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.42);
-}
-
-.auth-btn:disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.auth-compliance-footer {
-  margin-top: 18px;
-  padding-top: 14px;
-  border-top: 1px solid var(--border-color);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  text-align: center;
-  font-size: 10.5px;
-  color: var(--text-muted);
-}
-
-.auth-error-msg {
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  border-radius: 10px;
-  color: #ef4444;
-  font-size: 12.5px;
-  font-weight: 600;
-  padding: 10px 14px;
-  margin-top: 14px;
-  display: none;
-  text-align: left;
-}
+/* PREMIUM ENTERPRISE LOGIN */
+.auth-overlay{position:fixed;inset:0;background:radial-gradient(circle at 50% 0%,rgba(37,99,235,.20),transparent 38%),linear-gradient(135deg,#020617 0%,#0f172a 52%,#111827 100%);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:9999;display:flex;justify-content:center;align-items:center;padding:24px;overflow:auto}
+.auth-overlay:before{content:"";position:absolute;width:620px;height:620px;border:1px solid rgba(255,255,255,.05);border-radius:50%;top:-330px;right:-180px;pointer-events:none}
+.auth-card{width:100%;max-width:480px;background:rgba(255,255,255,.97);border:1px solid rgba(255,255,255,.7);border-radius:28px;padding:34px 32px 24px;box-shadow:0 35px 90px rgba(0,0,0,.42),0 0 0 1px rgba(255,255,255,.08);position:relative;text-align:left;overflow:hidden}
+[data-theme="dark"] .auth-card{background:rgba(15,23,42,.98);border-color:#334155}
+.auth-card:before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,#2563eb,#38bdf8,#10b981)}
+.auth-topline{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+.auth-logo-badge{width:58px;height:58px;flex:0 0 58px;margin:0;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:7px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(15,23,42,.12)}
+.auth-logo-badge img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.auth-brand-copy{min-width:0}.auth-brand-name{font-size:16px;font-weight:800;color:var(--text-main);letter-spacing:-.2px}.auth-brand-name span{color:#2563eb}.auth-dept-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-top:3px}
+.auth-secure-badge{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:9.5px;font-weight:700;color:#059669;background:#ecfdf5;border:1px solid #bbf7d0;border-radius:999px;padding:6px 9px;white-space:nowrap}.auth-secure-badge i{width:6px;height:6px;border-radius:50%;background:#10b981;box-shadow:0 0 8px #10b981}
+.auth-welcome{margin-bottom:22px}.auth-welcome h2{font-size:25px;line-height:1.2;letter-spacing:-.7px;color:var(--text-main);margin-bottom:7px}.auth-welcome p{font-size:12.5px;color:var(--text-muted);line-height:1.6}
+.auth-input-group{text-align:left;margin-bottom:15px}.auth-label-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}.auth-label-row label{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--text-main)}.auth-hint{font-size:10px;color:#2563eb;font-weight:700}
+.auth-input-box{position:relative;display:flex;align-items:center}.auth-input-box .input-icon{position:absolute;left:14px;font-size:15px;pointer-events:none;z-index:2;opacity:.75}.auth-input{width:100%;padding:13px 14px 13px 43px;border-radius:12px;border:1px solid var(--auth-input-border);background:var(--auth-input-bg);color:var(--auth-input-color);font-size:13.5px;font-weight:500;font-family:inherit;outline:none;transition:.2s}.auth-input::placeholder{color:var(--auth-input-placeholder);font-size:12px}.auth-input:focus{border-color:#2563eb;background:var(--auth-input-focus-bg);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+.auth-select-wrapper select.auth-input{appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:44px;font-weight:600}.auth-select-wrapper:after{content:"";position:absolute;right:16px;top:50%;transform:translateY(-50%);border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid #2563eb;pointer-events:none}
+.toggle-pass-btn{position:absolute;right:9px;background:transparent;border:0;font-size:15px;cursor:pointer;color:var(--text-muted);padding:7px;border-radius:8px;z-index:2}.toggle-pass-btn:hover{background:var(--bg-pill);color:var(--text-main)}
+.auth-session-card{margin:18px 0 20px;padding:12px 14px;border-radius:12px;background:linear-gradient(135deg,rgba(37,99,235,.06),rgba(16,185,129,.05));border:1px solid rgba(37,99,235,.12);display:flex;gap:10px;align-items:flex-start}.auth-session-card .session-icon{font-size:18px}.auth-session-card strong{display:block;font-size:11px;color:var(--text-main);margin-bottom:2px}.auth-session-card span{font-size:10.5px;color:var(--text-muted)}
+.auth-btn{width:100%;padding:14px 20px;border-radius:12px;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;border:none;font-size:14px;font-weight:800;cursor:pointer;margin-top:3px;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 8px 22px rgba(37,99,235,.28);transition:.18s}.auth-btn:hover{transform:translateY(-1px);box-shadow:0 11px 28px rgba(37,99,235,.34)}.auth-btn:disabled{opacity:.65;cursor:not-allowed;transform:none}
+.auth-error-msg{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:10px;color:#dc2626;font-size:11.5px;font-weight:600;padding:10px 12px;margin-top:12px;display:none;text-align:left}
+.auth-compliance-footer{margin-top:18px;padding-top:14px;border-top:1px solid var(--border-color);display:flex;justify-content:space-between;gap:10px;font-size:9.5px;color:var(--text-muted)}
+@media(max-width:520px){.auth-overlay{padding:14px}.auth-card{padding:28px 20px 20px;border-radius:22px}.auth-topline{margin-bottom:22px}.auth-secure-badge{display:none}.auth-welcome h2{font-size:22px}.auth-compliance-footer{flex-direction:column;text-align:center}}
 
 /* TIMELOCK GATE SCREEN */
 .lock-screen{
@@ -843,183 +582,68 @@ body.locked{
   .lock-box { padding: 25px 18px; }
   .lock-box h1 { font-size: 22px; }
 }
-
-/* ===== BOARDROOM UPGRADE ===== */
-.container,.status-bar,.countdown{max-width:1240px}
-.room-telemetry{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.room-id{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:7px 14px;border-radius:999px;font-size:12px;font-weight:600;font-variant-numeric:tabular-nums}
-.rec-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.5);color:#fca5a5;padding:7px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.06em}
-.rec-badge i{width:9px;height:9px;border-radius:50%;background:#ef4444;animation:recBlink 1.1s infinite}
-@keyframes recBlink{0%,100%{opacity:1}50%{opacity:.15}}
-
-.gallery-strip{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 12px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
-.g-tile{flex:0 0 150px;scroll-snap-align:start;background:var(--bg-surface);border:1px solid var(--border-color);border-radius:14px;padding:12px 10px 10px;text-align:center;position:relative}
-.g-tile.host{border-color:var(--accent-blue);box-shadow:0 0 0 2px rgba(37,99,235,.18)}
-.g-tile.me{border-color:#10b981}
-.g-avatar{width:48px;height:48px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px;position:relative}
-.g-tile:not(.more) .g-avatar::after{content:"";position:absolute;right:-1px;bottom:-1px;width:12px;height:12px;border-radius:50%;background:#10b981;border:2px solid var(--bg-surface)}
-.g-tile.host .g-avatar{animation:speak 1.8s infinite}
-@keyframes speak{0%,100%{box-shadow:0 0 0 0 rgba(37,99,235,.5)}50%{box-shadow:0 0 0 7px rgba(37,99,235,0)}}
-.g-name,.g-sub{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.g-name{font-size:12.5px;font-weight:700}
-.g-sub{font-size:10.5px;color:var(--text-muted);font-weight:600;margin-top:2px}
-.g-tile.host .g-sub{color:var(--accent-blue)}
-.g-tile.me .g-sub{color:#10b981}
-.g-mute{position:absolute;top:8px;right:8px;font-size:11px;opacity:.75}
-
-.stage-layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px;align-items:stretch;margin-top:10px}
-.stage-main{min-width:0}
-.video-card{position:relative;aspect-ratio:16/9}
-.video-hud{position:absolute;top:12px;left:12px;z-index:5;pointer-events:none;background:rgba(0,0,0,.55);color:#fff;padding:5px 11px;border-radius:8px;font-size:11px;font-weight:700;letter-spacing:.03em;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
-.stage-main .stats{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
-.stage-main .stat-value{font-variant-numeric:tabular-nums}
-.attendee-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,.12);color:#10b981;padding:2px 10px;border-radius:999px}
-
-.chat-wrap{position:relative;min-height:480px}
-.chat-panel{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg-surface);border:1px solid var(--border-color);border-radius:16px;overflow:hidden}
-.chat-head{padding:12px 16px;border-bottom:1px solid var(--border-color);display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px}
-.chat-head small{color:var(--text-muted);font-weight:600;font-size:11.5px}
-.chat-messages{flex:1;min-height:0;overflow-y:auto;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
-.msg{font-size:13px;line-height:1.45;animation:msgIn .25s ease;word-break:break-word}
-@keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.msg-meta{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:2px}
-.msg-name{color:var(--text-main);font-weight:700;font-size:12px}
-.badge-host,.badge-you{color:#fff;padding:1px 8px;border-radius:999px;font-size:10.5px;font-weight:700}
-.badge-host{background:#2563eb}
-.badge-you{background:linear-gradient(135deg,#10b981,#059669)}
-.msg.you .msg-text{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:10px;padding:6px 10px;display:inline-block}
-.chat-form{display:flex;gap:8px;padding:10px;border-top:1px solid var(--border-color)}
-.chat-form input{flex:1;min-width:0;padding:10px 12px;border-radius:10px;border:1.5px solid var(--auth-input-border);background:var(--auth-input-bg);color:var(--auth-input-color);font:inherit;font-size:13.5px;outline:none}
-.chat-form input:focus{border-color:var(--accent-blue)}
-.chat-form button{border:none;border-radius:10px;padding:0 18px;background:#2563eb;color:#fff;font-weight:700;cursor:pointer}
-
-.toast-stack{position:fixed;left:16px;bottom:16px;z-index:9000;display:flex;flex-direction:column;gap:8px;pointer-events:none;max-width:calc(100% - 32px)}
-.toast{background:var(--bg-surface-elevated);color:var(--text-main);border:1px solid var(--border-color);border-left:4px solid #10b981;padding:10px 14px;border-radius:10px;font-size:12.5px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.2);animation:toastIn .35s ease}
-.toast.out{opacity:0;transform:translateX(-12px);transition:opacity .4s,transform .4s}
-@keyframes toastIn{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:none}}
-
-@media(max-width:900px){
-  .stage-layout{grid-template-columns:1fr}
-  .chat-wrap{min-height:0;height:420px}
-}
-@media(max-width:768px){
-  .room-telemetry{justify-content:center;width:100%}
-  .g-tile{flex-basis:128px}
-  .video-hud{font-size:10px;top:8px;left:8px}
-  .chat-form input{font-size:16px}
-}
-
-/* ===== PROFESSIONAL LOCK SCREEN ===== */
-.lock-screen{background:radial-gradient(circle at 50% 0%,#1e3a8a 0%,#0f172a 62%);overflow-y:auto}
-.lock-box{max-width:520px;width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:26px;padding:38px 30px 30px;position:relative;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.lock-box::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#38bdf8,#6366f1,#10b981);border-radius:26px 26px 0 0}
-.lock-eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#94a3b8;margin-bottom:6px}
-.lock-welcome{font-size:14px;color:#93c5fd;font-weight:600;margin-bottom:10px}
-.lock-box h1{color:#fff;font-size:26px}
-#startCountdown{font-size:14px;margin-top:24px}
-.seg-clock{display:flex;justify-content:center;gap:10px}
-.seg{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px 0 8px;width:88px}
-.seg b{display:block;font-size:32px;font-weight:800;color:#fff;font-variant-numeric:tabular-nums}
-.seg small{font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8}
-.lock-checks{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:24px}
-.lock-checks span{font-size:11.5px;font-weight:600;color:#cbd5e1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:5px 12px;border-radius:999px}
-.lock-foot{margin-top:16px;font-size:12px;color:#94a3b8;line-height:1.6}
-@media(max-width:480px){.seg{width:30%}.seg b{font-size:26px}.lock-box{padding:30px 18px 24px}}
-
-/* ===== WAITING ROOM + AUTOPLAY HELPERS ===== */
-.waiting-room{position:absolute;inset:0;z-index:4;display:none;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px;text-align:center;color:#fff;background:radial-gradient(circle at 50% 15%,#1e3a8a 0%,#0f172a 72%)}
-.wr-logo{width:54px;height:54px;background:#fff;border-radius:14px;padding:6px;box-shadow:0 6px 18px rgba(0,0,0,.3)}
-.wr-logo img{width:100%;height:100%;object-fit:contain;display:block}
-.wr-title{font-size:18px;font-weight:800}
-.wr-sub{font-size:12.5px;color:#cbd5e1;max-width:420px}
-.wr-clock{font-size:46px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:1px;color:#fbbf24;line-height:1.1}
-.wr-label{font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:#94a3b8;font-weight:700}
-.wr-checks{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;font-size:11px;font-weight:600;margin-top:4px}
-.wr-checks span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:4px 10px;border-radius:999px}
-@media(max-width:600px){.wr-sub,.wr-checks{display:none}.wr-title{font-size:14px}.wr-clock{font-size:32px}.wr-logo{width:40px;height:40px}}
-.g-tile.away .g-avatar{animation:none;opacity:.5;filter:grayscale(1)}
-.g-tile.away .g-avatar::after{background:#f59e0b}
-.unmute-hint{position:absolute;bottom:58px;left:50%;transform:translateX(-50%);z-index:6;display:none;border:none;cursor:pointer;background:#2563eb;color:#fff;font-weight:700;font-size:13px;padding:9px 18px;border-radius:999px;box-shadow:0 6px 20px rgba(0,0,0,.4)}
 </style>
-<script src="https://assets.mediadelivery.net/playerjs/player-0.1.0.min.js"></script>
 </head>
 
 <body>
 
-<!-- THEME-ADAPTIVE CORPORATE CANDIDATE LOGIN INTERFACE -->
+<!-- PREMIUM ENTERPRISE CANDIDATE LOGIN -->
 <div id="authOverlay" class="auth-overlay">
   <div class="auth-card">
-    
-    <!-- White Elevated Crisp Logo Badge -->
-    <div class="auth-logo-badge">
-      <img src="https://lh3.googleusercontent.com/d/1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N" alt="TARA Official Logo" onerror="this.src='https://drive.google.com/thumbnail?id=1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N&sz=w200'">
-    </div>
-
-    <!-- Title & Department -->
-    <div class="auth-header-title"><span>TARA</span> TALENT SOLUTIONS</div>
-    <div class="auth-dept-tag">Executive Induction Portal</div>
-
-    <!-- Security Indicator -->
-    <div class="auth-security-pill">
-      <span class="sec-dot"></span> Single-Device Induction Protocol
-    </div>
-    
-    <!-- Field 1: Candidate Identifier -->
-    <div class="auth-input-group">
-      <div class="auth-label-row">
-        <label>Enter Registered Identifier</label>
-        <span class="auth-hint">Mobile or Email</span>
+    <div class="auth-topline">
+      <div class="auth-logo-badge">
+        <img src="https://lh3.googleusercontent.com/d/1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N" alt="TARA Official Logo" onerror="this.src='https://drive.google.com/thumbnail?id=1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N&sz=w200'">
       </div>
+      <div class="auth-brand-copy">
+        <div class="auth-brand-name"><span>TARA</span> TALENT SOLUTIONS</div>
+        <div class="auth-dept-tag">Executive Induction Portal</div>
+      </div>
+      <div class="auth-secure-badge"><i></i> SECURE</div>
+    </div>
+
+    <div class="auth-welcome">
+      <h2>Welcome to your induction</h2>
+      <p>Verify your registered details to securely enter the assigned training workspace.</p>
+    </div>
+
+    <div class="auth-input-group">
+      <div class="auth-label-row"><label>Registered Identifier</label><span class="auth-hint">Mobile / Email</span></div>
       <div class="auth-input-box">
         <span class="input-icon">📱</span>
-        <input type="text" id="authIdentifier" class="auth-input" placeholder="e.g. 9876543210 or yourname@gmail.com" autocomplete="username" autofocus>
+        <input type="text" id="authIdentifier" class="auth-input" placeholder="Enter your registered mobile or email" autocomplete="username" autofocus>
       </div>
     </div>
 
-    <!-- Field 2: Interactive Session Dropdown -->
     <div class="auth-input-group">
-      <div class="auth-label-row">
-        <label>Select Your Session</label>
-        <span class="auth-hint">Click to Choose ▾</span>
-      </div>
+      <div class="auth-label-row"><label>Training Session</label><span class="auth-hint">Select module</span></div>
       <div class="auth-select-wrapper auth-input-box">
         <span class="input-icon">🗓️</span>
         <select id="authSessionChoice" class="auth-input" onchange="togglePasscodeVisibility()">
-          <option value="1">Day 1: Foundation (01:00 PM – 04:00 PM)</option>
-          <option value="2">Day 2: Clarification (02:00 PM – 05:00 PM)</option>
-          <option value="3">Day 3: Execution (03:00 PM – 06:00 PM)</option>
+          <option value="1">Day 1 · Foundation (01:00 PM – 04:00 PM)</option>
+          <option value="2">Day 2 · Clarification (02:00 PM – 05:00 PM)</option>
+          <option value="3">Day 3 · Execution (03:00 PM – 06:00 PM)</option>
         </select>
       </div>
     </div>
 
-    <!-- Field 3: Dynamic Passcode Input (With Eye Toggle Button) -->
-    <div class="auth-input-group" id="passcodeBlock" style="display: none;">
-      <div class="auth-label-row">
-        <label id="passcodeLabel">Session Security Passcode</label>
-        <span class="auth-hint">Check Accuracy</span>
-      </div>
+    <div class="auth-input-group" id="passcodeBlock" style="display:none;">
+      <div class="auth-label-row"><label id="passcodeLabel">Session Security Passcode</label><span class="auth-hint">Required</span></div>
       <div class="auth-input-box">
         <span class="input-icon">🔑</span>
-        <input type="password" id="authPasscode" class="auth-input" placeholder="Enter session unlock passcode" autocomplete="current-password" style="padding-right: 44px;">
-        <button type="button" id="togglePassBtn" class="toggle-pass-btn" onclick="togglePasscodeVisibilityField()" title="Show/Hide Passcode">
-          👁️
-        </button>
+        <input type="password" id="authPasscode" class="auth-input" placeholder="Enter session unlock passcode" autocomplete="current-password" style="padding-right:44px;">
+        <button type="button" id="togglePassBtn" class="toggle-pass-btn" onclick="togglePasscodeVisibilityField()" title="Show/Hide Passcode">👁️</button>
       </div>
     </div>
 
-    <!-- Submit Action Button -->
-    <button type="button" id="authSubmitBtn" class="auth-btn" onclick="verifyCandidateAuthentication()">
-      <span>Verify & Start Session</span> ➔
-    </button>
+    <div class="auth-session-card">
+      <div class="session-icon">🔐</div>
+      <div><strong>Single-device training protocol</strong><span>Your session is protected by live attendance and device verification.</span></div>
+    </div>
 
-    <!-- Error Alert Box -->
+    <button type="button" id="authSubmitBtn" class="auth-btn" onclick="verifyCandidateAuthentication()"><span>Verify & Start Session</span> ➜</button>
     <div id="authError" class="auth-error-msg"></div>
 
-    <!-- Corporate Footer -->
-    <div class="auth-compliance-footer">
-      <span>🔒 Official Training & Attendance Protocol</span>
-      <span>TARA Talent Solutions • Induction Directorate</span>
-    </div>
+    <div class="auth-compliance-footer"><span>🔒 Official Training & Attendance Protocol</span><span>TARA Talent Solutions • Induction Directorate</span></div>
   </div>
 </div>
 
@@ -1029,18 +653,10 @@ body.locked{
     <div class="lock-logo-wrapper">
       <img src="https://lh3.googleusercontent.com/d/1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N" alt="TARA Logo" onerror="this.src='https://drive.google.com/thumbnail?id=1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N&sz=w200'">
     </div>
-    <div class="lock-eyebrow">TARA Talent Solutions • Induction Directorate</div>
-    <div class="lock-welcome" id="lockWelcome"></div>
     <h1 id="lockTitle">⏳ Session Starts Soon</h1>
     <p id="lockText">Today's induction sequence has not initiated yet.<br><br>Please wait, training workspace opens at its scheduled time.</p>
     <div class="lock-time" id="lockTimeWindow">⏰ Access Timing: Scheduled Slot</div>
     <div id="startCountdown">00:00:00</div>
-    <div class="lock-checks">
-      <span>✔ Identity verified</span>
-      <span>✔ Secure single-device link</span>
-      <span>✔ Attendance will be recorded</span>
-    </div>
-    <div class="lock-foot">Please keep this page open. Your workspace unlocks automatically at the scheduled time.</div>
   </div>
 </div>
 
@@ -1076,10 +692,6 @@ body.locked{
     <div class="brand">🏛 FOUNDATION SESSION</div>
   </div>
   <div class="header-controls">
-    <div class="room-telemetry">
-      <div class="room-id">🔐 Room ID: 942-8812-TTS</div>
-      <div class="rec-badge"><i></i>REC</div>
-    </div>
     <div class="batch" id="headerModuleTag">Professional Development Program • Day 1 of 3</div>
     <button class="theme-switch" id="themeToggle">🌓 Mode: Auto</button>
   </div>
@@ -1114,62 +726,25 @@ body.locked{
     </div>
   </div>
 
-  <!-- PARTICIPANT GALLERY -->
-  <div class="gallery-strip" id="galleryStrip" aria-label="Meeting participants"></div>
+  <!-- VIDEO EMBED AREA -->
+  <div class="video-card">
+    <div id="videoContainer"></div>
+  </div>
 
-  <div class="stage-layout">
-    <div class="stage-main">
-      <!-- VIDEO EMBED AREA -->
-      <div class="video-card">
-        <div class="video-hud" id="videoHud">🔴 LIVE WebRTC STREAM • 1080P HD</div>
-        <div id="videoContainer"></div>
-        <button type="button" class="unmute-hint" id="unmuteHint">🔊 Tap to unmute</button>
-        <div class="waiting-room" id="waitingRoom">
-          <div class="wr-logo"><img src="https://lh3.googleusercontent.com/d/1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N" alt="TARA Logo" onerror="this.src='https://drive.google.com/thumbnail?id=1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N&sz=w200'"></div>
-          <div class="wr-title" id="wrTitle">Waiting for the host to start the session</div>
-          <div class="wr-sub">Please stay on this page. Your session begins automatically, no action needed.</div>
-          <div class="wr-label">Session starts in</div>
-          <div class="wr-clock" id="wrClock">--:--</div>
-          <div class="wr-checks"><span>✔ Identity verified</span><span>✔ Audio ready</span><span>✔ Secure single-device link</span></div>
-        </div>
-      </div>
-
-      <!-- LIVE TELEMETRY BAR -->
-      <div class="stats">
-        <div class="stat">
-          <div class="stat-label">Candidate Name</div>
-          <div class="stat-value" id="hudCandidateName" style="color:#2563eb;">--</div>
-        </div>
-        <div class="stat">
-          <div class="stat-label">Verified Stream Timer</div>
-          <div class="stat-value" id="hudStreamClock">00:00</div>
-        </div>
-        <div class="stat">
-          <div class="stat-label">Session Telemetry</div>
-          <div class="stat-value" id="hudWatchTimer" style="color:#10b981; font-size:16px;">Live Stream Engaged</div>
-        </div>
-        <div class="stat">
-          <div class="stat-label">Training Status</div>
-          <div class="stat-value" id="trainingStatus">Checking...</div>
-        </div>
-        <div class="stat">
-          <div class="stat-label">Active Attendees</div>
-          <div class="stat-value"><span class="attendee-badge">🟢 <span id="hudAttendees">--</span></span></div>
-        </div>
-      </div>
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-label">Candidate Name</div>
+      <div class="stat-value" id="hudCandidateName" style="color:#2563eb;">--</div>
     </div>
-
-    <!-- LIVE Q&A / CHAT -->
-    <aside class="chat-wrap">
-      <div class="chat-panel">
-        <div class="chat-head"><span>💬 Live Q&amp;A / Chat</span><small id="chatCount">Room chat</small></div>
-        <div class="chat-messages" id="chatMessages" aria-live="polite"></div>
-        <div class="chat-form">
-          <input type="text" id="chatInput" maxlength="200" placeholder="Type a message…" autocomplete="off">
-          <button type="button" id="chatSendBtn">Send</button>
-        </div>
-      </div>
-    </aside>
+    <div class="stat">
+      <div class="stat-label">Session Telemetry</div>
+      <div class="stat-value" id="hudWatchTimer" style="color:#10b981; font-size:16px;">Live Stream Engaged</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Training Status</div>
+      <div class="stat-value" id="trainingStatus">Checking...</div>
+    </div>
   </div>
 
   <!-- INSTRUCTIONS -->
@@ -1191,8 +766,6 @@ body.locked{
 
 <div class="footer">Professional Training Hub • Access Controlled • Batch Monitored</div>
 
-<div class="toast-stack" id="toastStack"></div>
-
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbw79wnaUmMkr4DIHjbInzMTYHvqp5CcPIXrRukvA1kAD2bFgjq9NmDtvqDNvxsE_DrAeg/exec";
 
@@ -1202,9 +775,6 @@ const SESSION_CONFIG = {
   2: { name: "Clarification Session", start: 14, end: 17, timeStr: "02:00 PM – 05:00 PM Daily", progress: "66%", streamKey: "day2_v2", baseViewers: 36, maxViewers: 62 },
   3: { name: "Execution Session", start: 15, end: 18, timeStr: "03:00 PM – 06:00 PM Daily", progress: "100%", streamKey: "day3_v2", baseViewers: 25, maxViewers: 46 }
 };
-
-// TESTING MODE: true = hour-based time-lock bypassed (video loads instantly after login). Set false for production.
-const TESTING_MODE = true;
 
 let activeSession = 1;
 let currentCandidate = null;
@@ -1320,7 +890,6 @@ async function verifyCandidateAuthentication() {
       currentSessionToken = result.sessionToken;
       
       document.getElementById("hudCandidateName").innerText = currentCandidate.name;
-      document.getElementById("lockWelcome").innerText = `Welcome, ${currentCandidate.name}`;
       document.querySelector(".brand").innerText = `🏛 ${SESSION_CONFIG[activeSession].name.toUpperCase()}`;
       document.getElementById("headerModuleTag").innerText = `Professional Development Program • Day ${activeSession} of 3`;
       document.getElementById("progressModuleTitle").innerHTML = `<b>📘 Core Onboarding Phase • Module ${activeSession}</b>`;
@@ -1331,6 +900,7 @@ async function verifyCandidateAuthentication() {
       document.getElementById("authOverlay").style.display = "none";
       
       evaluateTimeLockEngine();
+      initWatchTracker();
       startHeartbeatCheck();
       enableReloadProtection();
       updateViewers();
@@ -1350,17 +920,6 @@ async function verifyCandidateAuthentication() {
 /* PRODUCTION TIMELOCK ENGINE */
 function evaluateTimeLockEngine() {
   if (!currentCandidate) return;
-  if (TESTING_MODE) {
-    const tc = SESSION_CONFIG[activeSession];
-    document.getElementById("lockScreen").style.display = "none";
-    document.body.classList.remove("locked");
-    document.getElementById("topCountdown").innerHTML = `🟢 Onboarding Window Operational (${tc.timeStr})`;
-    document.getElementById("trainingStatus").innerText = sessionLive ? "ACTIVE" : "Waiting Room";
-    document.getElementById("liveStatus").innerText = sessionLive ? `${tc.name} Active` : `${tc.name} • Waiting for Host`;
-    document.getElementById("statusDot").style.background = sessionLive ? "#10b981" : "#ffbc00";
-    startBoardroomExperience();
-    return;
-  }
   const now = new Date();
   const hour = now.getHours();
   const cfg = SESSION_CONFIG[activeSession];
@@ -1380,7 +939,6 @@ function evaluateTimeLockEngine() {
     if (liveStatus) liveStatus.innerText = `${cfg.name} Active`;
     if (statusDot) statusDot.style.background = "#10b981";
 
-    startBoardroomExperience();
     if (!isVideoLoaded) loadSecureBunnyStream(cfg.streamKey);
   } else if (hour < cfg.start) {
     document.body.classList.add("locked");
@@ -1403,7 +961,8 @@ function evaluateTimeLockEngine() {
     const m = Math.floor((diff / 60000) % 60);
     const s = Math.floor((diff / 1000) % 60);
 
-    renderSegClock(h, m, s);
+    document.getElementById("startCountdown").innerHTML =
+      `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
   } else {
     document.body.classList.add("locked");
     lockScreen.style.display = "flex";
@@ -1493,8 +1052,6 @@ function updateWatchTimerUI() {
   const btn = document.getElementById("completeSessionBtn");
   const alertBadge = document.getElementById("retentionBadge");
   const remaining = Math.max(0, requiredSeconds - secondsWatched);
-  const clockEl = document.getElementById("hudStreamClock");
-  if (clockEl) clockEl.innerText = formatSecs(secondsWatched);
 
   if (remaining > 0 && remaining <= 900) {
     alertBadge.style.display = "flex";
@@ -1588,12 +1145,11 @@ function closeCertModal() {
 }
 
 function loadSecureBunnyStream(streamKey) {
-  if (!sessionLive) return;
   isVideoLoaded = true;
   fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
   .then(r => r.json())
   .then(data => {
-    mountStream(data[streamKey]);
+    document.getElementById("videoContainer").innerHTML = data[streamKey];
   })
   .catch(err => {
     console.error(err);
@@ -1632,279 +1188,7 @@ function updateViewers(){
   
   const viewerTarget = document.getElementById("viewerCount");
   if (viewerTarget) viewerTarget.innerText = currentViewers;
-  const att = document.getElementById("hudAttendees");
-  if (att) att.innerText = currentViewers;
-  const more = document.getElementById("galleryMore");
-  if (more) more.innerText = `+${Math.max(0, currentViewers - 6)}`;
-  const cc = document.getElementById("chatCount");
-  if (cc) cc.innerText = `${currentViewers} online`;
 }
-
-/* BOARDROOM EXPERIENCE: GALLERY, LIVE CHAT, JOIN TOASTS */
-const rand = (a, b) => a + Math.random() * (b - a);
-const pick = arr => arr[Math.floor(Math.random() * arr.length)];
-
-const GALLERY = [
-  { name: "Lead Instructor (Host)", sub: "🎙️ Presenting", cls: "host", ini: "LI", color: "linear-gradient(135deg,#2563eb,#4f46e5)", host: true },
-  { name: "You (Verified)", sub: "✔ Verified", cls: "me", ini: "ME", color: "linear-gradient(135deg,#10b981,#059669)", avId: "galleryMeAvatar", subId: "galleryMeSub" },
-  { name: "Pooja S.", sub: "Bhopal", ini: "PS", color: "linear-gradient(135deg,#ec4899,#be185d)" },
-  { name: "Rohan M.", sub: "Indore", ini: "RM", color: "linear-gradient(135deg,#f59e0b,#d97706)" },
-  { name: "Neha K.", sub: "Ujjain", ini: "NK", color: "linear-gradient(135deg,#8b5cf6,#6d28d9)" },
-  { name: "Amit T.", sub: "Jabalpur", ini: "AT", color: "linear-gradient(135deg,#06b6d4,#0e7490)" },
-  { name: "Others", sub: "in the room", cls: "more", ini: "+0", color: "#64748b", avId: "galleryMore" }
-];
-
-function renderGallery() {
-  const strip = document.getElementById("galleryStrip");
-  strip.innerHTML = "";
-  GALLERY.forEach(t => {
-    const tile = document.createElement("div");
-    tile.className = "g-tile " + (t.cls || "");
-    if (!t.host && t.cls !== "more") {
-      const mute = document.createElement("span");
-      mute.className = "g-mute"; mute.textContent = "🔇"; mute.title = "Muted";
-      tile.appendChild(mute);
-    }
-    const av = document.createElement("div");
-    av.className = "g-avatar"; av.style.background = t.color; av.textContent = t.ini;
-    if (t.avId) av.id = t.avId;
-    const nm = document.createElement("div");
-    nm.className = "g-name"; nm.textContent = t.name;
-    const sb = document.createElement("div");
-    sb.className = "g-sub"; sb.textContent = t.sub;
-    if (t.subId) sb.id = t.subId;
-    tile.append(av, nm, sb);
-    strip.appendChild(tile);
-  });
-  updateViewers();
-}
-
-function refreshMeTile() {
-  if (!currentCandidate) return;
-  const av = document.getElementById("galleryMeAvatar");
-  const sb = document.getElementById("galleryMeSub");
-  const ini = currentCandidate.name.split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join("");
-  if (av) av.textContent = ini || "ME";
-  if (sb) sb.textContent = "✔ " + currentCandidate.name;
-}
-
-const CHAT_PEERS = ["Pooja S.", "Rohan M.", "Neha K.", "Amit T.", "Sneha R.", "Vikram P.", "Anjali D.", "Karan J."];
-const CHAT_LINES = [
-  "Notes completed sir", "Audio & slides are 100% clear", "Understood execution model",
-  "Video quality is perfect, no buffering", "Got it, thank you sir", "Clear explanation, taking notes",
-  "Everything is visible clearly", "Understood the onboarding steps", "Flow is well explained sir"
-];
-const HOST_LINES = [
-  "Welcome everyone. Please keep your notes ready.",
-  "Stay till the end; the verification code appears inside the session.",
-  "Feel free to post your questions in the chat."
-];
-const JOIN_POOL = [
-  ["Pooja Malviya", "Bhopal"], ["Rohan Mishra", "Indore"], ["Sneha Rathore", "Ujjain"], ["Amit Tiwari", "Jabalpur"],
-  ["Karan Jain", "Dewas"], ["Anjali Dubey", "Gwalior"], ["Vikram Patel", "Ratlam"], ["Neha Khare", "Sagar"]
-];
-
-function addChatMessage(m) {
-  const box = document.getElementById("chatMessages");
-  const nearBottom = box.scrollHeight - box.scrollTop - box.clientHeight < 60;
-  const el = document.createElement("div");
-  el.className = "msg" + (m.you ? " you" : "");
-  const meta = document.createElement("div");
-  meta.className = "msg-meta";
-  if (m.you) {
-    const b = document.createElement("span");
-    b.className = "badge-you"; b.textContent = `${m.name} (You)`;
-    meta.appendChild(b);
-  } else {
-    const n = document.createElement("span");
-    n.className = "msg-name"; n.textContent = m.name;
-    meta.appendChild(n);
-    if (m.host) {
-      const b = document.createElement("span");
-      b.className = "badge-host"; b.textContent = "Host";
-      meta.appendChild(b);
-    }
-  }
-  const tm = document.createElement("span");
-  tm.textContent = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-  meta.appendChild(tm);
-  const tx = document.createElement("div");
-  tx.className = "msg-text"; tx.textContent = m.text;
-  el.append(meta, tx);
-  box.appendChild(el);
-  while (box.children.length > 80) box.firstChild.remove();
-  if (nearBottom || m.you) box.scrollTop = box.scrollHeight;
-}
-
-function sendChatMessage() {
-  const inp = document.getElementById("chatInput");
-  const text = inp.value.trim();
-  if (!text || !currentCandidate) return;
-  addChatMessage({ name: currentCandidate.name, text: text, you: true });
-  inp.value = "";
-  inp.focus();
-}
-document.getElementById("chatSendBtn").addEventListener("click", sendChatMessage);
-document.getElementById("chatInput").addEventListener("keydown", e => {
-  if (e.key === "Enter") { e.preventDefault(); sendChatMessage(); }
-});
-
-let lastChatLine = "";
-function scheduleChatSim() {
-  setTimeout(() => {
-    const host = Math.random() < 0.15;
-    const pool = host ? HOST_LINES : CHAT_LINES;
-    let line;
-    do { line = pick(pool); } while (line === lastChatLine && pool.length > 1);
-    lastChatLine = line;
-    addChatMessage({ name: host ? "Lead Instructor" : pick(CHAT_PEERS), text: line, host: host });
-    scheduleChatSim();
-  }, rand(20000, 30000));
-}
-
-function showToast(text) {
-  const stack = document.getElementById("toastStack");
-  const t = document.createElement("div");
-  t.className = "toast"; t.textContent = text;
-  stack.appendChild(t);
-  while (stack.children.length > 3) stack.firstChild.remove();
-  setTimeout(() => { t.classList.add("out"); setTimeout(() => t.remove(), 450); }, 5000);
-}
-
-function scheduleJoinToast(first) {
-  setTimeout(() => {
-    const p = pick(JOIN_POOL);
-    showToast(`🟢 ${p[0]} (${p[1]}) joined the live boardroom`);
-    scheduleJoinToast(false);
-  }, first ? 8000 : rand(20000, 35000));
-}
-
-let boardroomStarted = false, sessionLive = false, waitTimer = null, videoEnded = false;
-const QUICK = /[?&]quick=1/.test(location.search); // ?quick=1 => 10s waiting room (testing)
-const greet = () => { const h = new Date().getHours(); return h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening"; };
-let peerCursor = Math.floor(Math.random() * CHAT_PEERS.length);
-const nextPeer = () => CHAT_PEERS[(peerCursor++) % CHAT_PEERS.length];
-
-function renderSegClock(h, m, s) {
-  const p = n => String(n).padStart(2, "0");
-  document.getElementById("startCountdown").innerHTML =
-    `<div class="seg-clock"><span class="seg"><b>${p(h)}</b><small>hrs</small></span><span class="seg"><b>${p(m)}</b><small>min</small></span><span class="seg"><b>${p(s)}</b><small>sec</small></span></div>`;
-}
-
-function setHud(t) { document.getElementById("videoHud").textContent = t; }
-
-function setHostState(joined) {
-  const t = document.querySelector(".g-tile.host");
-  if (!t) return;
-  t.classList.toggle("away", !joined);
-  t.querySelector(".g-sub").textContent = joined ? "🎙️ Presenting" : "⏳ Joining soon";
-}
-
-// Pre-start chatter: [seconds from start (negative = before end), text]
-const PRE_START = [
-  [2, () => "Hello everyone 👋"],
-  [8, () => `${greet()} everyone`],
-  [20, () => "Host abhi join nahi hue kya?"],
-  [38, () => "Session kab start hoga?"],
-  [58, () => "Meri audio check ho gayi, sab theek hai"],
-  [80, () => "Where is the host? Koi update mila?"],
-  [105, () => "Lagta hai sab log wait kar rahe hain 😅"],
-  [135, () => "Timer chal raha hai, start hone hi wala hai"],
-  [-50, () => "Almost time, host join hone wale honge"],
-  [-18, () => "I think host is joining now"]
-];
-
-function startBoardroomExperience() {
-  refreshMeTile();
-  if (boardroomStarted) return;
-  boardroomStarted = true;
-  const W = QUICK ? 10 : Math.round(rand(180, 240));
-  const endAt = Date.now() + W * 1000;
-  const wr = document.getElementById("waitingRoom");
-  const clk = document.getElementById("wrClock");
-  const ttl = document.getElementById("wrTitle");
-  wr.style.display = "flex";
-  setHud("🟡 WAITING ROOM • Host joining shortly");
-  setHostState(false);
-  const wt = document.getElementById("hudWatchTimer");
-  wt.innerText = "⏳ Waiting room"; wt.style.color = "#f59e0b";
-
-  const tick = () => {
-    const left = Math.max(0, Math.ceil((endAt - Date.now()) / 1000));
-    clk.innerText = formatSecs(left);
-    ttl.innerText = left <= 45 ? "Host is joining. Starting shortly" : "Waiting for the host to start the session";
-    if (left <= 0) beginSession();
-  };
-  tick();
-  waitTimer = setInterval(tick, 500);
-
-  PRE_START.forEach(([t, fn]) => {
-    const at = t < 0 ? W + t : t;
-    if (at < 1 || at > W - 3) return;
-    setTimeout(() => { if (!sessionLive) addChatMessage({ name: nextPeer(), text: fn() }); }, at * 1000);
-  });
-  scheduleJoinToast(true);
-}
-
-function beginSession() {
-  if (sessionLive) return;
-  sessionLive = true;
-  clearInterval(waitTimer);
-  document.getElementById("waitingRoom").style.display = "none";
-  setHud("🔴 LIVE WebRTC STREAM • 1080P HD");
-  setHostState(true);
-  showToast("🎙️ Lead Instructor joined and started the session");
-  addChatMessage({ name: "Lead Instructor", text: `${greet()} everyone, welcome to the session. Can everyone hear me clearly?`, host: true });
-  setTimeout(() => addChatMessage({ name: nextPeer(), text: "Yes sir, audio clear 👍" }), 5000);
-  setTimeout(() => addChatMessage({ name: nextPeer(), text: "Slides bhi clear dikh rahi hain" }), 9500);
-  setTimeout(() => addChatMessage({ name: nextPeer(), text: `${greet()} sir 🙏` }), 14000);
-  loadSecureBunnyStream(SESSION_CONFIG[activeSession].streamKey);
-  initWatchTracker();
-  scheduleChatSim();
-}
-
-/* AUTO-START STREAM (no play button) + RESUME-ON-PAUSE GUARD */
-function mountStream(html) {
-  const box = document.getElementById("videoContainer");
-  const tpl = document.createElement("template");
-  tpl.innerHTML = html;
-  const f = tpl.content.querySelector("iframe");
-  if (f) {
-    let s = f.getAttribute("src") || "";
-    if (!/[?&]autoplay=/.test(s)) s += (s.includes("?") ? "&" : "?") + "autoplay=true&preload=true&playsinline=true";
-    f.setAttribute("src", s);
-    const allow = f.getAttribute("allow") || "";
-    if (!/autoplay/.test(allow)) f.setAttribute("allow", ("autoplay; " + allow).trim());
-  }
-  box.innerHTML = "";
-  box.appendChild(tpl.content);
-  if (f) attachAutoplayGuard(f);
-}
-
-function attachAutoplayGuard(iframe) {
-  if (!window.playerjs) return;
-  try {
-    const player = new playerjs.Player(iframe);
-    player.on("ready", () => {
-      player.play();
-      setTimeout(() => {
-        player.getPaused(paused => {
-          if (paused) { player.mute(); player.play(); showUnmuteHint(player); }
-        });
-      }, 2500);
-    });
-    player.on("pause", () => { if (!isSessionCompleted && !videoEnded) setTimeout(() => player.play(), 250); });
-    player.on("ended", () => { videoEnded = true; });
-  } catch (e) { console.error(e); }
-}
-
-function showUnmuteHint(player) {
-  const b = document.getElementById("unmuteHint");
-  b.style.display = "block";
-  b.onclick = () => { try { player.unmute(); } catch (e) {} b.style.display = "none"; };
-}
-
-renderGallery();
 
 updateViewers();
 setInterval(updateViewers, 5000);
