@@ -908,7 +908,40 @@ body.locked{
   .video-hud{font-size:10px;top:8px;left:8px}
   .chat-form input{font-size:16px}
 }
+
+/* ===== PROFESSIONAL LOCK SCREEN ===== */
+.lock-screen{background:radial-gradient(circle at 50% 0%,#1e3a8a 0%,#0f172a 62%);overflow-y:auto}
+.lock-box{max-width:520px;width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:26px;padding:38px 30px 30px;position:relative;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.lock-box::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#38bdf8,#6366f1,#10b981);border-radius:26px 26px 0 0}
+.lock-eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#94a3b8;margin-bottom:6px}
+.lock-welcome{font-size:14px;color:#93c5fd;font-weight:600;margin-bottom:10px}
+.lock-box h1{color:#fff;font-size:26px}
+#startCountdown{font-size:14px;margin-top:24px}
+.seg-clock{display:flex;justify-content:center;gap:10px}
+.seg{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px 0 8px;width:88px}
+.seg b{display:block;font-size:32px;font-weight:800;color:#fff;font-variant-numeric:tabular-nums}
+.seg small{font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8}
+.lock-checks{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:24px}
+.lock-checks span{font-size:11.5px;font-weight:600;color:#cbd5e1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:5px 12px;border-radius:999px}
+.lock-foot{margin-top:16px;font-size:12px;color:#94a3b8;line-height:1.6}
+@media(max-width:480px){.seg{width:30%}.seg b{font-size:26px}.lock-box{padding:30px 18px 24px}}
+
+/* ===== WAITING ROOM + AUTOPLAY HELPERS ===== */
+.waiting-room{position:absolute;inset:0;z-index:4;display:none;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px;text-align:center;color:#fff;background:radial-gradient(circle at 50% 15%,#1e3a8a 0%,#0f172a 72%)}
+.wr-logo{width:54px;height:54px;background:#fff;border-radius:14px;padding:6px;box-shadow:0 6px 18px rgba(0,0,0,.3)}
+.wr-logo img{width:100%;height:100%;object-fit:contain;display:block}
+.wr-title{font-size:18px;font-weight:800}
+.wr-sub{font-size:12.5px;color:#cbd5e1;max-width:420px}
+.wr-clock{font-size:46px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:1px;color:#fbbf24;line-height:1.1}
+.wr-label{font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:#94a3b8;font-weight:700}
+.wr-checks{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;font-size:11px;font-weight:600;margin-top:4px}
+.wr-checks span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:4px 10px;border-radius:999px}
+@media(max-width:600px){.wr-sub,.wr-checks{display:none}.wr-title{font-size:14px}.wr-clock{font-size:32px}.wr-logo{width:40px;height:40px}}
+.g-tile.away .g-avatar{animation:none;opacity:.5;filter:grayscale(1)}
+.g-tile.away .g-avatar::after{background:#f59e0b}
+.unmute-hint{position:absolute;bottom:58px;left:50%;transform:translateX(-50%);z-index:6;display:none;border:none;cursor:pointer;background:#2563eb;color:#fff;font-weight:700;font-size:13px;padding:9px 18px;border-radius:999px;box-shadow:0 6px 20px rgba(0,0,0,.4)}
 </style>
+<script src="https://assets.mediadelivery.net/playerjs/player-0.1.0.min.js"></script>
 </head>
 
 <body>
@@ -996,10 +1029,18 @@ body.locked{
     <div class="lock-logo-wrapper">
       <img src="https://lh3.googleusercontent.com/d/1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N" alt="TARA Logo" onerror="this.src='https://drive.google.com/thumbnail?id=1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N&sz=w200'">
     </div>
+    <div class="lock-eyebrow">TARA Talent Solutions • Induction Directorate</div>
+    <div class="lock-welcome" id="lockWelcome"></div>
     <h1 id="lockTitle">⏳ Session Starts Soon</h1>
     <p id="lockText">Today's induction sequence has not initiated yet.<br><br>Please wait, training workspace opens at its scheduled time.</p>
     <div class="lock-time" id="lockTimeWindow">⏰ Access Timing: Scheduled Slot</div>
     <div id="startCountdown">00:00:00</div>
+    <div class="lock-checks">
+      <span>✔ Identity verified</span>
+      <span>✔ Secure single-device link</span>
+      <span>✔ Attendance will be recorded</span>
+    </div>
+    <div class="lock-foot">Please keep this page open. Your workspace unlocks automatically at the scheduled time.</div>
   </div>
 </div>
 
@@ -1080,8 +1121,17 @@ body.locked{
     <div class="stage-main">
       <!-- VIDEO EMBED AREA -->
       <div class="video-card">
-        <div class="video-hud">🔴 LIVE WebRTC STREAM • 1080P HD</div>
+        <div class="video-hud" id="videoHud">🔴 LIVE WebRTC STREAM • 1080P HD</div>
         <div id="videoContainer"></div>
+        <button type="button" class="unmute-hint" id="unmuteHint">🔊 Tap to unmute</button>
+        <div class="waiting-room" id="waitingRoom">
+          <div class="wr-logo"><img src="https://lh3.googleusercontent.com/d/1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N" alt="TARA Logo" onerror="this.src='https://drive.google.com/thumbnail?id=1gAwBqDUpuhKTTrRKgl-DozInsUQPip6N&sz=w200'"></div>
+          <div class="wr-title" id="wrTitle">Waiting for the host to start the session</div>
+          <div class="wr-sub">Please stay on this page. Your session begins automatically, no action needed.</div>
+          <div class="wr-label">Session starts in</div>
+          <div class="wr-clock" id="wrClock">--:--</div>
+          <div class="wr-checks"><span>✔ Identity verified</span><span>✔ Audio ready</span><span>✔ Secure single-device link</span></div>
+        </div>
       </div>
 
       <!-- LIVE TELEMETRY BAR -->
@@ -1270,6 +1320,7 @@ async function verifyCandidateAuthentication() {
       currentSessionToken = result.sessionToken;
       
       document.getElementById("hudCandidateName").innerText = currentCandidate.name;
+      document.getElementById("lockWelcome").innerText = `Welcome, ${currentCandidate.name}`;
       document.querySelector(".brand").innerText = `🏛 ${SESSION_CONFIG[activeSession].name.toUpperCase()}`;
       document.getElementById("headerModuleTag").innerText = `Professional Development Program • Day ${activeSession} of 3`;
       document.getElementById("progressModuleTitle").innerHTML = `<b>📘 Core Onboarding Phase • Module ${activeSession}</b>`;
@@ -1280,11 +1331,9 @@ async function verifyCandidateAuthentication() {
       document.getElementById("authOverlay").style.display = "none";
       
       evaluateTimeLockEngine();
-      initWatchTracker();
       startHeartbeatCheck();
       enableReloadProtection();
       updateViewers();
-      startBoardroomExperience();
     } else {
       errorElement.innerText = result.message || "Access denied. Candidate identity not found.";
       errorElement.style.display = "block";
@@ -1305,11 +1354,11 @@ function evaluateTimeLockEngine() {
     const tc = SESSION_CONFIG[activeSession];
     document.getElementById("lockScreen").style.display = "none";
     document.body.classList.remove("locked");
-    document.getElementById("topCountdown").innerHTML = `🧪 Testing Mode: time-lock bypassed (${tc.timeStr})`;
-    document.getElementById("trainingStatus").innerText = "ACTIVE";
-    document.getElementById("liveStatus").innerText = `${tc.name} Active`;
-    document.getElementById("statusDot").style.background = "#10b981";
-    if (!isVideoLoaded) loadSecureBunnyStream(tc.streamKey);
+    document.getElementById("topCountdown").innerHTML = `🟢 Onboarding Window Operational (${tc.timeStr})`;
+    document.getElementById("trainingStatus").innerText = sessionLive ? "ACTIVE" : "Waiting Room";
+    document.getElementById("liveStatus").innerText = sessionLive ? `${tc.name} Active` : `${tc.name} • Waiting for Host`;
+    document.getElementById("statusDot").style.background = sessionLive ? "#10b981" : "#ffbc00";
+    startBoardroomExperience();
     return;
   }
   const now = new Date();
@@ -1331,6 +1380,7 @@ function evaluateTimeLockEngine() {
     if (liveStatus) liveStatus.innerText = `${cfg.name} Active`;
     if (statusDot) statusDot.style.background = "#10b981";
 
+    startBoardroomExperience();
     if (!isVideoLoaded) loadSecureBunnyStream(cfg.streamKey);
   } else if (hour < cfg.start) {
     document.body.classList.add("locked");
@@ -1353,8 +1403,7 @@ function evaluateTimeLockEngine() {
     const m = Math.floor((diff / 60000) % 60);
     const s = Math.floor((diff / 1000) % 60);
 
-    document.getElementById("startCountdown").innerHTML =
-      `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    renderSegClock(h, m, s);
   } else {
     document.body.classList.add("locked");
     lockScreen.style.display = "flex";
@@ -1539,11 +1588,12 @@ function closeCertModal() {
 }
 
 function loadSecureBunnyStream(streamKey) {
+  if (!sessionLive) return;
   isVideoLoaded = true;
   fetch("https://script.google.com/macros/s/AKfycbyBGzC3nQkOp6eTtBqHU0bTW6tx9-BBeaqLslDdfunccXXanSaAkebcU-cJMNzp6us-Cg/exec")
   .then(r => r.json())
   .then(data => {
-    document.getElementById("videoContainer").innerHTML = data[streamKey];
+    mountStream(data[streamKey]);
   })
   .catch(err => {
     console.error(err);
@@ -1729,14 +1779,129 @@ function scheduleJoinToast(first) {
   }, first ? 8000 : rand(20000, 35000));
 }
 
-let boardroomStarted = false;
+let boardroomStarted = false, sessionLive = false, waitTimer = null, videoEnded = false;
+const QUICK = /[?&]quick=1/.test(location.search); // ?quick=1 => 10s waiting room (testing)
+const greet = () => { const h = new Date().getHours(); return h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening"; };
+let peerCursor = Math.floor(Math.random() * CHAT_PEERS.length);
+const nextPeer = () => CHAT_PEERS[(peerCursor++) % CHAT_PEERS.length];
+
+function renderSegClock(h, m, s) {
+  const p = n => String(n).padStart(2, "0");
+  document.getElementById("startCountdown").innerHTML =
+    `<div class="seg-clock"><span class="seg"><b>${p(h)}</b><small>hrs</small></span><span class="seg"><b>${p(m)}</b><small>min</small></span><span class="seg"><b>${p(s)}</b><small>sec</small></span></div>`;
+}
+
+function setHud(t) { document.getElementById("videoHud").textContent = t; }
+
+function setHostState(joined) {
+  const t = document.querySelector(".g-tile.host");
+  if (!t) return;
+  t.classList.toggle("away", !joined);
+  t.querySelector(".g-sub").textContent = joined ? "🎙️ Presenting" : "⏳ Joining soon";
+}
+
+// Pre-start chatter: [seconds from start (negative = before end), text]
+const PRE_START = [
+  [2, () => "Hello everyone 👋"],
+  [8, () => `${greet()} everyone`],
+  [20, () => "Host abhi join nahi hue kya?"],
+  [38, () => "Session kab start hoga?"],
+  [58, () => "Meri audio check ho gayi, sab theek hai"],
+  [80, () => "Where is the host? Koi update mila?"],
+  [105, () => "Lagta hai sab log wait kar rahe hain 😅"],
+  [135, () => "Timer chal raha hai, start hone hi wala hai"],
+  [-50, () => "Almost time, host join hone wale honge"],
+  [-18, () => "I think host is joining now"]
+];
+
 function startBoardroomExperience() {
   refreshMeTile();
   if (boardroomStarted) return;
   boardroomStarted = true;
-  addChatMessage({ name: "Lead Instructor", text: HOST_LINES[0], host: true });
-  scheduleChatSim();
+  const W = QUICK ? 10 : Math.round(rand(180, 240));
+  const endAt = Date.now() + W * 1000;
+  const wr = document.getElementById("waitingRoom");
+  const clk = document.getElementById("wrClock");
+  const ttl = document.getElementById("wrTitle");
+  wr.style.display = "flex";
+  setHud("🟡 WAITING ROOM • Host joining shortly");
+  setHostState(false);
+  const wt = document.getElementById("hudWatchTimer");
+  wt.innerText = "⏳ Waiting room"; wt.style.color = "#f59e0b";
+
+  const tick = () => {
+    const left = Math.max(0, Math.ceil((endAt - Date.now()) / 1000));
+    clk.innerText = formatSecs(left);
+    ttl.innerText = left <= 45 ? "Host is joining. Starting shortly" : "Waiting for the host to start the session";
+    if (left <= 0) beginSession();
+  };
+  tick();
+  waitTimer = setInterval(tick, 500);
+
+  PRE_START.forEach(([t, fn]) => {
+    const at = t < 0 ? W + t : t;
+    if (at < 1 || at > W - 3) return;
+    setTimeout(() => { if (!sessionLive) addChatMessage({ name: nextPeer(), text: fn() }); }, at * 1000);
+  });
   scheduleJoinToast(true);
+}
+
+function beginSession() {
+  if (sessionLive) return;
+  sessionLive = true;
+  clearInterval(waitTimer);
+  document.getElementById("waitingRoom").style.display = "none";
+  setHud("🔴 LIVE WebRTC STREAM • 1080P HD");
+  setHostState(true);
+  showToast("🎙️ Lead Instructor joined and started the session");
+  addChatMessage({ name: "Lead Instructor", text: `${greet()} everyone, welcome to the session. Can everyone hear me clearly?`, host: true });
+  setTimeout(() => addChatMessage({ name: nextPeer(), text: "Yes sir, audio clear 👍" }), 5000);
+  setTimeout(() => addChatMessage({ name: nextPeer(), text: "Slides bhi clear dikh rahi hain" }), 9500);
+  setTimeout(() => addChatMessage({ name: nextPeer(), text: `${greet()} sir 🙏` }), 14000);
+  loadSecureBunnyStream(SESSION_CONFIG[activeSession].streamKey);
+  initWatchTracker();
+  scheduleChatSim();
+}
+
+/* AUTO-START STREAM (no play button) + RESUME-ON-PAUSE GUARD */
+function mountStream(html) {
+  const box = document.getElementById("videoContainer");
+  const tpl = document.createElement("template");
+  tpl.innerHTML = html;
+  const f = tpl.content.querySelector("iframe");
+  if (f) {
+    let s = f.getAttribute("src") || "";
+    if (!/[?&]autoplay=/.test(s)) s += (s.includes("?") ? "&" : "?") + "autoplay=true&preload=true&playsinline=true";
+    f.setAttribute("src", s);
+    const allow = f.getAttribute("allow") || "";
+    if (!/autoplay/.test(allow)) f.setAttribute("allow", ("autoplay; " + allow).trim());
+  }
+  box.innerHTML = "";
+  box.appendChild(tpl.content);
+  if (f) attachAutoplayGuard(f);
+}
+
+function attachAutoplayGuard(iframe) {
+  if (!window.playerjs) return;
+  try {
+    const player = new playerjs.Player(iframe);
+    player.on("ready", () => {
+      player.play();
+      setTimeout(() => {
+        player.getPaused(paused => {
+          if (paused) { player.mute(); player.play(); showUnmuteHint(player); }
+        });
+      }, 2500);
+    });
+    player.on("pause", () => { if (!isSessionCompleted && !videoEnded) setTimeout(() => player.play(), 250); });
+    player.on("ended", () => { videoEnded = true; });
+  } catch (e) { console.error(e); }
+}
+
+function showUnmuteHint(player) {
+  const b = document.getElementById("unmuteHint");
+  b.style.display = "block";
+  b.onclick = () => { try { player.unmute(); } catch (e) {} b.style.display = "none"; };
 }
 
 renderGallery();
