@@ -421,7 +421,7 @@ const SESSION_CONFIG = {
 };
 
 // TESTING MODE: true = hour-based time-lock bypassed (video loads instantly after login). Set false for production.
-const TESTING_MODE = true;
+const TESTING_MODE = /[?&]test=1/.test(location.search);
 
 let activeSession = 1;
 let currentCandidate = null;
@@ -569,73 +569,46 @@ async function verifyCandidateAuthentication() {
 /* PRODUCTION TIMELOCK ENGINE */
 function evaluateTimeLockEngine() {
   if (!currentCandidate) return;
-  if (TESTING_MODE) {
-    const tc = SESSION_CONFIG[activeSession];
-    document.getElementById("lockScreen").style.display = "none";
-    document.body.classList.remove("locked");
-    document.getElementById("topCountdown").innerHTML = `Onboarding Window Operational (${tc.timeStr})`;
-    document.getElementById("trainingStatus").innerText = "ACTIVE";
-    document.getElementById("liveStatus").innerText = hostPresent ? `${tc.name} Active` : `${tc.name} • Waiting for Host`;
-    document.getElementById("statusDot").style.background = hostPresent ? "#10b981" : "#ffbc00";
-    startBoardroomExperience();
-    if (!isVideoLoaded) loadSecureBunnyStream(tc.streamKey);
-    return;
-  }
-  const now = new Date();
-  const hour = now.getHours();
+  const g = id => document.getElementById(id);
   const cfg = SESSION_CONFIG[activeSession];
-  const lockScreen = document.getElementById("lockScreen");
-  const topCountdown = document.getElementById("topCountdown");
-  const trainingStatus = document.getElementById("trainingStatus");
-  const liveStatus = document.getElementById("liveStatus");
-  const statusDot = document.getElementById("statusDot");
+  const now = new Date();
+  const at = h => { const d = new Date(); d.setHours(h, 0, 0, 0); return d; };
+  const fmt = h => `${h > 12 ? h - 12 : h}:00 ${h >= 12 ? "PM" : "AM"}`;
+  const startAt = at(cfg.start), endAt = at(cfg.end);
+  const inWindow = now >= startAt && now < endAt;
+  // Anyone already watching is never thrown out when the window closes; they finish their session.
+  const keepOpen = TESTING_MODE || inWindow || (scriptStarted && !isSessionCompleted) || isSessionCompleted;
 
-  const startFormatted = `${String(cfg.start > 12 ? cfg.start - 12 : cfg.start).padStart(2, '0')}:00 ${cfg.start >= 12 ? 'PM' : 'AM'}`;
-
-  if (hour >= cfg.start && hour < cfg.end) {
-    lockScreen.style.display = "none";
+  if (keepOpen) {
+    g("lockScreen").style.display = "none";
     document.body.classList.remove("locked");
-    if (topCountdown) topCountdown.innerHTML = `Onboarding Window Operational (${cfg.timeStr})`;
-    if (trainingStatus) trainingStatus.innerText = "ACTIVE";
-    if (liveStatus) liveStatus.innerText = hostPresent ? `${cfg.name} Active` : `${cfg.name} • Waiting for Host`;
-    if (statusDot) statusDot.style.background = "#10b981";
-
+    g("topCountdown").textContent = inWindow || TESTING_MODE ? `Session window open · ${cfg.timeStr}` : `Window closed at ${fmt(cfg.end)} · your session continues`;
+    g("trainingStatus").innerText = "Live";
+    g("liveStatus").innerText = hostPresent ? `${cfg.name} · Live` : `${cfg.name} · Waiting for host`;
+    g("statusDot").style.background = hostPresent ? "#16A34A" : "#F59E0B";
     startBoardroomExperience();
     if (!isVideoLoaded) loadSecureBunnyStream(cfg.streamKey);
-  } else if (hour < cfg.start) {
-    document.body.classList.add("locked");
-    lockScreen.style.display = "flex";
-    document.getElementById("lockTitle").innerHTML = "Session Starts Soon";
-    document.getElementById("lockText").innerHTML = `Today's induction sequence has not initiated yet.<br><br>Please wait, training workspace opens at ${startFormatted}.`;
-    document.getElementById("lockTimeWindow").innerText = `Access Timing: ${cfg.timeStr}`;
-    document.getElementById("startCountdown").style.display = "block";
+    return;
+  }
 
-    if (topCountdown) topCountdown.innerHTML = `Session Starts at ${startFormatted}`;
-    if (trainingStatus) trainingStatus.innerText = "Scheduled";
-    if (liveStatus) liveStatus.innerText = "System Paused";
-    if (statusDot) statusDot.style.background = "#ffbc00";
-
-    const target = new Date();
-    target.setHours(cfg.start, 0, 0, 0);
-    const diff = target - now;
-
-    const h = Math.floor(diff / 3600000);
-    const m = Math.floor((diff / 60000) % 60);
-    const s = Math.floor((diff / 1000) % 60);
-
-    renderSegClock(h, m, s);
+  document.body.classList.add("locked");
+  g("lockScreen").style.display = "flex";
+  g("lockTimeWindow").innerText = `Open ${fmt(cfg.start)} to ${fmt(cfg.end)}`;
+  g("statusDot").style.background = now < startAt ? "#F59E0B" : "#EF4444";
+  if (now < startAt) {
+    g("lockTitle").innerText = `Day ${activeSession} opens at ${fmt(cfg.start)}`;
+    g("lockText").innerHTML = "You are signed in. This page opens by itself when your session starts. Keep it open, no need to refresh.";
+    g("startCountdown").style.display = "block";
+    g("trainingStatus").innerText = "Scheduled";
+    g("topCountdown").textContent = `Starts at ${fmt(cfg.start)}`;
+    const diff = startAt - now;
+    renderSegClock(Math.floor(diff / 3600000), Math.floor(diff / 60000) % 60, Math.floor(diff / 1000) % 60);
   } else {
-    document.body.classList.add("locked");
-    lockScreen.style.display = "flex";
-    document.getElementById("lockTitle").innerHTML = "Training Access Closed";
-    document.getElementById("lockText").innerHTML = `Today's batch timing (${cfg.timeStr}) has ended.<br><br>Please revisit tomorrow during your scheduled slot.`;
-    document.getElementById("lockTimeWindow").innerText = `Access Timing: ${cfg.timeStr}`;
-    document.getElementById("startCountdown").style.display = "none";
-
-    if (topCountdown) topCountdown.innerHTML = `Session Closed (Reopens Tomorrow at ${startFormatted})`;
-    if (trainingStatus) trainingStatus.innerText = "Closed";
-    if (liveStatus) liveStatus.innerText = "Session Expired";
-    if (statusDot) statusDot.style.background = "#ef4444";
+    g("lockTitle").innerText = "Today's window has closed";
+    g("lockText").innerHTML = `Day ${activeSession} was open ${fmt(cfg.start)} to ${fmt(cfg.end)}. Please sign in again tomorrow during this time.`;
+    g("startCountdown").style.display = "none";
+    g("trainingStatus").innerText = "Closed";
+    g("topCountdown").textContent = `Closed · opens tomorrow at ${fmt(cfg.start)}`;
   }
 }
 
