@@ -843,6 +843,71 @@ body.locked{
   .lock-box { padding: 25px 18px; }
   .lock-box h1 { font-size: 22px; }
 }
+
+/* ===== BOARDROOM UPGRADE ===== */
+.container,.status-bar,.countdown{max-width:1240px}
+.room-telemetry{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.room-id{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:7px 14px;border-radius:999px;font-size:12px;font-weight:600;font-variant-numeric:tabular-nums}
+.rec-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.5);color:#fca5a5;padding:7px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.06em}
+.rec-badge i{width:9px;height:9px;border-radius:50%;background:#ef4444;animation:recBlink 1.1s infinite}
+@keyframes recBlink{0%,100%{opacity:1}50%{opacity:.15}}
+
+.gallery-strip{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 12px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+.g-tile{flex:0 0 150px;scroll-snap-align:start;background:var(--bg-surface);border:1px solid var(--border-color);border-radius:14px;padding:12px 10px 10px;text-align:center;position:relative}
+.g-tile.host{border-color:var(--accent-blue);box-shadow:0 0 0 2px rgba(37,99,235,.18)}
+.g-tile.me{border-color:#10b981}
+.g-avatar{width:48px;height:48px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px;position:relative}
+.g-tile:not(.more) .g-avatar::after{content:"";position:absolute;right:-1px;bottom:-1px;width:12px;height:12px;border-radius:50%;background:#10b981;border:2px solid var(--bg-surface)}
+.g-tile.host .g-avatar{animation:speak 1.8s infinite}
+@keyframes speak{0%,100%{box-shadow:0 0 0 0 rgba(37,99,235,.5)}50%{box-shadow:0 0 0 7px rgba(37,99,235,0)}}
+.g-name,.g-sub{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.g-name{font-size:12.5px;font-weight:700}
+.g-sub{font-size:10.5px;color:var(--text-muted);font-weight:600;margin-top:2px}
+.g-tile.host .g-sub{color:var(--accent-blue)}
+.g-tile.me .g-sub{color:#10b981}
+.g-mute{position:absolute;top:8px;right:8px;font-size:11px;opacity:.75}
+
+.stage-layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px;align-items:stretch;margin-top:10px}
+.stage-main{min-width:0}
+.video-card{position:relative;aspect-ratio:16/9}
+.video-hud{position:absolute;top:12px;left:12px;z-index:5;pointer-events:none;background:rgba(0,0,0,.55);color:#fff;padding:5px 11px;border-radius:8px;font-size:11px;font-weight:700;letter-spacing:.03em;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.stage-main .stats{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.stage-main .stat-value{font-variant-numeric:tabular-nums}
+.attendee-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,.12);color:#10b981;padding:2px 10px;border-radius:999px}
+
+.chat-wrap{position:relative;min-height:480px}
+.chat-panel{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg-surface);border:1px solid var(--border-color);border-radius:16px;overflow:hidden}
+.chat-head{padding:12px 16px;border-bottom:1px solid var(--border-color);display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px}
+.chat-head small{color:var(--text-muted);font-weight:600;font-size:11.5px}
+.chat-messages{flex:1;min-height:0;overflow-y:auto;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.msg{font-size:13px;line-height:1.45;animation:msgIn .25s ease;word-break:break-word}
+@keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.msg-meta{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:2px}
+.msg-name{color:var(--text-main);font-weight:700;font-size:12px}
+.badge-host,.badge-you{color:#fff;padding:1px 8px;border-radius:999px;font-size:10.5px;font-weight:700}
+.badge-host{background:#2563eb}
+.badge-you{background:linear-gradient(135deg,#10b981,#059669)}
+.msg.you .msg-text{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:10px;padding:6px 10px;display:inline-block}
+.chat-form{display:flex;gap:8px;padding:10px;border-top:1px solid var(--border-color)}
+.chat-form input{flex:1;min-width:0;padding:10px 12px;border-radius:10px;border:1.5px solid var(--auth-input-border);background:var(--auth-input-bg);color:var(--auth-input-color);font:inherit;font-size:13.5px;outline:none}
+.chat-form input:focus{border-color:var(--accent-blue)}
+.chat-form button{border:none;border-radius:10px;padding:0 18px;background:#2563eb;color:#fff;font-weight:700;cursor:pointer}
+
+.toast-stack{position:fixed;left:16px;bottom:16px;z-index:9000;display:flex;flex-direction:column;gap:8px;pointer-events:none;max-width:calc(100% - 32px)}
+.toast{background:var(--bg-surface-elevated);color:var(--text-main);border:1px solid var(--border-color);border-left:4px solid #10b981;padding:10px 14px;border-radius:10px;font-size:12.5px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.2);animation:toastIn .35s ease}
+.toast.out{opacity:0;transform:translateX(-12px);transition:opacity .4s,transform .4s}
+@keyframes toastIn{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:none}}
+
+@media(max-width:900px){
+  .stage-layout{grid-template-columns:1fr}
+  .chat-wrap{min-height:0;height:420px}
+}
+@media(max-width:768px){
+  .room-telemetry{justify-content:center;width:100%}
+  .g-tile{flex-basis:128px}
+  .video-hud{font-size:10px;top:8px;left:8px}
+  .chat-form input{font-size:16px}
+}
 </style>
 </head>
 
@@ -970,6 +1035,10 @@ body.locked{
     <div class="brand">🏛 FOUNDATION SESSION</div>
   </div>
   <div class="header-controls">
+    <div class="room-telemetry">
+      <div class="room-id">🔐 Room ID: 942-8812-TTS</div>
+      <div class="rec-badge"><i></i>REC</div>
+    </div>
     <div class="batch" id="headerModuleTag">Professional Development Program • Day 1 of 3</div>
     <button class="theme-switch" id="themeToggle">🌓 Mode: Auto</button>
   </div>
@@ -1004,25 +1073,53 @@ body.locked{
     </div>
   </div>
 
-  <!-- VIDEO EMBED AREA -->
-  <div class="video-card">
-    <div id="videoContainer"></div>
-  </div>
+  <!-- PARTICIPANT GALLERY -->
+  <div class="gallery-strip" id="galleryStrip" aria-label="Meeting participants"></div>
 
-  <!-- STATS -->
-  <div class="stats">
-    <div class="stat">
-      <div class="stat-label">Candidate Name</div>
-      <div class="stat-value" id="hudCandidateName" style="color:#2563eb;">--</div>
+  <div class="stage-layout">
+    <div class="stage-main">
+      <!-- VIDEO EMBED AREA -->
+      <div class="video-card">
+        <div class="video-hud">🔴 LIVE WebRTC STREAM • 1080P HD</div>
+        <div id="videoContainer"></div>
+      </div>
+
+      <!-- LIVE TELEMETRY BAR -->
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-label">Candidate Name</div>
+          <div class="stat-value" id="hudCandidateName" style="color:#2563eb;">--</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Verified Stream Timer</div>
+          <div class="stat-value" id="hudStreamClock">00:00</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Session Telemetry</div>
+          <div class="stat-value" id="hudWatchTimer" style="color:#10b981; font-size:16px;">Live Stream Engaged</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Training Status</div>
+          <div class="stat-value" id="trainingStatus">Checking...</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Active Attendees</div>
+          <div class="stat-value"><span class="attendee-badge">🟢 <span id="hudAttendees">--</span></span></div>
+        </div>
+      </div>
     </div>
-    <div class="stat">
-      <div class="stat-label">Session Telemetry</div>
-      <div class="stat-value" id="hudWatchTimer" style="color:#10b981; font-size:16px;">Live Stream Engaged</div>
-    </div>
-    <div class="stat">
-      <div class="stat-label">Training Status</div>
-      <div class="stat-value" id="trainingStatus">Checking...</div>
-    </div>
+
+    <!-- LIVE Q&A / CHAT -->
+    <aside class="chat-wrap">
+      <div class="chat-panel">
+        <div class="chat-head"><span>💬 Live Q&amp;A / Chat</span><small id="chatCount">Room chat</small></div>
+        <div class="chat-messages" id="chatMessages" aria-live="polite"></div>
+        <div class="chat-form">
+          <input type="text" id="chatInput" maxlength="200" placeholder="Type a message…" autocomplete="off">
+          <button type="button" id="chatSendBtn">Send</button>
+        </div>
+      </div>
+    </aside>
   </div>
 
   <!-- INSTRUCTIONS -->
@@ -1044,6 +1141,8 @@ body.locked{
 
 <div class="footer">Professional Training Hub • Access Controlled • Batch Monitored</div>
 
+<div class="toast-stack" id="toastStack"></div>
+
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbw79wnaUmMkr4DIHjbInzMTYHvqp5CcPIXrRukvA1kAD2bFgjq9NmDtvqDNvxsE_DrAeg/exec";
 
@@ -1053,6 +1152,9 @@ const SESSION_CONFIG = {
   2: { name: "Clarification Session", start: 14, end: 17, timeStr: "02:00 PM – 05:00 PM Daily", progress: "66%", streamKey: "day2_v2", baseViewers: 36, maxViewers: 62 },
   3: { name: "Execution Session", start: 15, end: 18, timeStr: "03:00 PM – 06:00 PM Daily", progress: "100%", streamKey: "day3_v2", baseViewers: 25, maxViewers: 46 }
 };
+
+// TESTING MODE: true = hour-based time-lock bypassed (video loads instantly after login). Set false for production.
+const TESTING_MODE = true;
 
 let activeSession = 1;
 let currentCandidate = null;
@@ -1182,6 +1284,7 @@ async function verifyCandidateAuthentication() {
       startHeartbeatCheck();
       enableReloadProtection();
       updateViewers();
+      startBoardroomExperience();
     } else {
       errorElement.innerText = result.message || "Access denied. Candidate identity not found.";
       errorElement.style.display = "block";
@@ -1198,6 +1301,17 @@ async function verifyCandidateAuthentication() {
 /* PRODUCTION TIMELOCK ENGINE */
 function evaluateTimeLockEngine() {
   if (!currentCandidate) return;
+  if (TESTING_MODE) {
+    const tc = SESSION_CONFIG[activeSession];
+    document.getElementById("lockScreen").style.display = "none";
+    document.body.classList.remove("locked");
+    document.getElementById("topCountdown").innerHTML = `🧪 Testing Mode: time-lock bypassed (${tc.timeStr})`;
+    document.getElementById("trainingStatus").innerText = "ACTIVE";
+    document.getElementById("liveStatus").innerText = `${tc.name} Active`;
+    document.getElementById("statusDot").style.background = "#10b981";
+    if (!isVideoLoaded) loadSecureBunnyStream(tc.streamKey);
+    return;
+  }
   const now = new Date();
   const hour = now.getHours();
   const cfg = SESSION_CONFIG[activeSession];
@@ -1330,6 +1444,8 @@ function updateWatchTimerUI() {
   const btn = document.getElementById("completeSessionBtn");
   const alertBadge = document.getElementById("retentionBadge");
   const remaining = Math.max(0, requiredSeconds - secondsWatched);
+  const clockEl = document.getElementById("hudStreamClock");
+  if (clockEl) clockEl.innerText = formatSecs(secondsWatched);
 
   if (remaining > 0 && remaining <= 900) {
     alertBadge.style.display = "flex";
@@ -1466,7 +1582,164 @@ function updateViewers(){
   
   const viewerTarget = document.getElementById("viewerCount");
   if (viewerTarget) viewerTarget.innerText = currentViewers;
+  const att = document.getElementById("hudAttendees");
+  if (att) att.innerText = currentViewers;
+  const more = document.getElementById("galleryMore");
+  if (more) more.innerText = `+${Math.max(0, currentViewers - 6)}`;
+  const cc = document.getElementById("chatCount");
+  if (cc) cc.innerText = `${currentViewers} online`;
 }
+
+/* BOARDROOM EXPERIENCE: GALLERY, LIVE CHAT, JOIN TOASTS */
+const rand = (a, b) => a + Math.random() * (b - a);
+const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+
+const GALLERY = [
+  { name: "Lead Instructor (Host)", sub: "🎙️ Presenting", cls: "host", ini: "LI", color: "linear-gradient(135deg,#2563eb,#4f46e5)", host: true },
+  { name: "You (Verified)", sub: "✔ Verified", cls: "me", ini: "ME", color: "linear-gradient(135deg,#10b981,#059669)", avId: "galleryMeAvatar", subId: "galleryMeSub" },
+  { name: "Pooja S.", sub: "Bhopal", ini: "PS", color: "linear-gradient(135deg,#ec4899,#be185d)" },
+  { name: "Rohan M.", sub: "Indore", ini: "RM", color: "linear-gradient(135deg,#f59e0b,#d97706)" },
+  { name: "Neha K.", sub: "Ujjain", ini: "NK", color: "linear-gradient(135deg,#8b5cf6,#6d28d9)" },
+  { name: "Amit T.", sub: "Jabalpur", ini: "AT", color: "linear-gradient(135deg,#06b6d4,#0e7490)" },
+  { name: "Others", sub: "in the room", cls: "more", ini: "+0", color: "#64748b", avId: "galleryMore" }
+];
+
+function renderGallery() {
+  const strip = document.getElementById("galleryStrip");
+  strip.innerHTML = "";
+  GALLERY.forEach(t => {
+    const tile = document.createElement("div");
+    tile.className = "g-tile " + (t.cls || "");
+    if (!t.host && t.cls !== "more") {
+      const mute = document.createElement("span");
+      mute.className = "g-mute"; mute.textContent = "🔇"; mute.title = "Muted";
+      tile.appendChild(mute);
+    }
+    const av = document.createElement("div");
+    av.className = "g-avatar"; av.style.background = t.color; av.textContent = t.ini;
+    if (t.avId) av.id = t.avId;
+    const nm = document.createElement("div");
+    nm.className = "g-name"; nm.textContent = t.name;
+    const sb = document.createElement("div");
+    sb.className = "g-sub"; sb.textContent = t.sub;
+    if (t.subId) sb.id = t.subId;
+    tile.append(av, nm, sb);
+    strip.appendChild(tile);
+  });
+  updateViewers();
+}
+
+function refreshMeTile() {
+  if (!currentCandidate) return;
+  const av = document.getElementById("galleryMeAvatar");
+  const sb = document.getElementById("galleryMeSub");
+  const ini = currentCandidate.name.split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join("");
+  if (av) av.textContent = ini || "ME";
+  if (sb) sb.textContent = "✔ " + currentCandidate.name;
+}
+
+const CHAT_PEERS = ["Pooja S.", "Rohan M.", "Neha K.", "Amit T.", "Sneha R.", "Vikram P.", "Anjali D.", "Karan J."];
+const CHAT_LINES = [
+  "Notes completed sir", "Audio & slides are 100% clear", "Understood execution model",
+  "Video quality is perfect, no buffering", "Got it, thank you sir", "Clear explanation, taking notes",
+  "Everything is visible clearly", "Understood the onboarding steps", "Flow is well explained sir"
+];
+const HOST_LINES = [
+  "Welcome everyone. Please keep your notes ready.",
+  "Stay till the end; the verification code appears inside the session.",
+  "Feel free to post your questions in the chat."
+];
+const JOIN_POOL = [
+  ["Pooja Malviya", "Bhopal"], ["Rohan Mishra", "Indore"], ["Sneha Rathore", "Ujjain"], ["Amit Tiwari", "Jabalpur"],
+  ["Karan Jain", "Dewas"], ["Anjali Dubey", "Gwalior"], ["Vikram Patel", "Ratlam"], ["Neha Khare", "Sagar"]
+];
+
+function addChatMessage(m) {
+  const box = document.getElementById("chatMessages");
+  const nearBottom = box.scrollHeight - box.scrollTop - box.clientHeight < 60;
+  const el = document.createElement("div");
+  el.className = "msg" + (m.you ? " you" : "");
+  const meta = document.createElement("div");
+  meta.className = "msg-meta";
+  if (m.you) {
+    const b = document.createElement("span");
+    b.className = "badge-you"; b.textContent = `${m.name} (You)`;
+    meta.appendChild(b);
+  } else {
+    const n = document.createElement("span");
+    n.className = "msg-name"; n.textContent = m.name;
+    meta.appendChild(n);
+    if (m.host) {
+      const b = document.createElement("span");
+      b.className = "badge-host"; b.textContent = "Host";
+      meta.appendChild(b);
+    }
+  }
+  const tm = document.createElement("span");
+  tm.textContent = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  meta.appendChild(tm);
+  const tx = document.createElement("div");
+  tx.className = "msg-text"; tx.textContent = m.text;
+  el.append(meta, tx);
+  box.appendChild(el);
+  while (box.children.length > 80) box.firstChild.remove();
+  if (nearBottom || m.you) box.scrollTop = box.scrollHeight;
+}
+
+function sendChatMessage() {
+  const inp = document.getElementById("chatInput");
+  const text = inp.value.trim();
+  if (!text || !currentCandidate) return;
+  addChatMessage({ name: currentCandidate.name, text: text, you: true });
+  inp.value = "";
+  inp.focus();
+}
+document.getElementById("chatSendBtn").addEventListener("click", sendChatMessage);
+document.getElementById("chatInput").addEventListener("keydown", e => {
+  if (e.key === "Enter") { e.preventDefault(); sendChatMessage(); }
+});
+
+let lastChatLine = "";
+function scheduleChatSim() {
+  setTimeout(() => {
+    const host = Math.random() < 0.15;
+    const pool = host ? HOST_LINES : CHAT_LINES;
+    let line;
+    do { line = pick(pool); } while (line === lastChatLine && pool.length > 1);
+    lastChatLine = line;
+    addChatMessage({ name: host ? "Lead Instructor" : pick(CHAT_PEERS), text: line, host: host });
+    scheduleChatSim();
+  }, rand(20000, 30000));
+}
+
+function showToast(text) {
+  const stack = document.getElementById("toastStack");
+  const t = document.createElement("div");
+  t.className = "toast"; t.textContent = text;
+  stack.appendChild(t);
+  while (stack.children.length > 3) stack.firstChild.remove();
+  setTimeout(() => { t.classList.add("out"); setTimeout(() => t.remove(), 450); }, 5000);
+}
+
+function scheduleJoinToast(first) {
+  setTimeout(() => {
+    const p = pick(JOIN_POOL);
+    showToast(`🟢 ${p[0]} (${p[1]}) joined the live boardroom`);
+    scheduleJoinToast(false);
+  }, first ? 8000 : rand(20000, 35000));
+}
+
+let boardroomStarted = false;
+function startBoardroomExperience() {
+  refreshMeTile();
+  if (boardroomStarted) return;
+  boardroomStarted = true;
+  addChatMessage({ name: "Lead Instructor", text: HOST_LINES[0], host: true });
+  scheduleChatSim();
+  scheduleJoinToast(true);
+}
+
+renderGallery();
 
 updateViewers();
 setInterval(updateViewers, 5000);
