@@ -177,6 +177,46 @@ img{max-width:100%}
 .cert-candidate{font-size:24px;font-weight:800;color:#2F54EB;margin-top:14px}
 .cert-actions{display:flex;gap:10px;flex-wrap:wrap}.cert-actions button{flex:1;min-width:140px;height:46px;border:0;border-radius:12px;font-weight:700;cursor:pointer}
 
+
+/* ---- v3: meeting-room look ---- */
+[data-theme=dark]{--bg:#070B16;--card:rgba(18,27,50,.72);--line:rgba(120,140,190,.18);--soft:rgba(108,139,255,.14)}
+body{background:radial-gradient(900px 520px at 88% -8%,rgba(47,84,235,.30),transparent 60%),radial-gradient(700px 500px at -10% 35%,rgba(14,165,164,.16),transparent 60%),var(--bg);background-attachment:fixed}
+.access-box,.stat,.chat-panel,.info-box,.g-tile,.topbar{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.viewer{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:7px 14px;cursor:pointer;font-weight:700;color:var(--ink)}
+.g-tile.more{cursor:pointer;border-style:dashed}.g-tile.more .g-avatar{background:var(--pri)!important;color:var(--pri-ink)}
+.code-card{display:flex;gap:14px;margin-top:12px;padding:16px;border-radius:var(--r);border:1px solid color-mix(in srgb,var(--pri) 45%,transparent);background:linear-gradient(135deg,var(--soft),transparent)}
+.code-card .ci{flex:none;width:42px;height:42px;border-radius:12px;background:var(--pri);color:var(--pri-ink);display:grid;place-items:center;font-weight:800}
+.code-card h3{font-size:15px}.code-card p{font-size:13.5px;color:var(--mute);margin-top:3px}
+.code-note{display:flex;gap:8px;margin-top:10px}.code-note input{flex:1;min-width:0;height:42px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);padding:0 12px;font-size:16px}
+.code-note button{height:42px;padding:0 14px;border:0;border-radius:12px;background:var(--pri);color:var(--pri-ink);font-weight:700;cursor:pointer}
+.auth-note{margin-bottom:16px;padding:11px 13px;border-radius:12px;background:var(--soft);font-size:13px;color:var(--mute)}
+.auth-note b{color:var(--ink)}
+.zbar{display:none}.vtoasts{display:none}
+.video-card:fullscreen,.video-card:-webkit-full-screen,.video-card.pseudo{display:flex;flex-direction:column;background:#070B16}
+.video-card:fullscreen #videoContainer,.video-card.pseudo #videoContainer{position:relative;flex:1}
+.video-card:fullscreen .zbar,.video-card.pseudo .zbar{display:flex}
+.video-card:fullscreen .vtoasts,.video-card.pseudo .vtoasts{display:flex}
+.zbar{flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px;padding:10px 14px calc(10px + var(--safe-b));background:#0E1529;color:#E8EEFB;font-size:13px;border-top:1px solid #1E2A47}
+.zl{display:flex;align-items:center;gap:8px;font-weight:700}.zdot{width:8px;height:8px;border-radius:50%;background:#EF4444;animation:blink 1.2s infinite}
+.zl span:last-child{font-variant-numeric:tabular-nums;opacity:.7;font-weight:600}
+.zb{height:36px;padding:0 14px;border:0;border-radius:10px;background:#1B2644;color:#fff;font-weight:600;font-size:13px;cursor:pointer}
+.zb b{margin-left:6px;color:#6C8BFF}
+.zr{width:100%;font-size:12.5px;color:#9FB0D3;text-align:center}
+.vtoasts{position:absolute;left:12px;bottom:92px;flex-direction:column;gap:6px;align-items:flex-start;z-index:7;pointer-events:none;max-width:78%}
+.cap{background:rgba(10,15,28,.78);color:#fff;font-size:13px;padding:7px 12px;border-radius:10px;animation:msgin .3s both}
+.cap b{color:#8FA8FF;margin-right:6px}
+.ppanel{display:none;position:fixed;top:0;right:0;bottom:0;width:min(380px,100%);z-index:2100;background:var(--card);background-color:#0E1529;color:#E8EEFB;flex-direction:column;border-left:1px solid #1E2A47;box-shadow:-20px 0 50px rgba(0,0,0,.4)}
+.ppanel.open{display:flex;animation:slidein .3s cubic-bezier(.2,.8,.2,1)}
+@keyframes slidein{from{transform:translateX(40px);opacity:0}}
+.pph{display:flex;justify-content:space-between;align-items:center;padding:16px;padding-top:calc(16px + var(--safe-t))}
+.pph button{width:36px;height:36px;border:0;border-radius:50%;background:#1B2644;color:#fff;cursor:pointer}
+.ppanel input{margin:0 14px 10px;height:42px;border-radius:12px;border:1px solid #27345A;background:#0A1020;color:#fff;padding:0 12px;font-size:16px}
+#ppList{flex:1;overflow-y:auto;padding:0 8px 16px}
+.pr{display:flex;align-items:center;gap:12px;padding:9px 8px;border-radius:12px}
+.pr:hover{background:#141D38}.pr .g-avatar{margin:0;width:38px;height:38px;flex:none;font-size:13px}
+.pr .pn{font-size:14px;font-weight:700}.pr .ps{font-size:12px;color:#8FA0C2}
+.pr>div:nth-child(2){flex:1;min-width:0}.pr .pm{font-size:12px;color:#8FA0C2}
+.pr .tag{font-size:10px;font-weight:700;background:#2F54EB;color:#fff;border-radius:99px;padding:1px 7px;margin-left:6px}
 @media(min-width:900px){
   .auth-shell{flex-direction:row}
   .auth-side{flex:1.1;padding:56px 56px;display:flex;flex-direction:column;justify-content:center}
@@ -228,6 +268,7 @@ img{max-width:100%}
         </div>
       </div>
 
+      <div class="auth-note"><b>Every session has a code.</b> You will see it inside the video. Note it down, because it is required to join the next day.</div>
       <div class="auth-input-group" id="passcodeBlock" style="display:none;">
         <div class="auth-label-row"><label id="passcodeLabel" for="authPasscode">Session passcode</label><span class="auth-hint">From your last session</span></div>
         <div class="auth-input-box">
@@ -276,8 +317,8 @@ img{max-width:100%}
 <div class="fs-modal" id="fsModal" role="dialog" aria-modal="true" aria-labelledby="fsTitle">
   <div class="fs-sheet">
     <div class="fs-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--pri)"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></div>
-    <h3 id="fsTitle">Watch in full screen</h3>
-    <p>Slides and on-screen details are easier to follow when the video fills your display.</p>
+    <h3 id="fsTitle">Switch to full screen</h3>
+    <p>The session fills your display with chat and participants still on it. Leave any time with Esc or Exit.</p>
     <button class="go" id="fsGo">Go full screen</button>
     <button class="later" id="fsLater">Not now</button>
   </div>
@@ -297,7 +338,7 @@ img{max-width:100%}
 <div class="page">
   <div class="status-bar">
     <div class="live-wrap"><div class="dot" id="statusDot"></div><span id="liveStatus">Checking status…</span></div>
-    <div class="viewer"><span id="viewerCount">--</span> in the room</div>
+    <button type="button" class="viewer" id="viewerBtn"><span id="viewerCount">--</span> participants</button>
   </div>
   <div class="countdown" id="topCountdown">Checking window…</div>
   <div class="retention-alert" id="retentionBadge"><span><b>Final stage.</b> Under 15 minutes left. Stay with the video, the passcode appears shortly.</span></div>
@@ -321,6 +362,8 @@ img{max-width:100%}
         <button class="fs-btn" id="fsBtn" type="button">Full screen</button>
         <div id="videoContainer"></div>
         <button type="button" class="unmute-hint" id="unmuteHint">Tap to unmute</button>
+        <div class="vtoasts" id="vToasts"></div>
+        <div class="zbar"><div class="zl"><span class="zdot"></span><span id="zTitle">Induction</span><span id="zClock">00:00</span></div><div><button class="zb" id="zPart" type="button">Participants<b id="zCount">--</b></button></div><div class="zr" id="zNote"></div></div>
       </div>
       <div class="stats">
         <div class="stat"><div class="stat-label">Candidate</div><div class="stat-value" id="hudCandidateName" style="color:var(--pri)">--</div></div>
@@ -330,6 +373,7 @@ img{max-width:100%}
         <div class="stat"><div class="stat-label">Attendees</div><div class="stat-value"><span class="attendee-badge" id="hudAttendees">--</span></div></div>
       </div>
     </div>
+    <aside class="ppanel" id="partPanel" aria-label="Participants"><div class="pph"><b>Participants (<span id="ppCount">0</span>)</b><button id="ppClose" aria-label="Close">✕</button></div><input id="ppSearch" placeholder="Search participants" autocomplete="off"><div id="ppList"></div></aside>
     <aside class="chat-wrap">
       <div class="chat-panel">
         <div class="chat-head"><span>Live chat</span><small id="chatCount">Room chat</small></div>
@@ -339,8 +383,9 @@ img{max-width:100%}
     </aside>
   </div>
 
+  <div class="code-card"><div class="ci">#</div><div style="flex:1;min-width:0"><h3 id="codeTitle">Session code</h3><p id="codeText"></p><div class="code-note" id="codeNoteRow"><input id="codeInput" placeholder="Write the code here to keep it safe" autocomplete="off"><button type="button" id="codeSave">Save</button></div></div></div>
   <div class="info-box">
-    <h3>Before you continue</h3>
+    <h3>How this session works</h3>
     <ul>
       <li>Watch the full session without skipping or leaving.</li>
       <li>Stay on this tab. Switching tabs pauses your progress.</li>
@@ -390,7 +435,7 @@ function applyTheme(theme) {
   themeToggle.innerText = theme === "dark" ? "🌞" : "🌙";
   themeToggle.title = theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
 }
-applyTheme(savedTheme || (systemDark && systemDark.matches ? "dark" : "light"));
+applyTheme(savedTheme || "dark");
 if (systemDark && systemDark.addEventListener) {
   systemDark.addEventListener("change", e => { if (!savedTheme) applyTheme(e.matches ? "dark" : "light"); });
 }
@@ -435,10 +480,10 @@ function togglePasscodeVisibility() {
     passcodeBlock.style.display = "none";
   } else if (chosen === 2) {
     passcodeBlock.style.display = "block";
-    passcodeLabel.innerText = "Session 1 Video Passcode";
+    passcodeLabel.innerText = "Day 1 session code";
   } else if (chosen === 3) {
     passcodeBlock.style.display = "block";
-    passcodeLabel.innerText = "Mentor Secret Passcode";
+    passcodeLabel.innerText = "Day 2 session code";
   }
 }
 
@@ -782,6 +827,7 @@ document.addEventListener('webkitfullscreenchange', manageFullscreenOrientation)
 
 /* REALISTIC STAGE & TIME-AWARE VIEWER ENGINE */
 function updateViewers(){
+  try { renderCodeCard(); } catch (e) {}
   const cfg = SESSION_CONFIG[activeSession] || SESSION_CONFIG[1];
   const now = new Date();
   const hour = now.getHours();
@@ -897,6 +943,7 @@ function addChatMessage(m) {
   box.appendChild(el);
   while (box.children.length > 80) box.firstChild.remove();
   if (nearBottom || m.you) box.scrollTop = box.scrollHeight;
+  if (inFs()) capt(m);
 }
 
 function sendChatMessage() {
@@ -957,7 +1004,7 @@ function scheduleChatSim(sc) {
 }
 
 function showToast(text) {
-  const stack = document.getElementById("toastStack");
+  const stack = document.getElementById(inFs() ? "vToasts" : "toastStack");
   const t = document.createElement("div");
   t.className = "toast"; t.textContent = text;
   stack.appendChild(t);
@@ -1072,6 +1119,89 @@ setInterval(() => {
   if (fsNext === null) fsNext = Date.now() + 120000;
   if (Date.now() >= fsNext) fsModal.classList.add("open");
 }, 4000);
+
+
+/* PARTICIPANTS PANEL (Zoom-style roster) */
+const crowd = [];
+function ensureCrowd(n) {
+  roster.forEach(p => { if (!crowd.some(c => c.full === p.full)) crowd.unshift({ full: p.full, city: p.city, ini: p.ini, color: p.color }); });
+  let guard = 0;
+  while (crowd.length < n && guard++ < 600) {
+    const f = pick(FIRST), l = pick(LAST), full = `${f} ${l}`;
+    if (crowd.some(c => c.full === full)) continue;
+    crowd.push({ full, city: pick(CITIES), ini: f[0] + l[0], color: `linear-gradient(135deg,${pick(GRADS)})` });
+  }
+}
+function renderParticipants() {
+  const n = parseInt(document.getElementById("viewerCount").innerText) || 40;
+  ensureCrowd(n);
+  const q = document.getElementById("ppSearch").value.trim().toLowerCase();
+  const me = currentCandidate ? currentCandidate.name : "You";
+  const meIni = me.split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join("");
+  const rows = [
+    { full: "Lead Instructor", sub: hostPresent ? "Host · Presenting" : "Host · Joining soon", ini: "LI", color: "linear-gradient(135deg,#2F54EB,#4f46e5)", tag: "Host" },
+    { full: me, sub: "You · Verified", ini: meIni, color: "linear-gradient(135deg,#10b981,#059669)", tag: "You" }
+  ].concat(crowd.slice(0, Math.max(0, n - 2)).map(c => ({ full: c.full, sub: c.city, ini: c.ini, color: c.color })));
+  document.getElementById("ppCount").innerText = n;
+  const list = document.getElementById("ppList");
+  list.innerHTML = "";
+  rows.filter(r => !q || r.full.toLowerCase().includes(q) || (r.sub || "").toLowerCase().includes(q)).forEach(r => {
+    const d = document.createElement("div"); d.className = "pr";
+    const av = document.createElement("div"); av.className = "g-avatar"; av.style.background = r.color; av.textContent = r.ini;
+    const mid = document.createElement("div");
+    const nm = document.createElement("div"); nm.className = "pn"; nm.textContent = r.full;
+    if (r.tag) { const t = document.createElement("span"); t.className = "tag"; t.textContent = r.tag; nm.appendChild(t); }
+    const sb = document.createElement("div"); sb.className = "ps"; sb.textContent = r.sub;
+    mid.append(nm, sb);
+    const m = document.createElement("div"); m.className = "pm"; m.textContent = r.tag === "Host" && hostPresent ? "Speaking" : "Muted";
+    d.append(av, mid, m); list.appendChild(d);
+  });
+}
+function openParticipants() {
+  const panel = document.getElementById("partPanel");
+  const host = inFs() ? vCard : document.body;
+  if (panel.parentElement !== host) host.appendChild(panel);
+  renderParticipants(); panel.classList.add("open");
+}
+document.getElementById("ppClose").onclick = () => document.getElementById("partPanel").classList.remove("open");
+document.getElementById("ppSearch").addEventListener("input", renderParticipants);
+["viewerBtn", "zPart"].forEach(id => document.getElementById(id).addEventListener("click", openParticipants));
+document.getElementById("galleryStrip").addEventListener("click", e => { if (e.target.closest(".more")) openParticipants(); });
+setInterval(() => { if (document.getElementById("partPanel").classList.contains("open")) renderParticipants(); }, 5000);
+
+/* FULL-SCREEN CAPTIONS + BAR */
+function capt(m) {
+  const box = document.getElementById("vToasts");
+  const c = document.createElement("div"); c.className = "cap";
+  const b = document.createElement("b"); b.textContent = m.you ? "You" : m.name;
+  c.append(b, document.createTextNode(m.text));
+  box.appendChild(c);
+  while (box.children.length > 4) box.firstChild.remove();
+  setTimeout(() => c.remove(), 8000);
+}
+setInterval(() => {
+  const g = id => document.getElementById(id);
+  g("zClock").textContent = g("hudStreamClock").textContent;
+  g("zCount").textContent = g("viewerCount").textContent;
+  g("zTitle").textContent = (SESSION_CONFIG[activeSession] || {}).name || "Induction";
+  g("zNote").textContent = activeSession === 3 ? "Final session. Stay until the end to receive your certificate." : `A session code will appear in this video. Write it down. You need it to join Day ${activeSession + 1}.`;
+}, 1000);
+
+/* CODE CARD */
+function renderCodeCard() {
+  if (!currentCandidate) return;
+  const last = activeSession === 3, nxt = activeSession + 1;
+  document.getElementById("codeTitle").textContent = last ? "Final session" : `Your Day ${nxt} login code is in this session`;
+  document.getElementById("codeText").textContent = last ? "No new code this time. Watch to the end and your certificate unlocks." : `A code appears inside the video. Write it down now. Without it you cannot sign in for Day ${nxt}.`;
+  document.getElementById("codeNoteRow").style.display = last ? "none" : "flex";
+}
+const codeKey = () => "tara_code_" + activeSession;
+try { const v = localStorage.getItem("tara_code_" + 1); } catch (e) {}
+document.getElementById("codeSave").onclick = () => {
+  const v = document.getElementById("codeInput").value.trim();
+  try { localStorage.setItem(codeKey(), v); } catch (e) {}
+  showToast(v ? "Code saved on this device" : "Enter the code first");
+};
 
 // Seed the room with random participants
 for (let i = 0; i < 7; i++) addPerson();
