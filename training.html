@@ -122,7 +122,7 @@ img{max-width:100%}
 .video-card:fullscreen,.video-card:-webkit-full-screen{border-radius:0;aspect-ratio:auto}
 .video-card.pseudo{position:fixed;inset:0;z-index:1500;border-radius:0;aspect-ratio:auto}
 .video-hud{position:absolute;top:10px;left:10px;z-index:5;font-size:11px;font-weight:700;color:#fff;background:rgba(0,0,0,.55);padding:5px 10px;border-radius:99px;backdrop-filter:blur(6px);pointer-events:none}
-.fs-btn{position:absolute;right:10px;top:10px;z-index:6;height:34px;padding:0 12px;border:0;border-radius:99px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;font-weight:700;cursor:pointer}
+.fs-btn{display:none!important;position:absolute;right:10px;top:10px;z-index:6;height:34px;padding:0 12px;border:0;border-radius:99px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;font-weight:700;cursor:pointer}
 .unmute-hint{display:none;position:absolute;left:50%;bottom:14px;transform:translateX(-50%);z-index:6;border:0;border-radius:99px;padding:10px 16px;background:#fff;color:#0F1B33;font-weight:700;font-size:13px;cursor:pointer}
 .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
@@ -314,6 +314,15 @@ body{background:radial-gradient(900px 520px at 88% -8%,rgba(47,84,235,.30),trans
   </div>
 </div>
 
+<div class="fs-modal" id="leaveModal" role="alertdialog" aria-modal="true" aria-labelledby="lvTitle">
+  <div class="fs-sheet">
+    <div class="fs-ico" style="background:rgba(245,158,11,.15)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></div>
+    <h3 id="lvTitle">Leave this session?</h3>
+    <p>Your session is still running. If you leave now, today's watch time will not be saved and you will have to join again from the start.</p>
+    <button class="go" id="lvStay">Stay in session</button>
+    <button class="later" id="lvLeave">Leave anyway</button>
+  </div>
+</div>
 <div class="fs-modal" id="fsModal" role="dialog" aria-modal="true" aria-labelledby="fsTitle">
   <div class="fs-sheet">
     <div class="fs-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--pri)"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></div>
@@ -542,6 +551,7 @@ async function verifyCandidateAuthentication() {
       evaluateTimeLockEngine();
       startHeartbeatCheck();
       enableReloadProtection();
+      armBackGuard();
       updateViewers();
     } else {
       errorElement.innerText = result.message || "Access denied. Candidate identity not found.";
@@ -1096,16 +1106,19 @@ const vCard = document.getElementById("videoCard"), fsModal = document.getElemen
 let fsNext = null;
 const inFs = () => !!(document.fullscreenElement || document.webkitFullscreenElement) || vCard.classList.contains("pseudo");
 function enterFs() {
-  const r = vCard.requestFullscreen || vCard.webkitRequestFullscreen;
-  if (r) { try { Promise.resolve(r.call(vCard)).catch(() => vCard.classList.add("pseudo")); } catch (e) { vCard.classList.add("pseudo"); } }
-  else vCard.classList.add("pseudo");
-  document.getElementById("fsBtn").textContent = "Exit";
+  const f = document.querySelector("#videoContainer iframe");
+  const pseudo = () => vCard.classList.add("pseudo");
+  const tryEl = (el, next) => {
+    const r = el.requestFullscreen || el.webkitRequestFullscreen;
+    if (!r) return next();
+    try { Promise.resolve(r.call(el)).catch(next); } catch (e) { next(); }
+  };
+  if (f) tryEl(f, () => tryEl(vCard, pseudo)); else tryEl(vCard, pseudo);
 }
 function exitFs() {
   vCard.classList.remove("pseudo");
   if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
   else if (document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
-  document.getElementById("fsBtn").textContent = "Full screen";
   fsNext = Date.now() + rand(180000, 240000);
 }
 document.getElementById("fsBtn").onclick = () => inFs() ? exitFs() : enterFs();
@@ -1202,6 +1215,33 @@ document.getElementById("codeSave").onclick = () => {
   try { localStorage.setItem(codeKey(), v); } catch (e) {}
   showToast(v ? "Code saved on this device" : "Enter the code first");
 };
+
+
+/* BACK-BUTTON GUARD: back press asks first instead of leaving the page */
+let backArmed = false, leaving = false;
+function armBackGuard() {
+  if (backArmed) return;
+  backArmed = true;
+  try { history.pushState({ s: 1 }, "", location.href); } catch (e) {}
+}
+window.addEventListener("popstate", () => {
+  if (!backArmed || leaving) return;
+  try { history.pushState({ s: 1 }, "", location.href); } catch (e) {}
+  if (currentCandidate && !isSessionCompleted) document.getElementById("leaveModal").classList.add("open");
+});
+document.getElementById("lvStay").onclick = () => document.getElementById("leaveModal").classList.remove("open");
+document.getElementById("lvLeave").onclick = () => {
+  leaving = true; disableReloadProtection();
+  document.getElementById("leaveModal").classList.remove("open");
+  history.go(-2);
+  setTimeout(() => location.reload(), 500);
+};
+let wasAway = false;
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) { wasAway = true; return; }
+  if (wasAway && currentCandidate && !isSessionCompleted) { showToast("Progress pauses while you are on another tab. Stay on this page."); }
+  wasAway = false;
+});
 
 // Seed the room with random participants
 for (let i = 0; i < 7; i++) addPerson();
