@@ -292,7 +292,7 @@ body{background:radial-gradient(900px 520px at 88% -8%,rgba(47,84,235,.30),trans
         </div>
       </div>
 
-      <div class="auth-note"><b>Every session has a code.</b> You will see it inside the video. Note it down, because it is required to join the next day.</div>
+      <div class="auth-note"><b>Every session has a code.</b> You will see it inside the video. Note it down, because it is required to join your next session.</div>
       <div class="auth-input-group" id="passcodeBlock" style="display:none;">
         <div class="auth-label-row"><label id="passcodeLabel" for="authPasscode">Session passcode</label><span class="auth-hint">From your last session</span></div>
         <div class="auth-input-box">
@@ -428,7 +428,7 @@ body{background:radial-gradient(900px 520px at 88% -8%,rgba(47,84,235,.30),trans
       <li>Stay on this tab. Switching tabs pauses your progress.</li>
       <li>Logging in on another device ends this session.</li>
       <li>The verification passcode appears inside the video.</li>
-      <li>The next day unlocks on the next calendar day.</li>
+      <li>Your next session opens once your team confirms the schedule.</li>
     </ul>
   </div>
   <button class="btn" id="completeSessionBtn" disabled onclick="handleSessionActionButtonClick()">Session in progress</button>
@@ -443,9 +443,9 @@ const API_URL = "https://script.google.com/macros/s/AKfycbw79wnaUmMkr4DIHjbInzMT
 
 // STAGGERED ACCESS WINDOWS
 const SESSION_CONFIG = {
-  1: { name: "Foundation Session", start: 13, end: 16, timeStr: "01:00 PM – 04:00 PM Daily", progress: "33%", streamKey: "day1_v2", baseViewers: 52, maxViewers: 86 },
-  2: { name: "Clarification Session", start: 14, end: 17, timeStr: "02:00 PM – 05:00 PM Daily", progress: "66%", streamKey: "day2_v2", baseViewers: 36, maxViewers: 62 },
-  3: { name: "Execution Session", start: 15, end: 18, timeStr: "03:00 PM – 06:00 PM Daily", progress: "100%", streamKey: "day3_v2", baseViewers: 25, maxViewers: 46 }
+  1: { name: "Foundation Session", start: 13, end: 16, timeStr: "01:00 PM – 04:00 PM", progress: "33%", streamKey: "day1_v2", baseViewers: 52, maxViewers: 86 },
+  2: { name: "Clarification Session", start: 14, end: 17, timeStr: "02:00 PM – 05:00 PM", progress: "66%", streamKey: "day2_v2", baseViewers: 36, maxViewers: 62 },
+  3: { name: "Execution Session", start: 15, end: 18, timeStr: "03:00 PM – 06:00 PM", progress: "100%", streamKey: "day3_v2", baseViewers: 25, maxViewers: 46 }
 };
 
 // TESTING MODE: true = hour-based time-lock bypassed (video loads instantly after login). Set false for production.
@@ -640,11 +640,11 @@ function evaluateTimeLockEngine() {
     renderSegClock(Math.floor(diff / 3600000), Math.floor(diff / 60000) % 60, Math.floor(diff / 1000) % 60);
   } else {
     g("lockTitle").innerText = "Today's session has ended";
-    g("lockText").innerHTML = `This session ran ${fmt(cfg.start)} to ${fmt(cfg.end)}. Sign in again tomorrow at the same time.`;
+    g("lockText").innerHTML = `This session ran ${fmt(cfg.start)} to ${fmt(cfg.end)}. Please check with your coordinator for your next joining time.`;
     g("startCountdown").style.display = "none";
     g("lockLobby").textContent = "Lobby is closed";
     g("trainingStatus").innerText = "Closed";
-    g("topCountdown").textContent = `Closed · opens tomorrow at ${fmt(cfg.start)}`;
+    g("topCountdown").textContent = `Session closed`;
   }
 }
 
@@ -793,7 +793,7 @@ async function markCurrentSessionCompleted(isManualClick) {
         document.getElementById("certOverlay").style.display = "flex";
       } else if (isManualClick) {
         const nextCfg = SESSION_CONFIG[activeSession + 1] || SESSION_CONFIG[1];
-        alert(`Congratulations ${currentCandidate.name}! Module ${activeSession} logged successfully.\n\nYour next module will unlock tomorrow between ${nextCfg.timeStr}.`);
+        alert(`Congratulations ${currentCandidate.name}! Module ${activeSession} logged successfully.\n\nYour coordinator will share your next session details.`);
         window.location.reload();
       }
     }
@@ -1206,7 +1206,7 @@ setInterval(() => {
   g("zClock").textContent = g("hudStreamClock").textContent;
   g("zCount").textContent = g("viewerCount").textContent;
   g("zTitle").textContent = (SESSION_CONFIG[activeSession] || {}).name || "Induction";
-  g("zNote").textContent = activeSession === 3 ? "Final session. Stay until the end to receive your certificate." : `A session code will appear in this video. Write it down. You need it to join Day ${activeSession + 1}.`;
+  g("zNote").textContent = activeSession === 3 ? "Final session. Stay until the end to receive your certificate." : `A session code will appear in this video. Write it down. You need it to join your next session.`;
 }, 1000);
 
 /* CODE CARD */
@@ -1214,7 +1214,7 @@ function renderCodeCard() {
   if (!currentCandidate) return;
   const last = activeSession === 3, nxt = activeSession + 1;
   document.getElementById("codeTitle").textContent = last ? "Final session" : `Your Day ${nxt} login code is in this session`;
-  document.getElementById("codeText").textContent = last ? "No new code this time. Watch to the end and your certificate unlocks." : `A code appears inside the video. Write it down now. Without it you cannot sign in for Day ${nxt}.`;
+  document.getElementById("codeText").textContent = last ? "No new code this time. Watch to the end and your certificate unlocks." : `A code appears inside the video. Write it down now. Without it you cannot sign in for the next session.`;
   document.getElementById("codeNoteRow").style.display = last ? "none" : "flex";
 }
 const codeKey = () => "tara_code_" + activeSession;
