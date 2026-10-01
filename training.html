@@ -927,20 +927,17 @@ document.addEventListener('fullscreenchange', manageFullscreenOrientation);
 document.addEventListener('webkitfullscreenchange', manageFullscreenOrientation);
 
 /* REALISTIC STAGE & TIME-AWARE VIEWER ENGINE */
+var viewerNow = 0;
 function updateViewers(){
   try { renderCodeCard(); } catch (e) {}
   const cfg = SESSION_CONFIG[activeSession] || SESSION_CONFIG[1];
-  const now = new Date();
-  const hour = now.getHours();
-  
-  let targetBase = cfg.baseViewers;
-  if ((hour >= 13 && hour <= 14) || (hour >= 15 && hour <= 17)) {
-    targetBase = Math.floor((cfg.baseViewers + cfg.maxViewers) / 2) + 6;
-  }
-  
-  let fluctuation = Math.floor(Math.random() * 5) - 2;
-  let currentViewers = Math.min(cfg.maxViewers, Math.max(cfg.baseViewers - 6, targetBase + fluctuation));
-  
+  const mins = (Date.now() - chatT0) / 60000;
+  const target = cfg.baseViewers - 4 + Math.min(1, mins / 12) * (cfg.maxViewers - cfg.baseViewers) * 0.55;
+  if (!viewerNow) viewerNow = Math.round(cfg.baseViewers - 4);
+  const r = Math.random();
+  viewerNow += viewerNow < target - 1 ? (r < .6 ? 1 : 0) : viewerNow > target + 1 ? (r < .6 ? -1 : 0) : (r < .3 ? 1 : r < .6 ? -1 : 0);
+  viewerNow = Math.min(cfg.maxViewers, Math.max(cfg.baseViewers - 6, viewerNow));
+  const currentViewers = viewerNow;
   const viewerTarget = document.getElementById("viewerCount");
   if (viewerTarget) viewerTarget.innerText = currentViewers;
   const att = document.getElementById("hudAttendees");
@@ -948,7 +945,7 @@ function updateViewers(){
   const more = document.getElementById("galleryMore");
   if (more) more.innerText = `+${Math.max(0, currentViewers - GALLERY_SHOWN)}`;
   const cc = document.getElementById("chatCount");
-  if (cc) cc.innerText = `${currentViewers} online`;
+  if (cc && !/typing/.test(cc.innerText)) cc.innerText = `${currentViewers} online`;
 }
 
 /* BOARDROOM EXPERIENCE: ROSTER, GALLERY, CHAT, SESSION-SPECIFIC HOST SCRIPT */
@@ -1052,6 +1049,7 @@ function sendChatMessage() {
   const text = inp.value.trim();
   if (!text || !currentCandidate) return;
   addChatMessage({ name: currentCandidate.name, text: text, you: true });
+  onUserChat(text);
   inp.value = "";
   inp.focus();
 }
@@ -1060,48 +1058,105 @@ document.getElementById("chatInput").addEventListener("keydown", e => {
   if (e.key === "Enter") { e.preventDefault(); sendChatMessage(); }
 });
 
-/* SESSION SCRIPT: host arrival times match each video; every chat line is randomised per visit */
+/* LIVE CHAT ENGINE: no fixed script. Each person has a typing style, topics are weighted, and timing is irregular. */
 const shuffle = a => a.map(v => [Math.random(), v]).sort((x, y) => x[0] - y[0]).map(v => v[1]);
-const PRE_POOL = ["Hello everyone","Good afternoon all","Audio aa rahi hai kisi ko?","Just joined, am I early?","Namaste, joined from mobile","Waiting for the host","Host kab join karenge?","Screen dikh rahi hai, sound check kar raha hu","Is this the right link for today?","Notes ready hain","Network thoda slow hai mera","Sab ready hain na?","Hi all, joined","Koi bata sakta hai kitne baje tak chalega?"];
-const ACK_POOL = ["Yes sir, audio clear","Slides clear dikh rahi hain","Good afternoon sir","Voice perfect aa rahi hai","Clear sir, thank you","Namaste sir, all good here","Audio and video both fine sir","Hearing you well sir"];
-const GENERAL_LINES = ["Notes completed sir","Video quality is perfect, no buffering","Got it, thank you sir","Clear explanation, taking notes","Everything is visible clearly","Flow is well explained sir","Understood sir","Samajh aa gaya sir","Nice point sir","Noted, thanks","Yeh part important lag raha hai","Screenshot le lu slide ka?"];
-const HOST_LINES = ["Feel free to post your questions in the chat.","Please keep taking notes as we go.","The verification code appears inside the session, so stay attentive.","Let me know if any point needs more detail.","Good, everyone is following along well."];
+const usedLines = new Set();
+function fresh(arr) {
+  const f = arr.filter(x => !usedLines.has(x));
+  const p = pick(f.length ? f : arr);
+  usedLines.add(p); if (usedLines.size > 160) usedLines.clear();
+  return p;
+}
+const STY = {};
+function voice(t, name) {
+  const s = STY[name] || (STY[name] = { low: Math.random() < .45, emo: Math.random() < .2, typo: Math.random() < .2, dot: Math.random() < .35 });
+  if (s.low) t = t.toLowerCase();
+  if (!s.dot) t = t.replace(/[.!]+$/, "");
+  if (s.typo && t.length > 8 && Math.random() < .5) { const i = 1 + Math.floor(Math.random() * (t.length - 3)); t = t.slice(0, i) + t.slice(i + 1); }
+  if (s.emo && Math.random() < .5) t += " " + pick(["🙂", "👍", "🙏", "😊"]);
+  return t;
+}
+function say(who, text, host, delay) {
+  setTimeout(() => {
+    const cc = document.getElementById("chatCount");
+    if (cc) cc.innerText = `${who} is typing…`;
+    setTimeout(() => {
+      addChatMessage({ name: who, text: host ? text : voice(text, who), host: !!host });
+      if (cc) cc.innerText = `${document.getElementById("viewerCount").innerText} online`;
+    }, rand(1200, 3000));
+  }, (delay || 0) * 1000);
+}
+const first = n => n.split(" ")[0];
+const GREET = ["hi", "hii", "hello", "hello everyone", "good afternoon", "good afternoon sir", "hi all", "hey", "hiii", "namaste", "hello sir", "hi sir", "hii everyone", "joined", "hi, joined from mobile", "good afternoon everyone"];
+const PRE = ["audio aa rahi hai?", "sir kab start honge", "anyone here?", "koi hai?", "waiting for host", "host abhi aaye nahi?", "kitne baje start hoga", "link sahi hai na?", "screen black dikh rahi hai kisi ko?", "mai bhi abhi aaya", "sab yahi hai na?", "start hua kya?", "just joined, is it live?", "sound check, can anyone hear?", "laptop se join kiya hai"];
+const PRE_REPLY = ["haan abhi nahi aaye", "bas aate honge", "wait karo thoda", "nahi abhi start nahi hua", "same, abhi wait kar raha hu", "yes live hai, host ka wait hai", "haan sab yahi hai"];
+const ACK = ["yes sir audio clear", "audio clear sir", "clear sir", "yes sir", "sound is fine", "audio theek hai sir", "loud and clear", "good afternoon sir", "yes visible", "voice aa rahi hai sir"];
+const MID = ["ok sir", "got it", "noted", "yes sir", "samajh aaya", "notes bana raha hu", "note kar liya", "achha, ye toh pata nahi tha", "makes sense", "ok understood", "haan sir", "right sir", "sahi hai", "ye part important hai na?", "sir ek baar repeat kar dijiye", "clear hai sir", "hmm ok", "theek hai", "ji sir", "yes yes", "ye wala slide notes me likh liya"];
+const TECH = [["sir awaaz thodi cut ho rahi hai", "ab theek hai"], ["video lag kar raha hai kisi ka?", "ab chal raha hai smooth"], ["net slow hai mera, ruk ruk ke chal raha", "reconnect hua, ab ok hai"], ["sound low hai thoda", "volume badha diya, ab clear hai"]];
+const QA = [["sir ye sabke liye same hai ya alag alag?", "Good question. Treat it as the same for everyone for now. I will point out anything that differs."], ["sir thoda repeat kar denge please?", "Sure, let me go over that once more."], ["late join kiya, kuch miss hua kya?", "Not much, you can follow along from here."], ["sir attendance lag gayi na?", "Yes, attendance is recorded for everyone present."], ["kitna time lagega sir aaj?", "Around an hour in total."], ["sir code kab aayega?", "The session code appears in the session itself. Keep your notes ready."], ["sir ek doubt tha, baad me puch sakte hai?", "Yes, ask in the chat any time. I will pick it up."], ["sir kya ye sab yaad rakhna hai?", "Take notes on the key points. That is enough."]];
+const AFTER = ["same doubt sir", "thanks sir", "ok sir got it", "thank you sir", "mujhe bhi yehi puchna tha", "thanks, clear ho gaya"];
+const HOSTSAY = ["Please keep taking notes as we go.", "Post your questions in the chat, I will pick them up.", "Stay with the session, the code will appear here.", "Is everyone able to follow so far?", "Good, let's continue."];
+const WRAP = ["thank you sir", "thanks sir", "thank you so much sir", "helpful session sir", "code note kar liya sir", "good session sir", "dhanyawad sir", "thanks everyone", "bahut achha laga sir"];
 const SESSION_SCRIPT = {
-  1:{hostAt:271,end:"4 PM",name:"Day 1: Foundation Session",intro:"",pre:["Day 1 hai na? Foundation session?","Countdown chal raha hai"],extra:["Foundation clear ho gaya sir","Onboarding steps samajh aaye"]},
-  2:{hostAt:90,end:"5 PM",name:"Day 2: Clarification Session",intro:"sorry for the short delay, ",pre:["Day 2 hai, clarification wala?","Host nahi dikh rahe abhi"],extra:["Doubt clear ho gaya sir","Ye point samajh aa gaya, thanks sir"]},
-  3:{hostAt:280,end:"6 PM",name:"Day 3: Execution Session, our final module",intro:"",pre:["Day 3 hai, last session","Countdown chal raha hai, thoda wait"],extra:["Execution plan clear hai sir","Understood execution model"]}
+  1: { hostAt: 271, name: "Day 1: Foundation Session", intro: "", pre: ["day 1 hai na? foundation wala?"], say: ["onboarding ka process clear hai", "targets ke baare me aur batayenge sir?", "joining process samajh aa gaya"], qa: [["sir pehle hafte me kya expect karna hai?", "I will walk through that in this session."]], wrap: "Thank you everyone. Please make sure you have noted the session code from today." },
+  2: { hostAt: 90, name: "Day 2: Clarification Session", intro: "sorry for the short delay, ", pre: ["day 2 hai, clarification wala?"], say: ["doubt clear ho gaya sir", "sir ye point dobara bata dijiye", "process ab clear hai"], qa: [["sir day 1 me jo bataya tha uska example mil sakta hai?", "Yes, I will give an example in a moment."]], wrap: "Thank you everyone. Please make sure you have noted the session code from today." },
+  3: { hostAt: 280, name: "Day 3: Execution Session, our final module", intro: "", pre: ["day 3 hai, last session na?"], say: ["execution plan clear hai sir", "final session hai na ye?", "plan note kar liya"], qa: [["sir iske baad aage kya hoga?", "Your coordinator will share the next steps once this program is complete."]], wrap: "Thank you everyone. That brings us to the end of the program." }
 };
-let lastChatLine = "";
+var chatT0 = Date.now(), wrapSaid = false;
 function runSessionScript() {
   if (scriptStarted) return;
-  scriptStarted = true;
+  scriptStarted = true; chatT0 = Date.now();
   initWatchTracker();
   const sc = SESSION_SCRIPT[activeSession] || SESSION_SCRIPT[1];
-  const n = Math.min(7, Math.max(3, Math.floor(sc.hostAt / 30)));
-  const times = Array.from({length: n}, () => rand(4, sc.hostAt - 8)).sort((a, b) => a - b);
-  shuffle(PRE_POOL.concat(sc.pre)).slice(0, n).forEach((txt, i) => setTimeout(() => { if (!hostPresent) addChatMessage({ name: pickPeer(), text: txt }); }, times[i] * 1000));
+  // 1. Opening: a quick burst of greetings from different people
+  const nG = 4 + Math.floor(Math.random() * 4);
+  Array.from({ length: nG }, () => rand(1, 28)).sort((x, y) => x - y).forEach(t => say(pickPeer(), fresh(GREET), false, t));
+  // 2. Before the host: uneven chatter and small replies
+  const nP = Math.min(8, Math.max(3, Math.floor(sc.hostAt / 22)));
+  Array.from({ length: nP }, () => rand(20, sc.hostAt - 10)).sort((x, y) => x - y).forEach(t => {
+    if (t < 25) return;
+    const pre = Math.random() < .5 ? fresh(PRE.concat(sc.pre)) : null;
+    if (pre) { say(pickPeer(), pre, false, t); if (Math.random() < .55) say(pickPeer(), fresh(PRE_REPLY), false, t + rand(5, 12)); }
+  });
   setTimeout(() => hostArrives(sc), sc.hostAt * 1000);
 }
 function hostArrives(sc) {
   hostPresent = true;
   renderGallery();
   showToast("Lead Instructor joined the session");
-  addChatMessage({ name: "Lead Instructor", text: `Good afternoon everyone, ${sc.intro}welcome to ${sc.name}. We will be live until ${sc.end}. Can everyone hear me clearly?`, host: true });
-  shuffle(ACK_POOL).slice(0, 3 + Math.floor(Math.random() * 2)).forEach((t, i) => setTimeout(() => addChatMessage({ name: pickPeer(), text: t }), (4 + i * 5 + rand(0, 3)) * 1000));
-  setTimeout(() => addChatMessage({ name: pickPeer(), text: pick(["Sir session " + sc.end + " tak chalega na?", "Kitne baje tak hai aaj sir?"]) }), rand(60, 80) * 1000);
-  setTimeout(() => addChatMessage({ name: "Lead Instructor", text: "Yes, we will wrap up by " + sc.end + ". Please stay till the end.", host: true }), rand(85, 100) * 1000);
-  setTimeout(() => scheduleChatSim(sc), 30000);
+  addChatMessage({ name: "Lead Instructor", text: `Good afternoon everyone, ${sc.intro}welcome to ${sc.name}. Can everyone hear me clearly?`, host: true });
+  const n = 3 + Math.floor(Math.random() * 3);
+  shuffle(ACK).slice(0, n).forEach((t, i) => say(pickPeer(), t, false, 3 + i * rand(2, 5) + rand(0, 2)));
+  if (Math.random() < .6) say(pickPeer(), fresh(["good afternoon sir", "hello sir", "namaste sir"]), false, rand(14, 22));
+  say("Lead Instructor", "Thank you. Let's get started.", true, rand(26, 34));
+  setTimeout(() => chatLoop(sc), rand(40, 55) * 1000);
 }
-function scheduleChatSim(sc) {
-  setTimeout(() => {
-    const host = Math.random() < 0.15;
-    const pool = host ? HOST_LINES : GENERAL_LINES.concat(sc.extra);
-    let line;
-    do { line = pick(pool); } while (line === lastChatLine && pool.length > 1);
-    lastChatLine = line;
-    addChatMessage({ name: host ? "Lead Instructor" : pickPeer(), text: line, host: host });
-    scheduleChatSim(sc);
-  }, rand(18000, 34000));
+function chatLoop(sc) {
+  const r = Math.random();
+  const gap = r < .16 ? rand(2, 5) : r < .3 ? rand(45, 90) : rand(10, 30);
+  setTimeout(() => { chatEvent(sc); chatLoop(sc); }, gap * 1000);
+}
+function chatEvent(sc) {
+  const mins = (Date.now() - chatT0) / 60000;
+  if ((mins > 47 || videoEnded) && !wrapSaid) { wrapSaid = true; say("Lead Instructor", sc.wrap, true, 0);  }
+  if (wrapSaid) { if (Math.random() < .7) say(pickPeer(), fresh(WRAP), false, rand(1, 6)); return; }
+  const r = Math.random();
+  if (r < .42) { say(pickPeer(), fresh(MID.concat(sc.say)), false, 0); }
+  else if (r < .56) { const [p, ok] = pick(TECH); const w = pickPeer(); say(w, p, false, 0); say(w, ok, false, rand(25, 55)); if (Math.random() < .4) say(pickPeer(), fresh(["same here", "mujhe bhi lag raha hai", "mere me theek hai"]), false, rand(5, 10)); }
+  else if (r < .70) { const [q, a] = pick(QA.concat(sc.qa)); const w = pickPeer(); say(w, q, false, 0); say("Lead Instructor", `@${first(w)} ${a}`, true, rand(10, 18)); if (Math.random() < .5) say(pickPeer(), fresh(AFTER), false, rand(20, 30)); }
+  else if (r < .82) { say("Lead Instructor", fresh(HOSTSAY), true, 0); if (Math.random() < .6) say(pickPeer(), fresh(ACK.concat(["yes sir", "ji sir", "all good sir"])), false, rand(4, 9)); }
+  else if (r < .92) { const k = 2 + Math.floor(Math.random() * 2); shuffle(MID).slice(0, k).forEach((t, i) => say(pickPeer(), t, false, i * rand(1, 4))); }
+  else { const w = pickPeer(); say(w, fresh(["sir late join kiya, kuch miss toh nahi hua?", "joined late, kya chal raha hai abhi?"]), false, 0); say(pickPeer(), fresh(["abhi bas shuru hi hua hai", "kuch khaas miss nahi hua", "intro chal raha tha"]), false, rand(8, 16)); }
+}
+function onUserChat(text) {
+  const t = text.toLowerCase();
+  if (/\b(hi+|hello+|hey|namaste|good (morning|afternoon|evening))\b/.test(t)) {
+    const k = 1 + Math.floor(Math.random() * 2);
+    for (let i = 0; i < k; i++) say(pickPeer(), fresh(["hi", "hello", "hii", "hello " + first(currentCandidate.name), "namaste"]), false, rand(3, 9) + i * 3);
+  } else if (text.includes("?")) {
+    if (hostPresent) say("Lead Instructor", `@${first(currentCandidate.name)} ` + fresh(["Good question. I will cover that shortly.", "Noted. Keep it in your notes, we will come to it.", "Thanks for asking. Let me address that in a moment."]), true, rand(8, 16));
+    else say(pickPeer(), fresh(["host abhi aaye nahi", "sir abhi join nahi hue", "wait karo, aate honge"]), false, rand(4, 10));
+  }
 }
 
 function showToast(text) {
@@ -1118,7 +1173,7 @@ function scheduleRosterChurn(first) {
   setTimeout(() => {
     if (Math.random() < 0.3) removeRandomPerson();
     const p = addPerson();
-    showToast(`${p.full} (${p.city}) joined the live boardroom`);
+    showToast(`${p.full} (${p.city}) joined the session`);
     renderGallery(p);
     scheduleRosterChurn(false);
   }, first ? 8000 : rand(20000, 35000));
@@ -1300,7 +1355,6 @@ function renderCodeCard() {
   document.getElementById("codeNoteRow").style.display = last ? "none" : "flex";
 }
 const codeKey = () => "tara_code_" + activeSession;
-try { const v = localStorage.getItem("tara_code_" + 1); } catch (e) {}
 document.getElementById("codeSave").onclick = () => {
   const v = document.getElementById("codeInput").value.trim();
   try { localStorage.setItem(codeKey(), v); } catch (e) {}
