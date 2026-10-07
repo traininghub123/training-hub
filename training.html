@@ -125,7 +125,15 @@ img{max-width:100%}
 .video-card:fullscreen,.video-card:-webkit-full-screen{border-radius:0;aspect-ratio:auto}
 .video-card.pseudo{position:fixed;inset:0;z-index:1500;border-radius:0;aspect-ratio:auto}
 .video-hud{position:absolute;top:10px;left:10px;z-index:5;font-size:11px;font-weight:700;color:#fff;background:rgba(0,0,0,.55);padding:5px 10px;border-radius:99px;backdrop-filter:blur(6px);pointer-events:none}
-.fs-btn{display:none!important;position:absolute;right:10px;top:10px;z-index:6;height:34px;padding:0 12px;border:0;border-radius:99px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;font-weight:700;cursor:pointer}
+.fs-btn{position:absolute;right:10px;top:10px;z-index:30;width:38px;height:38px;padding:0;border:0;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;font-size:18px;line-height:1;font-weight:700;cursor:pointer;display:grid;place-items:center;backdrop-filter:blur(6px)}
+.fs-part{display:none;position:absolute;right:56px;top:10px;z-index:30;height:38px;padding:0 14px;border:0;border-radius:99px;background:rgba(0,0,0,.6);color:#fff;font-size:13px;font-weight:700;cursor:pointer;backdrop-filter:blur(6px)}
+.fs-part b{margin-left:6px;color:#8FA8FF}
+.video-card:fullscreen .fs-part,.video-card:-webkit-full-screen .fs-part,.video-card.pseudo .fs-part{display:block}
+.sb-right{display:flex;align-items:center;gap:8px}
+.chat-toggle{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:7px 14px;cursor:pointer;font-weight:700;color:var(--ink);font-size:13px}
+.chat-toggle.off{color:var(--mute)}
+.stage-layout.nochat .chat-wrap{display:none}
+.stage-layout.nochat{grid-template-columns:minmax(0,1fr)!important}
 .unmute-hint{display:none;position:absolute;left:50%;bottom:14px;transform:translateX(-50%);z-index:6;border:0;border-radius:99px;padding:10px 16px;background:#fff;color:#0F1B33;font-weight:700;font-size:13px;cursor:pointer}
 .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
@@ -194,20 +202,8 @@ body{background:radial-gradient(900px 520px at 88% -8%,rgba(47,84,235,.30),trans
 .code-note button{height:42px;padding:0 14px;border:0;border-radius:12px;background:var(--pri);color:var(--pri-ink);font-weight:700;cursor:pointer}
 .auth-note{margin-bottom:16px;padding:11px 13px;border-radius:12px;background:var(--soft);font-size:13px;color:var(--mute)}
 .auth-note b{color:var(--ink)}
-.zbar{display:none}.vtoasts{display:none}
-.video-card:fullscreen,.video-card:-webkit-full-screen,.video-card.pseudo{display:flex;flex-direction:column;background:#070B16}
-.video-card:fullscreen #videoContainer,.video-card.pseudo #videoContainer{position:relative;flex:1}
-.video-card:fullscreen .zbar,.video-card.pseudo .zbar{display:flex}
-.video-card:fullscreen .vtoasts,.video-card.pseudo .vtoasts{display:flex}
-.zbar{flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px;padding:10px 14px calc(10px + var(--safe-b));background:#0E1529;color:#E8EEFB;font-size:13px;border-top:1px solid #1E2A47}
-.zl{display:flex;align-items:center;gap:8px;font-weight:700}.zdot{width:8px;height:8px;border-radius:50%;background:#EF4444;animation:blink 1.2s infinite}
-.zl span:last-child{font-variant-numeric:tabular-nums;opacity:.7;font-weight:600}
-.zb{height:36px;padding:0 14px;border:0;border-radius:10px;background:#1B2644;color:#fff;font-weight:600;font-size:13px;cursor:pointer}
-.zb b{margin-left:6px;color:#6C8BFF}
-.zr{width:100%;font-size:12.5px;color:#9FB0D3;text-align:center}
-.vtoasts{position:absolute;left:12px;bottom:92px;flex-direction:column;gap:6px;align-items:flex-start;z-index:7;pointer-events:none;max-width:78%}
-.cap{background:rgba(10,15,28,.78);color:#fff;font-size:13px;padding:7px 12px;border-radius:10px;animation:msgin .3s both}
-.cap b{color:#8FA8FF;margin-right:6px}
+.vtoasts{display:none;position:absolute;left:12px;bottom:18px;flex-direction:column;gap:6px;align-items:flex-start;z-index:7;pointer-events:none;max-width:78%}
+.video-card:fullscreen .vtoasts,.video-card:-webkit-full-screen .vtoasts,.video-card.pseudo .vtoasts{display:flex}
 .ppanel{display:none;position:fixed;top:0;right:0;bottom:0;width:min(380px,100%);z-index:2100;background:var(--card);background-color:#0E1529;color:#E8EEFB;flex-direction:column;border-left:1px solid #1E2A47;box-shadow:-20px 0 50px rgba(0,0,0,.4)}
 .ppanel.open{display:flex;animation:slidein .3s cubic-bezier(.2,.8,.2,1)}
 @keyframes slidein{from{transform:translateX(40px);opacity:0}}
@@ -441,7 +437,7 @@ html.theming *,html.theming *::before,html.theming *::after{transition:backgroun
   <div class="fs-sheet">
     <div class="fs-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--pri)"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></div>
     <h3 id="fsTitle">Switch to full screen</h3>
-    <p>The session fills your display with chat and participants still on it. Leave any time with Esc or Exit.</p>
+    <p>The video fills your display. Leave any time with the ✕ button or Esc.</p>
     <button class="go" id="fsGo">Go full screen</button>
     <button class="later" id="fsLater">Not now</button>
   </div>
@@ -461,7 +457,7 @@ html.theming *,html.theming *::before,html.theming *::after{transition:backgroun
 <div class="page">
   <div class="status-bar">
     <div class="live-wrap"><div class="dot" id="statusDot"></div><span id="liveStatus">Checking status…</span></div>
-    <button type="button" class="viewer" id="viewerBtn"><span id="viewerCount">--</span> participants</button>
+    <div class="sb-right"><button type="button" class="chat-toggle" id="chatToggle" aria-pressed="true">💬 Chat: On</button><button type="button" class="viewer" id="viewerBtn"><span id="viewerCount">--</span> participants</button></div>
   </div>
   <div class="countdown" id="topCountdown">Checking window…</div>
   <div class="retention-alert" id="retentionBadge"><span><b>Final stage.</b> Under 15 minutes left. Stay with the video, the passcode appears shortly.</span></div>
@@ -482,12 +478,12 @@ html.theming *,html.theming *::before,html.theming *::after{transition:backgroun
     <div class="stage-main">
       <div class="video-card" id="videoCard">
         <div class="video-hud" id="videoHud">● LIVE · HD</div>
-        <button class="fs-btn" id="fsBtn" type="button">Full screen</button>
+        <button class="fs-btn" id="fsBtn" type="button" aria-label="Full screen">⛶</button>
+        <button class="fs-part" id="zPart" type="button">👥 Participants<b id="zCount">--</b></button>
         <div id="videoContainer"></div>
         <button type="button" class="unmute-hint" id="unmuteHint">Tap to unmute</button>
         <button type="button" class="tap-play" id="tapPlay">▶ Tap to play</button>
         <div class="vtoasts" id="vToasts"></div>
-        <div class="zbar"><div class="zl"><span class="zdot"></span><span id="zTitle">Induction</span><span id="zClock">00:00</span></div><div><button class="zb" id="zPart" type="button">Participants<b id="zCount">--</b></button></div><div class="zr" id="zNote"></div></div>
       </div>
       <div class="stats">
         <div class="stat"><div class="stat-label">Candidate</div><div class="stat-value" id="hudCandidateName" style="color:var(--pri)">--</div></div>
@@ -1215,7 +1211,6 @@ function addChatMessage(m) {
   box.appendChild(el);
   while (box.children.length > 80) box.firstChild.remove();
   if (nearBottom || m.you) box.scrollTop = box.scrollHeight;
-  if (inFs()) capt(m);
 }
 
 function sendChatMessage() {
@@ -1475,27 +1470,38 @@ document.getElementById("dayPick").addEventListener("click", e => {
 const vCard = document.getElementById("videoCard"), fsModal = document.getElementById("fsModal");
 let fsNext = null;
 const inFs = () => !!(document.fullscreenElement || document.webkitFullscreenElement) || vCard.classList.contains("pseudo");
+const fsBtnEl = document.getElementById("fsBtn");
+function updFs() {
+  fsBtnEl.textContent = inFs() ? "✕" : "⛶";
+  fsBtnEl.setAttribute("aria-label", inFs() ? "Exit full screen" : "Full screen");
+  if (inFs()) fsModal.classList.remove("open");
+  else {                                           // leaving fullscreen: participants list goes back to the page
+    const pp = document.getElementById("partPanel");
+    if (pp.parentElement !== document.body) document.body.appendChild(pp);
+  }
+}
 function enterFs() {
-  const f = yt ? null : document.querySelector("#videoContainer iframe");
-  const pseudo = () => vCard.classList.add("pseudo");
-  const tryEl = (el, next) => {
-    const r = el.requestFullscreen || el.webkitRequestFullscreen;
-    if (!r) return next();
-    try { Promise.resolve(r.call(el)).catch(next); } catch (e) { next(); }
-  };
-  if (f) tryEl(f, () => tryEl(vCard, pseudo)); else tryEl(vCard, pseudo);
+  const pseudo = () => { vCard.classList.add("pseudo"); document.body.style.overflow = "hidden"; updFs(); };
+  const r = vCard.requestFullscreen || vCard.webkitRequestFullscreen;
+  if (!r) return pseudo();
+  try { Promise.resolve(r.call(vCard)).catch(pseudo); } catch (e) { pseudo(); }
 }
 function exitFs() {
-  vCard.classList.remove("pseudo");
-  if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
-  else if (document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
+  vCard.classList.remove("pseudo"); document.body.style.overflow = "";
+  try {
+    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
+    else if (document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
+  } catch (e) {}
   fsNext = Date.now() + rand(180000, 240000);
+  updFs();
 }
-document.getElementById("fsBtn").onclick = () => inFs() ? exitFs() : enterFs();
+fsBtnEl.onclick = () => inFs() ? exitFs() : enterFs();
+document.addEventListener("keydown", e => { if (e.key === "Escape" && vCard.classList.contains("pseudo")) exitFs(); });
 document.getElementById("fsGo").onclick = () => { fsModal.classList.remove("open"); enterFs(); };
 document.getElementById("fsLater").onclick = () => { fsModal.classList.remove("open"); fsNext = Date.now() + rand(240000, 360000); };
 ["fullscreenchange", "webkitfullscreenchange"].forEach(ev => document.addEventListener(ev, () => {
-  if (!inFs()) { document.getElementById("fsBtn").textContent = "Full screen"; fsNext = Date.now() + rand(180000, 240000); }
+  if (!inFs()) fsNext = Date.now() + rand(180000, 240000);
+  updFs();
 }));
 setInterval(() => {
   if (!currentCandidate || !scriptStarted || isSessionCompleted || document.hidden || inFs() || fsModal.classList.contains("open") || presence.active) return;
@@ -1552,23 +1558,16 @@ document.getElementById("ppSearch").addEventListener("input", renderParticipants
 document.getElementById("galleryStrip").addEventListener("click", e => { if (e.target.closest(".more")) openParticipants(); });
 setInterval(() => { if (document.getElementById("partPanel").classList.contains("open")) renderParticipants(); }, 5000);
 
-/* FULL-SCREEN CAPTIONS + BAR */
-function capt(m) {
-  const box = document.getElementById("vToasts");
-  const c = document.createElement("div"); c.className = "cap";
-  const b = document.createElement("b"); b.textContent = m.you ? "You" : m.name;
-  c.append(b, document.createTextNode(m.text));
-  box.appendChild(c);
-  while (box.children.length > 4) box.firstChild.remove();
-  setTimeout(() => c.remove(), 8000);
-}
-setInterval(() => {
-  const g = id => document.getElementById(id);
-  g("zClock").textContent = g("hudStreamClock").textContent;
-  g("zCount").textContent = g("viewerCount").textContent;
-  g("zTitle").textContent = (SESSION_CONFIG[activeSession] || {}).name || "Induction";
-  g("zNote").textContent = activeSession === 3 ? "Final session. Stay until the end to receive your certificate." : `A session code will appear in this video. Write it down. You need it to join your next session.`;
-}, 1000);
+/* Participants count on the fullscreen button */
+setInterval(() => { document.getElementById("zCount").textContent = document.getElementById("viewerCount").textContent; }, 1000);
+
+/* CHAT ON / OFF (chat keeps running in the background, closing only hides it) */
+document.getElementById("chatToggle").onclick = function () {
+  const off = document.querySelector(".stage-layout").classList.toggle("nochat");
+  this.textContent = off ? "💬 Chat: Off" : "💬 Chat: On";
+  this.classList.toggle("off", off); this.setAttribute("aria-pressed", String(!off));
+  if (!off) { const m = document.getElementById("chatMessages"); m.scrollTop = m.scrollHeight; }
+};
 
 /* CODE CARD */
 function renderCodeCard() {
