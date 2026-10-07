@@ -316,6 +316,23 @@ html.theming *,html.theming *::before,html.theming *::after{transition:backgroun
 @media(max-width:480px){.theme-fab{width:40px;height:40px;top:calc(10px + var(--safe-t));right:10px}}
 @media(prefers-reduced-motion:reduce){.auth-side h2{-webkit-text-fill-color:#fff;background:none}}
 .yshield{position:absolute;inset:0;z-index:2}
+
+/* ===== v6: LMS-style presence check + real-play tracking ===== */
+.tap-play{display:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:8;border:0;border-radius:99px;padding:14px 26px;background:#fff;color:#0F1B33;font-weight:800;font-size:15px;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.4);animation:rise .3s both}
+.tap-play.show{display:block}
+.pc-modal{display:none;position:fixed;inset:0;z-index:2200;background:rgba(6,12,28,.92);color:#fff;flex-direction:column;gap:12px;align-items:center;justify-content:center;text-align:center;padding:20px;overflow:auto}
+.pc-modal.open{display:flex;animation:rise .3s both}
+.pc-modal.shake .pc-ring{animation:shake .45s}
+.pc-modal h2{font-size:22px}.pc-modal p{font-size:14px;color:#B7C3E0;max-width:320px}
+.pc-ring{position:relative;width:128px;height:128px;display:grid;place-items:center}
+.pc-ring svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.pc-ring circle{fill:none;stroke-width:7}.pc-rb{stroke:rgba(255,255,255,.15)}
+.pc-rf{stroke:#2DD4BF;stroke-linecap:round;stroke-dasharray:327;stroke-dashoffset:0;transition:stroke-dashoffset .25s linear}
+.pc-wave{font-size:54px;transform-origin:70% 80%;animation:pcwv 1.4s ease-in-out infinite}
+@keyframes pcwv{0%,60%,100%{transform:rotate(0)}10%,30%{transform:rotate(16deg)}20%,40%{transform:rotate(-12deg)}50%{transform:rotate(8deg)}}
+.pc-go{height:52px;padding:0 34px;border:0;border-radius:14px;background:var(--pri);color:var(--pri-ink);font-weight:700;font-size:16px;cursor:pointer}
+.pc-cnt{font-size:13px;color:#9FB0D3;font-variant-numeric:tabular-nums}
+@media(max-height:430px){.pc-ring{width:84px;height:84px}.pc-wave{font-size:34px}.pc-modal{gap:6px}.pc-modal p{display:none}}
 </style>
 </head>
 <body>
@@ -413,6 +430,13 @@ html.theming *,html.theming *::before,html.theming *::after{transition:backgroun
     <button class="later" id="lvLeave">Leave anyway</button>
   </div>
 </div>
+<div class="pc-modal" id="presenceModal" role="alertdialog" aria-modal="true" aria-labelledby="pcTitle">
+  <div class="pc-ring"><svg viewBox="0 0 120 120"><circle class="pc-rb" cx="60" cy="60" r="52"/><circle class="pc-rf" id="pcRing" cx="60" cy="60" r="52"/></svg><div class="pc-wave">👋</div></div>
+  <h2 id="pcTitle">Still with us?</h2>
+  <p>Tap to confirm you are watching.<br>The video restarts from the beginning if you miss it.</p>
+  <button type="button" class="pc-go" id="pcYes">Yes, I'm here!</button>
+  <div class="pc-cnt" id="pcCnt">20s</div>
+</div>
 <div class="fs-modal" id="fsModal" role="dialog" aria-modal="true" aria-labelledby="fsTitle">
   <div class="fs-sheet">
     <div class="fs-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--pri)"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></div>
@@ -461,6 +485,7 @@ html.theming *,html.theming *::before,html.theming *::after{transition:backgroun
         <button class="fs-btn" id="fsBtn" type="button">Full screen</button>
         <div id="videoContainer"></div>
         <button type="button" class="unmute-hint" id="unmuteHint">Tap to unmute</button>
+        <button type="button" class="tap-play" id="tapPlay">▶ Tap to play</button>
         <div class="vtoasts" id="vToasts"></div>
         <div class="zbar"><div class="zl"><span class="zdot"></span><span id="zTitle">Induction</span><span id="zClock">00:00</span></div><div><button class="zb" id="zPart" type="button">Participants<b id="zCount">--</b></button></div><div class="zr" id="zNote"></div></div>
       </div>
@@ -748,24 +773,166 @@ function handlePageUnload(e) {
   }
 }
 
-/* WATCH TRACKER */
+/* WATCH TRACKER: counts only while the video is really playing, the tab is visible and no presence check is open */
+let bp = null, bPlaying = false, videoDuration = 0, idleSecs = 0, resumeOnShow = false, counting = false;
+const PC_SECS = 20;
+const presence = { pts: null, i: 0, active: false, deadline: 0, timer: null, vib: null, reFs: false };
+
+function ytState() { try { return yt && yt.getPlayerState ? yt.getPlayerState() : -1; } catch (e) { return -1; } }
+function isPlaying() { return yt ? ytState() === 1 : (bp ? bPlaying : false); }
+function isBuffering() { return yt ? ytState() === 3 : false; }
+const vpPlay = () => { try { if (yt) yt.playVideo(); else if (bp) bp.play(); } catch (e) {} };
+const vpPause = () => { try { if (yt) yt.pauseVideo(); else if (bp) bp.pause(); } catch (e) {} };
+const vpSeek0 = () => { try { if (yt) yt.seekTo(0, true); else if (bp) bp.setCurrentTime(0); } catch (e) {} };
+function readDuration() {
+  if (videoDuration > 0) return;
+  try {
+    if (yt && yt.getDuration) { const d = yt.getDuration(); if (d > 0) videoDuration = d; }
+    else if (bp) bp.getDuration(d => { if (d > 0) videoDuration = d; });
+  } catch (e) {}
+}
+
+/* 2 / 3 / 4 random check points (in watch seconds), one per equal slice so they never bunch up */
+function genPresencePoints() {
+  const span = Math.min(requiredSeconds, videoDuration > 0 ? videoDuration : requiredSeconds);
+  const n = span < 300 ? 2 : span <= 900 ? 3 : 4;
+  const lo = Math.min(20, span * 0.1), hi = span * 0.92, seg = (hi - lo) / n;
+  presence.pts = Array.from({ length: n }, (_, k) => Math.round(lo + seg * k + seg * rand(0.15, 0.85)));
+  presence.i = 0;
+}
+
+function showTap(label) {
+  const b = document.getElementById("tapPlay");
+  b.textContent = label || "▶ Tap to play"; b.classList.add("show");
+}
+function hideTap() { document.getElementById("tapPlay").classList.remove("show"); }
+document.getElementById("tapPlay").onclick = () => {
+  hideTap(); idleSecs = 0;
+  if (videoEnded && !isSessionCompleted) { videoEnded = false; vpSeek0(); }   // replay, watch time is kept
+  vpPlay();
+};
+
 function initWatchTracker() {
   secondsWatched = 0;
+  presence.pts = null; presence.i = 0;
   updateWatchTimerUI();
-
   if (watchTimerInterval) clearInterval(watchTimerInterval);
-
-  watchTimerInterval = setInterval(() => {
-    if (!document.hidden && !isSessionCompleted) {
-      secondsWatched++;
-      updateWatchTimerUI();
-
-      if (secondsWatched >= requiredSeconds) {
-        unlockAndAutoCompleteSession();
-      }
-    }
-  }, 1000);
+  watchTimerInterval = setInterval(watchTick, 1000);
 }
+
+function watchTick() {
+  if (isSessionCompleted) return;
+  readDuration();
+  if (bp && !yt) { try { bp.getPaused(p => { bPlaying = !p && !videoEnded; }); } catch (e) {} }
+  const visible = !document.hidden;
+  const playing = isPlaying();
+  counting = playing && visible && !presence.active;
+
+  if (counting) {
+    idleSecs = 0; hideTap();
+    if (!presence.pts) genPresencePoints();
+    secondsWatched++;
+    updateWatchTimerUI();
+    if (presence.i < presence.pts.length && secondsWatched >= presence.pts[presence.i] && secondsWatched < requiredSeconds) {
+      startPresenceCheck(); return;
+    }
+  } else {
+    updateWatchTimerUI();
+    if (visible && !presence.active) {
+      if (videoEnded) {
+        if (secondsWatched < requiredSeconds) showTap("↻ Watch again");
+      } else if (!playing && !isBuffering()) {
+        if (++idleSecs >= 3) showTap("▶ Tap to play");   // paused for more than 3 seconds
+      } else idleSecs = 0;
+    }
+  }
+  tryCompleteSession();
+}
+
+/* completion needs BOTH: video "ended" event and full watch time */
+function tryCompleteSession() {
+  if (isSessionCompleted) return;
+  if (videoEnded && secondsWatched >= requiredSeconds) {
+    presenceCleanup(); hideTap();
+    unlockAndAutoCompleteSession();
+  }
+}
+function onVideoEnded() {
+  videoEnded = true; bPlaying = false; idleSecs = 0;
+  tryCompleteSession();
+  if (!isSessionCompleted) { updateWatchTimerUI(); if (!document.hidden && secondsWatched < requiredSeconds) showTap("↻ Watch again"); }
+}
+function onPlayState() { if (isPlaying()) { idleSecs = 0; hideTap(); } updateWatchTimerUI(); }
+
+/* ---- presence check ("Still with us?") ---- */
+function startPresenceCheck() {
+  if (presence.active || isSessionCompleted) return;
+  presence.active = true; presence.deadline = Date.now() + PC_SECS * 1000;
+  vpPause();
+  const modal = document.getElementById("presenceModal");
+  const fe = document.fullscreenElement || document.webkitFullscreenElement;
+  presence.reFs = false;
+  let host = document.body;
+  if (fe && fe !== vCard) {                      // player's own (Bunny iframe) fullscreen hides our popup: leave it, come back after
+    presence.reFs = true;
+    try { (document.exitFullscreen || document.webkitExitFullscreen).call(document); } catch (e) {}
+  } else if (fe === vCard || vCard.classList.contains("pseudo")) host = vCard;
+  if (modal.parentElement !== host) host.appendChild(modal);
+  document.getElementById("fsModal").classList.remove("open");
+  modal.classList.add("open");
+  modal.classList.remove("shake"); void modal.offsetWidth; modal.classList.add("shake");
+  const buzz = () => { try { navigator.vibrate && navigator.vibrate([300, 150, 300]); } catch (e) {} };
+  buzz(); presence.vib = setInterval(buzz, 4000);
+  presenceTickUI();
+  presence.timer = setInterval(presenceTickUI, 250);
+}
+function presenceTickUI() {
+  if (!presence.active) return;
+  const left = Math.max(0, Math.ceil((presence.deadline - Date.now()) / 1000));
+  document.getElementById("pcCnt").textContent = left + "s";
+  document.getElementById("pcRing").style.strokeDashoffset = 327 * (1 - left / PC_SECS);
+  if (Date.now() >= presence.deadline) presenceMissed();
+}
+function presenceCleanup() {
+  clearInterval(presence.timer); clearInterval(presence.vib);
+  presence.timer = presence.vib = null; presence.active = false;
+  try { navigator.vibrate && navigator.vibrate(0); } catch (e) {}
+  const modal = document.getElementById("presenceModal");
+  modal.classList.remove("open");
+  if (modal.parentElement !== document.body) document.body.appendChild(modal);
+}
+document.getElementById("pcYes").onclick = () => {
+  if (!presence.active) return;
+  const re = presence.reFs;
+  presenceCleanup();
+  presence.i++; idleSecs = 0;
+  if (re) enterFs();                              // click is a user gesture, so fullscreen is allowed again
+  if (document.hidden) resumeOnShow = true; else vpPlay();
+};
+function presenceMissed() {
+  presenceCleanup();
+  showToast("Presence check missed. The video restarts from the beginning.");
+  restartVideo();
+}
+/* full restart: watch time 0, new random points. Chat / participants keep running untouched. */
+function restartVideo() {
+  secondsWatched = 0; videoEnded = false; idleSecs = 0;
+  presence.pts = null; presence.i = 0;
+  hideTap(); updateWatchTimerUI();
+  vpSeek0();
+  if (document.hidden) resumeOnShow = true; else vpPlay();
+}
+
+/* tab hidden -> pause, back -> resume (only if it was playing) */
+document.addEventListener("visibilitychange", () => {
+  if (!currentCandidate || isSessionCompleted) return;
+  if (document.hidden) {
+    if (isPlaying()) { resumeOnShow = true; vpPause(); }
+  } else if (resumeOnShow) {
+    resumeOnShow = false;
+    if (!presence.active && !videoEnded) vpPlay();
+  }
+});
 
 /* SINGLE DEVICE HEARTBEAT */
 function startHeartbeatCheck() {
@@ -814,14 +981,19 @@ function updateWatchTimerUI() {
     alertBadge.style.display = "none";
   }
 
-  if (remaining > 0) {
-    if (remaining <= 900) {
-      timerElement.innerText = `Final Stage: ${formatSecs(remaining)} left`;
+  if (remaining > 0 || (!videoEnded && !isSessionCompleted)) {
+    const live = typeof counting !== "undefined" && counting;
+    if (remaining <= 0) {
+      timerElement.innerText = "Almost done: let the video finish";
+      timerElement.style.color = "#f59e0b";
+      btn.innerText = "Let the video play to the end";
+    } else if (remaining <= 900) {
+      timerElement.innerText = `Final Stage: ${formatSecs(remaining)} left${live ? "" : " · paused"}`;
       timerElement.style.color = "#f59e0b";
       btn.innerText = `Final Stage Active (${formatSecs(remaining)} left)`;
     } else {
-      timerElement.innerText = `Streaming & Attention Verified`;
-      timerElement.style.color = "#10b981";
+      timerElement.innerText = live ? `Streaming & Attention Verified` : `Paused · watch time is not counting`;
+      timerElement.style.color = live ? "#10b981" : "#f59e0b";
       btn.innerText = `Video Watching in Progress...`;
     }
     btn.disabled = true;
@@ -845,6 +1017,7 @@ function unlockAndAutoCompleteSession() {
   isSessionCompleted = true;
   disableReloadProtection();
   clearInterval(watchTimerInterval);
+  presenceCleanup(); hideTap();
   updateWatchTimerUI();
   markCurrentSessionCompleted(false);
 }
@@ -1216,16 +1389,21 @@ function attachAutoplayGuard(iframe) {
   if (!window.playerjs) return;
   try {
     const player = new playerjs.Player(iframe);
+    bp = player; bPlaying = false;
     player.on("ready", () => {
       player.play();
+      try { player.getDuration(d => { if (d > 0) videoDuration = d; }); } catch (e) {}
       setTimeout(() => {
         player.getPaused(paused => {
           if (paused) { player.mute(); player.play(); showUnmuteHint(player); }
         });
       }, 2500);
     });
-    player.on("pause", () => { if (!isSessionCompleted && !videoEnded) setTimeout(() => player.play(), 250); });
-    player.on("ended", () => { videoEnded = true; });
+    // No auto-resume on pause: the learner must press play (LMS behaviour)
+    player.on("play", () => { bPlaying = true; onPlayState(); });
+    player.on("pause", () => { bPlaying = false; onPlayState(); });
+    player.on("timeupdate", d => { if (d && d.duration > 0) videoDuration = d.duration; });
+    player.on("ended", onVideoEnded);
   } catch (e) { console.error(e); }
 }
 
@@ -1262,8 +1440,8 @@ function mountYT(id, box) {
           setTimeout(() => { try { if (yt.getPlayerState() !== 1) { yt.mute(); yt.playVideo(); showYtUnmute(); } } catch (x) {} }, 2500);
         },
         onStateChange: e => {
-          if (e.data === 2 && !isSessionCompleted && !videoEnded) setTimeout(() => { try { yt.playVideo(); } catch (x) {} }, 250);
-          else if (e.data === 0) videoEnded = true;
+          if (e.data === 0) onVideoEnded();          // no auto-resume on pause (LMS behaviour)
+          else onPlayState();
         },
         onError: () => { box.innerHTML = "<div style='color:#fff;padding:40px 20px;text-align:center;font-weight:600;'>This video cannot be played. Please contact support.</div>"; }
       }
@@ -1320,7 +1498,7 @@ document.getElementById("fsLater").onclick = () => { fsModal.classList.remove("o
   if (!inFs()) { document.getElementById("fsBtn").textContent = "Full screen"; fsNext = Date.now() + rand(180000, 240000); }
 }));
 setInterval(() => {
-  if (!currentCandidate || !scriptStarted || isSessionCompleted || document.hidden || inFs() || fsModal.classList.contains("open")) return;
+  if (!currentCandidate || !scriptStarted || isSessionCompleted || document.hidden || inFs() || fsModal.classList.contains("open") || presence.active) return;
   if (fsNext === null) fsNext = Date.now() + 120000;
   if (Date.now() >= fsNext) fsModal.classList.add("open");
 }, 4000);
