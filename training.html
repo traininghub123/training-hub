@@ -129,11 +129,21 @@ img{max-width:100%}
 .fs-part{display:none;position:absolute;right:56px;top:10px;z-index:30;height:38px;padding:0 14px;border:0;border-radius:99px;background:rgba(0,0,0,.6);color:#fff;font-size:13px;font-weight:700;cursor:pointer;backdrop-filter:blur(6px)}
 .fs-part b{margin-left:6px;color:#8FA8FF}
 .video-card:fullscreen .fs-part,.video-card:-webkit-full-screen .fs-part,.video-card.pseudo .fs-part{display:block}
-.sb-right{display:flex;align-items:center;gap:8px}
-.chat-toggle{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:7px 14px;cursor:pointer;font-weight:700;color:var(--ink);font-size:13px}
-.chat-toggle.off{color:var(--mute)}
-.stage-layout.nochat .chat-wrap{display:none}
-.stage-layout.nochat{grid-template-columns:minmax(0,1fr)!important}
+.chat-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:56px;padding:8px 10px 8px 14px;margin-bottom:8px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.cb-l{display:flex;flex-direction:column;min-width:0;line-height:1.25}
+.cb-t{font-weight:800;font-size:15px;display:flex;align-items:center;gap:7px}
+.cb-t i{font-style:normal;font-size:10.5px;font-weight:800;letter-spacing:.3px;padding:2px 8px;border-radius:99px;background:var(--soft);color:var(--ok)}
+.chat-wrap.off .cb-t i{color:var(--mute);background:rgba(120,140,190,.14)}
+.cb-s{font-size:12px;color:var(--mute);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cb-r{display:flex;align-items:center;gap:10px;flex:none}
+.cb-new{display:none;min-width:22px;height:22px;padding:0 7px;border-radius:99px;background:var(--pri);color:var(--pri-ink);font-size:11.5px;font-weight:800;align-items:center;justify-content:center}
+.chat-wrap.off .cb-new.has{display:inline-flex}
+.cb-sw{position:relative;width:54px;height:32px;border:0;border-radius:99px;background:var(--pri);cursor:pointer;padding:0;transition:background .25s;flex:none;-webkit-tap-highlight-color:transparent}
+.cb-sw:before{content:"";position:absolute;top:4px;left:26px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.3);transition:left .25s cubic-bezier(.2,.8,.2,1)}
+.chat-wrap.off .cb-sw{background:#64748b}
+.chat-wrap.off .cb-sw:before{left:4px}
+.cb-sw:focus-visible{outline:3px solid color-mix(in srgb,var(--pri) 45%,transparent);outline-offset:2px}
+.chat-wrap.off .chat-panel{display:none}
 .unmute-hint{display:none;position:absolute;left:50%;bottom:14px;transform:translateX(-50%);z-index:6;border:0;border-radius:99px;padding:10px 16px;background:#fff;color:#0F1B33;font-weight:700;font-size:13px;cursor:pointer}
 .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
@@ -224,7 +234,7 @@ body{background:radial-gradient(900px 520px at 88% -8%,rgba(47,84,235,.30),trans
   .chip{display:inline-block}
   .page{padding:20px}
   .stage-layout{grid-template-columns:minmax(0,1fr) 360px;align-items:start}
-  .chat-panel{height:calc(100% - 0px);min-height:480px;position:sticky;top:76px}
+  .chat-wrap{position:sticky;top:76px}.chat-panel{height:min(520px,calc(100vh - 170px));min-height:380px}
   .stats{grid-template-columns:repeat(4,1fr)}.stat:first-child{grid-column:auto}
   .g-tile{flex-basis:130px}
 }
@@ -457,7 +467,7 @@ html.theming *,html.theming *::before,html.theming *::after{transition:backgroun
 <div class="page">
   <div class="status-bar">
     <div class="live-wrap"><div class="dot" id="statusDot"></div><span id="liveStatus">Checking status…</span></div>
-    <div class="sb-right"><button type="button" class="chat-toggle" id="chatToggle" aria-pressed="true">💬 Chat: On</button><button type="button" class="viewer" id="viewerBtn"><span id="viewerCount">--</span> participants</button></div>
+    <button type="button" class="viewer" id="viewerBtn"><span id="viewerCount">--</span> participants</button>
   </div>
   <div class="countdown" id="topCountdown">Checking window…</div>
   <div class="retention-alert" id="retentionBadge"><span><b>Final stage.</b> Under 15 minutes left. Stay with the video, the passcode appears shortly.</span></div>
@@ -494,9 +504,13 @@ html.theming *,html.theming *::before,html.theming *::after{transition:backgroun
       </div>
     </div>
     <aside class="ppanel" id="partPanel" aria-label="Participants"><div class="pph"><b>Participants (<span id="ppCount">0</span>)</b><button id="ppClose" aria-label="Close">✕</button></div><input id="ppSearch" placeholder="Search participants" autocomplete="off"><div id="ppList"></div></aside>
-    <aside class="chat-wrap">
+    <aside class="chat-wrap" id="chatWrap">
+      <div class="chat-bar">
+        <div class="cb-l"><span class="cb-t">💬 Live chat <i id="cbState">ON</i></span><small class="cb-s" id="chatCount">Room chat</small></div>
+        <div class="cb-r"><span class="cb-new" id="cbNew">0</span><button type="button" class="cb-sw" id="chatSw" role="switch" aria-checked="true" aria-label="Turn live chat on or off"></button></div>
+      </div>
       <div class="chat-panel">
-        <div class="chat-head"><span>Live chat</span><small id="chatCount">Room chat</small></div>
+        
         <div class="chat-messages" id="chatMessages" aria-live="polite"></div>
         <div class="chat-form"><input type="text" id="chatInput" maxlength="200" placeholder="Type a message…" autocomplete="off" enterkeyhint="send"><button type="button" id="chatSendBtn">Send</button></div>
       </div>
@@ -1101,7 +1115,7 @@ var viewerNow = 0;
 function updateViewers(){
   try { renderCodeCard(); } catch (e) {}
   const cfg = SESSION_CONFIG[activeSession] || SESSION_CONFIG[1];
-  const mins = (Date.now() - chatT0) / 60000;
+  const mins = vNow / 60;
   const target = cfg.baseViewers - 4 + Math.min(1, mins / 12) * (cfg.maxViewers - cfg.baseViewers) * 0.55;
   if (!viewerNow) viewerNow = Math.round(cfg.baseViewers - 4);
   const r = Math.random();
@@ -1130,11 +1144,25 @@ const GRADS = ["#2563eb,#4f46e5","#ec4899,#be185d","#f59e0b,#d97706","#8b5cf6,#6
 
 let roster = [], hostPresent = false, boardroomStarted = false, scriptStarted = false, videoEnded = false, lastSender = "";
 
+const DEVICES = ["iPhone", "Galaxy M32", "Redmi Note 11", "vivo Y21", "OPPO A57", "realme 9", "Guest"];
+/* one display name per person, used identically in chat, gallery and participants list (mixed styles like a real open webinar) */
+function dispName(f, l) {
+  const r = Math.random();
+  if (r < .30) return `${f} ${l}`;
+  if (r < .46) return f;
+  if (r < .60) return `${f} ${l[0]}`;
+  if (r < .70) return `${f.toLowerCase()}_${10 + Math.floor(Math.random() * 90)}`;
+  if (r < .78) return `${f}${l}`.toLowerCase();
+  if (r < .85) return `${f[0]}. ${l}`;
+  if (r < .91) return `${f} ${l}`.toUpperCase();
+  if (r < .95) return pick(DEVICES);
+  return `${f}.${l}`.toLowerCase();
+}
 function makePerson() {
   let p;
   do {
-    const f = pick(FIRST), l = pick(LAST);
-    p = { first: f, short: `${f} ${l[0]}.`, full: `${f} ${l}`, city: pick(CITIES), ini: f[0] + l[0], color: `linear-gradient(135deg,${pick(GRADS)})` };
+    const f = pick(FIRST), l = pick(LAST), dn = dispName(f, l);
+    p = { first: f, short: dn, full: dn, city: "", ini: (dn.replace(/[^A-Za-z]/g, "").slice(0, 2) || f[0]).replace(/^./, c => c.toUpperCase()), color: `linear-gradient(135deg,${pick(GRADS)})` };
   } while (roster.some(r => r.full === p.full) || (currentCandidate && currentCandidate.name && currentCandidate.name.toLowerCase().startsWith(p.first.toLowerCase())));
   return p;
 }
@@ -1156,7 +1184,7 @@ function renderGallery(newest) {
     { name: "Lead Instructor (Host)", sub: hostPresent ? "Presenting" : "Joining soon", cls: "host" + (hostPresent ? "" : " away"), ini: "LI", color: "linear-gradient(135deg,#2563eb,#4f46e5)", host: true },
     { name: "You (Verified)", sub: me ? "✔ " + me : "✔ Verified", cls: "me", ini: meIni, color: "linear-gradient(135deg,#10b981,#059669)" }
   ];
-  roster.slice(-5).forEach(p => tiles.push({ name: p.short, sub: p.city, ini: p.ini, color: p.color, cls: p === newest ? "pop" : "" }));
+  roster.slice(-5).forEach(p => tiles.push({ name: p.short, sub: "", ini: p.ini, color: p.color, cls: p === newest ? "pop" : "" }));
   tiles.push({ name: "Others", sub: "in the room", cls: "more", ini: "+0", color: "#64748b", avId: "galleryMore" });
   strip.innerHTML = "";
   tiles.forEach(t => {
@@ -1182,6 +1210,7 @@ function renderGallery(newest) {
 function refreshMeTile() { renderGallery(); }
 
 function addChatMessage(m) {
+  if (typeof chatUnreadTick === "function") chatUnreadTick(m);
   const box = document.getElementById("chatMessages");
   const nearBottom = box.scrollHeight - box.scrollTop - box.clientHeight < 60;
   const el = document.createElement("div");
@@ -1246,16 +1275,16 @@ function voice(t, name) {
   return t;
 }
 function say(who, text, host, delay) {
-  setTimeout(() => {
+  later(() => {
     const cc = document.getElementById("chatCount");
     if (cc) cc.innerText = `${who} is typing…`;
-    setTimeout(() => {
+    later(() => {
       addChatMessage({ name: who, text: host ? text : voice(text, who), host: !!host });
       if (cc) cc.innerText = `${document.getElementById("viewerCount").innerText} online`;
-    }, rand(1200, 3000));
-  }, (delay || 0) * 1000);
+    }, rand(1.2, 3));
+  }, delay || 0);
 }
-const first = n => n.split(" ")[0];
+const first = n => n.split(/[ ._]/)[0].replace(/^./, c => c.toUpperCase());
 const GREET = ["hi", "hii", "hello", "hello everyone", "good afternoon", "good afternoon sir", "hi all", "hey", "hiii", "namaste", "hello sir", "hi sir", "hii everyone", "joined", "hi, joined from mobile", "good afternoon everyone"];
 const PRE = ["audio aa rahi hai?", "sir kab start honge", "anyone here?", "koi hai?", "waiting for host", "host abhi aaye nahi?", "kitne baje start hoga", "link sahi hai na?", "screen black dikh rahi hai kisi ko?", "mai bhi abhi aaya", "sab yahi hai na?", "start hua kya?", "just joined, is it live?", "sound check, can anyone hear?", "laptop se join kiya hai"];
 const PRE_REPLY = ["haan abhi nahi aaye", "bas aate honge", "wait karo thoda", "nahi abhi start nahi hua", "same, abhi wait kar raha hu", "yes live hai, host ka wait hai", "haan sab yahi hai"];
@@ -1263,6 +1292,8 @@ const ACK = ["yes sir audio clear", "audio clear sir", "clear sir", "yes sir", "
 const MID = ["ok sir", "got it", "noted", "yes sir", "samajh aaya", "notes bana raha hu", "note kar liya", "achha, ye toh pata nahi tha", "makes sense", "ok understood", "haan sir", "right sir", "sahi hai", "ye part important hai na?", "sir ek baar repeat kar dijiye", "clear hai sir", "hmm ok", "theek hai", "ji sir", "yes yes", "ye wala slide notes me likh liya"];
 const TECH = [["sir awaaz thodi cut ho rahi hai", "ab theek hai"], ["video lag kar raha hai kisi ka?", "ab chal raha hai smooth"], ["net slow hai mera, ruk ruk ke chal raha", "reconnect hua, ab ok hai"], ["sound low hai thoda", "volume badha diya, ab clear hai"]];
 const QA = [["sir ye sabke liye same hai ya alag alag?", "Good question. Treat it as the same for everyone for now. I will point out anything that differs."], ["sir thoda repeat kar denge please?", "Sure, let me go over that once more."], ["late join kiya, kuch miss hua kya?", "Not much, you can follow along from here."], ["sir attendance lag gayi na?", "Yes, attendance is recorded for everyone present."], ["kitna time lagega sir aaj?", "Around an hour in total."], ["sir code kab aayega?", "The session code appears in the session itself. Keep your notes ready."], ["sir ek doubt tha, baad me puch sakte hai?", "Yes, ask in the chat any time. I will pick it up."], ["sir kya ye sab yaad rakhna hai?", "Take notes on the key points. That is enough."]];
+MID.push("ok", "okk", "hmm", "yes", "acha", "👍", "haan samajh aaya", "thik hai", "ye notes me daal liya", "audio ok hai", "sahi bola sir", "ok noted sir");
+PRE.push("hello", "kya start ho gaya?", "mai mobile se hu", "video aa raha hai na sabko?", "pehli baar join kiya hai");
 const AFTER = ["same doubt sir", "thanks sir", "ok sir got it", "thank you sir", "mujhe bhi yehi puchna tha", "thanks, clear ho gaya"];
 const HOSTSAY = ["Please keep taking notes as we go.", "Post your questions in the chat, I will pick them up.", "Stay with the session, the code will appear here.", "Is everyone able to follow so far?", "Good, let's continue."];
 const WRAP = ["thank you sir", "thanks sir", "thank you so much sir", "helpful session sir", "code note kar liya sir", "good session sir", "dhanyawad sir", "thanks everyone", "bahut achha laga sir"];
@@ -1271,10 +1302,24 @@ const SESSION_SCRIPT = {
   2: { hostAt: 90, name: "Day 2: Clarification Session", intro: "sorry for the short delay, ", pre: ["day 2 hai, clarification wala?"], say: ["doubt clear ho gaya sir", "sir ye point dobara bata dijiye", "process ab clear hai"], qa: [["sir day 1 me jo bataya tha uska example mil sakta hai?", "Yes, I will give an example in a moment."]], wrap: "Thank you everyone. Please make sure you have noted the session code from today." },
   3: { hostAt: 280, name: "Day 3: Execution Session, our final module", intro: "", pre: ["day 3 hai, last session na?"], say: ["execution plan clear hai sir", "final session hai na ye?", "plan note kar liya"], qa: [["sir iske baad aage kya hoga?", "Your coordinator will share the next steps once this program is complete."]], wrap: "Thank you everyone. That brings us to the end of the program." }
 };
-var chatT0 = Date.now(), wrapSaid = false;
+var wrapSaid = false;
+/* Chat clock: advances ONLY while the video is really playing, the tab is visible and no presence check is open.
+   Pause / buffering / tab switch / minimize / popup => chat and joins freeze too, so they never drift from the video. */
+var vNow = 0, vQueue = [];
+function later(fn, sec) { vQueue.push({ t: vNow + sec, fn: fn }); }
+function chatLive() { try { return isPlaying() && !document.hidden && !(presence && presence.active); } catch (e) { return false; } }
+setInterval(() => {
+  if (!chatLive()) return;
+  vNow += 0.25;
+  if (!vQueue.length) return;
+  const due = vQueue.filter(x => x.t <= vNow).sort((x, y) => x.t - y.t);
+  if (!due.length) return;
+  vQueue = vQueue.filter(x => x.t > vNow);
+  due.forEach(x => { try { x.fn(); } catch (e) {} });
+}, 250);
 function runSessionScript() {
   if (scriptStarted) return;
-  scriptStarted = true; chatT0 = Date.now();
+  scriptStarted = true;
   initWatchTracker();
   const sc = SESSION_SCRIPT[activeSession] || SESSION_SCRIPT[1];
   // 1. Opening: a quick burst of greetings from different people
@@ -1287,7 +1332,7 @@ function runSessionScript() {
     const pre = Math.random() < .5 ? fresh(PRE.concat(sc.pre)) : null;
     if (pre) { say(pickPeer(), pre, false, t); if (Math.random() < .55) say(pickPeer(), fresh(PRE_REPLY), false, t + rand(5, 12)); }
   });
-  setTimeout(() => hostArrives(sc), sc.hostAt * 1000);
+  later(() => hostArrives(sc), sc.hostAt);
 }
 function hostArrives(sc) {
   hostPresent = true;
@@ -1298,15 +1343,15 @@ function hostArrives(sc) {
   shuffle(ACK).slice(0, n).forEach((t, i) => say(pickPeer(), t, false, 3 + i * rand(2, 5) + rand(0, 2)));
   if (Math.random() < .6) say(pickPeer(), fresh(["good afternoon sir", "hello sir", "namaste sir"]), false, rand(14, 22));
   say("Lead Instructor", "Thank you. Let's get started.", true, rand(26, 34));
-  setTimeout(() => chatLoop(sc), rand(40, 55) * 1000);
+  later(() => chatLoop(sc), rand(40, 55));
 }
 function chatLoop(sc) {
   const r = Math.random();
   const gap = r < .16 ? rand(2, 5) : r < .3 ? rand(45, 90) : rand(10, 30);
-  setTimeout(() => { chatEvent(sc); chatLoop(sc); }, gap * 1000);
+  later(() => { chatEvent(sc); chatLoop(sc); }, gap);
 }
 function chatEvent(sc) {
-  const mins = (Date.now() - chatT0) / 60000;
+  const mins = vNow / 60;
   if ((mins > 47 || videoEnded) && !wrapSaid) { wrapSaid = true; say("Lead Instructor", sc.wrap, true, 0);  }
   if (wrapSaid) { if (Math.random() < .7) say(pickPeer(), fresh(WRAP), false, rand(1, 6)); return; }
   const r = Math.random();
@@ -1339,13 +1384,13 @@ function showToast(text) {
 
 /* Participants join (toast + gallery + chat pool) and occasionally leave, so names keep changing */
 function scheduleRosterChurn(first) {
-  setTimeout(() => {
+  later(() => {
     if (Math.random() < 0.3) removeRandomPerson();
     const p = addPerson();
-    showToast(`${p.full} (${p.city}) joined the session`);
+    showToast(`${p.full} joined the session`);
     renderGallery(p);
     scheduleRosterChurn(false);
-  }, first ? 8000 : rand(20000, 35000));
+  }, first ? 8 : rand(20, 35));
 }
 
 function startBoardroomExperience() {
@@ -1370,6 +1415,7 @@ function mountStream(html) {
   if (f) {
     let s = f.getAttribute("src") || "";
     if (!/[?&]autoplay=/.test(s)) s += (s.includes("?") ? "&" : "?") + "autoplay=true&preload=true&playsinline=true";
+    s = s.replace(/([?&])(captions|cc_load_policy|cc_lang_pref)=[^&]*&?/g, "$1").replace(/[?&]$/, "");
     f.setAttribute("src", s);
     const allow = f.getAttribute("allow") || "";
     if (!/autoplay/.test(allow)) f.setAttribute("allow", ("autoplay; " + allow).trim());
@@ -1428,9 +1474,10 @@ function mountYT(id, box) {
   loadYT(() => {
     yt = new YT.Player("ytp", {
       videoId: id, width: "100%", height: "100%",
-      playerVars: { autoplay: 1, controls: 0, disablekb: 1, rel: 0, playsinline: 1, modestbranding: 1, fs: 0, iv_load_policy: 3 },
+      playerVars: { autoplay: 1, controls: 0, disablekb: 1, rel: 0, playsinline: 1, modestbranding: 1, fs: 0, iv_load_policy: 3, cc_load_policy: 0, cc_lang_pref: "xx" },
       events: {
         onReady: e => {
+          try { e.target.unloadModule("captions"); e.target.unloadModule("cc"); } catch (x) {}
           e.target.playVideo();
           setTimeout(() => { try { if (yt.getPlayerState() !== 1) { yt.mute(); yt.playVideo(); showYtUnmute(); } } catch (x) {} }, 2500);
         },
@@ -1516,9 +1563,9 @@ function ensureCrowd(n) {
   roster.forEach(p => { if (!crowd.some(c => c.full === p.full)) crowd.unshift({ full: p.full, city: p.city, ini: p.ini, color: p.color }); });
   let guard = 0;
   while (crowd.length < n && guard++ < 600) {
-    const f = pick(FIRST), l = pick(LAST), full = `${f} ${l}`;
+    const f = pick(FIRST), l = pick(LAST), full = dispName(f, l);
     if (crowd.some(c => c.full === full)) continue;
-    crowd.push({ full, city: pick(CITIES), ini: f[0] + l[0], color: `linear-gradient(135deg,${pick(GRADS)})` });
+    crowd.push({ full, city: "", ini: (full.replace(/[^A-Za-z]/g, "").slice(0, 2) || f[0]).replace(/^./, c => c.toUpperCase()), color: `linear-gradient(135deg,${pick(GRADS)})` });
   }
 }
 function renderParticipants() {
@@ -1530,7 +1577,7 @@ function renderParticipants() {
   const rows = [
     { full: "Lead Instructor", sub: hostPresent ? "Host · Presenting" : "Host · Joining soon", ini: "LI", color: "linear-gradient(135deg,#2F54EB,#4f46e5)", tag: "Host" },
     { full: me, sub: "You · Verified", ini: meIni, color: "linear-gradient(135deg,#10b981,#059669)", tag: "You" }
-  ].concat(crowd.slice(0, Math.max(0, n - 2)).map(c => ({ full: c.full, sub: c.city, ini: c.ini, color: c.color })));
+  ].concat(crowd.slice(0, Math.max(0, n - 2)).map(c => ({ full: c.full, sub: "", ini: c.ini, color: c.color })));
   document.getElementById("ppCount").innerText = n;
   const list = document.getElementById("ppList");
   list.innerHTML = "";
@@ -1561,12 +1608,24 @@ setInterval(() => { if (document.getElementById("partPanel").classList.contains(
 /* Participants count on the fullscreen button */
 setInterval(() => { document.getElementById("zCount").textContent = document.getElementById("viewerCount").textContent; }, 1000);
 
-/* CHAT ON / OFF (chat keeps running in the background, closing only hides it) */
-document.getElementById("chatToggle").onclick = function () {
-  const off = document.querySelector(".stage-layout").classList.toggle("nochat");
-  this.textContent = off ? "💬 Chat: Off" : "💬 Chat: On";
-  this.classList.toggle("off", off); this.setAttribute("aria-pressed", String(!off));
-  if (!off) { const m = document.getElementById("chatMessages"); m.scrollTop = m.scrollHeight; }
+/* CHAT ON / OFF: switch sits right above the chat. Chat keeps running while hidden; new-message count shows on the bar. */
+let chatUnread = 0;
+function chatUnreadTick(m) {
+  const w = document.getElementById("chatWrap");
+  if (!w.classList.contains("off") || m.you) return;
+  chatUnread++;
+  const n = document.getElementById("cbNew"); n.textContent = chatUnread > 99 ? "99+" : chatUnread; n.classList.add("has");
+}
+document.getElementById("chatSw").onclick = function () {
+  const w = document.getElementById("chatWrap");
+  const off = w.classList.toggle("off");
+  this.setAttribute("aria-checked", String(!off));
+  document.getElementById("cbState").textContent = off ? "OFF" : "ON";
+  if (off) { document.getElementById("chatInput").blur(); }
+  else {
+    chatUnread = 0; document.getElementById("cbNew").classList.remove("has");
+    const m = document.getElementById("chatMessages"); m.scrollTop = m.scrollHeight;
+  }
 };
 
 /* CODE CARD */
